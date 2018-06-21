@@ -18,6 +18,14 @@ Homestead.json
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
+<<<<<<< HEAD
 public/assets/js/.DS_Store
 public/.DS_Store
 public/assets/.DS_Store
+=======
+.env.example
+composer.lock
+.env.example
+composer.lock
+>>>>>>> d2508b8d8c5f2cfea668e2110d2fc54dd2df3479
+.env.example
