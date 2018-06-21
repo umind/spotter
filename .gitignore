@@ -29,3 +29,5 @@ composer.lock
 composer.lock
 >>>>>>> d2508b8d8c5f2cfea668e2110d2fc54dd2df3479
 .env.example
+public/assets/plugins/.DS_Store
+public/.DS_Store
