@@ -85,7 +85,6 @@
                                 </div>
                                 <div class="caption">
                                     <div class="ad-box-caption-title">
-										<h4 class="text-center">Lorem ipsum</h4>
                                         <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
                                             {{ str_limit($ad->title, 40) }}
                                         </a>
