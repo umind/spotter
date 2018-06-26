@@ -157,14 +157,14 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ logo_url() }}" title="{{get_option('site_name')}}" alt="{{get_option('site_name')}}" />
+                    <h2 class="text-uppercase">Spotter</h2>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;<li><a href="{{route('home')}}">@lang('app.home')</a> </li>
+                    <li><a href="{{route('home')}}">@lang('app.home')</a></li>
                     @if($header_menu_pages->count() > 0)
                         @foreach($header_menu_pages as $page)
                             <li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
@@ -179,13 +179,13 @@
 
 
                     <li>
-                        <p><a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;" style="display: inline;"><i class="fa fa-search"></i></a></p>
+                        <a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;" style="display: inline;"><i class="fa fa-search"></i></a>
                         <div id="example" class="more" style="display: none;">
                             {!! Form::open(['route' => 'search_redirect','method' => 'get', 'class' => 'form-inline']) !!}
                             <input type="text" class="form-control" id="searchKeyword" name="q" placeholder="@lang('app.what_are_u_looking')">
 
                             {!! Form::close() !!}
-                            <p><a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;"><i class="fa fa-close"></i></a></p>
+                            <a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;"><i class="fa fa-close"></i></a>
                         </div>
                     </li>
 
@@ -213,7 +213,8 @@
                     </ul>
 
                     <div class="footer-heading">
-                        <h3>{{get_option('site_name')}}</h3>
+						<h3 class="text-uppercase">Spotter</h3>
+<!--                        <h3>{{get_option('site_name')}}</h3>-->
                     </div>
 
                     <div class="footer-copyright">
