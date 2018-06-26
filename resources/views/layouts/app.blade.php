@@ -213,12 +213,11 @@
                     </ul>
 
                     <div class="footer-heading">
-						<h3 class="text-uppercase">Spotter</h3>
-<!--                        <h3>{{get_option('site_name')}}</h3>-->
+                        <h3 class="text-uppercase">{{get_option('site_name')}}</h3>
                     </div>
 
                     <div class="footer-copyright">
-                        <p>{{get_text_tpl(get_option('footer_copyright_text'))}}</p>
+                        <p>{!! get_text_tpl(get_option('footer_copyright_text')) !!}</p>
                     </div>
 
                     <div class="footer-social-links">
