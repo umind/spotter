@@ -115,21 +115,54 @@
 									<div class="notification-div">
 										<h3>Notification</h3>
 										<ul class="notification-list">
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
-											<li>Lorem Ipsum</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
+											<li>
+												<a href="">Lorem Ipsum</a>
+											</li>
 										</ul>
 									</div>
 								</li>

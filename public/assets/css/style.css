@@ -1673,18 +1673,6 @@ Auction
 	display: none;
 }
 
-#sub-header .right-info .notification-div h3,
-#sub-header .right-info .notification-div li {
-	text-align: left;
-	border-bottom: 1px solid #dddfe2;
-	padding: 8px 30px 7px 12px;
-	margin: 0;
-}
-
-#sub-header .right-info .notification-div h3 {
-	padding: 10px 30px 6px 12px;
-}
-
 #sub-header .right-info .notification-div::before {
 	z-index: 9999;
 	content: '';
@@ -1695,6 +1683,31 @@ Auction
 	border-left: 10px solid transparent;
 	position: absolute;
 	display: inline-block;
+}
+
+#sub-header .right-info .notification-div h3 {
+	margin: 0;
+	text-align: left;
+	padding: 10px 30px 6px 12px;
+	border-bottom: 2px solid #dddfe2;
+}
+
+#sub-header .right-info .notification-div li {
+	border-bottom: 1px solid #dddfe2;
+	padding: 8px 30px 7px 12px;
+}
+
+#sub-header .right-info .notification-div li:hover {
+	background-color: #e6e6e6;
+}
+
+#sub-header .right-info .notification-div li a {
+	font-size: 14px;
+	color: #000000;
+}
+
+#sub-header .right-info .notification-div li a:hover {
+	color: #000000;
 }
 
 #sub-header .right-info .notification-list {
