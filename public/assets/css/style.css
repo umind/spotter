@@ -32,7 +32,6 @@ a:hover {
 
 .navbar-brand {
 	height: auto;
-	padding: 0;
 	padding: 0 15px;
 }
 
@@ -1464,13 +1463,30 @@ img.thumb-listing-table {
 	.comments-container {
 		width: 100%;
 	}
-
 	.comments-list .comment-box {
 		width: 90%;
 	}
-
 	.reply-list .comment-box {
 		width: 90%;
+	}
+	.social-icons {
+		text-align: center;
+	}
+	#sub-header .right-info {
+		float: none !important;
+		text-align: center;
+	}
+	.navbar-brand h2 {
+		line-height: 50px;
+	}
+	.navbar-default {
+		border-color: #d0d0d0;
+	}
+	.navbar-collapse {
+		border: none;
+	}
+	.navbar-default .navbar-toggle:focus {
+		background-color: transparent;
 	}
 }
 
@@ -1509,12 +1525,6 @@ Auction
 
 #sub-header {
 	background: #252652;
-}
-
-@media (max-width: 767px) {
-	#sub-header {
-		height: 84px;
-	}
 }
 
 #sub-header ul {
@@ -1582,7 +1592,6 @@ Auction
 
 #sub-header .right-info .dropdown-menu {
 	padding: 10px 0;
-	z-index: 9999;
 }
 
 #sub-header .right-info .dropdown-menu li {
@@ -1596,6 +1605,101 @@ Auction
 
 #sub-header .right-info .dropdown-menu li a:hover {
 	color: #000000;
+}
+
+#sub-header .right-info .notification-li {
+	position: relative;
+}
+
+#sub-header .right-info .notification {
+	position: relative;
+}
+
+#sub-header .right-info .notification i {
+	font-size: 20px;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #f0ad4e;
+}
+
+#sub-header .right-info .notification i:hover {
+	color: #f4c23d;
+}
+
+#sub-header .right-info .notification .notification-number {
+	position: absolute;
+	top: -5px;
+	right: -6px;
+	text-align: center;
+	color: #ffffff;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 1px 7px;
+	border-radius: 50%;
+	background-color: #B2282D;
+}
+
+#sub-header .right-info .notification-div {
+	position: absolute;
+	top: 50px;
+	right: 0;
+	color: #000000;
+	z-index: 9999;
+	background-color: #f2f2f2;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+	display: none;
+}
+
+#sub-header .right-info .notification-div h4,
+#sub-header .right-info .notification-div li {
+	text-align: left;
+	border-bottom: 1px solid #dddfe2;
+	padding: 6px 30px 5px 12px;
+	margin: 0;
+}
+
+#sub-header .right-info .notification-div h4 {
+	padding-bottom: 4px;
+}
+
+#sub-header .right-info .notification-div::before {
+	z-index: 9999;
+	content: '';
+	top: -10px;
+	right: 15px;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #f2f2f2;
+	border-left: 10px solid transparent;
+	position: absolute;
+	display: inline-block;
+}
+
+#sub-header .right-info .notification-list {
+	margin: 0;
+	padding: 0;
+	overflow-y: scroll;
+	width: 280px;
+	height: 350px;
+}
+
+#sub-header .right-info .notification-list li {
+	display: block;
+}
+
+#sub-header .right-info .notification-list::-webkit-scrollbar {
+	width: 7px;
+}
+
+#sub-header .right-info .notification-list::-webkit-scrollbar-thumb {
+	background-color: rgba(153, 153, 153, .6);
+}
+
+#sub-header .right-info .notification-list::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(153, 153, 153, .8);
+}
+
+#sub-header .right-info .notification-list::-webkit-scrollbar-track {
+	background-color: rgb(230, 230, 230);
 }
 
 .nav-sarchbar li {
@@ -1665,7 +1769,7 @@ Auction
 
 .place-bid-btn .btn-primary {
 	min-width: 150px;
-	padding: 6px 12px 4px;
+	padding: 6px 12px 5px;
 	font-size: 16px;
 	background-color: #252652;
 	transition: all .3s ease;

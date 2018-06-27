@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row equal">
                     @foreach($top_categories as $top_cat)
-                        <div class="col-md-3">
+                        <div class="col-xs-6 col-sm-4 col-md-3">
                             <div class="home-cat-box">
                                 <div class="home-cat-box-title">
                                     <h3> <a href="{{ route('search', [ 'category' => 'cat-'.$top_cat->id.'-'.$top_cat->category_slug]) }}"> <i class="fa fa-folder-open-o"></i>  {{$top_cat->category_name}}
@@ -84,6 +84,7 @@
                                     </a>
                                 </div>
                                 <div class="caption">
+									<h4 class="text-center">Lorem Ipsum</h4>
                                     <div class="ad-box-caption-title">
                                         <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
                                             {{ str_limit($ad->title, 40) }}
@@ -112,7 +113,7 @@
                                 </div>
 
 
-                                <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
+                                <div class="countdown" data-expire-date="{{$ad->expired_at}}"></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
                                 </div>
@@ -181,6 +182,7 @@
                                     </a>
                                 </div>
                                 <div class="caption">
+									<h4 class="text-center">Lorem Ipsum</h4>
                                     <div class="ad-box-caption-title">
                                         <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
                                             {{ str_limit($ad->title, 40) }}
@@ -209,7 +211,7 @@
                                 </div>
 
 
-                                <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
+                                <div class="countdown" data-expire-date="{{$ad->expired_at}}"></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
                                 </div>

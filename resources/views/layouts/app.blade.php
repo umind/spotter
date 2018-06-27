@@ -93,6 +93,7 @@
                 <div class="col-sm-6">
                     <div class="right-info">
                         <ul>
+<!--
                             @if(get_option('enable_language_switcher') == 1)
 
                                 <li class="dropdown">
@@ -105,7 +106,33 @@
                                     </ul>
                                 </li>
                             @endif
-
+-->
+							<li class="notification-li">
+								<div class="notification">
+									<i class="fa fa-bell"></i>
+									<span class="notification-number">1</span>
+								</div>
+								<div class="notification-div">
+									<h4>Notification</h4>
+									<ul class="notification-list">
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+										<li>Lorem Ipsum</li>
+									</ul>
+								</div>
+							</li>
 
                             @if (Auth::guest())
                                 <li><a href="{{ route('login') }}">@lang('app.login')</a></li>
@@ -170,7 +197,7 @@
                             <li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
                         @endforeach
                     @endif
-                    &nbsp;<li><a href="{{route('create_ad')}}">@lang('app.post_an_ad')</a> </li>
+                    <li><a href="{{route('create_ad')}}">@lang('app.post_an_ad')</a> </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
