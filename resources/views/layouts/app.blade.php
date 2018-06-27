@@ -50,180 +50,183 @@
 
 </head>
 <body class="@if(is_rtl()) rtl @endif">
-<div id="app">
+	<div id="app">
 
-    @if(env('APP_DEMO') == true)
-        @include('demobar')
-    @endif
-    <div id="sub-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="social-icons">
-                        @php
-                            $facebook_url = get_option('facebook_url');
-                            $twitter_url = get_option('twitter_url');
-                            $linked_in_url = get_option('linked_in_url');
-                            $dribble_url = get_option('dribble_url');
-                            $google_plus_url = get_option('google_plus_url');
-                            $youtube_url = get_option('youtube_url');
-                        @endphp
-                        <ul>
-                            @if($facebook_url)
-                                <li><a href="{{$facebook_url}}"><i class="fa fa-facebook"></i> </a> </li>
-                            @endif
-                            @if($twitter_url)
-                                <li><a href="{{$twitter_url}}"><i class="fa fa-twitter"></i> </a> </li>
-                            @endif
-                            @if($google_plus_url)
-                                <li><a href="{{$google_plus_url}}"><i class="fa fa-google-plus"></i> </a> </li>
-                            @endif
-                            @if($youtube_url)
-                                <li><a href="{{$youtube_url}}"><i class="fa fa-youtube"></i> </a> </li>
-                            @endif
-                            @if($linked_in_url)
-                                <li><a href="{{$linked_in_url}}"><i class="fa fa-linkedin"></i> </a> </li>
-                            @endif
-                            @if($dribble_url)
-                                <li><a href="{{$dribble_url}}"><i class="fa fa-dribbble"></i> </a> </li>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="right-info">
-                        <ul>
-<!--
-                            @if(get_option('enable_language_switcher') == 1)
+		@if(env('APP_DEMO') == true)
+			@include('demobar')
+		@endif
+		<div id="sub-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="social-icons">
+							@php
+								$facebook_url = get_option('facebook_url');
+								$twitter_url = get_option('twitter_url');
+								$linked_in_url = get_option('linked_in_url');
+								$dribble_url = get_option('dribble_url');
+								$google_plus_url = get_option('google_plus_url');
+								$youtube_url = get_option('youtube_url');
+							@endphp
+							<ul>
+								@if($facebook_url)
+									<li><a href="{{$facebook_url}}"><i class="fa fa-facebook"></i> </a> </li>
+								@endif
+								@if($twitter_url)
+									<li><a href="{{$twitter_url}}"><i class="fa fa-twitter"></i> </a> </li>
+								@endif
+								@if($google_plus_url)
+									<li><a href="{{$google_plus_url}}"><i class="fa fa-google-plus"></i> </a> </li>
+								@endif
+								@if($youtube_url)
+									<li><a href="{{$youtube_url}}"><i class="fa fa-youtube"></i> </a> </li>
+								@endif
+								@if($linked_in_url)
+									<li><a href="{{$linked_in_url}}"><i class="fa fa-linkedin"></i> </a> </li>
+								@endif
+								@if($dribble_url)
+									<li><a href="{{$dribble_url}}"><i class="fa fa-dribbble"></i> </a> </li>
+								@endif
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="right-info">
+							<ul>
+	<!--
+								@if(get_option('enable_language_switcher') == 1)
 
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @if($current_lang) {{$current_lang->language_name}} @else @lang('app.language') @endif <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="{{ route('switch_language', 'en') }}">English</a></li>
-                                        @foreach(get_languages() as $lang)
-                                            <li><a href="{{ route('switch_language', $lang->language_code) }}">{{ $lang->language_name }}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endif
--->
-							<li class="notification-li">
-								<div class="notification">
-									<i class="fa fa-bell"></i>
-									<span class="notification-number">1</span>
-								</div>
-								<div class="notification-div">
-									<h4>Notification</h4>
-									<ul class="notification-list">
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-										<li>Lorem Ipsum</li>
-									</ul>
-								</div>
-							</li>
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @if($current_lang) {{$current_lang->language_name}} @else @lang('app.language') @endif <span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li><a href="{{ route('switch_language', 'en') }}">English</a></li>
+											@foreach(get_languages() as $lang)
+												<li><a href="{{ route('switch_language', $lang->language_code) }}">{{ $lang->language_name }}</a></li>
+											@endforeach
+										</ul>
+									</li>
+								@endif
+	-->
+								<li class="notification-li">
+									<div class="notification">
+										<i class="fa fa-bell"></i>
+										<span class="notification-number">1</span>
+									</div>
+									<div class="notification-div">
+										<h4>Notification</h4>
+										<ul class="notification-list">
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+											<li>Lorem Ipsum</li>
+										</ul>
+									</div>
+								</li>
 
-                            @if (Auth::guest())
-                                <li><a href="{{ route('login') }}">@lang('app.login')</a></li>
-                                <li><a href="{{ route('register') }}">@lang('app.register')</a></li>
-                            @else
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ auth()->user()->name }} <span class="headerAvatar"> <img src="{{auth()->user()->get_gravatar()}}" /> </span> <span class="caret"></span>
-                                    </a>
+								@if (Auth::guest())
+									<li><a href="{{ route('login') }}">@lang('app.login')</a></li>
+									<li><a href="{{ route('register') }}">@lang('app.register')</a></li>
+								@else
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+											{{ auth()->user()->name }} <span class="headerAvatar"> <img src="{{auth()->user()->get_gravatar()}}" /> </span> <span class="caret"></span>
+										</a>
 
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{route('dashboard')}}"> @lang('app.dashboard') </a> </li>
-                                        <li>
-                                            <a href="{{ route('logout') }}"
-                                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                @lang('app.logout')
-                                            </a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="{{route('dashboard')}}"> @lang('app.dashboard') </a> </li>
+											<li>
+												<a href="{{ route('logout') }}"
+												   onclick="event.preventDefault();
+														 document.getElementById('logout-form').submit();">
+													@lang('app.logout')
+												</a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                {{ csrf_field() }}
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endif
-
-
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+													{{ csrf_field() }}
+												</form>
+											</li>
+										</ul>
+									</li>
+								@endif
 
 
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
 
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <h2 class="text-uppercase">Spotter</h2>
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{route('home')}}">@lang('app.home')</a></li>
-                    @if($header_menu_pages->count() > 0)
-                        @foreach($header_menu_pages as $page)
-                            <li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
-                        @endforeach
-                    @endif
-                    <li><a href="{{route('create_ad')}}">@lang('app.post_an_ad')</a> </li>
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right nav-sarchbar">
-                    <!-- Authentication Links -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
-                    <li>
-                        <a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;" style="display: inline;"><i class="fa fa-search"></i></a>
-                        <div id="example" class="more" style="display: none;">
-                            {!! Form::open(['route' => 'search_redirect','method' => 'get', 'class' => 'form-inline']) !!}
-                            <input type="text" class="form-control" id="searchKeyword" name="q" placeholder="@lang('app.what_are_u_looking')">
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
 
-                            {!! Form::close() !!}
-                            <a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;"><i class="fa fa-close"></i></a>
-                        </div>
-                    </li>
+					<!-- Collapsed Hamburger -->
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
 
-                </ul>
-            </div>
-        </div>
-    </nav>
+					<!-- Branding Image -->
+					<a class="navbar-brand" href="{{ route('home') }}">
+						<h2 class="text-uppercase">Spotter</h2>
+					</a>
+				</div>
 
-    @yield('content')
+				<div class="collapse navbar-collapse" id="app-navbar-collapse">
+					<!-- Left Side Of Navbar -->
+					<ul class="nav navbar-nav">
+						<li><a href="{{route('home')}}">@lang('app.home')</a></li>
+						@if($header_menu_pages->count() > 0)
+							@foreach($header_menu_pages as $page)
+								<li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
+							@endforeach
+						@endif
+						<li><a href="{{route('create_ad')}}">@lang('app.post_an_ad')</a> </li>
+					</ul>
 
-    <div id="footer">
+					<!-- Right Side Of Navbar -->
+					<ul class="nav navbar-nav navbar-right nav-sarchbar">
+						<!-- Authentication Links -->
+
+
+						<li>
+							<a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;" style="display: inline;"><i class="fa fa-search"></i></a>
+							<div id="example" class="more" style="display: none;">
+								{!! Form::open(['route' => 'search_redirect','method' => 'get', 'class' => 'form-inline']) !!}
+								<input type="text" class="form-control" id="searchKeyword" name="q" placeholder="@lang('app.what_are_u_looking')">
+
+								{!! Form::close() !!}
+								<a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;"><i class="fa fa-close"></i></a>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		@yield('content')
+		<!-- Push-footer start -->
+		<div class="push-footer"></div>
+		<!-- Push-footer end -->
+	</div>
+	<div id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -282,10 +285,6 @@
             </div>
         </div>
     </div>
-
-
-</div>
-
 
 <script src="{{ asset('assets/js/vendor/jquery-1.11.2.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>

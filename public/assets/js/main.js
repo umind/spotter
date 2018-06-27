@@ -153,3 +153,9 @@ $(document).ready(function(){
         }
     }
 });
+
+$(document).ready(function () {
+	var height = $("#footer").outerHeight();
+	$("#app").css("margin-bottom", "-" + height + "px");
+	$(".push-footer").css("height", height + "px");
+});
