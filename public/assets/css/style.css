@@ -1673,16 +1673,16 @@ Auction
 	display: none;
 }
 
-#sub-header .right-info .notification-div h4,
+#sub-header .right-info .notification-div h3,
 #sub-header .right-info .notification-div li {
 	text-align: left;
 	border-bottom: 1px solid #dddfe2;
-	padding: 6px 30px 5px 12px;
+	padding: 8px 30px 7px 12px;
 	margin: 0;
 }
 
-#sub-header .right-info .notification-div h4 {
-	padding-bottom: 4px;
+#sub-header .right-info .notification-div h3 {
+	padding: 10px 30px 6px 12px;
 }
 
 #sub-header .right-info .notification-div::before {

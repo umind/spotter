@@ -113,7 +113,7 @@
 										<span class="notification-number">1</span>
 									</div>
 									<div class="notification-div">
-										<h4>Notification</h4>
+										<h3>Notification</h3>
 										<ul class="notification-list">
 											<li>Lorem Ipsum</li>
 											<li>Lorem Ipsum</li>
