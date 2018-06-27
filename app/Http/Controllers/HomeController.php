@@ -18,7 +18,6 @@ use Yajra\Datatables\Datatables;
 
 class HomeController extends Controller
 {
-
     public function index(){
         $top_categories = Category::whereCategoryType('auction')->orderBy('category_name', 'asc')->get();
 
@@ -33,7 +32,7 @@ class HomeController extends Controller
 
         return view('index', compact('top_categories', 'regular_ads', 'premium_ads', 'total_ads_count', 'user_count'));
     }
-
+    
     public function contactUs(){
         $title = trans('app.contact_us');
         return view('contact_us', compact('title'));

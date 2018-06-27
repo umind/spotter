@@ -20,7 +20,11 @@ Auth::routes();
 Route::get('installation', ['as' => 'installation', 'uses'=>'HomeController@installation']);
 Route::post('installation', [ 'uses'=>'HomeController@installationPost']);
 
-Route::get('/', ['as' => 'home', 'uses'=>'HomeController@index']);
+// Event Controller
+Route::get('/', ['as' => 'home', 'uses'=>'EventController@index']);
+Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show']);
+
+// Language Switcher
 Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
 
 //Account activating
