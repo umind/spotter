@@ -28,6 +28,10 @@ class User extends Authenticatable
         return $this->belongsTo(Country::class);
     }
 
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+
     /**
      * @param int $s
      * @param string $d

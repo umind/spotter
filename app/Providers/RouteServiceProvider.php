@@ -23,7 +23,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (auth()->user()) {
+            Route::bind('event', function ($id) {
+                return auth()->user()->events()->findOrFail($id);
+            });
+        }
 
         parent::boot();
     }

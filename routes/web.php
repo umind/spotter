@@ -22,6 +22,17 @@ Route::post('installation', [ 'uses'=>'HomeController@installationPost']);
 
 // Event Controller
 Route::get('/', ['as' => 'home', 'uses'=>'EventController@index']);
+// Admin Events
+Route::get('dashboard/my_events', ['as' => 'dashboard_events', 'uses'=>'EventController@myEvents']);
+Route::get('dashboard/my_events/create', ['as' => 'create_event', 'uses'=>'EventController@create']);
+Route::post('dashboard/my_events/store', ['as' => 'store_event', 'uses'=>'EventController@store']);
+Route::get('dashboard/my_events/edit/{event}', ['as' => 'edit_event', 'uses'=>'EventController@edit']);
+Route::get('dashboard/my_events/pending', ['as' => 'pending_events', 'uses'=>'EventController@pending']);
+Route::post('ajax/my_events/change_status', ['as' => 'change_event_status', 'uses'=>'EventController@changeStatus']);
+Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
+Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
+Route::post('dashboard/my_events/delete', ['as' => 'delete_event', 'uses'=>'EventController@delete']);
+
 Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show']);
 
 // Language Switcher

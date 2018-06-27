@@ -112,6 +112,9 @@
             });
 
             $('.approveAds, .blockAds').on('click', function () {
+                if (!confirm('{{ trans('app.are_you_sure') }}')) {
+                    return '';
+                }
                 var selector = $(this);
                 var slug = selector.data('slug');
                 var value = selector.data('value');

@@ -2,31 +2,38 @@
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav">
         <ul class="nav" id="side-menu">
-            <li>
-                <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> @lang('app.dashboard')</a>
-            </li>
+            @if($lUser->is_admin())
+                <li>
+                    <a href="{{ route('dashboard') }}"><i class="fa fa-dashboard fa-fw"></i> @lang('app.dashboard')</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.events')<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>  <a href="{{ route('dashboard_events') }}">@lang('app.my_events')</a> </li>
+                        <li>  <a href="{{ route('create_event') }}">@lang('app.post_an_event')</a> </li>
+                        <li>  <a href="{{ route('pending_events') }}">@lang('app.pending_for_approval')</a> </li>
+                    </ul>
+                </li>
+            @endif
 
             <li>
-                <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.my_ads')<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.ads')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span>  </a>
                 <ul class="nav nav-second-level">
                     <li>  <a href="{{ route('my_ads') }}">@lang('app.my_ads')</a> </li>
-                    <li>  <a href="{{ route('create_ad') }}">@lang('app.post_an_ad')</a> </li>
-                    <li>  <a href="{{ route('pending_ads') }}">@lang('app.pending_for_approval')</a> </li>
-                    <li>  <a href="{{ route('favorite_ads') }}">@lang('app.favourite_ads')</a> </li>
+                    @if($lUser->is_admin())
+                        <li>  <a href="{{ route('create_ad') }}">@lang('app.post_an_ad')</a> </li>
+                    @else
+                        <li>  <a href="{{ route('favorite_ads') }}">@lang('app.favourite_ads')</a> </li>
+                    @endif
+
+                    {{-- <li>  <a href="{{ route('approved_ads') }}">@lang('app.approved_ads')</a> </li> --}}
+                    {{-- <li>  <a href="{{ route('admin_pending_ads') }}">@lang('app.pending_for_approval')</a> </li> --}}
+                    {{-- <li>  <a href="{{ route('admin_blocked_ads') }}">@lang('app.blocked_ads')</a> </li> --}}
                 </ul>
             </li>
 
             @if($lUser->is_admin())
-
                 <li> <a href="{{ route('parent_categories') }}"><i class="fa fa-list"></i> @lang('app.categories') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li>
-                <li>
-                    <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.ads')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span>  </a>
-                    <ul class="nav nav-second-level">
-                        <li>  <a href="{{ route('approved_ads') }}">@lang('app.approved_ads')</a> </li>
-                        <li>  <a href="{{ route('admin_pending_ads') }}">@lang('app.pending_for_approval')</a> </li>
-                        <li>  <a href="{{ route('admin_blocked_ads') }}">@lang('app.blocked_ads')</a> </li>
-                    </ul>
-                </li>
 
                 <li> <a href="{{ route('pages') }}"><i class="fa fa-file-word-o"></i> @lang('app.pages') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li>
                 <li> <a href="{{ route('admin_comments') }}"><i class="fa fa-comment-o"></i> @lang('app.comments') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li>
