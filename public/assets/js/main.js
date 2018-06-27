@@ -159,3 +159,9 @@ $(document).ready(function () {
 	$("#app").css("margin-bottom", "-" + height + "px");
 	$(".push-footer").css("height", height + "px");
 });
+
+$(document).ready(function(){
+	$(".notification").click(function(){
+		$(".notification-div").toggle();
+	});
+});
