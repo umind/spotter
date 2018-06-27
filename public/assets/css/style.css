@@ -858,7 +858,6 @@ Ad box
 	display: block;
 	overflow: hidden;
 	position: relative;
-	border-radius: 3px 3px 0 0;
 	height: 158px;
 }
 
@@ -868,7 +867,7 @@ Ad box
 	overflow: hidden;
 }
 
-.ad-box .caption h4 {
+.ad-box .caption h3 {
 	margin-top: 0;
 	margin-bottom: 8px;
 }
@@ -938,6 +937,19 @@ Ad box
 	max-height: 23px;
 	width: auto;
 	margin-left: 5px;
+}
+
+.ad-box-caption-title h3 {
+	margin: 0;
+	padding: 10px 8px;
+}
+
+.bid-number {
+	padding: 10px 8px 0;
+}
+
+.artical-number {
+	padding: 0 8px 10px;
 }
 
 /**
@@ -1657,7 +1669,7 @@ Auction
 	color: #ffffff;
 	font-size: 10px;
 	font-weight: bold;
-	padding: 0 6px;
+	padding: 0 5px;
 	border-radius: 50%;
 	background-color: #B2282D;
 }
