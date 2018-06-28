@@ -1663,8 +1663,8 @@ Auction
 
 #sub-header .right-info .notification .notification-number {
 	position: absolute;
-	top: -2px;
-	right: -2px;
+	top: -1px;
+	right: -1px;
 	text-align: center;
 	color: #ffffff;
 	font-size: 10px;

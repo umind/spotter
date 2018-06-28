@@ -172,11 +172,11 @@
 									<li><a href="{{ route('register') }}">@lang('app.register')</a></li>
 								@else
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+										<a href="#" class="dropdown-toggle user" data-toggle="dropdown" role="button" aria-expanded="false">
 											{{ auth()->user()->name }} <span class="headerAvatar"> <img src="{{auth()->user()->get_gravatar()}}" /> </span> <span class="caret"></span>
 										</a>
 
-										<ul class="dropdown-menu" role="menu">
+										<ul class="dropdown-menu user" role="menu">
 											<li><a href="{{route('dashboard')}}"> @lang('app.dashboard') </a> </li>
 											<li>
 												<a href="{{ route('logout') }}"
