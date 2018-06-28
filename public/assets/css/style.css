@@ -1732,6 +1732,7 @@ Auction
 }
 
 #sub-header .right-info .notification-list li {
+	padding: 0;
 	display: block;
 }
 
