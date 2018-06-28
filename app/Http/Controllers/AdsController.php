@@ -192,6 +192,7 @@ class AdsController extends Controller
             'type'              => $request->type,
             'ad_condition'      => $request->condition,
             'price'             => $request->price,
+            'price_increaser'   => $request->price_increaser,
             'is_negotiable'     => $is_negotialble,
 
             'seller_name'       => $request->seller_name,

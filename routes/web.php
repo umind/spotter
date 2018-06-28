@@ -98,6 +98,7 @@ Route::group(['middleware' => 'only_admin_access'], function () {
 
 //Post bid
 Route::post('{id}/post-new', ['as' => 'post_bid','uses' => 'BidController@postBid']);
+Route::post('{id}/post-max-bid', ['as' => 'post_max_bid','uses' => 'BidController@postMaxBid']);
 
 
 //Checkout payment

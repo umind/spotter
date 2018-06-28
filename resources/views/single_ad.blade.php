@@ -21,6 +21,41 @@
 
 @section('content')
 
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+            {!! Form::open(['route'=> ['post_max_bid', $ad->id], 'class' => 'form-inline']) !!}
+            <div class="form">
+                <div class="input-group max-bid">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </span>
+                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid(), 2, '.', ',') }}" min="{{ $ad->current_bid() }}">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
+                          <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                  </span>
+                  {{-- <div class="input-group-addon">.00</div> --}}
+              </div>
+          </div>
+          <button type="submit" class="btn btn-primary">@lang('app.place_max_bid')</button>
+          {!! Form::close() !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="page-header search-page-header">
         <div class="container">
             <div class="row">
@@ -314,13 +349,25 @@
                                     {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <div class="input-group-addon">{{currency_sign()}}</div>
-                                            <input type="number" class="form-control" id="bid_amount" name="bid_amount" placeholder="@lang('app.bid_amount')" min="{{$ad->current_bid() + 1}}" required="required">
-                                            <div class="input-group-addon">.00</div>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
+                                                    <span class="glyphicon glyphicon-minus"></span>
+                                                </button>
+                                            </span>
+                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid(), 2, '.', ',') }}" min="{{ $ad->current_bid() }}">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
+                                                  <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </span>
+                                            {{-- <div class="input-group-addon">.00</div> --}}
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">@lang('app.place_bid')</button>
                                     {!! Form::close() !!}
+
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+
 
                                 @else
                                     @if($ad->is_bid_accepted())
@@ -853,6 +900,67 @@
                 e.preventDefault();
                 $(this).closest('form').remove();
                 $(this).closest('.reply_form_box').hide();
+            });
+
+            // increase or decrease price
+            $('.btn-number').click(function(e){
+                e.preventDefault();
+                
+                fieldName = $(this).attr('data-field');
+                type      = $(this).attr('data-type');
+                var input = $("input[name='"+fieldName+"']");
+                var currentVal = parseInt(input.val());
+                var increaser = parseInt('{{ $ad->price_increaser }}');
+                console.log(currentVal);
+
+                if (!isNaN(currentVal)) {
+                    if(type == 'minus') {
+                        
+                        if(currentVal > input.attr('min')) {
+                            input.val(parseFloat(currentVal - increaser).toFixed(2)).change();
+                        } 
+                        if(parseInt(input.val()) == input.attr('min')) {
+                            $(this).attr('disabled', true);
+                        }
+
+                    } else if(type == 'plus') {
+                        var val = currentVal + increaser;
+                        input.val(parseFloat(currentVal + increaser).toFixed(2)).change();
+                    }
+                } else {
+                    input.val(0);
+                }
+            });
+
+            $('.input-number').change(function() {
+
+                minValue =  parseInt($(this).attr('min'));
+                valueCurrent = parseInt($(this).val());
+                
+                name = $(this).attr('name');
+                if(valueCurrent >= minValue) {
+                    $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled');
+                    $(this).val(parseFloat(valueCurrent).toFixed(2));
+                } else {
+                    $(this).val(parseFloat(minValue).toFixed(2));
+                }
+                
+            });
+
+            $(".input-number").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                     // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) || 
+                     // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                         // let it happen, don't do anything
+                         return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
             });
 
         });

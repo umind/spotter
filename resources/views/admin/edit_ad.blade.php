@@ -67,6 +67,16 @@
 
                         </div>
 
+
+                        <div class="form-group  {{ $errors->has('price_increaser')? 'has-error':'' }}">
+                            <label for="price_increaser" class="col-md-4 control-label"> <span class="price_increaser_text">@lang('app.price_increaser')</span> </label>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="text" placeholder="@lang('app.price_increaser')" class="form-control" name="price_increaser" id="price_increaser" value="{{ old('price_increaser')? old('price_increaser') : $ad->price_increaser }}">
+                                </div>
+                            </div>
+                        </div>
+
                         <legend>@lang('app.image')</legend>
 
                         <div class="form-group {{ $errors->has('images')? 'has-error':'' }}">
