@@ -1664,7 +1664,7 @@ Auction
 #sub-header .right-info .notification .notification-number {
 	position: absolute;
 	top: -2px;
-	right: -4px;
+	right: -2px;
 	text-align: center;
 	color: #ffffff;
 	font-size: 10px;
@@ -1706,7 +1706,6 @@ Auction
 
 #sub-header .right-info .notification-div li {
 	border-bottom: 1px solid #dddfe2;
-	padding: 8px 30px 7px 12px;
 }
 
 #sub-header .right-info .notification-div li:hover {
@@ -1716,6 +1715,8 @@ Auction
 #sub-header .right-info .notification-div li a {
 	font-size: 14px;
 	color: #000000;
+	padding: 8px 30px 7px 12px;
+	display: block;
 }
 
 #sub-header .right-info .notification-div li a:hover {
