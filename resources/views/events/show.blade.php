@@ -12,40 +12,6 @@
         </div>
     @endif
 
-    @if($top_categories->count())
-        <div class="home-category">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="front-ads-head">
-                            <h2>@lang('app.categories')</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="container">
-                <div class="row equal">
-                    @foreach($top_categories as $top_cat)
-                        <div class="col-md-3">
-                            <div class="home-cat-box">
-                                <div class="home-cat-box-title">
-                                    <h3> <a href="{{ route('search', [ 'category' => 'cat-'.$top_cat->id.'-'.$top_cat->category_slug]) }}"> <i class="fa fa-folder-open-o"></i>  {{$top_cat->category_name}}
-                                        </a>
-                                    </h3>
-                                </div>
-
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    @endif
-
-
     @if(get_option('enable_monetize') == 1)
         <div class="container">
             <div class="row">
@@ -63,7 +29,7 @@
 
                     <div class="col-md-12">
                         <div class="front-ads-head">
-                            <h2>@lang('app.new_regular_ads')</h2>
+                            <h2>{{ $event->title }}</h2>
                         </div>
                     </div>
 

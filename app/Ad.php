@@ -36,8 +36,8 @@ class Ad extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    public function event(){
-        return $this->belongsTo(Event::class);
+    public function events(){
+        return $this->belongsToMany(Event::class);
     }
 
     public function scopeActivePremium($query){

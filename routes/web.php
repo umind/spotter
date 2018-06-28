@@ -22,18 +22,23 @@ Route::post('installation', [ 'uses'=>'HomeController@installationPost']);
 
 // Event Controller
 Route::get('/', ['as' => 'home', 'uses'=>'EventController@index']);
-// Admin Events
-Route::get('dashboard/my_events', ['as' => 'dashboard_events', 'uses'=>'EventController@myEvents']);
-Route::get('dashboard/my_events/create', ['as' => 'create_event', 'uses'=>'EventController@create']);
-Route::post('dashboard/my_events/store', ['as' => 'store_event', 'uses'=>'EventController@store']);
-Route::get('dashboard/my_events/edit/{event}', ['as' => 'edit_event', 'uses'=>'EventController@edit']);
-Route::get('dashboard/my_events/pending', ['as' => 'pending_events', 'uses'=>'EventController@pending']);
-Route::post('ajax/my_events/change_status', ['as' => 'change_event_status', 'uses'=>'EventController@changeStatus']);
-Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
-Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
-Route::post('dashboard/my_events/delete', ['as' => 'delete_event', 'uses'=>'EventController@delete']);
+Route::group(['middleware' => 'only_admin_access'], function () {
+    // Admin Events
+    Route::get('dashboard/my_events', ['as' => 'dashboard_events', 'uses'=>'EventController@myEvents']);
+    Route::get('dashboard/my_events/create', ['as' => 'create_event', 'uses'=>'EventController@create']);
+    Route::post('dashboard/my_events/store', ['as' => 'store_event', 'uses'=>'EventController@store']);
+    Route::get('dashboard/my_events/edit/{event}', ['as' => 'edit_event', 'uses'=>'EventController@edit']);
+    Route::get('dashboard/my_events/pending', ['as' => 'pending_events', 'uses'=>'EventController@pending']);
+    Route::post('ajax/my_events/change_status', ['as' => 'change_event_status', 'uses'=>'EventController@changeStatus']);
+    Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
+    Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
+    Route::post('dashboard/my_events/delete', ['as' => 'delete_event', 'uses'=>'EventController@delete']);
+});
 
 Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show']);
+
+// Products
+Route::get('products', ['as' => 'products', 'uses' => 'HomeController@index']);
 
 // Language Switcher
 Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
@@ -85,8 +90,11 @@ Route::post('get-city-by-state', ['as'=>'get_city_by_state', 'uses' => 'AdsContr
 Route::post('switch/product-view', ['as'=>'switch_grid_list_view', 'uses' => 'AdsController@switchGridListView']);
 
 
-Route::get('post-new', ['as'=>'create_ad', 'uses' => 'AdsController@create']);
-Route::post('post-new', ['uses' => 'AdsController@store']);
+// only admin can create auction
+Route::group(['middleware' => 'only_admin_access'], function () {
+    Route::get('post-new', ['as'=>'create_ad', 'uses' => 'AdsController@create']);
+    Route::post('post-new', ['uses' => 'AdsController@store']);
+});
 
 //Post bid
 Route::post('{id}/post-new', ['as' => 'post_bid','uses' => 'BidController@postBid']);

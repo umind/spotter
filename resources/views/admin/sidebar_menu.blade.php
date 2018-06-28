@@ -41,15 +41,6 @@
                 <li> <a href="{{ route('users') }}"><i class="fa fa-users"></i> @lang('app.users')</a>  </li>
 
                 <li>
-                    <a href="#"><i class="fa fa-desktop fa-fw"></i> @lang('app.appearance')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>
-                    <ul class="nav nav-second-level">
-                        <li> <a href="{{ route('theme_settings') }}">@lang('app.theme_settings')</a> </li>
-                        <li> <a href="{{ route('social_url_settings') }}">@lang('app.social_url')</a> </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-
-                <li>
                     <a href="#"><i class="fa fa-map-marker"></i> @lang('app.locations')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>
                     <ul class="nav nav-second-level">
                         <li> <a href="{{ route('country_list') }}">@lang('app.countries')</a> </li>
@@ -60,14 +51,12 @@
                 </li>
 
                 <li> <a href="{{ route('contact_messages') }}"><i class="fa fa-envelope-o"></i> @lang('app.contact_messages') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>  </li>
-                <li> <a href="{{ route('monetization') }}"><i class="fa fa-dollar"></i> @lang('app.monetization') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>  </li>
 
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> @lang('app.settings')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>
                     <ul class="nav nav-second-level">
                         <li> <a href="{{ route('general_settings') }}">@lang('app.general_settings')</a> </li>
                         <li> <a href="{{ route('ad_settings') }}">@lang('app.ad_settings_and_pricing')</a> </li>
-                        <li> <a href="{{ route('payment_settings') }}">@lang('app.payment_settings')</a> </li>
                         <li> <a href="{{ route('language_settings') }}">@lang('app.language_settings')</a> </li>
                         <li> <a href="{{ route('file_storage_settings') }}">@lang('app.file_storage_settings')</a> </li>
                         <li> <a href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li>
@@ -82,7 +71,6 @@
 
             @endif
 
-            <li> <a href="{{ route('payments') }}"><i class="fa fa-money"></i> @lang('app.payments')</a>  </li>
             <li> <a href="{{ route('profile') }}"><i class="fa fa-user"></i> @lang('app.profile')</a>  </li>
             <li> <a href="{{ route('change_password') }}"><i class="fa fa-lock"></i> @lang('app.change_password')</a>  </li>
 

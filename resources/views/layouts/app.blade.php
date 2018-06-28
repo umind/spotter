@@ -224,13 +224,14 @@
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<!-- Left Side Of Navbar -->
 					<ul class="nav navbar-nav">
-						<li><a href="{{route('home')}}">@lang('app.home')</a></li>
+						<li><a href="{{route('home')}}">@lang('app.auctions')</a></li>
+						<li><a href="{{ route('products')}}">@lang('app.products')</a> </li>
 						@if($header_menu_pages->count() > 0)
 							@foreach($header_menu_pages as $page)
 								<li><a href="{{ route('single_page', $page->slug) }}">{{ $page->title }} </a></li>
 							@endforeach
 						@endif
-						<li><a href="{{route('create_ad')}}">@lang('app.post_an_ad')</a> </li>
+                        <li><a href="{{ route('contact_us_page') }}">@lang('app.contact_us')</a></li>
 					</ul>
 
 					<!-- Right Side Of Navbar -->

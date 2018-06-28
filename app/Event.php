@@ -8,7 +8,7 @@ class Event extends Model
 {
     public function auctions()
     {
-    	return $this->hasMany(Ad::class);
+    	return $this->belongsToMany(Ad::class);
     }
 
     public function user()

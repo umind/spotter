@@ -7,6 +7,8 @@ use App\Ad;
 use App\User;
 use App\Event;
 use App\Category;
+use Carbon\Carbon;
+use App\Http\Requests\EventRequest;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -18,17 +20,12 @@ class EventController extends Controller
     }
 
     public function show(Event $event){
-        $top_categories = Category::whereCategoryType('auction')->orderBy('category_name', 'asc')->get();
-
-        $limit_regular_ads = get_option('number_of_free_ads_in_home');
-        $limit_premium_ads = get_option('number_of_premium_ads_in_home');
-
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();
 
         $ads = $event->auctions()->paginate(10);
 
-        return view('events.show', compact('top_categories', 'ads', 'total_ads_count', 'user_count'));
+        return view('events.show', compact('ads', 'total_ads_count', 'user_count', 'event'));
     }
 
     // admin panel methods
@@ -42,26 +39,61 @@ class EventController extends Controller
     public function create()
     {
         $title = trans('app.post_an_event');
-        $ads = Auth::user()->ads;
+        $products = Auth::user()->ads;
 
-        return view('admin.events.create', compact('title', 'ads'));
+        return view('admin.events.create', compact('title', 'products'));
     }
 
-    public function store()
+    public function store(EventRequest $request)
     {
+        $user = Auth::user();
+        $event = new Event;
+        $event->title = $request->title;
+        $event->address = $request->address;
+        $event->city = $request->city;
+        $event->zip_code = $request->zip_code;
+        $event->auction_ends = Carbon::parse($request->auction_deadline);
+        $event->view_dates = $request->view_dates;
+        $event->description = $request->description;
+        $event->save();
 
+        $user->events()->save($event);
+
+        $event->auctions()->sync($request->products);
+
+        return redirect()->route('dashboard_events')->with('success', trans('app.ad_created_msg'));
     }
 
     public function edit(Event $event) {
-        $limit_regular_ads = get_option('number_of_free_ads_in_home');
-        $title = trans('app.my_events');
-        $events = Auth::user()->events()->paginate(10);
-        return view('admin.events.my_events', compact('events', 'title'));
+        $title = trans('app.edit_an_event');
+        $products = Auth::user()->ads;
+        $selectedProducts = isset($event->auctions) ? $event->auctions->pluck('id')->toArray() : [];
+        return view('admin.events.edit', compact('products', 'title', 'selectedProducts', 'event'));
     }
 
-    public function update(Event $event)
+    public function update(EventRequest $request, Event $event)
     {
-        
+        $user = Auth::user();
+        $event->title = $request->title;
+        $event->address = $request->address;
+        $event->city = $request->city;
+        $event->zip_code = $request->zip_code;
+        $event->auction_ends = Carbon::parse($request->auction_deadline);
+        $event->view_dates = $request->view_dates;
+        $event->description = $request->description;
+        $event->save();
+
+        $user->events()->save($event);
+        $event->auctions()->sync($request->products);
+
+        return redirect()->route('dashboard_events')->with('success', trans('app.ad_created_msg'));
+    }
+
+    public function delete(Request $request)
+    {
+        $event = Auth::user()->events()->findOrFail($request->event);
+        $event->delete();
+        return ['success'=>1, 'msg'=>trans('app.ad_deleted_msg')];
     }
 
     public function pending()

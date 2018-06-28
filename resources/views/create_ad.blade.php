@@ -277,7 +277,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> @lang('app.save_new_ad')</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> @lang('app.save')</button>
                         </div>
                     </div>
                     {{ Form::close() }}
