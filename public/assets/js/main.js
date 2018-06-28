@@ -167,4 +167,11 @@ $(document).ready(function () {
 		if ($(e.target).closest(".notification").length != 0) return false;
 		$(".notification-div").hide();
 	});
+	$(".dropdown-toggle").click(function () {
+		$(".dropdown-menu").toggle();
+	});
+	$("body").click(function (e) {
+		if ($(e.target).closest(".dropdown-toggle").length != 0) return false;
+		$(".dropdown-menu").hide();
+	});
 });
