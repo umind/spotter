@@ -37,7 +37,7 @@
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid(), 2, '.', ',') }}" min="{{ $ad->current_bid() }}">
+                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2, '.', ',') }}" min="{{ $ad->current_bid_plus_increaser() }}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                           <span class="glyphicon glyphicon-plus"></span>
@@ -354,7 +354,7 @@
                                                     <span class="glyphicon glyphicon-minus"></span>
                                                 </button>
                                             </span>
-                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid(), 2, '.', ',') }}" min="{{ $ad->current_bid() }}">
+                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2, '.', ',') }}" min="{{ $ad->current_bid_plus_increaser() }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                                                   <span class="glyphicon glyphicon-plus"></span>
