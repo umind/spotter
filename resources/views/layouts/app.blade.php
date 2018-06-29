@@ -24,15 +24,15 @@
 
     <!-- Conditional page load script -->
     @if(request()->segment(1) === 'dashboard')
-        <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/admin.css?ver=' . str_random(10)) }}">
         <link rel="stylesheet" href="{{ asset('assets/plugins/metisMenu/dist/metisMenu.min.css') }}">
     @endif
 
 <!-- main style.css -->
-    <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css?ver=' . str_random(10)) }}">
 
     @if(is_rtl())
-        <link rel="stylesheet" href="{{ asset("assets/css/rtl.css") }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/rtl.css?ver=' . str_random(10)) }}">
     @endif
 
     @yield('page-css')
@@ -177,7 +177,11 @@
 										</a>
 
 										<ul class="dropdown-menu user" role="menu">
+											@if(auth()->user()->is_admin())
 											<li><a href="{{route('dashboard')}}"> @lang('app.dashboard') </a> </li>
+											@else
+											<li><a href="{{route('my_ads')}}"> @lang('app.auctions') </a> </li>
+											@endif
 											<li>
 												<a href="{{ route('logout') }}"
 												   onclick="event.preventDefault();
@@ -334,7 +338,7 @@
         });
     </script>
 @endif
-<script src="{{ asset('assets/js/main.js') }}"></script>
+<script src="{{ asset('assets/js/main.js?ver=' . str_random(10)) }}"></script>
 <script>
     var toastr_options = {closeButton : true};
 </script>

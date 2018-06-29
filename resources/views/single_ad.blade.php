@@ -33,13 +33,13 @@
             <div class="form">
                 <div class="input-group max-bid">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
+                        <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="max_bid_amount">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2, '.', ',') }}" min="{{ $ad->current_bid_plus_increaser() }}">
+                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2, '.', ',') }}" min="{{ $ad->current_bid_plus_increaser() }}">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
+                        <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="max_bid_amount">
                           <span class="glyphicon glyphicon-plus"></span>
                       </button>
                   </span>
@@ -909,23 +909,19 @@
                 fieldName = $(this).attr('data-field');
                 type      = $(this).attr('data-type');
                 var input = $("input[name='"+fieldName+"']");
-                var currentVal = parseInt(input.val());
-                var increaser = parseInt('{{ $ad->price_increaser }}');
-                console.log(currentVal);
-
+                var currentVal = toFloat(input.val());
+                var increaser = parseFloat('{{ $ad->price_increaser }}');
+                
                 if (!isNaN(currentVal)) {
                     if(type == 'minus') {
-                        
                         if(currentVal > input.attr('min')) {
-                            input.val(parseFloat(currentVal - increaser).toFixed(2)).change();
+                            input.val(number_format(currentVal - increaser, 2)).change();
                         } 
                         if(parseInt(input.val()) == input.attr('min')) {
                             $(this).attr('disabled', true);
                         }
-
                     } else if(type == 'plus') {
-                        var val = currentVal + increaser;
-                        input.val(parseFloat(currentVal + increaser).toFixed(2)).change();
+                        input.val(number_format(currentVal + increaser, 2));
                     }
                 } else {
                     input.val(0);
@@ -940,9 +936,9 @@
                 name = $(this).attr('name');
                 if(valueCurrent >= minValue) {
                     $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled');
-                    $(this).val(parseFloat(valueCurrent).toFixed(2));
+                    $(this).val(number_format(valueCurrent, 2));
                 } else {
-                    $(this).val(parseFloat(minValue).toFixed(2));
+                    $(this).val(number_format(minValue, 2));
                 }
                 
             });

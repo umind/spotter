@@ -126,9 +126,10 @@ Route::resource('user', 'UserController');
 
 //Dashboard Route
 Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
-    Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
-
     Route::group(['middleware'=>'only_admin_access'], function(){
+        
+        Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
+
         Route::group(['prefix'=>'settings'], function(){
             Route::get('theme-settings', ['as'=>'theme_settings', 'uses' => 'SettingsController@ThemeSettings']);
             Route::get('modern-theme-settings', ['as'=>'modern_theme_settings', 'uses' => 'SettingsController@modernThemeSettings']);
