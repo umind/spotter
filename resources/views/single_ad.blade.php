@@ -26,7 +26,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Modal title</h4>
+            <h4 class="modal-title">Place Max Bid</h4>
         </div>
         <div class="modal-body">
             {!! Form::open(['route'=> ['post_max_bid', $ad->id], 'class' => 'form-inline']) !!}
@@ -46,7 +46,7 @@
                   {{-- <div class="input-group-addon">.00</div> --}}
               </div>
           </div>
-          <button type="submit" class="btn btn-primary">@lang('app.place_max_bid')</button>
+          <button type="submit" class="btn btn-danger bid">@lang('app.place_max_bid')</button>
           {!! Form::close() !!}
       </div>
       <div class="modal-footer">
@@ -365,8 +365,9 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary">@lang('app.place_bid')</button>
                                     {!! Form::close() !!}
-
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+								<div class="text-right">
+                                    <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+								</div>
 
 
                                 @else
