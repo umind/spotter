@@ -55,34 +55,34 @@
                                     </span>
                                     </a>
                                 </div>
-								<div class="bid-number">BID-1234567890</div>
+								<div class="bid-price">
+									<div class="bid-number">Bid number: 00546</div>
+									<div class="starting-price">Starting price: 40.000</div>
+								</div>
+<!--
                                 <div class="caption">
                                     <div class="ad-box-category">
                                         @if($ad->sub_category)
                                             <a class="price text-muted" href="{{ route('search', [ $ad->country->country_code,  'category' => 'cat-'.$ad->sub_category->id.'-'.$ad->sub_category->category_slug]) }}"> <i class="fa fa-folder-o"></i> {{ $ad->sub_category->category_name }} </a>
                                         @endif
-<!--
                                         @if($ad->city)
                                             <a class="location text-muted" href="{{ route('search', [$ad->country->country_code, 'state' => 'state-'.$ad->state->id, 'city' => 'city-'.$ad->city->id]) }}"> <i class="fa fa-map-marker"></i> {{ $ad->city->city_name }} </a>
                                         @endif
--->
                                     </div>
                                 </div>
-								<div class="artical-number">ART-1234567890</div>
+-->
+<!--								<div class="artical-number">ART-1234567890</div>-->
+<!--
                                 <div class="ad-box-footer">
                                     <span class="ad-box-price">@lang('app.starting_price') {{ themeqx_price($ad->price) }},</span>
                                     <span class="ad-box-price">@lang('app.current_bid') {{ themeqx_price($ad->current_bid()) }}</span>
-
-<!--
                                     @if($ad->price_plan == 'premium')
                                         <div class="ad-box-premium" data-toggle="tooltip" title="@lang('app.premium_ad')">
                                             {!! $ad->premium_icon() !!}
                                         </div>
                                     @endif
--->
                                 </div>
-
-
+-->
                                 <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
