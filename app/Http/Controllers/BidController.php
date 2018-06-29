@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class BidController extends Controller
 {
+    public function construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index($ad_id){
         $user = Auth::user();
         $user_id = $user->id;
@@ -33,7 +38,7 @@ class BidController extends Controller
         $bid_amount = $request->bid_amount;
 
         $ad = Ad::find($ad_id);
-        $current_max_bid = $ad->current_bid();
+        $current_max_bid = $ad->current_bid_plus_increaser();
 
         if ($bid_amount <= $current_max_bid ){
             return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
@@ -56,10 +61,10 @@ class BidController extends Controller
             return redirect(route('login'))->with('error', trans('app.login_first_to_post_bid'));
         }
         $user = Auth::user();
-        $bid_amount = $request->bid_amount;
+        $bid_amount = $request->max_bid_amount;
 
         $ad = Ad::find($ad_id);
-        $current_max_bid = $ad->current_bid();
+        $current_max_bid = $ad->current_bid_plus_increaser();
 
         if ($bid_amount <= $current_max_bid ){
             return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
@@ -69,6 +74,7 @@ class BidController extends Controller
             'ad_id'         => $ad_id,
             'user_id'       => $user->id,
             'bid_amount'    => $bid_amount,
+            'max_bid_amount'    => $bid_amount,
             'is_accepted'   => 0,
         ];
 

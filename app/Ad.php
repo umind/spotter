@@ -189,7 +189,11 @@ class Ad extends Model
         if ($get_last_bid && $get_last_bid > $last_bid){
             $last_bid = $get_last_bid;
         }
-        return $last_bid + $this->price_increaser;
+        return $last_bid;
+    }
+
+    public function current_bid_plus_increaser(){
+        return $this->current_bid() + $this->price_increaser;
     }
 
     public function is_bid_active(){
