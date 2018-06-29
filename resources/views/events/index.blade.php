@@ -25,9 +25,6 @@
     @if($events->count())
         <div id="regular-ads-container">
             <div class="container">
-				<div class="front-ads-head">
-					<h2 class="text-uppercase">Auctions</h2>
-				</div>
 <!--
 				@foreach($events as $event)
 					<div class="col-md-3">
@@ -56,7 +53,11 @@
 					</div>
 				@endforeach
 -->
-				<div class="auction-header">
+				<div class="auction">
+					<div class="front-ads-head">
+					<h2 class="text-uppercase">Auctions</h2>
+				</div>
+					<div class="auction-header">
 					<div class="row">
 						<div class="col-md-6 auction-name">
 							<p>Auction 1</p>
@@ -66,14 +67,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="auction-content">
+					<div class="auction-content">
 					<ul>
 						<li class="item">
 							<a href="">
 								<img src="{{ asset('uploads/images/1515336499x4ofx-pexels-photo.jpeg') }}" class="img-responsive" />
 							</a>
 							<div class="information">
-								<h4>Van Gogh Starry night</h4>
+								<h4>Lorem Ipsum</h4>
 								<p>Starpreis: 40.000</p>
 							</div>
 						</li>
@@ -82,7 +83,7 @@
 								<img src="{{ asset('uploads/images/1515337664uvcxf-business-pug-working-on-laptop-925x.jpg') }}" class="img-responsive" />
 							</a>
 							<div class="information">
-								<h4>Van Gogh Starry night</h4>
+								<h4>Lorem Ipsum</h4>
 								<p>Starpreis: 40.000</p>
 							</div>
 						</li>
@@ -91,7 +92,7 @@
 								<img src="{{ asset('uploads/images/1515337910o3l8q-green-eyed-grey-cat-925x.jpg') }}" class="img-responsive" />
 							</a>
 							<div class="information">
-								<h4>Van Gogh Starry night</h4>
+								<h4>Lorem Ipsum</h4>
 								<p>Starpreis: 40.000</p>
 							</div>
 						</li>
@@ -100,22 +101,22 @@
 								<img src="{{ asset('uploads/images/1515336955wmkxa-iphone-qr-reader-925x.jpg') }}" class="img-responsive" />
 							</a>
 							<div class="information">
-								<h4>Van Gogh Starry night</h4>
+								<h4>Lorem Ipsum</h4>
 								<p>Starpreis: 40.000</p>
 							</div>
 						</li>
 						<li class="item">
 							<a href="">
-								<img src="{{ asset('uploads/images/1515336955wmkxa-iphone-qr-reader-925x.jpg') }}" class="img-responsive" />
+								<img src="{{ asset('uploads/images/1515337310ox0bm-home-tv-stand-shelves-925x.jpg') }}" class="img-responsive" />
 							</a>
 							<div class="information">
-								<h4>Van Gogh Starry night</h4>
+								<h4>Lorem Ipsum</h4>
 								<p>Starpreis: 40.000</p>
 							</div>
 						</li>
 					</ul>
 				</div>
-				<div class="auction-footer">
+					<div class="auction-footer">
 					<div class="row">
 						<div class="col-md-4">
 							<p>Auktionar: Luis B</p>
@@ -127,6 +128,83 @@
 						<div class="col-md-4 text-right">
 							<p>Datum: 27.06.2018</p>
 							<p>Beginn 10:00 Uhr</p>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class="auction">
+					<div class="auction-header">
+						<div class="row">
+							<div class="col-md-6 auction-name">
+								<p>Auction 2</p>
+							</div>
+							<div class="col-md-6 all-products text-right">
+								<button id="btn-allProducts">All products</button>
+							</div>
+						</div>
+					</div>
+					<div class="auction-content">
+						<ul>
+							<li class="item">
+								<a href="">
+									<img src="{{ asset('uploads/images/1515336499x4ofx-pexels-photo.jpeg') }}" class="img-responsive" />
+								</a>
+								<div class="information">
+									<h4>Lorem Ipsum</h4>
+									<p>Starpreis: 40.000</p>
+								</div>
+							</li>
+							<li class="item">
+								<a href="">
+									<img src="{{ asset('uploads/images/1515337664uvcxf-business-pug-working-on-laptop-925x.jpg') }}" class="img-responsive" />
+								</a>
+								<div class="information">
+									<h4>Lorem Ipsum</h4>
+									<p>Starpreis: 40.000</p>
+								</div>
+							</li>
+							<li class="item">
+								<a href="">
+									<img src="{{ asset('uploads/images/1515337910o3l8q-green-eyed-grey-cat-925x.jpg') }}" class="img-responsive" />
+								</a>
+								<div class="information">
+									<h4>Lorem Ipsum</h4>
+									<p>Starpreis: 40.000</p>
+								</div>
+							</li>
+							<li class="item">
+								<a href="">
+									<img src="{{ asset('uploads/images/1515336955wmkxa-iphone-qr-reader-925x.jpg') }}" class="img-responsive" />
+								</a>
+								<div class="information">
+									<h4>Lorem Ipsum</h4>
+									<p>Starpreis: 40.000</p>
+								</div>
+							</li>
+							<li class="item">
+								<a href="">
+									<img src="{{ asset('uploads/images/1515337310ox0bm-home-tv-stand-shelves-925x.jpg') }}" class="img-responsive" />
+								</a>
+								<div class="information">
+									<h4>Lorem Ipsum</h4>
+									<p>Starpreis: 40.000</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="auction-footer">
+						<div class="row">
+							<div class="col-md-4">
+								<p>Auktionar: Luis B</p>
+								<p>Ort: Seestrasse 160 8002, Zurich</p>
+							</div>
+							<div class="col-md-4 text-center">
+								<p class="text-red">Gebot gultig bis: 10t17Std15min37sec</p>
+							</div>
+							<div class="col-md-4 text-right">
+								<p>Datum: 27.06.2018</p>
+								<p>Beginn 10:00 Uhr</p>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -845,7 +845,15 @@ Ad box
 	margin-bottom: 20px;
 }
 
-/* Auction */
+/* Auction start */
+
+.auction {
+	margin-bottom: 40px;
+}
+
+.auction:last-child {
+	margin-bottom: 0;
+}
 
 .auction-header {
 	padding: 10px 15px;
@@ -886,7 +894,7 @@ Ad box
 
 .auction-content ul {
 	padding: 0;
-	margin: 0;
+	margin: 5px 0;
 	font-size: 0;
 }
 
@@ -895,8 +903,8 @@ Ad box
 	list-style: none;
 	display: inline-block;
 	width: 20%;
-	transition: all .3s ease;
 	overflow: hidden;
+	transition: all .3s ease;
 }
 
 .auction-content .information {
@@ -905,8 +913,8 @@ Ad box
 	bottom: 0;
 	left: 0;
 	height: 0;
-	transition: all .3s ease;
 	overflow: hidden;
+	transition: all .3s ease;
 	text-align: center;
 	font-weight: bold;
 	background-color: rgba(0, 0, 0, 0.5);
@@ -924,6 +932,7 @@ Ad box
 .auction-content .item img {
 	transition: all .3s ease;
 	max-width: 100%;
+	width: 100%;
 	height: 200px;
 }
 
@@ -963,6 +972,8 @@ Ad box
 .auction-footer .text-red {
 	color: #FF0000;
 }
+
+/* Auction end */
 
 .ad-box {
 	background: #fff none repeat scroll 0 0;
@@ -1943,5 +1954,5 @@ Auction
 }
 
 .place-bid-btn .btn-primary:hover {
-	background-color: #f0ad4e;
+	background-color: #EEA439;
 }
