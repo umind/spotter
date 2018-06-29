@@ -127,7 +127,7 @@ Route::resource('user', 'UserController');
 //Dashboard Route
 Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
     Route::group(['middleware'=>'only_admin_access'], function(){
-        
+
         Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
 
         Route::group(['prefix'=>'settings'], function(){
@@ -241,43 +241,48 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
 
     });
 
-    //All user can access this route
-    Route::get('payments', ['as'=>'payments', 'uses' => 'PaymentController@index']);
-    Route::get('payments-data', ['as'=>'get_payments_data', 'uses' => 'PaymentController@paymentsData']);
-    Route::get('payments-info/{trand_id}', ['as'=>'payment_info', 'uses' => 'PaymentController@paymentInfo']);
-    //End all users access
+    // only standard user access
+    Route::get('all_auctions', ['as'=>'all_user_auctions', 'uses' => 'AdsController@allUserAuctions']);
+    Route::get('active_ads', ['as'=>'active_user_ads', 'uses' => 'AdsController@activeUserAuctions']);
+    Route::get('favorite-lists', ['as'=>'favorite_ads', 'uses' => 'AdsController@favoriteAds']);
+
+    // all user access
+
 
 
     Route::group(['prefix'=>'u'], function(){
         Route::group(['prefix'=>'posts'], function(){
-            Route::get('/', ['as'=>'my_ads', 'uses' => 'AdsController@myAds']);
-            Route::post('delete', ['as'=>'delete_ads', 'uses' => 'AdsController@destroy']);
-            Route::get('edit/{id}', ['as'=>'edit_ad', 'uses' => 'AdsController@edit']);
-            Route::post('edit/{id}', ['uses' => 'AdsController@update']);
-            Route::get('my-lists', ['as'=>'my_ads', 'uses' => 'AdsController@myAds']);
-            Route::get('favorite-lists', ['as'=>'favorite_ads', 'uses' => 'AdsController@favoriteAds']);
-            //Upload ads image
-            Route::post('upload-a-image', ['as'=>'upload_ads_image', 'uses' => 'AdsController@uploadAdsImage']);
-            Route::post('upload-post-image', ['as'=>'upload_post_image', 'uses' => 'PostController@uploadPostImage']);
-            //Delete media
-            Route::post('delete-media', ['as'=>'delete_media', 'uses' => 'AdsController@deleteMedia']);
-            Route::post('feature-media-creating', ['as'=>'feature_media_creating_ads', 'uses' => 'AdsController@featureMediaCreatingAds']);
-            Route::get('append-media-image', ['as'=>'append_media_image', 'uses' => 'AdsController@appendMediaImage']);
-            Route::get('append-post-media-image', ['as'=>'append_post_media_image', 'uses' => 'PostController@appendPostMediaImage']);
-            Route::get('pending-lists', ['as'=>'pending_ads', 'uses' => 'AdsController@pendingAds']);
-            Route::get('archive-lists', ['as'=>'favourite_ad', 'uses' => 'AdsController@create']);
 
-            Route::get('reports-by/{slug}', ['as'=>'reports_by_ads', 'uses' => 'AdsController@reportsByAds']);
+            Route::group(['middleware' => 'only_admin_access'], function () {
+                Route::get('/', ['as'=>'my_ads', 'uses' => 'AdsController@myAds']);
+                Route::post('delete', ['as'=>'delete_ads', 'uses' => 'AdsController@destroy']);
+                Route::get('edit/{id}', ['as'=>'edit_ad', 'uses' => 'AdsController@edit']);
+                Route::post('edit/{id}', ['uses' => 'AdsController@update']);
+                Route::get('my-lists', ['as'=>'my_ads', 'uses' => 'AdsController@myAds']);
+                //Upload ads image
+                Route::post('upload-a-image', ['as'=>'upload_ads_image', 'uses' => 'AdsController@uploadAdsImage']);
+                Route::post('upload-post-image', ['as'=>'upload_post_image', 'uses' => 'PostController@uploadPostImage']);
+                //Delete media
+                Route::post('delete-media', ['as'=>'delete_media', 'uses' => 'AdsController@deleteMedia']);
+                Route::post('feature-media-creating', ['as'=>'feature_media_creating_ads', 'uses' => 'AdsController@featureMediaCreatingAds']);
+                Route::get('append-media-image', ['as'=>'append_media_image', 'uses' => 'AdsController@appendMediaImage']);
+                Route::get('append-post-media-image', ['as'=>'append_post_media_image', 'uses' => 'PostController@appendPostMediaImage']);
+                Route::get('pending-lists', ['as'=>'pending_ads', 'uses' => 'AdsController@pendingAds']);
+                Route::get('archive-lists', ['as'=>'favourite_ad', 'uses' => 'AdsController@create']);
+
+                Route::get('reports-by/{slug}', ['as'=>'reports_by_ads', 'uses' => 'AdsController@reportsByAds']);
+
+                //bids
+                Route::get('bids/{ad_id}', ['as'=>'auction_bids', 'uses' => 'BidController@index']);
+                Route::post('bids/action', ['as'=>'bid_action', 'uses' => 'BidController@bidAction']);
+                Route::get('bidder_info/{bid_id}', ['as'=>'bidder_info', 'uses' => 'BidController@bidderInfo']);
+            });
+
             Route::get('profile', ['as'=>'profile', 'uses' => 'UserController@profile']);
             Route::get('profile/edit', ['as'=>'profile_edit', 'uses' => 'UserController@profileEdit']);
             Route::post('profile/edit', ['uses' => 'UserController@profileEditPost']);
             Route::get('profile/change-avatar', ['as'=>'change_avatar', 'uses' => 'UserController@changeAvatar']);
             Route::post('upload-avatar', ['as'=>'upload_avatar',  'uses' => 'UserController@uploadAvatar']);
-
-            //bids
-            Route::get('bids/{ad_id}', ['as'=>'auction_bids', 'uses' => 'BidController@index']);
-            Route::post('bids/action', ['as'=>'bid_action', 'uses' => 'BidController@bidAction']);
-            Route::get('bidder_info/{bid_id}', ['as'=>'bidder_info', 'uses' => 'BidController@bidderInfo']);
 
             /**
              * Change Password route
