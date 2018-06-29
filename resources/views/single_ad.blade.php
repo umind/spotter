@@ -60,7 +60,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{safe_output($ad->title)}}</h2>
                     <div class="btn-group btn-breadcrumb">
                         <a href="{{ route('home') }}" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
 
@@ -76,6 +75,7 @@
                         <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-warning">{{ safe_output($ad->title) }}</a>
 
                     </div>
+                    <h2>{{safe_output($ad->title)}}</h2>
                 </div>
             </div>
         </div>
