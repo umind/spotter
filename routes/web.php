@@ -242,8 +242,9 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
     });
 
     // only standard user access
-    Route::get('bidding_auctions', ['as'=>'bidding_auctions', 'uses' => 'AdsController@allBiddingAuctions']);
+    Route::get('finished_auctions', ['as'=>'finished_auctions', 'uses' => 'AdsController@finishedAuctions']);
     Route::get('active_bidding_auctions', ['as'=>'active_bidding_auctions', 'uses' => 'AdsController@activeBiddingAuctions']);
+    Route::get('won_auctions', ['as'=>'won_auctions', 'uses' => 'AdsController@wonAuctions']);
     Route::get('favorite-lists', ['as'=>'favorite_ads', 'uses' => 'AdsController@favoriteAds']);
 
     // all user access

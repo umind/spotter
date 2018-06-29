@@ -81,17 +81,6 @@
         </div>
     </div>
 
-
-    @if(get_option('enable_monetize') == 1)
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {!! get_option('monetize_code_below_ad_title') !!}
-                </div>
-            </div>
-        </div>
-    @endif
-
     <div class="single-auction-wrap">
 
         <div class="container">
@@ -149,50 +138,27 @@
 
                     </div>
 
-
-                    @if(get_option('enable_monetize') == 1)
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {!! get_option('monetize_code_below_ad_image') !!}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
                     <div class="ads-detail">
                         @lang('app.description')</h4>
                         {!! nl2br(safe_output($ad->description)) !!}
                     </div>
 
-
-                    @if(get_option('enable_monetize') == 1)
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {!! get_option('monetize_code_below_ad_description') !!}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
                     @if($ad->category_type == 'auction')
                         <hr />
                         <div id="bid_history">
                             <h2>@lang('app.bid_history')</h2>
-
-                            @if($ad->bids->count())
+                            @if($bids->count())
                                 <table class="table table-striped">
                                     <tr>
                                         <th>@lang('app.bidder')</th>
-                                        <th>@lang('app.bid_amount')</th>
+                                        {{-- <th>@lang('app.bid_amount')</th> --}}
                                         <th>@lang('app.date_time')</th>
                                     </tr>
-                                    @foreach($ad->bids as $bid)
+                                    @foreach($bids as $bid)
                                         <tr>
-                                            <td>@lang('app.bidder') #{{$bid->user_id}}</td>
-                                            <td>{{themeqx_price($bid->bid_amount)}}</td>
-                                            <td>{{$bid->posting_datetime() }}</td>
+                                            <td>{{ $bid->user->user_name }}</td>
+                                            {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
+                                            <td>{{ $bid->posting_datetime() }}</td>
                                         </tr>
                                     @endforeach
 
@@ -341,10 +307,11 @@
                         @if($ad->category_type == 'auction')
                             <div class="widget">
                                 <h3>@lang('app.highest_bid') {{themeqx_price($ad->current_bid())}}</h3>
+                                <p>@lang('app.plus_pdv') 7.7% MwSt</p>
                                 @if($ad->is_bid_active())
 
                                     <p>{{sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
-                                    <p>@lang('app.total_bids'): {{$ad->bids->count()}}, <a href="#bid_history">@lang('app.bid_history')</a> </p>
+                                    <p>@lang('app.total_bids'): {{ $bids->count() }}, <a href="#bid_history">@lang('app.bid_history')</a> </p>
 
                                     {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
                                     <div class="form-group">
@@ -369,6 +336,9 @@
                                     <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
 								</div>
 
+                                @if($userMaxBid)
+                                    <p>@lang('app.your_max_bid'): {{ number_format($userMaxBid, 2) }}</p>
+                                @endif
 
                                 @else
                                     @if($ad->is_bid_accepted())
@@ -377,7 +347,7 @@
                                         <p>{{sprintf(trans('app.bid_deadline_closed_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
                                     @endif
 
-                                    <p>@lang('app.total_bids'): {{$ad->bids->count()}} </p>
+                                    <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
 
                                     <div class="alert alert-warning">
                                         <h4>@lang('app.bid_closed')</h4>
@@ -388,16 +358,6 @@
                             </div>
                         @endif
 
-
-                        @if(get_option('enable_monetize') == 1)
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {!! get_option('monetize_code_above_general_info') !!}
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
                         <div class="widget">
 
                             @if($ad->category_type== 'jobs')

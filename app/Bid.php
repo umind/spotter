@@ -12,4 +12,9 @@ class Bid extends Model
         $created_date_time = $this->created_at->timezone(get_option('default_timezone'))->format(get_option('date_format_custom').' '.get_option('time_format_custom'));
         return $created_date_time;
     }
+
+    public function user()
+    {
+    	return $this->belongsTo(User::class);
+    }
 }

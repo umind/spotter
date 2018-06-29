@@ -24,7 +24,8 @@
                         <li>  <a href="{{ route('create_ad') }}">@lang('app.post_an_ad')</a> </li>
                     @else
                         <li>  <a href="{{ route('active_bidding_auctions') }}">@lang('app.active_ads')</a> </li>
-                        <li>  <a href="{{ route('bidding_auctions') }}">@lang('app.all_auctions')</a> </li>
+                        <li>  <a href="{{ route('finished_auctions') }}">@lang('app.finished_auctions')</a> </li>
+                        <li>  <a href="{{ route('won_auctions') }}">@lang('app.won_auctions')</a> </li>
                         <li>  <a href="{{ route('favorite_ads') }}">@lang('app.favourite_ads')</a> </li>
                     @endif
 

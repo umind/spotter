@@ -954,7 +954,11 @@ class AdsController extends Controller
         //Get Related Ads, add [->whereCountryId($ad->country_id)] for more specific results
         $related_ads = Ad::active()->whereCategoryId($ad->category_id)->where('id', '!=',$ad->id)->with('category', 'city')->limit($limit_regular_ads)->orderByRaw('RAND()')->get();
 
-        return view('single_ad', compact('ad', 'title', 'related_ads'));
+        // get all bids for this auctions and also the max bid by the logged in user if set
+        $userMaxBid = Auth::user()->bids()->max('max_bid_amount');
+        $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get();
+
+        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid'));
     }
 
     public function switchGridListView(Request $request){
@@ -1013,9 +1017,9 @@ class AdsController extends Controller
     }
 
     // standard users methods
-    public function allBiddingAuctions()
+    public function finishedAuctions()
     {
-        $title = trans('app.all_bidding_auctions');
+        $title = trans('app.finished_auctions');
 
         $ads = Ad::whereHas('bids', function ($q) {
             $q->where('bids.user_id', Auth::id());
@@ -1023,7 +1027,7 @@ class AdsController extends Controller
         ->where('expired_at', '<', Carbon::now())
         ->paginate(10);
 
-        return view('admin.auctions.all_bidding_auctions', compact('title', 'ads'));
+        return view('admin.auctions.finished_auctions', compact('title', 'ads'));
     }
 
     public function activeBiddingAuctions()
@@ -1037,6 +1041,18 @@ class AdsController extends Controller
         ->paginate(10);
 
         return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));
+    }
+
+    public function wonAuctions()
+    {
+        $title = trans('app.won_auctions');
+
+        $ads = Ad::whereHas('bids', function ($q) {
+            $q->where('bids.user_id', Auth::id())
+                ->where('bids.is_accepted', 1);
+        })->paginate(10);
+
+        return view('admin.auctions.won_auctions', compact('title', 'ads'));
     }
 
 }

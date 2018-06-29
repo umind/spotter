@@ -38,7 +38,15 @@ class BidController extends Controller
         $bid_amount = toFloat($request->bid_amount);
 
         $ad = Ad::find($ad_id);
+        // get max bid that you enter inside place bid field
         $current_max_bid = $ad->current_bid_plus_increaser();
+
+        // for notification also
+        // get max bid that you enter inside place MAX bid field
+        // $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
+        // $userWithCurrentMaxBid = User::whereHas('bids', function () {
+
+        // });
 
         if ($bid_amount < $current_max_bid ){
             return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
@@ -51,8 +59,14 @@ class BidController extends Controller
             'is_accepted'   => 0,
         ];
 
-
         Bid::create($data);
+
+        // notification here
+        // if ($bid_amount > $maxBid) {
+        //     $notification = new Notification
+        //     $user->
+        // }
+
         return back()->with('success', trans('app.your_bid_posted'));
     }
 
@@ -77,8 +91,18 @@ class BidController extends Controller
             'is_accepted'   => 0,
         ];
 
+        // find if this user already has placed max bid
+        $bid = Bid::where('user_id', $user->id)->whereNotNull('max_bid_amount')->first();
 
-        Bid::create($data);
+        // if max bids by this user already exists replace by new max bid
+        // if thats not the case then just create new max bid
+        if ($bid) {
+            $bid->max_bid_amount = $bid_amount;
+            $bid->save();
+        } else {
+            Bid::create($data);
+        }
+        
         return back()->with('success', trans('app.your_bid_posted'));
     }
 

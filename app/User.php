@@ -32,6 +32,15 @@ class User extends Authenticatable
         return $this->hasMany(Event::class);
     }
 
+    public function bids(){
+        return $this->hasMany(Bid::class);
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
+    }
+
     /**
      * @param int $s
      * @param string $d

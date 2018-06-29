@@ -25,188 +25,54 @@
     @if($events->count())
         <div id="regular-ads-container">
             <div class="container">
-<!--
-				@foreach($events as $event)
-					<div class="col-md-3">
-						<div class="ad-box">
-							<div class="ads-thumbnail">
-								<a href="{{ route('single_event', ['event' => $event->id]) }}">
-									<img itemprop="image"  src="{{ media_url($event->feature_img) }}" class="img-responsive" alt="{{ $event->title }}">
-									<span class="modern-img-indicator">
-								</span>
-								</a>
-							</div>
-							<div class="caption">
-								<div class="ad-box-caption-title">
-									<a class="ad-box-title" href="{{ route('single_event', ['event' => $event->id]) }}" title="{{ $event->title }}">
-										{{ str_limit($event->title, 40) }}
-									</a>
-								</div>
-							</div>
-
-							{{-- <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
-							<div class="place-bid-btn">
-								<a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
-							</div> --}}
-
-						</div>
-					</div>
-				@endforeach
--->
 				<div class="auction">
 					<div class="front-ads-head">
-					<h2 class="text-uppercase">Auctions</h2>
-				</div>
-					<div class="auction-header">
-					<div class="row">
-						<div class="col-md-6 auction-name">
-							<p>Auction 1</p>
-						</div>
-						<div class="col-md-6 all-products text-right">
-							<button id="btn-allProducts">All products</button>
-						</div>
+						<h2 class="text-uppercase">@lang('app.ads')</h2>
 					</div>
-				</div>
-					<div class="auction-content">
-					<ul>
-						<li class="item">
-							<a href="">
-								<img src="{{ asset('uploads/images/1515336499x4ofx-pexels-photo.jpeg') }}" class="img-responsive" />
-							</a>
-							<div class="information">
-								<h4>Lorem Ipsum</h4>
-								<p>Starpreis: 40.000</p>
-							</div>
-						</li>
-						<li class="item">
-							<a href="">
-								<img src="{{ asset('uploads/images/1515337664uvcxf-business-pug-working-on-laptop-925x.jpg') }}" class="img-responsive" />
-							</a>
-							<div class="information">
-								<h4>Lorem Ipsum</h4>
-								<p>Starpreis: 40.000</p>
-							</div>
-						</li>
-						<li class="item">
-							<a href="">
-								<img src="{{ asset('uploads/images/1515337910o3l8q-green-eyed-grey-cat-925x.jpg') }}" class="img-responsive" />
-							</a>
-							<div class="information">
-								<h4>Lorem Ipsum</h4>
-								<p>Starpreis: 40.000</p>
-							</div>
-						</li>
-						<li class="item">
-							<a href="">
-								<img src="{{ asset('uploads/images/1515336955wmkxa-iphone-qr-reader-925x.jpg') }}" class="img-responsive" />
-							</a>
-							<div class="information">
-								<h4>Lorem Ipsum</h4>
-								<p>Starpreis: 40.000</p>
-							</div>
-						</li>
-						<li class="item">
-							<a href="">
-								<img src="{{ asset('uploads/images/1515337310ox0bm-home-tv-stand-shelves-925x.jpg') }}" class="img-responsive" />
-							</a>
-							<div class="information">
-								<h4>Lorem Ipsum</h4>
-								<p>Starpreis: 40.000</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-					<div class="auction-footer">
-					<div class="row">
-						<div class="col-md-4">
-							<p>Auktionar: Luis B</p>
-							<p>Ort: Seestrasse 160 8002, Zurich</p>
-						</div>
-						<div class="col-md-4 text-center">
-							<p class="text-red">Gebot gultig bis: 10t17Std15min37sec</p>
-						</div>
-						<div class="col-md-4 text-right">
-							<p>Datum: 27.06.2018</p>
-							<p>Beginn 10:00 Uhr</p>
-						</div>
-					</div>
-				</div>
-				</div>
-				<div class="auction">
-					<div class="auction-header">
-						<div class="row">
-							<div class="col-md-6 auction-name">
-								<p>Auction 2</p>
-							</div>
-							<div class="col-md-6 all-products text-right">
-								<button id="btn-allProducts">All products</button>
+					@if($events->count())
+						<div class="auction-header">
+							<div class="row">
+								<div class="col-md-6 auction-name">
+									<p></p>
+								</div>
+								<div class="col-md-6 all-products text-right">
+									<button id="btn-allProducts">@lang('app.all_products')</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="auction-content">
-						<ul>
-							<li class="item">
-								<a href="">
-									<img src="{{ asset('uploads/images/1515336499x4ofx-pexels-photo.jpeg') }}" class="img-responsive" />
-								</a>
-								<div class="information">
-									<h4>Lorem Ipsum</h4>
-									<p>Starpreis: 40.000</p>
+							<div class="auction-content">
+							<ul>
+								@foreach($event->auctions as $auction)
+									<li class="item">
+										<a href="{{ route('single_event', $event->id) }}">
+											<img src="{{ media_url($auction->feature_img) }}" class="img-responsive" />
+										</a>
+										<div class="information">
+											<h4>{{ $auction->title }}</h4>
+											<p>@lang('app.starting_price'): {{ number_format($auction->price, 2) }}</p>
+										</div>
+									</li>
+								@endforeach
+							</ul>
+						</div>
+							<div class="auction-footer">
+							<div class="row">
+								<div class="col-md-4">
+									<p>@lang('app.auctioner'): {{ $event->user->first_name }} {{ $event->user->last_name }}</p>
+									<p>@lang('app.venue'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
-							</li>
-							<li class="item">
-								<a href="">
-									<img src="{{ asset('uploads/images/1515337664uvcxf-business-pug-working-on-laptop-925x.jpg') }}" class="img-responsive" />
-								</a>
-								<div class="information">
-									<h4>Lorem Ipsum</h4>
-									<p>Starpreis: 40.000</p>
+								<div class="col-md-4 text-center">
+									<p class="text-red countdown" data-expire-date="{{ $event->auction_ends }}"></p>
 								</div>
-							</li>
-							<li class="item">
-								<a href="">
-									<img src="{{ asset('uploads/images/1515337910o3l8q-green-eyed-grey-cat-925x.jpg') }}" class="img-responsive" />
-								</a>
-								<div class="information">
-									<h4>Lorem Ipsum</h4>
-									<p>Starpreis: 40.000</p>
+								<div class="col-md-4 text-right">
+									<p>@lang('app.date'): {{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }}</p>
+									<p>@lang('app.begins'): {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }}</p>
 								</div>
-							</li>
-							<li class="item">
-								<a href="">
-									<img src="{{ asset('uploads/images/1515336955wmkxa-iphone-qr-reader-925x.jpg') }}" class="img-responsive" />
-								</a>
-								<div class="information">
-									<h4>Lorem Ipsum</h4>
-									<p>Starpreis: 40.000</p>
-								</div>
-							</li>
-							<li class="item">
-								<a href="">
-									<img src="{{ asset('uploads/images/1515337310ox0bm-home-tv-stand-shelves-925x.jpg') }}" class="img-responsive" />
-								</a>
-								<div class="information">
-									<h4>Lorem Ipsum</h4>
-									<p>Starpreis: 40.000</p>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="auction-footer">
-						<div class="row">
-							<div class="col-md-4">
-								<p>Auktionar: Luis B</p>
-								<p>Ort: Seestrasse 160 8002, Zurich</p>
-							</div>
-							<div class="col-md-4 text-center">
-								<p class="text-red">Gebot gultig bis: 10t17Std15min37sec</p>
-							</div>
-							<div class="col-md-4 text-right">
-								<p>Datum: 27.06.2018</p>
-								<p>Beginn 10:00 Uhr</p>
 							</div>
 						</div>
-					</div>
+					@else
+					<h1>@lang('app.no_upcoming_events')</h1>
+					@endif
 				</div>
 			</div>
 		</div>
