@@ -68,7 +68,7 @@ Route::get('auction/{id}/{slug?}', ['as' => 'single_ad', 'uses'=>'AdsController@
 Route::get('embedded/{slug}', ['as' => 'embedded_ad', 'uses'=>'AdsController@embeddedAd']);
 
 Route::post('save-ad-as-favorite', ['as' => 'save_ad_as_favorite', 'uses'=>'UserController@saveAdAsFavorite']);
-Route::post('report-post', ['as' => 'report_ads_pos', 'uses'=>'AdsController@reportAds']);
+// Route::post('report-post', ['as' => 'report_ads_pos', 'uses'=>'AdsController@reportAds']);
 Route::post('reply-by-email', ['as' => 'reply_by_email_post', 'uses'=>'UserController@replyByEmailPost']);
 Route::post('post-comments/{id}', ['as' => 'post_comments', 'uses'=>'CommentController@postComments']);
 
@@ -217,13 +217,13 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         Route::get('blocked', ['as'=>'admin_blocked_ads', 'uses' => 'AdsController@adminBlockedAds']);
         Route::post('status-change', ['as'=>'ads_status_change', 'uses' => 'AdsController@adStatusChange']);
 
-        Route::get('ad-reports', ['as'=>'ad_reports', 'uses' => 'AdsController@reports']);
+        // Route::get('ad-reports', ['as'=>'ad_reports', 'uses' => 'AdsController@reports']);
         Route::get('users', ['as'=>'users', 'uses' => 'UserController@index']);
         Route::get('users-data', ['as'=>'get_users_data', 'uses' => 'UserController@usersData']);
         Route::get('users-info/{id}', ['as'=>'user_info', 'uses' => 'UserController@userInfo']);
         Route::post('change-user-status', ['as'=>'change_user_status', 'uses' => 'UserController@changeStatus']);
         Route::post('change-user-feature', ['as'=>'change_user_feature', 'uses' => 'UserController@changeFeature']);
-        Route::post('delete-reports', ['as'=>'delete_report', 'uses' => 'AdsController@deleteReports']);
+        // Route::post('delete-reports', ['as'=>'delete_report', 'uses' => 'AdsController@deleteReports']);
 
         Route::get('contact-messages', ['as'=>'contact_messages', 'uses' => 'HomeController@contactMessages']);
         Route::get('contact-messages-data', ['as'=>'contact_messages_data', 'uses' => 'HomeController@contactMessagesData']);
@@ -242,13 +242,11 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
     });
 
     // only standard user access
-    Route::get('all_auctions', ['as'=>'all_user_auctions', 'uses' => 'AdsController@allUserAuctions']);
-    Route::get('active_ads', ['as'=>'active_user_ads', 'uses' => 'AdsController@activeUserAuctions']);
+    Route::get('bidding_auctions', ['as'=>'bidding_auctions', 'uses' => 'AdsController@allBiddingAuctions']);
+    Route::get('active_bidding_auctions', ['as'=>'active_bidding_auctions', 'uses' => 'AdsController@activeBiddingAuctions']);
     Route::get('favorite-lists', ['as'=>'favorite_ads', 'uses' => 'AdsController@favoriteAds']);
 
     // all user access
-
-
 
     Route::group(['prefix'=>'u'], function(){
         Route::group(['prefix'=>'posts'], function(){
@@ -270,7 +268,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
                 Route::get('pending-lists', ['as'=>'pending_ads', 'uses' => 'AdsController@pendingAds']);
                 Route::get('archive-lists', ['as'=>'favourite_ad', 'uses' => 'AdsController@create']);
 
-                Route::get('reports-by/{slug}', ['as'=>'reports_by_ads', 'uses' => 'AdsController@reportsByAds']);
+                // Route::get('reports-by/{slug}', ['as'=>'reports_by_ads', 'uses' => 'AdsController@reportsByAds']);
 
                 //bids
                 Route::get('bids/{ad_id}', ['as'=>'auction_bids', 'uses' => 'BidController@index']);
@@ -278,6 +276,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
                 Route::get('bidder_info/{bid_id}', ['as'=>'bidder_info', 'uses' => 'BidController@bidderInfo']);
             });
 
+            // all users access
             Route::get('profile', ['as'=>'profile', 'uses' => 'UserController@profile']);
             Route::get('profile/edit', ['as'=>'profile_edit', 'uses' => 'UserController@profileEdit']);
             Route::post('profile/edit', ['uses' => 'UserController@profileEditPost']);

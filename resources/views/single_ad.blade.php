@@ -433,20 +433,6 @@
                                 <h3>@lang('app.general_info')</h3>
                                 <p><span class="ad-info-name"><i class="fa fa-money"></i> @lang('app.price')</span> <span class="ad-info-value">{{ themeqx_price_ng($ad->price) }}</span></p>
 
-                                @if(! empty($ad->country))
-                                    <p><span class="ad-info-name"><i class="fa fa-globe"></i>  @lang('app.country') </span> <span class="ad-info-value"> {!! $ad->country->country_name !!} </span> </p>
-                                @endif
-
-                                @if(! empty($ad->state))
-                                    <p><span class="ad-info-name"><i class="fa fa-flag-o"></i>  @lang('app.state') </span> <span class="ad-info-value"> {!! $ad->state->state_name !!} </span> </p>
-                                @endif
-
-                                @if(! empty($ad->city))
-                                    <p><span class="ad-info-name"><i class="fa fa-area-chart"></i>  @lang('app.city') </span> <span class="ad-info-value"> {!! $ad->city->city_name !!} </span> </p>
-                                @endif
-
-                                <p><span class="ad-info-name"><i class="fa fa-map-marker"></i>  @lang('app.address') </span> <span class="ad-info-value"> {!! safe_output($ad->address) !!} </span> </p>
-
                             @endif
 
                             <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p>
@@ -461,16 +447,6 @@
                             </div>
 
                         </div>
-
-                        @if(get_option('enable_monetize') == 1)
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {!! get_option('monetize_code_below_general_info') !!}
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
 
                         <div class="widget">
 
@@ -501,9 +477,6 @@
                                 @endif
 
                                 <ul class="ad-action-list">
-                                    @if( ! empty($ad->user))
-                                        <li><a href="{{ route('ads_by_user', ['user_id' => $ad->user_id]) }}"><i class="fa fa-user"></i> @lang('app.view_all_ad_of_this') @if($ad->category_type== 'jobs') @lang('app.employer') @else @lang('app.seller') @endif </a></li>
-                                    @endif
 
                                     <li>
                                         <a href="javascript:;" id="save_as_favorite" data-slug="{{ $ad->slug }}">
@@ -520,8 +493,6 @@
                                             <li><a href="#" data-toggle="modal" data-target="#replyByEmail"><i class="fa fa-envelope-o"></i> @lang('app.reply_by_email')</a></li>
                                         @endif
                                     @endif
-
-                                    <li><a href="#" data-toggle="modal" data-target="#reportAdModal"><i class="fa fa-ban"></i> @lang('app.report_this_ad')</a></li>
                                 </ul>
 
                             </div>
@@ -657,55 +628,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="reportAdModal" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">@lang('app.report_ad_title')</h4>
-                </div>
-                <div class="modal-body">
-
-                    <p>@lang('app.report_ad_description')</p>
-
-                    <form>
-
-                        <div class="form-group">
-                            <label class="control-label">@lang('app.reason'):</label>
-                            <select class="form-control" name="reason">
-                                <option value="">@lang('app.select_a_reason')</option>
-                                <option value="unavailable">@lang('app.item_sold_unavailable')</option>
-                                <option value="fraud">@lang('app.fraud')</option>
-                                <option value="duplicate">@lang('app.duplicate')</option>
-                                <option value="spam">@lang('app.spam')</option>
-                                <option value="wrong_category">@lang('app.wrong_category')</option>
-                                <option value="offensive">@lang('app.offensive')</option>
-                                <option value="other">@lang('app.other')</option>
-                            </select>
-
-                            <div id="reason_info"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email" class="control-label">@lang('app.email'):</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                            <div id="email_info"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="control-label">@lang('app.message'):</label>
-                            <textarea class="form-control" id="message" name="message"></textarea>
-                            <div id="message_info"></div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.close')</button>
-                    <button type="button" class="btn btn-primary" id="report_ad">@lang('app.report_ad')</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="replyByEmail" role="dialog">
         <div class="modal-dialog" role="document">
@@ -811,56 +733,6 @@
                         }
                     }
                 });
-            });
-
-            $('button#report_ad').click(function(){
-                var reason = $('[name="reason"]').val();
-                var email = $('[name="email"]').val();
-                var message = $('[name="message"]').val();
-                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-                var error = 0;
-                if(reason.length < 1){
-                    $('#reason_info').html('<p class="text-danger">Reason required</p>');
-                    error++;
-                }else {
-                    $('#reason_info').html('');
-                }
-                if(email.length < 1){
-                    $('#email_info').html('<p class="text-danger">Email required</p>');
-                    error++;
-                }else {
-                    if ( ! regex.test(email)){
-                        $('#email_info').html('<p class="text-danger">Valid email required</p>');
-                        error++;
-                    }else {
-                        $('#email_info').html('');
-                    }
-                }
-                if(message.length < 1){
-                    $('#message_info').html('<p class="text-danger">Message required</p>');
-                    error++;
-                }else {
-                    $('#message_info').html('');
-                }
-
-                if (error < 1){
-                    $('#loadingOverlay').show();
-                    $.ajax({
-                        type : 'POST',
-                        url : '{{ route('report_ads_pos') }}',
-                        data : { reason : reason, email: email,message:message, slug:'{{ $ad->slug }}',  _token : '{{ csrf_token() }}' },
-                        success : function (data) {
-                            if (data.status == 1){
-                                toastr.success(data.msg, '@lang('app.success')', toastr_options);
-                            }else {
-                                toastr.error(data.msg, '@lang('app.error')', toastr_options);
-                            }
-                            $('#reportAdModal').modal('hide');
-                            $('#loadingOverlay').hide();
-                        }
-                    });
-                }
             });
 
             $('#replyByEmailForm').submit(function(e){

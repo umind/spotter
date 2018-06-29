@@ -23,9 +23,9 @@
                         <li>  <a href="{{ route('my_ads') }}">@lang('app.my_ads')</a> </li>
                         <li>  <a href="{{ route('create_ad') }}">@lang('app.post_an_ad')</a> </li>
                     @else
-                        <li>  <a href="{{ route('active_user_ads') }}">@lang('app.active_ads')</a> </li>
-                        <li>  <a href="{{ route('all_user_ads') }}">@lang('app.all_auctions')</a> </li>
-                        <li>  <a href="{{ route('favorite_user_ads') }}">@lang('app.favourite_ads')</a> </li>
+                        <li>  <a href="{{ route('active_bidding_auctions') }}">@lang('app.active_ads')</a> </li>
+                        <li>  <a href="{{ route('bidding_auctions') }}">@lang('app.all_auctions')</a> </li>
+                        <li>  <a href="{{ route('favorite_ads') }}">@lang('app.favourite_ads')</a> </li>
                     @endif
 
                     {{-- <li>  <a href="{{ route('approved_ads') }}">@lang('app.approved_ads')</a> </li> --}}
@@ -39,18 +39,17 @@
 
                 <li> <a href="{{ route('pages') }}"><i class="fa fa-file-word-o"></i> @lang('app.pages') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li>
                 <li> <a href="{{ route('admin_comments') }}"><i class="fa fa-comment-o"></i> @lang('app.comments') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li>
-                <li> <a href="{{ route('ad_reports') }}"><i class="fa fa-exclamation"></i> @lang('app.ad_reports') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li>
+                {{-- <li> <a href="{{ route('ad_reports') }}"><i class="fa fa-exclamation"></i> @lang('app.ad_reports') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span></a>  </li> --}}
                 <li> <a href="{{ route('users') }}"><i class="fa fa-users"></i> @lang('app.users')</a>  </li>
 
-                <li>
+                {{-- <li>
                     <a href="#"><i class="fa fa-map-marker"></i> @lang('app.locations')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>
                     <ul class="nav nav-second-level">
                         <li> <a href="{{ route('country_list') }}">@lang('app.countries')</a> </li>
                         <li> <a href="{{ route('state_list') }}">@lang('app.states')</a> </li>
                         <li> <a href="{{ route('city_list') }}">@lang('app.cities')</a> </li>
                     </ul>
-                    <!-- /.nav-second-level -->
-                </li>
+                </li> --}}
 
                 <li> <a href="{{ route('contact_messages') }}"><i class="fa fa-envelope-o"></i> @lang('app.contact_messages') <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>  </li>
 

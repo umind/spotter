@@ -1012,4 +1012,31 @@ class AdsController extends Controller
         return view('admin.reports_by_ads', compact('title', 'ad', 'reports'));
     }
 
+    // standard users methods
+    public function allBiddingAuctions()
+    {
+        $title = trans('app.all_bidding_auctions');
+
+        $ads = Ad::whereHas('bids', function ($q) {
+            $q->where('bids.user_id', Auth::id());
+        })
+        ->where('expired_at', '<', Carbon::now())
+        ->paginate(10);
+
+        return view('admin.auctions.all_bidding_auctions', compact('title', 'ads'));
+    }
+
+    public function activeBiddingAuctions()
+    {
+        $title = trans('app.active_bidding_auctions');
+
+        $ads = Ad::whereHas('bids', function ($q) {
+            $q->where('bids.user_id', Auth::id());
+        })
+        ->where('expired_at', '>=', Carbon::now())
+        ->paginate(10);
+
+        return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));
+    }
+
 }
