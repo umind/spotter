@@ -141,12 +141,12 @@ $(document).ready(function () {
 
 			var timeinterval = setInterval(function (countDownItem, endtime) {
 				var t = getTimeRemaining(endtime);
-				var clockHtml = '<b>' + jsonData.time_remaining + '</b> ' + t.days + ' days ' + t.hours + ':' + t.minutes + ':' + t.seconds;
+				var clockHtml = jsonData.time_remaining + ' <b>' + t.days + ' days ' + t.hours + ':' + t.minutes + ':' + t.seconds + '<b>';
 
 				$(countDownItem).html(clockHtml);
 				if (t.total <= 0) {
-					clearInterval(timeinterval);
-					$(countDownItem).html('Bid Time Expired');
+					// clearInterval(timeinterval);
+					$(countDownItem).html(jsonData.bidding_time_expired);
 				}
 			}, 1000, countDownItem, endtime);
 		}

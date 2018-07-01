@@ -762,7 +762,8 @@ if ( ! function_exists('avatar_by_email')){
 if ( ! function_exists('frontendLocalisedJson')){
     function frontendLocalisedJson(){
         $json_array = [
-            'time_remaining'    => trans('app.time_remaining')
+            'time_remaining'    => trans('app.time_remaining'),
+            'bidding_time_expired'    => trans('app.bidding_time_expired')
         ];
 
         $json = \Psy\Util\Json::encode($json_array);

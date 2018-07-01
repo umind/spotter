@@ -2,26 +2,6 @@
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('content')
-    @if(get_option('enable_monetize') == 1)
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {!! get_option('monetize_code_above_categories') !!}
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if(get_option('enable_monetize') == 1)
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {!! get_option('monetize_code_below_categories') !!}
-                </div>
-            </div>
-        </div>
-    @endif
-
     @if($ads->count())
         <div id="regular-ads-container">
             <div class="container">
@@ -38,14 +18,15 @@
 
                             <div class="ad-box">
 								<div class="ad-box-caption-title">
-									<h3>Lorem Ipsum</h3>
-									<a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
-										{{ str_limit($ad->title, 40) }}
-									</a>
+									<h3>
+                                        <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
+                                            {{ str_limit($ad->title, 40) }}
+                                        </a>
+                                    </h3>
 								</div>
                                 <div class="ads-thumbnail">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}">
-                                        <img itemprop="image"  src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="{{ $ad->title }}">
+                                        <img itemprop="image" src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="{{ $ad->title }}">
                                         <span class="modern-img-indicator">
                                         @if(! empty($ad->video_url))
                                                 <i class="fa fa-file-video-o"></i>
@@ -56,33 +37,10 @@
                                     </a>
                                 </div>
 								<div class="bid-price">
-									<div class="bid-number">Bid number: 00546</div>
-									<div class="starting-price">Starting price: 40.000</div>
+									<div class="bid-number">@lang('app.bid_no'): {{ $ad->auction_no }}</div>
+									<div class="starting-price">@lang('app.starting_price') {{ themeqx_price($ad->price) }}</div>
 								</div>
-<!--
-                                <div class="caption">
-                                    <div class="ad-box-category">
-                                        @if($ad->sub_category)
-                                            <a class="price text-muted" href="{{ route('search', [ $ad->country->country_code,  'category' => 'cat-'.$ad->sub_category->id.'-'.$ad->sub_category->category_slug]) }}"> <i class="fa fa-folder-o"></i> {{ $ad->sub_category->category_name }} </a>
-                                        @endif
-                                        @if($ad->city)
-                                            <a class="location text-muted" href="{{ route('search', [$ad->country->country_code, 'state' => 'state-'.$ad->state->id, 'city' => 'city-'.$ad->city->id]) }}"> <i class="fa fa-map-marker"></i> {{ $ad->city->city_name }} </a>
-                                        @endif
-                                    </div>
-                                </div>
--->
-<!--								<div class="artical-number">ART-1234567890</div>-->
-<!--
-                                <div class="ad-box-footer">
-                                    <span class="ad-box-price">@lang('app.starting_price') {{ themeqx_price($ad->price) }},</span>
-                                    <span class="ad-box-price">@lang('app.current_bid') {{ themeqx_price($ad->current_bid()) }}</span>
-                                    @if($ad->price_plan == 'premium')
-                                        <div class="ad-box-premium" data-toggle="tooltip" title="@lang('app.premium_ad')">
-                                            {!! $ad->premium_icon() !!}
-                                        </div>
-                                    @endif
-                                </div>
--->
+
                                 <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>

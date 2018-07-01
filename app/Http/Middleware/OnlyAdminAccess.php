@@ -23,7 +23,8 @@ class OnlyAdminAccess
         $user = Auth::user();
 
         if ( ! $user->is_admin())            
-            return redirect(route('active_bidding_auctions'))->with('error', trans('app.access_restricted'));
+            // ->with('error', trans('app.access_restricted'))
+            return redirect(route('active_bidding_auctions'));
 
         return $next($request);
     }

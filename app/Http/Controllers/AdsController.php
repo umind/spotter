@@ -955,7 +955,14 @@ class AdsController extends Controller
         $related_ads = Ad::active()->whereCategoryId($ad->category_id)->where('id', '!=',$ad->id)->with('category', 'city')->limit($limit_regular_ads)->orderByRaw('RAND()')->get();
 
         // get all bids for this auctions and also the max bid by the logged in user if set
-        $userMaxBid = Auth::user()->bids()->max('max_bid_amount');
+        $userMaxBid = null;
+
+        $userMaxBid = $ad->bids()->whereHas('user', function ($q) {
+            $q->where('user_id', Auth::id());
+        })->max('max_bid_amount');
+
+        $bids = collect([]);
+
         $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get();
 
         return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid'));

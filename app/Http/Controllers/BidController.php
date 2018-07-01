@@ -41,20 +41,25 @@ class BidController extends Controller
         // get max bid that you enter inside place bid field
         $current_max_bid = $ad->current_bid_plus_increaser();
 
-        // for notification also
         // get max bid that you enter inside place MAX bid field
-        // $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
-        // $userWithCurrentMaxBid = User::whereHas('bids', function () {
+        $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
 
-        // });
+        // for notification also
+        $userWithCurrentMaxBid = User::whereHas('bids', function ($q) {
+            $q->orderBy('max_bid_amount', 'desc');
+        })->first();
 
         if ($bid_amount < $current_max_bid ){
             return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
         }
 
+        if($userWithCurrentMaxBid && $maxBid > $bid_amount) {
+            $bid_amount += $ad->price_increaser;
+        }
+
         $data = [
             'ad_id'         => $ad_id,
-            'user_id'       => $user->id,
+            'user_id'       => $userWithCurrentMaxBid && $maxBid > $bid_amount ? $userWithCurrentMaxBid->id : $user->id,
             'bid_amount'    => $bid_amount,
             'is_accepted'   => 0,
         ];
@@ -87,6 +92,7 @@ class BidController extends Controller
         $data = [
             'ad_id'         => $ad_id,
             'user_id'       => $user->id,
+            'bid_amount'    => $current_max_bid,
             'max_bid_amount'    => $bid_amount,
             'is_accepted'   => 0,
         ];

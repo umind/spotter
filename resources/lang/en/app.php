@@ -3,6 +3,9 @@
 return [
     'date' => 'Date',
     'begins' => 'Begins',
+    'bid_no' => 'Bid Number',
+    'auction_no' => 'Auction Number',
+    'bidding_time_expired' => 'Bidding Time Expired',
 
 
     'login'                 => 'Login',
@@ -677,7 +680,7 @@ return [
     'bidder'                            => 'Bidder',
     'there_is_no_bids'                  => 'There is no bids',
     'highest_bid'                       => 'Highest bid',
-    'plus_pdv'                       => 'Zusätzlich',
+    'plus_pdv'                          => 'Zusätzlich',
     'total_bids'                        => 'Total Bids',
     'enter_min_bid_amount'              => 'Please enter bid amount that is not less then or equal to %s',
     'posted_at'                         => 'Posted at',
