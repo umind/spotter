@@ -49,7 +49,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="default_timezone" class="col-sm-4 control-label">
                                 @lang('app.default_timezone')
                             </label>
@@ -66,9 +66,9 @@
                                 {!! $errors->has('default_timezone')? '<p class="help-block">'.$errors->first('default_timezone').'</p>':'' !!}
                                 <p class="text-info">@lang('app.default_timezone_help_text')</p>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="form-group {{ $errors->has('date_format')? 'has-error':'' }}">
+                        {{-- <div class="form-group {{ $errors->has('date_format')? 'has-error':'' }}">
                             <label for="email_address" class="col-sm-4 control-label">@lang('app.date_format')</label>
                             <div class="col-sm-8">
                                 <fieldset>
@@ -87,11 +87,11 @@
                                 </fieldset>
                                 <p class="text-info"> @lang('app.date_format_help_text')</p>
                             </div>
-                        </div>
+                        </div> --}}
 
 
 
-                        <div class="form-group {{ $errors->has('time_format')? 'has-error':'' }}">
+                        {{-- <div class="form-group {{ $errors->has('time_format')? 'has-error':'' }}">
                             <label for="email_address" class="col-sm-4 control-label">@lang('app.time_format')</label>
                             <div class="col-sm-8">
                                 <fieldset>
@@ -106,7 +106,7 @@
                                 </fieldset>
                                 <p><a href="http://php.net/manual/en/function.date.php" target="_blank">@lang('app.date_time_read_more')</a> </p>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group {{ $errors->has('currency_sign')? 'has-error':'' }}">
                             <label for="currency_sign" class="col-sm-4 control-label">@lang('app.currency_sign')</label>
@@ -142,7 +142,7 @@
                         </div>
 
 
-                        <div class="form-group {{ $errors->has('verification_email_after_registration')? 'has-error':'' }}">
+                        {{-- <div class="form-group {{ $errors->has('verification_email_after_registration')? 'has-error':'' }}">
                             <label for="email_address" class="col-sm-4 control-label">@lang('app.verification_email_after_registration')</label>
                             <div class="col-sm-8">
                                 <fieldset>
@@ -150,7 +150,7 @@
                                     <label><input type="radio" value="0" name="verification_email_after_registration" {{ get_option('verification_email_after_registration') == '0'? 'checked':'' }}> @lang('app.no') </label> <br />
                                 </fieldset>
                             </div>
-                        </div>
+                        </div> --}}
 
 
                         <div class="form-group {{ $errors->has('enable_google_maps')? 'has-error':'' }}">
@@ -181,7 +181,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('enable_fb_comments')? 'has-error':'' }}">
+                        {{-- <div class="form-group {{ $errors->has('enable_fb_comments')? 'has-error':'' }}">
                             <label class="col-md-4 control-label">@lang('app.enable_disable') </label>
                             <div class="col-md-8">
                                 <label for="enable_fb_comments" class="checkbox-inline">
@@ -189,7 +189,7 @@
                                     @lang('app.enable_fb_comments')
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
 
 
                         <legend>@lang('app.contact_us_page')</legend>

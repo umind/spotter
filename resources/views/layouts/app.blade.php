@@ -93,21 +93,7 @@
 					<div class="col-sm-6">
 						<div class="right-info">
 							<ul>
-	<!--
-								@if(get_option('enable_language_switcher') == 1)
-
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> @if($current_lang) {{$current_lang->language_name}} @else @lang('app.language') @endif <span class="caret"></span></a>
-										<ul class="dropdown-menu">
-											<li><a href="{{ route('switch_language', 'en') }}">English</a></li>
-											@foreach(get_languages() as $lang)
-												<li><a href="{{ route('switch_language', $lang->language_code) }}">{{ $lang->language_name }}</a></li>
-											@endforeach
-										</ul>
-									</li>
-								@endif
-	-->
-								<li class="notification-li">
+								{{-- <li class="notification-li">
 									<div class="notification">
 										<i class="fa fa-bell"></i>
 										<span class="notification-number">1</span>
@@ -165,7 +151,7 @@
 											</li>
 										</ul>
 									</div>
-								</li>
+								</li> --}}
 
 								@if (Auth::guest())
 									<li><a href="{{ route('login') }}">@lang('app.login')</a></li>

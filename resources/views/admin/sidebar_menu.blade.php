@@ -23,7 +23,7 @@
                         <li>  <a href="{{ route('my_ads') }}">@lang('app.my_ads')</a> </li>
                         <li>  <a href="{{ route('create_ad') }}">@lang('app.post_an_ad')</a> </li>
                     @else
-                        <li>  <a href="{{ route('active_bidding_auctions') }}">@lang('app.active_ads')</a> </li>
+                        <li>  <a href="{{ route('active_bidding_auctions') }}">@lang('app.active_bidding_auctions')</a> </li>
                         <li>  <a href="{{ route('finished_auctions') }}">@lang('app.finished_auctions')</a> </li>
                         <li>  <a href="{{ route('won_auctions') }}">@lang('app.won_auctions')</a> </li>
                         <li>  <a href="{{ route('favorite_ads') }}">@lang('app.favourite_ads')</a> </li>
@@ -58,11 +58,11 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i> @lang('app.settings')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span> </a>
                     <ul class="nav nav-second-level">
                         <li> <a href="{{ route('general_settings') }}">@lang('app.general_settings')</a> </li>
-                        <li> <a href="{{ route('ad_settings') }}">@lang('app.ad_settings_and_pricing')</a> </li>
-                        <li> <a href="{{ route('language_settings') }}">@lang('app.language_settings')</a> </li>
-                        <li> <a href="{{ route('file_storage_settings') }}">@lang('app.file_storage_settings')</a> </li>
-                        <li> <a href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li>
-                        <li> <a href="{{ route('re_captcha_settings') }}">@lang('app.re_captcha_settings')</a> </li>
+                        {{-- <li> <a href="{{ route('ad_settings') }}">@lang('app.ad_settings_and_pricing')</a> </li> --}}
+                        {{-- <li> <a href="{{ route('language_settings') }}">@lang('app.language_settings')</a> </li> --}}
+                        {{-- <li> <a href="{{ route('file_storage_settings') }}">@lang('app.file_storage_settings')</a> </li> --}}
+                        {{-- <li> <a href="{{ route('social_settings') }}">@lang('app.social_settings')</a> </li> --}}
+                        {{-- <li> <a href="{{ route('re_captcha_settings') }}">@lang('app.re_captcha_settings')</a> </li> --}}
                         <li> <a href="{{ route('other_settings') }}">@lang('app.other_settings')</a> </li>
                     </ul>
                     <!-- /.nav-second-level -->

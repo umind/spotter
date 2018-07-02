@@ -34,11 +34,11 @@
 
                     </address>
 
-                    @if(get_option('site_email_address'))
+                    @if(get_option('email_address'))
                         <address>
                             <strong>@lang('app.email')</strong>
                             <br> <i class="fa fa-envelope-o"></i>
-                            <a href="mailto:{{ get_option('site_email_address') }}"> {{ get_option('site_email_address') }} </a>
+                            <a href="mailto:{{ get_option('email_address') }}"> {{ get_option('email_address') }} </a>
                         </address>
                     @endif
 
@@ -50,7 +50,7 @@
                             <div class="col-md-12">
                                 <div class="form-group {{ $errors->has('name')? 'has-error':'' }}">
                                     <label for="name">@lang('app.name')</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="@lang('app.enter_name')" value="{{ old('name') }}" required="required" />
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="@lang('app.enter_name')" value="{{ old('name') }}"/>
                                     {!! $errors->has('name')? '<p class="help-block">'.$errors->first('name').'</p>':'' !!}
                                 </div>
                                 <div class="form-group {{ $errors->has('email')? 'has-error':'' }}">
@@ -59,7 +59,7 @@
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-envelope"></span>
                                 </span>
-                                        <input type="email" class="form-control" id="email" placeholder="@lang('app.enter_email_address')" name="email" value="{{ old('email') }}" required="required" />
+                                        <input type="text" class="form-control" id="email" placeholder="@lang('app.enter_email_address')" name="email" value="{{ old('email') }}"/>
                                     </div>
                                     {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
 
@@ -67,7 +67,7 @@
 
                                 <div class="form-group {{ $errors->has('message')? 'has-error':'' }}">
                                     <label for="name">@lang('app.message')</label>
-                                    <textarea name="message" id="message" class="form-control" required="required" placeholder="@lang('app.message')">{{ old('message') }}</textarea>
+                                    <textarea name="message" id="message" class="form-control" placeholder="@lang('app.message')">{{ old('message') }}</textarea>
                                     {!! $errors->has('message')? '<p class="help-block">'.$errors->first('message').'</p>':'' !!}
                                 </div>
                             </div>
