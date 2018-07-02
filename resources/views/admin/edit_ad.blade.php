@@ -37,7 +37,22 @@
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="ad_title" value="{{ old('ad_title') ? old('ad_title') : $ad->title }}" name="ad_title" placeholder="@lang('app.ad_title')">
                                 {!! $errors->has('ad_title')? '<p class="help-block">'.$errors->first('ad_title').'</p>':'' !!}
-                                <p class="text-info"> @lang('app.great_title_info')</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('auction_no')? 'has-error':'' }}">
+                            <label for="auction_no" class="col-sm-4 control-label">@lang('app.auction_no')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="auction_no" value="{{ old('auction_no') ? old('auction_no') : $ad->auction_no }}" name="auction_no" placeholder="@lang('app.auction_no')">
+                                {!! $errors->has('auction_no')? '<p class="help-block">'.$errors->first('auction_no').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('bid_no')? 'has-error':'' }}">
+                            <label for="bid_no" class="col-sm-4 control-label">@lang('app.bid_no')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="bid_no" value="{{ old('bid_no') ? old('bid_no') : $ad->bid_no }}" name="bid_no" placeholder="@lang('app.bid_no')">
+                                {!! $errors->has('bid_no')? '<p class="help-block">'.$errors->first('bid_no').'</p>':'' !!}
                             </div>
                         </div>
 
@@ -46,7 +61,6 @@
                             <div class="col-sm-8">
                                 <textarea name="ad_description" class="form-control" id="content_editor" rows="8">{{ old('ad_description')?  old('ad_description') : $ad->description }}</textarea>
                                 {!! $errors->has('ad_description')? '<p class="help-block">'.$errors->first('ad_description').'</p>':'' !!}
-                                <p class="text-info"> @lang('app.ad_description_info_text')</p>
                             </div>
                         </div>
 
@@ -62,7 +76,6 @@
 
                             <div class="col-sm-8 col-md-offset-4">
                                 {!! $errors->has('price')? '<p class="help-block">'.$errors->first('price').'</p>':'' !!}
-                                <p class="text-info">Pick a good price. </p>
                             </div>
 
                         </div>
@@ -218,7 +231,6 @@
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $ad->address }}" name="address" placeholder="@lang('app.address')">
                                 {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
-                                <p class="text-info">@lang('app.address_line_help_text')</p>
                             </div>
                         </div>
 

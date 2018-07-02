@@ -17,6 +17,7 @@
 
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('assets/plugins/fotorama-4.6.4/fotorama.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/easyzoom.css') }}">
 @endsection
 
 @section('content')
@@ -128,9 +129,11 @@
                             ?>
                         @else
                             <div class="ads-gallery">
-                                <div class="fotorama"  data-nav="thumbs" data-allowfullscreen="true" data-width="100%">
+                                <div class="easyzoom">
                                     @foreach($ad->media_img as $img)
-                                        <img src="{{ media_url($img, true) }}" alt="{{ $ad->title }}">
+                                        <a href="{{ media_url($img, true) }}">
+                                            <img src="{{ media_url($img, false) }}" alt="{{ $ad->title }}">
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>
@@ -460,16 +463,6 @@
 
                         </div>
 
-                        @if(get_option('enable_monetize') == 1)
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {!! get_option('monetize_code_below_seller_info') !!}
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
                         @if($related_ads->count() > 0 && get_option('enable_related_ads') == 1)
                             <div class="widget similar-ads">
                                 <h3>@lang('app.similar_ads')</h3>
@@ -478,46 +471,29 @@
                                     <div class="item-loop">
 
                                         <div class="ad-box">
+                                            <div class="ad-box-caption-title">
+                                                <h3>
+                                                    <a class="ad-box-title" href="{{ route('single_ad', [$rad->id, $rad->slug]) }}" title="{{ $rad->title }}">
+                                                        {{ str_limit($ad->title, 40) }}
+                                                    </a>
+                                                </h3>
+                                            </div>
                                             <div class="ads-thumbnail">
                                                 <a href="{{ route('single_ad', [$rad->id, $rad->slug]) }}">
-                                                    <img itemprop="image"  src="{{ media_url($rad->feature_img) }}" class="img-responsive" alt="{{ $rad->title }}">
+                                                    <img itemprop="image" src="{{ media_url($rad->feature_img) }}" class="img-responsive" alt="{{ $rad->title }}">
                                                     <span class="modern-img-indicator">
-                                        @if(! empty($rad->video_url))
+                                                    @if(! empty($rad->video_url))
                                                             <i class="fa fa-file-video-o"></i>
                                                         @else
                                                             <i class="fa fa-file-image-o"> {{ $rad->media_img->count() }}</i>
                                                         @endif
-                                    </span>
+                                                </span>
                                                 </a>
                                             </div>
-                                            <div class="caption">
-                                                <div class="ad-box-caption-title">
-                                                    <a class="ad-box-title" href="{{ route('single_ad', [$rad->id, $rad->slug]) }}" title="{{ $rad->title }}">
-                                                        {{ str_limit($rad->title, 40) }}
-                                                    </a>
-                                                </div>
-
-                                                <div class="ad-box-category">
-                                                    @if($rad->sub_category)
-                                                        <a class="price text-muted" href="{{ route('search', [ $rad->country->country_code,  'category' => 'cat-'.$rad->sub_category->id.'-'.$rad->sub_category->category_slug]) }}"> <i class="fa fa-folder-o"></i> {{ $rad->sub_category->category_name }} </a>
-                                                    @endif
-                                                    @if($rad->city)
-                                                        <a class="location text-muted" href="{{ route('search', [$rad->country->country_code, 'state' => 'state-'.$rad->state->id, 'city' => 'city-'.$rad->city->id]) }}"> <i class="fa fa-map-marker"></i> {{ $rad->city->city_name }} </a>
-                                                    @endif
-                                                </div>
+                                            <div class="bid-price">
+                                                <div class="bid-number">@lang('app.bid_no'): {{ $rad->auction_no }}</div>
+                                                <div class="starting-price">@lang('app.starting_price') {{ themeqx_price($rad->price) }}</div>
                                             </div>
-
-                                            <div class="ad-box-footer">
-                                                <span class="ad-box-price">@lang('app.starting_price') {{ themeqx_price($rad->price) }},</span>
-                                                <span class="ad-box-price">@lang('app.current_bid') {{ themeqx_price($rad->current_bid()) }}</span>
-
-                                                @if($rad->price_plan == 'premium')
-                                                    <div class="ad-box-premium" data-toggle="tooltip" title="@lang('app.premium_ad')">
-                                                        {!! $rad->premium_icon() !!}
-                                                    </div>
-                                                @endif
-                                            </div>
-
 
                                             <div class="countdown" data-expire-date="{{$rad->expired_at}}" ></div>
                                             <div class="place-bid-btn">
@@ -634,18 +610,7 @@
 @endsection
 
 @section('page-js')
-    @if(get_option('enable_fb_comments') == 1)
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
-    @endif
-
+    <script src="{{ asset('assets/js/easyzoom.js') }}"></script>
     <script src="{{ asset('assets/plugins/fotorama-4.6.4/fotorama.js') }}"></script>
     <script src="{{ asset('assets/plugins/SocialShare/SocialShare.js') }}"></script>
     <script src="{{ asset('assets/plugins/form-validator/form-validator.min.js') }}"></script>
@@ -734,6 +699,10 @@
                 $(this).closest('form').remove();
                 $(this).closest('.reply_form_box').hide();
             });
+
+            // Instantiate EasyZoom instances
+            var $easyzoom = $('.easyzoom').easyZoom();
+            var api = $easyzoom.data('easyZoom');
 
             // increase or decrease price
             $('.btn-number').click(function(e){

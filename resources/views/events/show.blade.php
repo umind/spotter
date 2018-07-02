@@ -58,12 +58,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="no-ads-wrap">
-                        <h2><i class="fa fa-frown-o"></i> @lang('app.no_regular_ads_country') </h2>
-
-                        @if (env('APP_DEMO') == true)
-                            <h4>Seems you are checking the demo version, you can check ads preview by switching country to <a href="{{route('set_country', 'US')}}"><img src="{{asset('assets/flags/16/us.png')}}" /> United States </a> </h4>
-                        @endif
-
+                        <h2><i class="fa fa-frown-o"></i> @lang('app.no_auctions_found') </h2>
                     </div>
                 </div>
             </div>

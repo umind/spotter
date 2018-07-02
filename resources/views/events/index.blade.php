@@ -53,7 +53,7 @@
 						</div>
 					@endforeach
 				@else
-				<h1>@lang('app.no_upcoming_events')</h1>
+					<h1>@lang('app.no_upcoming_events')</h1>
 				@endif
 			</div>
 		</div>

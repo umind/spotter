@@ -122,6 +122,7 @@ class AdsController extends Controller
             'ad_title'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
+            'price_increaser'          => 'required',
             'ad_description'    => 'required',
             'country'           => 'required',
             'seller_name'       => 'required',
@@ -186,6 +187,8 @@ class AdsController extends Controller
 
         $data = [
             'title'             => $request->ad_title,
+            'auction_no'             => $request->auction_no,
+            'bid_no'             => $request->bid_no,
             'slug'              => $slug,
             'description'       => $request->ad_description,
             'category_id'       => $sub_category->category_id,
@@ -376,6 +379,9 @@ class AdsController extends Controller
 
         $rules = [
             'ad_title'          => 'required',
+            'bid_no'          => 'required',
+            'auction_no'          => 'required',
+            'price_increaser'          => 'required',
             'ad_description'    => 'required',
             'country'           => 'required',
             'seller_name'       => 'required',
@@ -412,8 +418,11 @@ class AdsController extends Controller
 
         $data = [
             'title'             => $request->ad_title,
+            'auction_no'             => $request->auction_no,
+            'bid_no'             => $request->bid_no,
             'description'       => $request->ad_description,
             'price'             => $request->price,
+            'price_increaser'             => $request->price_increaser,
             'is_negotiable'     => $is_negotialble,
 
             'seller_name'       => $request->seller_name,
@@ -571,10 +580,10 @@ class AdsController extends Controller
                 }
 
                 $file_base_name = str_replace('.'.$image->getClientOriginalExtension(), '', $image->getClientOriginalName());
-                $resized = Image::make($image)->resize(640, null, function ($constraint) {
+                $resized = Image::make($image)->resize(1920, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->stream();
-                $resized_thumb = Image::make($image)->resize(320, 213)->stream();
+                $resized_thumb = Image::make($image)->resize(640, 426)->stream();
 
                 $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
 
@@ -964,7 +973,7 @@ class AdsController extends Controller
         // get all bids without max bid 
         $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get();
 
-        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', ''));
+        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid'));
     }
 
     public function switchGridListView(Request $request){

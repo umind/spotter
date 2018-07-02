@@ -7,7 +7,8 @@ return [
     'auction_closed_msg' => 'Auction successfully closed',
     'winning_amount' => 'Winning Amount',
     'sold_for' => 'Sold For',
-
+    'no_auctions_found' => 'Currently there are no auctions found',
+    'total_auctions_found' => 'Total Auctions Found',
 
 
     'date' => 'Date',

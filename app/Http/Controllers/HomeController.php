@@ -21,16 +21,12 @@ class HomeController extends Controller
     public function index(){
         $top_categories = Category::whereCategoryType('auction')->orderBy('category_name', 'asc')->get();
 
-        $limit_regular_ads = get_option('number_of_free_ads_in_home');
-        $limit_premium_ads = get_option('number_of_premium_ads_in_home');
-
-        $regular_ads = Ad::activeRegular()->with('category', 'city')->limit($limit_regular_ads)->orderBy('id', 'desc')->get();
-        $premium_ads = Ad::activePremium()->with('category', 'city')->limit($limit_premium_ads)->orderBy('id', 'desc')->get();
+        $ads = Ad::active()->orderBy('id', 'desc')->get();
 
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();
 
-        return view('index', compact('top_categories', 'regular_ads', 'premium_ads', 'total_ads_count', 'user_count'));
+        return view('index', compact('top_categories', 'ads', 'total_ads_count', 'user_count'));
     }
     
     public function contactUs(){
