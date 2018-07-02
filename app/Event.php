@@ -44,4 +44,9 @@ class Event extends Model
         }
         return $html;
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('status', '1');
+    }
 }
