@@ -2,25 +2,6 @@
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('content')
-    @if(get_option('enable_monetize') == 1)
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {!! get_option('monetize_code_above_categories') !!}
-                </div>
-            </div>
-        </div>
-    @endif
-
-    @if(get_option('enable_monetize') == 1)
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {!! get_option('monetize_code_below_categories') !!}
-                </div>
-            </div>
-        </div>
-    @endif
 
     @if($events->count())
         <div id="regular-ads-container">
@@ -37,7 +18,7 @@
 										<p>{{ $event->title }}</p>
 									</div>
 									<div class="col-md-6 all-products text-right">
-										<button id="btn-allProducts">@lang('app.all_products')</button>
+										<a href="{{ route('single_event', $event->id) }}" id="btn-allProducts">@lang('app.all_products')</a>
 									</div>
 								</div>
 							</div>
