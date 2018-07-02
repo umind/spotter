@@ -31,13 +31,13 @@
                                 </tr>
                                 @foreach($ad->bids as $bid)
                                     <tr>
-                                        <td><a href="{{route('bidder_info', $bid->id)}}">@lang('app.bidder') #{{$bid->user_id}}</a> </td>
+                                        <td><a href="{{route('bidder_info', $bid->id)}}">{{ $bid->user->user_name }}</a> </td>
                                         <td>{{themeqx_price($bid->bid_amount)}}
                                             @if($ad->current_bid()  == $bid->bid_amount)
                                                 <span class="label label-success">@lang('app.highest_bid')</span>
                                             @endif
                                         </td>
-                                        <td>{{$bid->posting_datetime() }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($bid->created_at)->format('F d Y, H:i') }}</td>
                                         <td>
                                             @if( ! $ad->is_bid_accepted())
                                                 <a href="javascript:;" class="btn btn-success action" data-ad-id="{{$ad->id}}" data-bid-id="{{$bid->id}}" data-action="accept"><i class="fa fa-check-circle-o"></i> </a>

@@ -1,6 +1,13 @@
 <?php
 
 return [
+    // newest
+    'max_bid_same_error_msg' => 'This bid is already the highest one. Please enter higher max bid.',
+    'closed' => 'Closed',
+    'auction_closed_msg' => 'Auction successfully closed',
+
+
+
     'date' => 'Date',
     'begins' => 'Begins',
     'bid_no' => 'Bid Number',

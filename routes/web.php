@@ -33,6 +33,7 @@ Route::group(['middleware' => 'only_admin_access'], function () {
     Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
     Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
     Route::post('dashboard/my_events/delete', ['as' => 'delete_event', 'uses'=>'EventController@delete']);
+    Route::get('dashboard/my_events/close/{event}', ['as' => 'close_event', 'uses'=>'EventController@close']);
 });
 
 Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show']);
@@ -100,27 +101,26 @@ Route::group(['middleware' => 'only_admin_access'], function () {
 Route::post('{id}/post-new', ['as' => 'post_bid','uses' => 'BidController@postBid']);
 Route::post('{id}/post-max-bid', ['as' => 'post_max_bid','uses' => 'BidController@postMaxBid']);
 
-
 //Checkout payment
-Route::get('checkout/{transaction_id}', ['as'=>'payment_checkout', 'uses' => 'PaymentController@checkout']);
-Route::post('checkout/{transaction_id}', ['uses' => 'PaymentController@chargePayment']);
+// Route::get('checkout/{transaction_id}', ['as'=>'payment_checkout', 'uses' => 'PaymentController@checkout']);
+// Route::post('checkout/{transaction_id}', ['uses' => 'PaymentController@chargePayment']);
 //Payment success url
-Route::any('checkout/{transaction_id}/payment-success', ['as'=>'payment_success_url','uses' => 'PaymentController@paymentSuccess']);
-Route::any('checkout/{transaction_id}/paypal-notify', ['as'=>'paypal_notify_url','uses' => 'PaymentController@paypalNotify']);
+// Route::any('checkout/{transaction_id}/payment-success', ['as'=>'payment_success_url','uses' => 'PaymentController@paymentSuccess']);
+// Route::any('checkout/{transaction_id}/paypal-notify', ['as'=>'paypal_notify_url','uses' => 'PaymentController@paypalNotify']);
 
 
-Route::group(['prefix'=>'login'], function(){
-    //Social login route
+// Route::group(['prefix'=>'login'], function(){
+//     //Social login route
 
-    Route::get('facebook', ['as' => 'facebook_redirect', 'uses'=>'SocialLogin@redirectFacebook']);
-    Route::get('facebook-callback', ['as' => 'facebook_callback', 'uses'=>'SocialLogin@callbackFacebook']);
+//     Route::get('facebook', ['as' => 'facebook_redirect', 'uses'=>'SocialLogin@redirectFacebook']);
+//     Route::get('facebook-callback', ['as' => 'facebook_callback', 'uses'=>'SocialLogin@callbackFacebook']);
 
-    Route::get('google', ['as' => 'google_redirect', 'uses'=>'SocialLogin@redirectGoogle']);
-    Route::get('google-callback', ['as' => 'google_callback', 'uses'=>'SocialLogin@callbackGoogle']);
+//     Route::get('google', ['as' => 'google_redirect', 'uses'=>'SocialLogin@redirectGoogle']);
+//     Route::get('google-callback', ['as' => 'google_callback', 'uses'=>'SocialLogin@callbackGoogle']);
 
-    Route::get('twitter', ['as' => 'twitter_redirect', 'uses'=>'SocialLogin@redirectTwitter']);
-    Route::get('twitter-callback', ['as' => 'twitter_callback', 'uses'=>'SocialLogin@callbackTwitter']);
-});
+//     Route::get('twitter', ['as' => 'twitter_redirect', 'uses'=>'SocialLogin@redirectTwitter']);
+//     Route::get('twitter-callback', ['as' => 'twitter_callback', 'uses'=>'SocialLogin@callbackTwitter']);
+// });
 
 Route::resource('user', 'UserController');
 

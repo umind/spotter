@@ -37,7 +37,7 @@
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2, '.', ',') }}" min="{{ $ad->current_bid_plus_increaser() }}">
+                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid, 2) : number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $ad->current_bid_plus_increaser() }}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="max_bid_amount">
                           <span class="glyphicon glyphicon-plus"></span>
@@ -158,7 +158,7 @@
                                         <tr>
                                             <td>{{ $bid->user->user_name }}</td>
                                             {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
-                                            <td>{{ $bid->posting_datetime() }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($bid->created_at)->format('F d Y, H:i') }}</td>
                                         </tr>
                                     @endforeach
 
@@ -321,7 +321,7 @@
                                                     <span class="glyphicon glyphicon-minus"></span>
                                                 </button>
                                             </span>
-                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2, '.', ',') }}" min="{{ $ad->current_bid_plus_increaser() }}">
+                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $ad->current_bid_plus_increaser() }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                                                   <span class="glyphicon glyphicon-plus"></span>
@@ -396,8 +396,8 @@
 
                             @endif
 
-                            <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p>
-                            <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expired_at')</span> <span class="ad-info-value">{{$ad->expired_date()}}</span></p>
+                            {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p> --}}
+                            <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expires_on')</span> <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->format('F d Y, H:i') }}</span></p>
 
                             <div class="modern-social-share-btn-group">
                                 <h4>@lang('app.share_this_ad')</h4>
@@ -750,11 +750,11 @@
                         if(currentVal > input.attr('min')) {
                             input.val(number_format(currentVal - increaser, 2)).change();
                         } 
-                        if(parseInt(input.val()) == input.attr('min')) {
+                        if(toFloat(input.val()) == input.attr('min')) {
                             $(this).attr('disabled', true);
                         }
                     } else if(type == 'plus') {
-                        input.val(number_format(currentVal + increaser, 2));
+                        input.val(number_format(currentVal + increaser, 2)).change();
                     }
                 } else {
                     input.val(0);
@@ -764,7 +764,7 @@
             $('.input-number').change(function() {
 
                 minValue =  parseInt($(this).attr('min'));
-                valueCurrent = parseInt($(this).val());
+                valueCurrent = toFloat($(this).val());
                 
                 name = $(this).attr('name');
                 if(valueCurrent >= minValue) {

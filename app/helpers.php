@@ -271,7 +271,7 @@ function themeqx_price($price = 0){
         $currency_sign = classified_currency_symbol(get_option('currency_sign'));
 
         if ($currency_position == 'right'){
-            $show_price = $price.$currency_sign;
+            $show_price = $price.' '.$currency_sign;
         }else{
             $show_price = $currency_sign.$price;
         }

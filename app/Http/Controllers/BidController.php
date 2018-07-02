@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ad;
 use App\Bid;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,10 +35,17 @@ class BidController extends Controller
         if ( ! Auth::check()){
             return redirect(route('login'))->with('error', trans('app.login_first_to_post_bid'));
         }
+
         $user = Auth::user();
         $bid_amount = toFloat($request->bid_amount);
 
         $ad = Ad::find($ad_id);
+
+        // check if expired
+        if (Carbon::parse($ad->expired_at)->isPast()) {
+            return back()->with('error', trans('app.bidding_time_expired'));
+        }
+
         // get max bid that you enter inside place bid field
         $current_max_bid = $ad->current_bid_plus_increaser();
 
@@ -84,25 +92,31 @@ class BidController extends Controller
 
         $ad = Ad::find($ad_id);
         $current_max_bid = $ad->current_bid_plus_increaser();
+        $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
 
         if ($bid_amount < $current_max_bid ){
             return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
         }
 
+        if ($bid_amount == $maxBid){
+            return back()->with('error', trans('app.max_bid_same_error_msg'));
+        }
+
         $data = [
             'ad_id'         => $ad_id,
             'user_id'       => $user->id,
-            'bid_amount'    => $current_max_bid,
+            'bid_amount'    => $current_max_bid == $bid_amount ? $bid_amount : $current_max_bid,
             'max_bid_amount'    => $bid_amount,
             'is_accepted'   => 0,
         ];
 
         // find if this user already has placed max bid
-        $bid = Bid::where('user_id', $user->id)->whereNotNull('max_bid_amount')->first();
+        $bid = $ad->bids()->where('user_id', $user->id)->whereNotNull('max_bid_amount')->first();
 
         // if max bids by this user already exists replace by new max bid
         // if thats not the case then just create new max bid
         if ($bid) {
+            $bid->bid_amount = $current_max_bid == $bid_amount ? $bid_amount : null;
             $bid->max_bid_amount = $bid_amount;
             $bid->save();
         } else {

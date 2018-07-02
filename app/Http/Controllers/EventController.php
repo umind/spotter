@@ -61,6 +61,13 @@ class EventController extends Controller
 
         $event->auctions()->sync($request->products);
 
+        // assign bid deadline to every product the same as the event deadline
+        foreach ($request->products as $product) {
+            $ad = Ad::find($product);
+            $ad->expired_at = Carbon::parse($request->auction_deadline);
+            $ad->save();
+        }
+
         return redirect()->route('dashboard_events')->with('success', trans('app.ad_created_msg'));
     }
 
@@ -85,6 +92,13 @@ class EventController extends Controller
 
         $user->events()->save($event);
         $event->auctions()->sync($request->products);
+
+        // assign bid deadline to every product the same as the event deadline
+        foreach ($request->products as $product) {
+            $ad = Ad::find($product);
+            $ad->expired_at = Carbon::parse($request->auction_deadline);
+            $ad->save();
+        }
 
         return redirect()->route('dashboard_events')->with('success', trans('app.ad_created_msg'));
     }
@@ -118,5 +132,15 @@ class EventController extends Controller
             }
         }
         return ['success'=> 0, 'msg' => trans('app.error_msg')];
+    }
+
+    public function close(Event $event)
+    {
+        $event->status = '2';
+        $event->save();
+
+        $event->auctions()->update(['status' => '2']);
+
+        return redirect()->route('dashboard_events')->with('success', trans('app.auction_closed_msg'));
     }
 }

@@ -121,7 +121,7 @@ class Ad extends Model
                 $html = '<span class="text-success">'.trans('app.published').'</span>';
                 break;
             case 2:
-                $html = '<span class="text-warning">'.trans('app.blocked').'</span>';
+                $html = '<span class="text-muted">'.trans('app.closed').'</span>';
                 break;
         }
         return $html;

@@ -134,7 +134,7 @@ class CommentController extends Controller
             'author_email'  => $author_email,
             'author_ip'     => $ip,
             'comment'       => $request->comment,
-            'approved'      => $approved,
+            'approved'      => 1,
         ];
 
         //If it reply, make it approve

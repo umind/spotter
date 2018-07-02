@@ -120,6 +120,8 @@ class AdsController extends Controller
         $rules = [
             'category'          => 'required',
             'ad_title'          => 'required',
+            'bid_no'          => 'required',
+            'auction_no'          => 'required',
             'ad_description'    => 'required',
             'country'           => 'required',
             'seller_name'       => 'required',
@@ -954,18 +956,15 @@ class AdsController extends Controller
         //Get Related Ads, add [->whereCountryId($ad->country_id)] for more specific results
         $related_ads = Ad::active()->whereCategoryId($ad->category_id)->where('id', '!=',$ad->id)->with('category', 'city')->limit($limit_regular_ads)->orderByRaw('RAND()')->get();
 
-        // get all bids for this auctions and also the max bid by the logged in user if set
-        $userMaxBid = null;
-
+        // get all bids for this auction and also the max bid by the logged in user if set
         $userMaxBid = $ad->bids()->whereHas('user', function ($q) {
             $q->where('user_id', Auth::id());
         })->max('max_bid_amount');
-
-        $bids = collect([]);
-
+        
+        // get all bids without max bid 
         $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get();
 
-        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid'));
+        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', ''));
     }
 
     public function switchGridListView(Request $request){

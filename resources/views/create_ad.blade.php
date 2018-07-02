@@ -53,7 +53,22 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="ad_title" value="{{ old('ad_title') }}" name="ad_title" placeholder="@lang('app.ad_title')">
                             {!! $errors->has('ad_title')? '<p class="help-block">'.$errors->first('ad_title').'</p>':'' !!}
-                            <p class="text-info"> @lang('app.great_title_info')</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group {{ $errors->has('auction_no')? 'has-error':'' }}">
+                        <label for="auction_no" class="col-sm-4 control-label">@lang('app.auction_no')</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="auction_no" value="{{ old('auction_no') }}" name="auction_no" placeholder="@lang('app.auction_no')">
+                            {!! $errors->has('auction_no')? '<p class="help-block">'.$errors->first('auction_no').'</p>':'' !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group {{ $errors->has('bid_no')? 'has-error':'' }}">
+                        <label for="bid_no" class="col-sm-4 control-label">@lang('app.bid_no')</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="bid_no" value="{{ old('bid_no') }}" name="bid_no" placeholder="@lang('app.bid_no')">
+                            {!! $errors->has('bid_no')? '<p class="help-block">'.$errors->first('bid_no').'</p>':'' !!}
                         </div>
                     </div>
 
@@ -62,7 +77,6 @@
                         <div class="col-sm-8">
                             <textarea name="ad_description" class="form-control" id="content_editor" rows="8">{{ old('ad_description') }}</textarea>
                             {!! $errors->has('ad_description')? '<p class="help-block">'.$errors->first('ad_description').'</p>':'' !!}
-                            <p class="text-info"> @lang('app.ad_description_info_text')</p>
                         </div>
                     </div>
 
@@ -90,13 +104,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group {{ $errors->has('bid_deadline')? 'has-error':'' }}">
+                    {{-- <div class="form-group {{ $errors->has('bid_deadline')? 'has-error':'' }}">
                         <label for="bid_deadline" class="col-sm-4 control-label"> @lang('app.bid_deadline')</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="bid_deadline" value="{{ old('bid_deadline') }}" name="bid_deadline" placeholder="@lang('app.bid_deadline')">
                             {!! $errors->has('bid_deadline')? '<p class="help-block">'.$errors->first('bid_deadline').'</p>':'' !!}
                         </div>
-                    </div>
+                    </div> --}}
 
                     <legend>@lang('app.image')</legend>
 
@@ -209,11 +223,10 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : (Auth::check() ? $lUser->address : '' ) }}" name="address" placeholder="@lang('app.address')">
                             {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
-                            <p class="text-info">@lang('app.address_line_help_text')</p>
                         </div>
                     </div>
 
-                    @if(get_option('ads_price_plan') != 'all_ads_free')
+                   {{--  @if(get_option('ads_price_plan') != 'all_ads_free')
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">@lang('app.payment_info')</h3>
@@ -267,20 +280,7 @@
 
                             </div>
                         </div>
-                    @endif
-
-                    @if(get_option('enable_recaptcha_post_ad') == 1)
-                        <div class="form-group {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="g-recaptcha" data-sitekey="{{get_option('recaptcha_site_key')}}"></div>
-                                @if ($errors->has('g-recaptcha-response'))
-                                    <span class="help-block">
-                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                        </span>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
+                    @endif --}}
 
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-8">

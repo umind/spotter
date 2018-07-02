@@ -32,7 +32,7 @@
                                         <td>
                                             <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a></h5>
                                             <p class="text-muted">
-                                                <i class="fa fa-clock-o"></i> @lang('app.expired_on'): {{ Carbon\Carbon::parse($ad->expired_at)->format('d-m-Y') }}
+                                                <i class="fa fa-clock-o"></i> @lang('app.expired_on'): {{ Carbon\Carbon::parse($ad->expired_at)->format('F d Y, H:i') }}
                                             </p>
                                         </td>
 
