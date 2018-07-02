@@ -520,6 +520,9 @@ class AdsController extends Controller
                         if ($storage->has('uploads/images/thumbs/'.$m->media_name)){
                             $storage->delete('uploads/images/thumbs/'.$m->media_name);
                         }
+                        if ($storage->has('uploads/images/medium/'.$m->media_name)){
+                            $storage->delete('uploads/images/medium/'.$m->media_name);
+                        }
                     }
                     $m->delete();
                 }
@@ -583,11 +586,14 @@ class AdsController extends Controller
                 $resized = Image::make($image)->resize(1920, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->stream();
-                $resized_thumb = Image::make($image)->resize(640, 426)->stream();
+
+                $resized_medium = Image::make($image)->resize(640, 426)->stream();
+                $resized_thumb = Image::make($image)->resize(320, 213)->stream();
 
                 $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
 
                 $imageFileName = 'uploads/images/'.$image_name;
+                $imageMediumName = 'uploads/images/medium/'.$image_name;
                 $imageThumbName = 'uploads/images/thumbs/'.$image_name;
 
                 try{
@@ -598,9 +604,13 @@ class AdsController extends Controller
                         //Save image name into db
                         $created_img_db = Media::create(['user_id' => $user_id, 'ad_id' => $ad_id, 'media_name'=>$image_name, 'type'=>'image', 'storage' => get_option('default_storage'), 'ref'=>'ad']);
 
+                        //upload medium image
+                        current_disk()->put($imageMediumName, $resized_medium->__toString(), 'public');
+                        $medium_img_url = media_url($created_img_db, 'medium');
+
                         //upload thumb image
                         current_disk()->put($imageThumbName, $resized_thumb->__toString(), 'public');
-                        $img_url = media_url($created_img_db, false);
+                        $img_url = media_url($created_img_db, 'thumb');
                     }
                 } catch (\Exception $e){
                     return redirect()->back()->withInput($request->input())->with('error', $e->getMessage()) ;
@@ -625,6 +635,9 @@ class AdsController extends Controller
         if ($media->type == 'image'){
             if ($storage->has('uploads/images/thumbs/'.$media->media_name)){
                 $storage->delete('uploads/images/thumbs/'.$media->media_name);
+            }
+            if ($storage->has('uploads/images/medium/'.$media->media_name)){
+                $storage->delete('uploads/images/medium/'.$media->media_name);
             }
         }
 

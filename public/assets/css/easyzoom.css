@@ -46,7 +46,6 @@
 	background: #FFF;
 }
 
-
 /**
  * EasyZoom layout variations
  */
@@ -64,6 +63,3 @@
 	height: 100%;
 	margin-left: 20px;
 }
-
-.easyzoom-flyout img { max-width: auto !important; }
-

@@ -9,26 +9,32 @@
  * @param bool $full_size
  * @return \Illuminate\Contracts\Routing\UrlGenerator|string
  */
-function media_url($img = '', $full_size = false){
+function media_url($img = '', $full_size = 'big'){
     $url_path = asset('assets/img/classified-placeholder.png');
 
     if ($img){
         if ($img->type == 'image'){
             if ($img->storage == 'public'){
-                if ($full_size){
+                if ($full_size == 'big'){
                     if (file_exists(public_path('uploads/images/'.$img->media_name))){
                         $url_path = asset('uploads/images/'.$img->media_name);
                     }
-                }else{
+                }elseif($full_size == 'medium'){
+                    if (file_exists(public_path('uploads/images/medium/'.$img->media_name))) {
+                        $url_path = asset('uploads/images/medium/' . $img->media_name);
+                    }
+                }elseif($full_size == 'thumb'){
                     if (file_exists(public_path('uploads/images/thumbs/'.$img->media_name))) {
                         $url_path = asset('uploads/images/thumbs/' . $img->media_name);
                     }
                 }
             }elseif ($img->storage == 's3'){
-                if ($full_size){
+                if ($full_size == 'big'){
                     $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/'.$img->media_name);
-                }else{
-                    $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/thumbs/'.$img->media_name);
+                }elseif($full_size == 'medium'){
+                    $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/medium/'.$img->media_name);
+                }elseif($full_size == 'thumb'){
+                    $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/thumb/'.$img->media_name);
                 }
             }
         }

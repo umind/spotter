@@ -99,7 +99,7 @@
                                     @if($ad->media_img->count() > 0)
                                         @foreach($ad->media_img as $img)
                                             <div class="creating-ads-img-wrap">
-                                                <img src="{{ media_url($img, false) }}" class="img-responsive" />
+                                                <img src="{{ media_url($img, 'thumb') }}" class="img-responsive" />
                                                 <div class="img-action-wrap" id="{{ $img->id }}">
                                                     <a href="javascript:;" class="imgDeleteBtn"><i class="fa fa-trash-o"></i> </a>
                                                 </div>

@@ -16,8 +16,7 @@
 @endsection
 
 @section('page-css')
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fotorama-4.6.4/fotorama.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/easyzoom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/fancybox/jquery.fancybox.css') }}">
 @endsection
 
 @section('content')
@@ -129,10 +128,11 @@
                             ?>
                         @else
                             <div class="ads-gallery">
-                                <div class="easyzoom">
+                                <img id="zoom_01" src="{{ media_url($ad->media_img()->first(), 'medium') }}" data-zoom-image="{{ media_url($ad->media_img()->first(), 'big') }}" alt="b-1">
+                                <div id="gallery_01">
                                     @foreach($ad->media_img as $img)
-                                        <a href="{{ media_url($img, true) }}">
-                                            <img src="{{ media_url($img, false) }}" alt="{{ $ad->title }}">
+                                        <a href="#" data-image="{{ media_url($img, 'medium') }}" data-zoom-image="{{ media_url($img, 'big') }}">
+                                            <img id="zoom_01" src="{{ media_url($img, 'thumb') }}" alt="{{ $ad->title }}">
                                         </a>
                                     @endforeach
                                 </div>
@@ -610,8 +610,8 @@
 @endsection
 
 @section('page-js')
-    <script src="{{ asset('assets/js/easyzoom.js') }}"></script>
-    <script src="{{ asset('assets/plugins/fotorama-4.6.4/fotorama.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.elevateZoom-3.0.8.min.js') }}"></script>
+    <script src="{{ asset('assets/fancybox/jquery.fancybox.js') }}"></script>
     <script src="{{ asset('assets/plugins/SocialShare/SocialShare.js') }}"></script>
     <script src="{{ asset('assets/plugins/form-validator/form-validator.min.js') }}"></script>
 
@@ -700,10 +700,6 @@
                 $(this).closest('.reply_form_box').hide();
             });
 
-            // Instantiate EasyZoom instances
-            var $easyzoom = $('.easyzoom').easyZoom();
-            var api = $easyzoom.data('easyZoom');
-
             // increase or decrease price
             $('.btn-number').click(function(e){
                 e.preventDefault();
@@ -760,6 +756,15 @@
                     e.preventDefault();
                 }
             });
+
+                $("#zoom_01").elevateZoom({gallery:'gallery_01'}); 
+
+                //pass the images to Fancybox
+                $("#zoom_01").bind("click", function(e) {  
+                  var ez =   $('#zoom_01').data('elevateZoom'); 
+                    $.fancybox(ez.getGalleryList());
+                  return false;
+                });
 
         });
     </script>
