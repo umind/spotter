@@ -162,7 +162,7 @@ class Ad extends Model
     }
 
     public function bids(){
-        return $this->hasMany(Bid::class)->orderBy('id', 'desc');
+        return $this->hasMany(Bid::class)->orderBy('max_bid_amount', 'desc')->orderBy('bid_amount', 'desc');
     }
 
     public function bid_deadline(){

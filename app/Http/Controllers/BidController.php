@@ -130,6 +130,7 @@ class BidController extends Controller
         $action = $request->action;
         $ad_id = $request->ad_id;
         $bid_id = $request->bid_id;
+        $won_bid_amount = $request->won_bid_amount;
 
         $user = Auth::user();
         $user_id = $user->id;
@@ -145,6 +146,7 @@ class BidController extends Controller
         switch ($action){
             case 'accept':
                 $bid->is_accepted = 1;
+                $bid->won_bid_amount = $won_bid_amount;
                 $bid->save();
                 break;
             case 'delete':
