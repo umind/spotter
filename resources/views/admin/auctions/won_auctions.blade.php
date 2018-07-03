@@ -32,9 +32,12 @@
                                         <td>
                                             <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a></h5>
                                             <p class="text-muted">
-                                                @php $event = $ad->events()->first(); @endphp
+                                                @php 
+                                                    $event = $ad->events()->first(); 
+                                                    $wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
+                                                @endphp
 
-                                                <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ number_format($ad->accepted_bid_amount, 2) }}
+                                                <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
                                                 <br>
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
                                                 <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">

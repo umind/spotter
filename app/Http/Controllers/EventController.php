@@ -169,6 +169,6 @@ class EventController extends Controller
 
         $event->auctions()->update(['status' => '2']);
 
-        return redirect()->route('dashboard_events')->with('success', trans('app.auction_closed_msg'));
+        return redirect()->route('active_events')->with('success', trans('app.auction_closed_msg'));
     }
 }

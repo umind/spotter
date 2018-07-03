@@ -68,7 +68,7 @@
                                         </td>
                                         <td>{{ \Carbon\Carbon::parse($bid->created_at)->format('F d Y, H:i') }}</td>
                                         <td>
-                                            @if( ! $ad->is_bid_accepted())
+                                            @if( ! $ad->is_bid_accepted() && \Carbon\Carbon::parse($ad->expired_at)->isPast())
                                                 <a class="btn btn-success accept_bid" data-ad-id="{{$ad->id}}" data-bid-id="{{$bid->id}}" data-toggle="modal" data-target="#myModal"><i class="fa fa-check-circle-o"></i> </a>
                                             @endif
 
@@ -109,12 +109,10 @@
                 var selector = $(this);
                 var action = selector.data('action');
 
-                if (action === 'delete'){
-                    if (!confirm('{{ trans('app.are_you_sure') }}')) {
-                        return;
-                    }
+                if (!confirm('{{ trans('app.are_you_sure') }}')) {
+                    return;
                 }
-
+                
                 var ad_id = selector.data('ad-id');
                 var bid_id = selector.data('bid-id');
                 var won_bid_amount = $('input.input-number').val();

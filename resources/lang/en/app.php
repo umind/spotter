@@ -2,6 +2,9 @@
 
 return [
     // newest
+    'sold_to' => 'Sold To',
+    'won_and_bought_for' => 'You won on an auction. Product bought for :won_bid_amount',
+    'you_won' => 'Auction is closed and only you are allowed to see it.',
     'ad_closed' => 'Auction is closed and only you are allowed to see it.',
     'active_events' => 'Active Events',
     'closed_events' => 'Closed Events',
@@ -72,7 +75,7 @@ return [
     'select_a_country'      => 'Select a country',
     'error'                 => 'Error!',
     'success'               => 'Success!',
-    'are_you_sure'          => 'Are you sure want to delete this?',
+    'are_you_sure'          => 'Are you sure?',
     'email_password_error'  => 'Your email or password is incorrect.',
     'ads'                   => 'Auctions',
     'no_upcoming_events'                   => 'Currently there are no upcoming auctions',

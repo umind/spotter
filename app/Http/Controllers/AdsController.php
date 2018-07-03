@@ -954,6 +954,7 @@ class AdsController extends Controller
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
         //$ad = Ad::whereSlug($slug)->first();
         $ad = Ad::find($id);
+        $user = Auth::user();
 
         if (! $ad){
             return view('error_404');
@@ -961,7 +962,7 @@ class AdsController extends Controller
 
         if ( ! $ad->is_published()){
             if (Auth::check()){
-                $user_id = Auth::user()->id;
+                $user_id = $user->id;
                 if ($user_id != $ad->user_id){
                     return view('error_404');
                 }
@@ -986,7 +987,11 @@ class AdsController extends Controller
         // get all bids without max bid 
         $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get();
 
-        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid'));
+        // get the user who won
+        $wonBid = $ad->bids()->where('is_accepted', 1)->first();
+        $wonUser = $wonBid ? User::find($wonBid->user_id) : null;
+
+        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', 'wonUser', 'wonBid'));
     }
 
     public function switchGridListView(Request $request){

@@ -353,6 +353,10 @@
                                     @endif
 
                                     <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
+                                    @if(Auth::user()->is_admin() && $wonBid && $wonUser)
+                                        <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
+                                        <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
+                                    @endif
 
                                     <div class="alert alert-warning">
                                         <h4>@lang('app.bid_closed')</h4>

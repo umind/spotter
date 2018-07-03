@@ -18,7 +18,7 @@ class NotificationController extends Controller
 
     public function show(Notification $notification)
     {
-    	$notification->is_read = 1;;
+    	$notification->is_read = 1;
     	$notification->save();
     	return redirect()->away($notification->url);
     }
