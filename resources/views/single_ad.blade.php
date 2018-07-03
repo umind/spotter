@@ -312,7 +312,7 @@
                         @if($ad->category_type == 'auction')
                             <div class="widget">
                                 <h3>@lang('app.highest_bid') {{themeqx_price($ad->current_bid())}}</h3>
-                                <p>@lang('app.plus_pdv') 7.7% MwSt</p>
+                                <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
                                 @if($ad->is_bid_active())
 
                                     <p>{{sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>

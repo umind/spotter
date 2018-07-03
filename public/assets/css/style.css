@@ -42,10 +42,6 @@ a:hover {
 	align-items: center;
 }
 
-[class*="col-"] {
-	flex: 1;
-}
-
 /** make bootstrap flat */
 
 .navbar {
@@ -1202,10 +1198,13 @@ ul.footer-menu li a {
 
 .widget h3 {
 	color: #666666;
+	margin: 0;
+	margin-bottom: 6px;
+}
+
+.widget .pdv {
+	padding-bottom: 5px;
 	border-bottom: 1px solid #cbcbcb;
-	margin-bottom: 20px;
-	margin-top: 0;
-	padding-bottom: 10px;
 }
 
 .widget .btn,
