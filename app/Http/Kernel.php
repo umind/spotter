@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'dashboard' => \App\Http\Middleware\DashboardArea::class,
         'only_admin_access' => \App\Http\Middleware\OnlyAdminAccess::class,
+        'auction_closed' => \App\Http\Middleware\RedirectIfAuctionClosed::class,
     ];
 }

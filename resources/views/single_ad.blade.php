@@ -106,7 +106,9 @@
                     @endif
 
                     <div class="auction-img-video-wrap">
-                        @if ( ! $ad->is_published())
+                        @if ($ad->status == '2')
+                            <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_closed')</div>
+                        @elseif ( ! $ad->is_published())
                             <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_not_published_warning')</div>
                         @endif
                         @if( ! empty($ad->video_url))

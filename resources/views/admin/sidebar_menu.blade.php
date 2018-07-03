@@ -9,7 +9,8 @@
                 <li>
                     <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.events')<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li>  <a href="{{ route('dashboard_events') }}">@lang('app.my_events')</a> </li>
+                        <li>  <a href="{{ route('active_events') }}">@lang('app.active_events')</a> </li>
+                        <li>  <a href="{{ route('closed_events') }}">@lang('app.closed_events')</a> </li>
                         <li>  <a href="{{ route('create_event') }}">@lang('app.post_an_event')</a> </li>
                         <li>  <a href="{{ route('pending_events') }}">@lang('app.pending_for_approval')</a> </li>
                     </ul>
@@ -22,6 +23,7 @@
                     @if($lUser->is_admin())
                         <li>  <a href="{{ route('my_ads') }}">@lang('app.my_ads')</a> </li>
                         <li>  <a href="{{ route('create_ad') }}">@lang('app.post_an_ad')</a> </li>
+                        <li>  <a href="{{ route('admin_pending_ads') }}">@lang('app.pending_for_approval')</a> </li>
                     @else
                         <li>  <a href="{{ route('active_bidding_auctions') }}">@lang('app.active_bidding_auctions')</a> </li>
                         <li>  <a href="{{ route('finished_auctions') }}">@lang('app.finished_auctions')</a> </li>
@@ -30,7 +32,6 @@
                     @endif
 
                     {{-- <li>  <a href="{{ route('approved_ads') }}">@lang('app.approved_ads')</a> </li> --}}
-                    {{-- <li>  <a href="{{ route('admin_pending_ads') }}">@lang('app.pending_for_approval')</a> </li> --}}
                     {{-- <li>  <a href="{{ route('admin_blocked_ads') }}">@lang('app.blocked_ads')</a> </li> --}}
                 </ul>
             </li>

@@ -2,6 +2,9 @@
 
 return [
     // newest
+    'ad_closed' => 'Auction is closed and only you are allowed to see it.',
+    'active_events' => 'Active Events',
+    'closed_events' => 'Closed Events',
     'max_bid_same_error_msg' => 'This bid is already the highest one. Please enter higher max bid.',
     'closed' => 'Closed',
     'auction_closed_msg' => 'Auction successfully closed',
@@ -9,6 +12,8 @@ return [
     'sold_for' => 'Sold For',
     'no_auctions_found' => 'Currently there are no auctions found',
     'total_auctions_found' => 'Total Auctions Found',
+    'registration_success_activating_msg' => 'we\'ve sent you an activation email, please follow email instruction',
+    'registration_error_activating_msg' => 'we can\'t sending you activation email during an email error, please contact with your admin',
 
 
     'date' => 'Date',

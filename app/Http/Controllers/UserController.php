@@ -118,14 +118,14 @@ class UserController extends Controller
             $registration_success_activating_msg = "";
             if ($active_status == '1') {
                 try {
-                    $registration_success_activating_msg = ", we've sent you an activation email, please follow email instruction";
+                    $registration_success_activating_msg = ", " . trans('app.registration_success_activating_msg');
 
                     Mail::send('emails.activation_email', ['user' => $data], function ($m) use ($data) {
                         $m->from(get_option('email_address'), get_option('site_name'));
                         $m->to($data['email'], $data['name'])->subject(trans('app.activate_email_subject'));
                     });
                 } catch (\Exception $e) {
-                    $registration_success_activating_msg = ", we can't sending you activation email during an email error, please contact with your admin";
+                    $registration_success_activating_msg = ", " . trans('app.registration_error_activating_msg');
                     //
                 }
             }

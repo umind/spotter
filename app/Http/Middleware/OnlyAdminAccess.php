@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Event;
 use Illuminate\Support\Facades\Auth;
 
 class OnlyAdminAccess
@@ -22,9 +23,10 @@ class OnlyAdminAccess
 
         $user = Auth::user();
 
-        if ( ! $user->is_admin())            
+        if ( ! $user->is_admin()) {
             // ->with('error', trans('app.access_restricted'))
             return redirect(route('active_bidding_auctions'));
+        }
 
         return $next($request);
     }

@@ -154,7 +154,7 @@ class AdsController extends Controller
                 $rules['build_year'] = 'required';
             }
             if ($sub_category->category_type == 'auction') {
-                $rules['bid_deadline'] = 'required';
+                // $rules['bid_deadline'] = 'required';
             }
         }
 
@@ -305,7 +305,7 @@ class AdsController extends Controller
             }
 
             if ( Auth::check()){
-                return redirect(route('pending_ads'))->with('success', trans('app.ad_created_msg'));
+                return redirect(route('my_ads'))->with('success', trans('app.ad_created_msg'));
             }
             return back()->with('success', trans('app.ad_created_msg'));
         }

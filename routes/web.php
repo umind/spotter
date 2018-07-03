@@ -17,18 +17,20 @@
 
 Auth::routes();
 
-Route::get('installation', ['as' => 'installation', 'uses'=>'HomeController@installation']);
-Route::post('installation', [ 'uses'=>'HomeController@installationPost']);
+// Route::get('installation', ['as' => 'installation', 'uses'=>'HomeController@installation']);
+// Route::post('installation', [ 'uses'=>'HomeController@installationPost']);
 
 // Event Controller
 Route::get('/', ['as' => 'home', 'uses'=>'EventController@index']);
 Route::group(['middleware' => 'only_admin_access'], function () {
     // Admin Events
-    Route::get('dashboard/my_events', ['as' => 'dashboard_events', 'uses'=>'EventController@myEvents']);
+    // Route::get('dashboard/my_events', ['as' => 'dashboard_events', 'uses'=>'EventController@myEvents']);
     Route::get('dashboard/my_events/create', ['as' => 'create_event', 'uses'=>'EventController@create']);
     Route::post('dashboard/my_events/store', ['as' => 'store_event', 'uses'=>'EventController@store']);
     Route::get('dashboard/my_events/edit/{event}', ['as' => 'edit_event', 'uses'=>'EventController@edit']);
     Route::get('dashboard/my_events/pending', ['as' => 'pending_events', 'uses'=>'EventController@pending']);
+    Route::get('dashboard/my_events/active', ['as' => 'active_events', 'uses'=>'EventController@active']);
+    Route::get('dashboard/my_events/closed', ['as' => 'closed_events', 'uses'=>'EventController@closed']);
     Route::post('ajax/my_events/change_status', ['as' => 'change_event_status', 'uses'=>'EventController@changeStatus']);
     Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
     Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
@@ -36,13 +38,13 @@ Route::group(['middleware' => 'only_admin_access'], function () {
     Route::get('dashboard/my_events/close/{event}', ['as' => 'close_event', 'uses'=>'EventController@close']);
 });
 
-Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show']);
+Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show'])->middleware('auction_closed');
 
 // Products
 Route::get('products', ['as' => 'products', 'uses' => 'HomeController@index']);
 
 // Language Switcher
-Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
+// Route::get('LanguageSwitch/{lang}', ['as' => 'switch_language', 'uses'=>'HomeController@switchLang']);
 
 //Account activating
 Route::get('account/activating/{activation_code}', ['as' => 'email_activation_link', 'uses'=>'UserController@activatingAccount']);
@@ -54,19 +56,18 @@ Route::post('contact-us', ['uses'=>'HomeController@contactUsPost']);
 Route::get('page/{slug}', ['as' => 'single_page', 'uses'=>'PostController@showPage']);
 
 Route::get('category/{cat_id?}', ['uses'=>'CategoriesController@show'])->name('category');
-Route::get('countries/{country_code?}', ['uses'=>'LocationController@countriesListsPublic'])->name('countries');
-Route::get('set-country/{country_code}', ['uses'=>'LocationController@setCurrentCountry'])->name('set_country');
+// Route::get('countries/{country_code?}', ['uses'=>'LocationController@countriesListsPublic'])->name('countries');
+// Route::get('set-country/{country_code}', ['uses'=>'LocationController@setCurrentCountry'])->name('set_country');
 
 Route::get('searchCityJson', ['uses'=>'LocationController@searchCityJson'])->name('searchCityJson');
-
 
 Route::get('search/{country_code?}/{state_id?}/{city_id?}/{category_slug?}/{brand_slug?}', ['as' => 'search', 'uses'=>'AdsController@search']);
 Route::get('search-redirect', ['as' => 'search_redirect', 'uses'=>'AdsController@searchRedirect']);
 
-Route::get('auctions-by-user/{id?}', ['as' => 'ads_by_user', 'uses'=>'AdsController@adsByUser']);
+// Route::get('auctions-by-user/{id?}', ['as' => 'ads_by_user', 'uses'=>'AdsController@adsByUser']);
 
-Route::get('auction/{id}/{slug?}', ['as' => 'single_ad', 'uses'=>'AdsController@singleAuction']);
-Route::get('embedded/{slug}', ['as' => 'embedded_ad', 'uses'=>'AdsController@embeddedAd']);
+Route::get('auction/{id}/{slug?}', ['as' => 'single_ad', 'uses'=>'AdsController@singleAuction'])->middleware('auction_closed');
+// Route::get('embedded/{slug}', ['as' => 'embedded_ad', 'uses'=>'AdsController@embeddedAd']);
 
 Route::post('save-ad-as-favorite', ['as' => 'save_ad_as_favorite', 'uses'=>'UserController@saveAdAsFavorite']);
 // Route::post('report-post', ['as' => 'report_ads_pos', 'uses'=>'AdsController@reportAds']);
@@ -74,9 +75,9 @@ Route::post('reply-by-email', ['as' => 'reply_by_email_post', 'uses'=>'UserContr
 Route::post('post-comments/{id}', ['as' => 'post_comments', 'uses'=>'CommentController@postComments']);
 
 
-Route::get('apply_job', function (){
-    return redirect(route('home'));
-});
+// Route::get('apply_job', function (){
+//     return redirect(route('home'));
+// });
 
 // Password reset routes...
 Route::post('send-password-reset-link', ['as' => 'send_reset_link', 'uses'=>'Auth\PasswordController@postEmail']);
@@ -131,46 +132,46 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
 
         Route::group(['prefix'=>'settings'], function(){
-            Route::get('theme-settings', ['as'=>'theme_settings', 'uses' => 'SettingsController@ThemeSettings']);
-            Route::get('modern-theme-settings', ['as'=>'modern_theme_settings', 'uses' => 'SettingsController@modernThemeSettings']);
-            Route::get('social-url-settings', ['as'=>'social_url_settings', 'uses' => 'SettingsController@SocialUrlSettings']);
+            // Route::get('theme-settings', ['as'=>'theme_settings', 'uses' => 'SettingsController@ThemeSettings']);
+            // Route::get('modern-theme-settings', ['as'=>'modern_theme_settings', 'uses' => 'SettingsController@modernThemeSettings']);
+            // Route::get('social-url-settings', ['as'=>'social_url_settings', 'uses' => 'SettingsController@SocialUrlSettings']);
             Route::get('general', ['as'=>'general_settings', 'uses' => 'SettingsController@GeneralSettings']);
-            Route::get('payments', ['as'=>'payment_settings', 'uses' => 'SettingsController@PaymentSettings']);
-            Route::get('ad', ['as'=>'ad_settings', 'uses' => 'SettingsController@AdSettings']);
-            Route::get('languages', ['as'=>'language_settings', 'uses' => 'LanguageController@index']);
-            Route::post('languages', ['uses' => 'LanguageController@store']);
-            Route::post('languages-delete', ['as'=>'delete_language', 'uses' => 'LanguageController@destroy']);
+            // Route::get('payments', ['as'=>'payment_settings', 'uses' => 'SettingsController@PaymentSettings']);
+            // Route::get('ad', ['as'=>'ad_settings', 'uses' => 'SettingsController@AdSettings']);
+            // Route::get('languages', ['as'=>'language_settings', 'uses' => 'LanguageController@index']);
+            // Route::post('languages', ['uses' => 'LanguageController@store']);
+            // Route::post('languages-delete', ['as'=>'delete_language', 'uses' => 'LanguageController@destroy']);
 
-            Route::get('storage', ['as'=>'file_storage_settings', 'uses' => 'SettingsController@StorageSettings']);
-            Route::get('social', ['as'=>'social_settings', 'uses' => 'SettingsController@SocialSettings']);
-            Route::get('blog', ['as'=>'blog_settings', 'uses' => 'SettingsController@BlogSettings']);
+            // Route::get('storage', ['as'=>'file_storage_settings', 'uses' => 'SettingsController@StorageSettings']);
+            // Route::get('social', ['as'=>'social_settings', 'uses' => 'SettingsController@SocialSettings']);
+            // Route::get('blog', ['as'=>'blog_settings', 'uses' => 'SettingsController@BlogSettings']);
             Route::get('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettings']);
             Route::post('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettingsPost']);
 
-            Route::get('recaptcha', ['as'=>'re_captcha_settings', 'uses' => 'SettingsController@reCaptchaSettings']);
+            // Route::get('recaptcha', ['as'=>'re_captcha_settings', 'uses' => 'SettingsController@reCaptchaSettings']);
 
             //Save settings / options
             Route::post('save-settings', ['as'=>'save_settings', 'uses' => 'SettingsController@update']);
-            Route::get('monetization', ['as'=>'monetization', 'uses' => 'SettingsController@monetization']);
+            // Route::get('monetization', ['as'=>'monetization', 'uses' => 'SettingsController@monetization']);
         });
 
-        Route::group(['prefix'=>'location'], function(){
-            Route::get('country', ['as'=>'country_list', 'uses' => 'LocationController@countries']);
-            Route::get('country-data', ['as'=>'get_countries_data', 'uses' => 'LocationController@getCountriesData']);
-            Route::get('states', ['as'=>'state_list', 'uses' => 'LocationController@stateList']);
-            Route::post('states', [ 'uses' => 'LocationController@saveState']);
-            Route::get('states/{id}/edit', ['as'=>'edit_state', 'uses' => 'LocationController@stateEdit']);
-            Route::post('states/{id}/edit', ['uses' => 'LocationController@stateEditPost']);
-            Route::post('states/delete', ['as'=>'delete_state', 'uses' => 'LocationController@stateDestroy']);
-            Route::get('state-data', ['as'=>'get_state_data', 'uses' => 'LocationController@getStatesData']);
-            Route::get('cities', ['as'=>'city_list', 'uses' => 'LocationController@cityList']);
-            Route::post('cities', ['uses' => 'LocationController@saveCity']);
-            Route::get('city-data', ['as'=>'get_city_data', 'uses' => 'LocationController@getCityData']);
+        // Route::group(['prefix'=>'location'], function(){
+        //     Route::get('country', ['as'=>'country_list', 'uses' => 'LocationController@countries']);
+        //     Route::get('country-data', ['as'=>'get_countries_data', 'uses' => 'LocationController@getCountriesData']);
+        //     Route::get('states', ['as'=>'state_list', 'uses' => 'LocationController@stateList']);
+        //     Route::post('states', [ 'uses' => 'LocationController@saveState']);
+        //     Route::get('states/{id}/edit', ['as'=>'edit_state', 'uses' => 'LocationController@stateEdit']);
+        //     Route::post('states/{id}/edit', ['uses' => 'LocationController@stateEditPost']);
+        //     Route::post('states/delete', ['as'=>'delete_state', 'uses' => 'LocationController@stateDestroy']);
+        //     Route::get('state-data', ['as'=>'get_state_data', 'uses' => 'LocationController@getStatesData']);
+        //     Route::get('cities', ['as'=>'city_list', 'uses' => 'LocationController@cityList']);
+        //     Route::post('cities', ['uses' => 'LocationController@saveCity']);
+        //     Route::get('city-data', ['as'=>'get_city_data', 'uses' => 'LocationController@getCityData']);
 
-            Route::get('cities/{id}/edit', ['as'=>'edit_city', 'uses' => 'LocationController@cityEdit']);
-            Route::post('cities/{id}/edit', ['uses' => 'LocationController@cityEditPost']);
-            Route::post('city/delete', ['as'=>'delete_city', 'uses' => 'LocationController@cityDestroy']);
-        });
+        //     Route::get('cities/{id}/edit', ['as'=>'edit_city', 'uses' => 'LocationController@cityEdit']);
+        //     Route::post('cities/{id}/edit', ['uses' => 'LocationController@cityEditPost']);
+        //     Route::post('city/delete', ['as'=>'delete_city', 'uses' => 'LocationController@cityDestroy']);
+        // });
 
         Route::group(['prefix'=>'categories'], function(){
             Route::get('/', ['as'=>'parent_categories', 'uses' => 'CategoriesController@index']);
@@ -182,17 +183,17 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
             Route::post('delete-categories', ['as'=>'delete_categories', 'uses' => 'CategoriesController@destroy']);
         });
 
-        Route::group(['prefix'=>'posts'], function(){
-            Route::get('/', ['as'=>'posts', 'uses' => 'PostController@posts']);
-            Route::get('data', ['as'=>'posts_data', 'uses' => 'PostController@postsData']);
+        // Route::group(['prefix'=>'posts'], function(){
+        //     Route::get('/', ['as'=>'posts', 'uses' => 'PostController@posts']);
+        //     Route::get('data', ['as'=>'posts_data', 'uses' => 'PostController@postsData']);
 
-            Route::get('create', ['as'=>'create_new_post', 'uses' => 'PostController@createPost']);
-            Route::post('create', ['uses' => 'PostController@storePost']);
-            Route::post('delete', ['as'=>'delete_post','uses' => 'PostController@destroyPost']);
+        //     Route::get('create', ['as'=>'create_new_post', 'uses' => 'PostController@createPost']);
+        //     Route::post('create', ['uses' => 'PostController@storePost']);
+        //     Route::post('delete', ['as'=>'delete_post','uses' => 'PostController@destroyPost']);
 
-            Route::get('edit/{slug}', ['as'=>'edit_post', 'uses' => 'PostController@editPost']);
-            Route::post('edit/{slug}', ['uses' => 'PostController@updatePost']);
-        });
+        //     Route::get('edit/{slug}', ['as'=>'edit_post', 'uses' => 'PostController@editPost']);
+        //     Route::post('edit/{slug}', ['uses' => 'PostController@updatePost']);
+        // });
 
         Route::group(['prefix'=>'pages'], function(){
             Route::get('/', ['as'=>'pages', 'uses' => 'PostController@index']);
@@ -212,10 +213,10 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
             Route::post('action', ['as'=>'comment_action', 'uses' => 'CommentController@commentAction']);
         });
 
-        Route::get('approved', ['as'=>'approved_ads', 'uses' => 'AdsController@index']);
+        // Route::get('approved', ['as'=>'approved_ads', 'uses' => 'AdsController@index']);
         Route::get('pending', ['as'=>'admin_pending_ads', 'uses' => 'AdsController@adminPendingAds']);
-        Route::get('blocked', ['as'=>'admin_blocked_ads', 'uses' => 'AdsController@adminBlockedAds']);
-        Route::post('status-change', ['as'=>'ads_status_change', 'uses' => 'AdsController@adStatusChange']);
+        // Route::get('blocked', ['as'=>'admin_blocked_ads', 'uses' => 'AdsController@adminBlockedAds']);
+        // Route::post('status-change', ['as'=>'ads_status_change', 'uses' => 'AdsController@adStatusChange']);
 
         // Route::get('ad-reports', ['as'=>'ad_reports', 'uses' => 'AdsController@reports']);
         Route::get('users', ['as'=>'users', 'uses' => 'UserController@index']);
@@ -267,7 +268,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
                 Route::get('append-media-image', ['as'=>'append_media_image', 'uses' => 'AdsController@appendMediaImage']);
                 Route::get('append-post-media-image', ['as'=>'append_post_media_image', 'uses' => 'PostController@appendPostMediaImage']);
                 Route::get('pending-lists', ['as'=>'pending_ads', 'uses' => 'AdsController@pendingAds']);
-                Route::get('archive-lists', ['as'=>'favourite_ad', 'uses' => 'AdsController@create']);
+                // Route::get('archive-lists', ['as'=>'favourite_ad', 'uses' => 'AdsController@create']);
 
                 // Route::get('reports-by/{slug}', ['as'=>'reports_by_ads', 'uses' => 'AdsController@reportsByAds']);
 

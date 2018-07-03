@@ -43,9 +43,9 @@
 
                                         <td>
 
-                                            <a href="{{ route('reports_by_ads', $ad->slug) }}">
+                                            {{-- <a href="{{ route('reports_by_ads', $ad->slug) }}">
                                                 <i class="fa fa-exclamation-triangle"></i> @lang('app.reports') : {{ $ad->reports->count() }}
-                                            </a>
+                                            </a> --}}
 
                                             <hr />
 
@@ -58,11 +58,11 @@
 
                                             <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
 
-                                            @if($ad->status ==1)
+                                            {{-- @if($ad->status ==1)
                                             <a href="javascript:;" class="btn btn-warning blockAds" data-slug="{{ $ad->slug }}" data-value="2"><i class="fa fa-ban"></i> </a>
                                             @else
                                                 <a href="javascript:;" class="btn btn-success approveAds" data-slug="{{ $ad->slug }}" data-value="1"><i class="fa fa-check-circle-o"></i> </a>
-                                            @endif
+                                            @endif --}}
 
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
                                         </td>
@@ -102,26 +102,6 @@
                     url: '{{ route('delete_ads') }}',
                     type: "POST",
                     data: {slug: slug, _token: '{{ csrf_token() }}'},
-                    success: function (data) {
-                        if (data.success == 1) {
-                            selector.closest('tr').hide('slow');
-                            toastr.success(data.msg, '@lang('app.success')', toastr_options);
-                        }
-                    }
-                });
-            });
-
-            $('.approveAds, .blockAds').on('click', function () {
-                if (!confirm('{{ trans('app.are_you_sure') }}')) {
-                    return '';
-                }
-                var selector = $(this);
-                var slug = selector.data('slug');
-                var value = selector.data('value');
-                $.ajax({
-                    url: '{{ route('ads_status_change') }}',
-                    type: "POST",
-                    data: {slug: slug, value: value, _token: '{{ csrf_token() }}'},
                     success: function (data) {
                         if (data.success == 1) {
                             selector.closest('tr').hide('slow');

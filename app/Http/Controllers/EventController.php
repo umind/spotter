@@ -118,6 +118,22 @@ class EventController extends Controller
         return view('admin.events.pending_events', compact('title', 'events'));
     }
 
+    public function active()
+    {
+        $title = trans('app.active_events');
+        $events = Auth::user()->events()->whereStatus('1')->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.events.active_events', compact('title', 'events'));
+    }
+
+        public function closed()
+    {
+        $title = trans('app.closed_events');
+        $events = Auth::user()->events()->whereStatus('2')->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.events.closed_events', compact('title', 'events'));
+    }
+
     public function changeStatus(Request $request){
         $event = Auth::user()->events()->findOrFail($request->event);
 
@@ -126,6 +142,8 @@ class EventController extends Controller
 
             $event->status = $value;
             $event->save();
+
+            $event->auctions()->update(['status' => $value]);
 
             if ($value == 1){
                 return ['success' => 1, 'msg' => trans('app.event_approved_msg')];
