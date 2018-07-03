@@ -37,19 +37,13 @@ a:hover {
     App end
 ----------------------------*/
 
-.container {
-	height: inherit;
+.auction .row {
+	display: flex;
+	align-items: center;
 }
 
-.row-eq-height {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-	margin-left: -15px;
-	margin-right: -15px;
-	align-items: center;
-	height: inherit;
+[class*="col-"] {
+	flex: 1;
 }
 
 /** make bootstrap flat */
@@ -217,15 +211,15 @@ a:hover {
 /** The Spacing **/
 
 .btn-breadcrumb .btn {
-	padding: 6px 12px 6px 24px;
+	padding: 6px 12px 4px 24px;
 }
 
 .btn-breadcrumb .btn:first-child {
-	padding: 6px 6px 6px 10px;
+	padding: 6px 6px 4px 10px;
 }
 
 .btn-breadcrumb .btn:last-child {
-	padding: 6px 18px 6px 24px;
+	padding: 6px 18px 4px 24px;
 }
 
 /** Default button **/
@@ -337,8 +331,7 @@ a:hover {
 }
 
 .btn-breadcrumb a.btn {
-	font-weight: 300;
-	font-size: 12px;
+	font-size: 13px;
 }
 
 /**
@@ -398,7 +391,7 @@ a.more-states {
 
 .home-category {
 	background: #f9f9f9;
-	padding: 20px 0;
+	padding: 30px 0;
 }
 
 .home-cat-box-content a {
@@ -956,7 +949,7 @@ Ad box
 	padding: 10px 15px 8px;
 	background-color: #E1E3E2;
 	color: #252654;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 }
 
 .auction-footer:last-child {
@@ -994,13 +987,18 @@ Ad box
 	height: 158px;
 }
 
+.ad-box .ads-thumbnail .img-responsive {
+	width: 100%;
+	height: 100%;
+}
+
 .ad-box .bid-price {
 	color: #ffffff;
 	background-color: #252654;
 	margin-top: 10px;
-	padding: 10px 8px;
+	padding: 10px 8px 8px;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .ad-box .bid-price .bid-number,
@@ -1126,7 +1124,7 @@ Create ad
 
 #footer {
 	background: #222;
-	padding: 30px;
+	padding: 30px 0;
 	text-align: center;
 	color: #ffffff;
 }
@@ -1187,6 +1185,7 @@ ul.footer-menu li a {
 
 .ads-detail {
 	margin-top: 20px;
+	text-align: justify;
 }
 
 .ads-detail-title {
@@ -1216,6 +1215,7 @@ ul.footer-menu li a {
 
 .widget .form-control {
 	height: auto;
+	z-index: 0;
 }
 
 .widget form {
@@ -1229,11 +1229,11 @@ ul.footer-menu li a {
 .widget .btn-primary,
 .widget .btn-danger.bid {
 	padding: 6px 12px 4px;
-	min-width: 105px;
+	min-width: 115px;
 }
 
 .widget .form-group {
-	width: 65%;
+	width: 60%;
 }
 
 .widget .glyphicon {
@@ -1256,7 +1256,7 @@ ul.footer-menu li a {
 .modal-body .btn-primary,
 .modal-body .btn-danger.bid {
 	padding: 6px 12px 4px;
-	min-width: 105px;
+	min-width: 115px;
 }
 
 .modal-body .form {
@@ -1337,12 +1337,14 @@ ul.footer-menu li a {
 
 .footer-features {
 	background: #f6f6f6;
-	padding: 30px 0 50px;
+	padding: 20px 0 40px;
 	text-align: center;
 }
 
 .footer-features .btn-warning {
 	padding: 10px 16px 8px;
+	margin-right: 5px;
+	margin-bottom: 5px;
 }
 
 .footer-heading h3 {
@@ -1408,7 +1410,8 @@ img.thumb-listing-table {
 
 #side-menu li .label {
 	position: absolute;
-	right: 25px;
+	right: 30px;
+	padding: 5px;
 }
 
 /** Google map */
@@ -1692,58 +1695,6 @@ img.thumb-listing-table {
 	top: 20px;
 }
 
-/** =====================
- * Responsive
- ========================*/
-
-@media only screen and (max-width: 766px) {
-	.comments-container {
-		width: 100%;
-	}
-	.comments-list .comment-box {
-		width: 90%;
-	}
-	.reply-list .comment-box {
-		width: 90%;
-	}
-	.social-icons {
-		text-align: center;
-	}
-	#sub-header .right-info {
-		float: none !important;
-		text-align: center;
-	}
-	.navbar-brand h2 {
-		line-height: 50px;
-	}
-	.navbar-default {
-		border-color: #d0d0d0;
-	}
-	.navbar-collapse {
-		border: none;
-	}
-	.navbar-default .navbar-toggle:focus {
-		background-color: transparent;
-	}
-}
-
-
-@media (max-width:991px) {
-	.home-top-searchbar,
-	.home-search-wrap {
-		height: 400px;
-	}
-	.home-search-section-inner .form-group {
-		margin-bottom: 10px;
-		clear: both;
-		display: block;
-	}
-	.home-search-section-inner .select2-container {
-		width: 100% !important;
-	}
-}
-
-
 /* Devices --- */
 
 .demobar {
@@ -2006,7 +1957,7 @@ Auction
 
 .countdown {
 	padding: 10px 5px;
-	font-size: 15px;
+	font-size: 14px;
 	text-align: center;
 }
 
@@ -2027,4 +1978,77 @@ Auction
 
 .place-bid-btn .btn-primary:hover {
 	background-color: #EEA439;
+}
+
+/** =====================
+ * Responsive
+ ========================*/
+
+@media only screen and (max-width: 320px) {
+	.social-icons {
+		font-size: 10px;
+	}
+	#sub-header .right-info ul li a {
+		font-size: 12px;
+	}
+	.navbar-nav.in li a,
+	#example-show {
+		padding-left: 20px;
+	}
+	.auction .row {
+		display: block;
+	}
+	.auction-header #btn-allProducts {
+		font-size: 12px;
+	}
+	.footer-menu {
+		font-size: 12px;
+	}
+	.footer-features .btn-warning:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 766px) {
+	.navbar-nav.in li a,
+	#example-show {
+		padding-left: 20px;
+	}
+	.comments-container {
+		width: 100%;
+	}
+	.comments-list .comment-box {
+		width: 90%;
+	}
+	.reply-list .comment-box {
+		width: 90%;
+	}
+	.navbar-brand h2 {
+		line-height: 50px;
+	}
+	.navbar-default {
+		border-color: #d0d0d0;
+	}
+	.navbar-collapse {
+		border: none;
+	}
+	.navbar-default .navbar-toggle:focus {
+		background-color: transparent;
+	}
+}
+
+
+@media (max-width: 991px) {
+	.home-top-searchbar,
+	.home-search-wrap {
+		height: 400px;
+	}
+	.home-search-section-inner .form-group {
+		margin-bottom: 10px;
+		clear: both;
+		display: block;
+	}
+	.home-search-section-inner .select2-container {
+		width: 100% !important;
+	}
 }

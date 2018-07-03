@@ -58,7 +58,7 @@
 		<div id="sub-header">
 			<div class="container">
 				<div class="row-eq-height">
-					<div class="col-sm-6">
+					<div class="col-xs-7">
 						<div class="social-icons">
 							@php
 								$facebook_url = get_option('facebook_url');
@@ -90,7 +90,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-xs-5">
 						<div class="right-info">
 							<ul>
 								{{-- <li class="notification-li">

@@ -15,7 +15,6 @@
 
                     @foreach($ads as $ad)
                         <div class="col-md-3">
-
                             <div class="ad-box">
 								<div class="ad-box-caption-title">
 									<h3>

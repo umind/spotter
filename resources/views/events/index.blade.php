@@ -12,11 +12,11 @@
 				@if($events->count())
 					@foreach($events as $event)
 						<div class="auction-header">
-							<div class="row-eq-height">
-								<div class="col-md-6 auction-name">
+							<div class="row">
+								<div class="col-xs-6 auction-name">
 									<p>{{ $event->title }}</p>
 								</div>
-								<div class="col-md-6 all-products text-right">
+								<div class="col-xs-6 all-products text-right">
 									<a href="{{ route('single_event', $event->id) }}" id="btn-allProducts">@lang('app.all_products')</a>
 								</div>
 							</div>
@@ -37,7 +37,7 @@
 							</ul>
 						</div>
 							<div class="auction-footer">
-							<div class="row-eq-height">
+							<div class="row">
 								<div class="col-md-4">
 									<p>@lang('app.auctioner'): {{ $event->user->first_name }} {{ $event->user->last_name }}</p>
 									<p>@lang('app.venue'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
