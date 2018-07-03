@@ -792,3 +792,12 @@ function toFloat($num) {
         preg_replace("/[^0-9]/", "", substr($num, $sep+1, strlen($num)))
     );
 }
+
+function rotationImages($auctions) {
+    $images = '';
+    foreach ($auctions as $auction) {
+        $images .= '"' . media_url($auction->feature_img) . '",';
+    }
+
+    return rtrim($images, ',');
+}

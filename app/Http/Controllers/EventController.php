@@ -68,7 +68,7 @@ class EventController extends Controller
             $ad->save();
         }
 
-        return redirect()->route('dashboard_events')->with('success', trans('app.ad_created_msg'));
+        return redirect()->route('pending_events')->with('success', trans('app.ad_created_msg'));
     }
 
     public function edit(Event $event) {
@@ -100,7 +100,13 @@ class EventController extends Controller
             $ad->save();
         }
 
-        return redirect()->route('dashboard_events')->with('success', trans('app.ad_created_msg'));
+        if ($event->status == '2') {
+            return redirect()->route('closed_events')->with('success', trans('app.ad_created_msg'));
+        } elseif($event->status == '1') {
+            return redirect()->route('closed_events')->with('success', trans('app.ad_created_msg'));
+        } elseif ($event->status == '0') {
+            return redirect()->route('pending_events')->with('success', trans('app.ad_created_msg'));
+        }
     }
 
     public function delete(Request $request)
