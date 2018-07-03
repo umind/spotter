@@ -1833,7 +1833,7 @@ Auction
 }
 
 #sub-header .right-info .notification i {
-	font-size: 18px;
+	font-size: 20px;
 	vertical-align: middle;
 	cursor: pointer;
 	color: #f0ad4e;
@@ -1845,13 +1845,13 @@ Auction
 
 #sub-header .right-info .notification .notification-number {
 	position: absolute;
-	top: -1px;
-	right: -1px;
+	top: -3px;
+	right: -3px;
 	text-align: center;
 	color: #ffffff;
 	font-size: 10px;
 	font-weight: bold;
-	padding: 0 5px;
+	padding: 0 4px;
 	border-radius: 50%;
 	background-color: #B2282D;
 }
