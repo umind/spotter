@@ -49,6 +49,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('auctioner')? 'has-error':'' }}">
+                            <label for="auctioner" class="col-sm-4 control-label">@lang('app.auctioner')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="auctioner" value="{{ old('auctioner') }}" name="auctioner" placeholder="@lang('app.auctioner')">
+                                {!! $errors->has('auctioner')? '<p class="help-block">'.$errors->first('auctioner').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
 	                        <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
                             <div class="col-sm-8">
@@ -74,9 +82,9 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('auction_deadline')? 'has-error':'' }}">
-	                        <label for="auction_deadline" class="col-sm-4 control-label">@lang('app.auction_deadline')</label>
+	                        <label for="auction_deadline" class="col-sm-4 control-label">@lang('app.bidding_deadline')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="auction_deadline" value="{{ old('auction_deadline') }}" name="auction_deadline" placeholder="@lang('app.auction_deadline')">
+                                <input type="text" class="form-control" id="auction_deadline" value="{{ old('auction_deadline') }}" name="auction_deadline" placeholder="@lang('app.bidding_deadline')">
                                 {!! $errors->has('auction_deadline')? '<p class="help-block">'.$errors->first('auction_deadline').'</p>':'' !!}
                             </div>
                         </div>

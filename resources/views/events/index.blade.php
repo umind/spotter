@@ -39,11 +39,11 @@
 							<div class="auction-footer">
 							<div class="row">
 								<div class="col-md-4">
-									<p>@lang('app.auctioner'): {{ $event->user->first_name }} {{ $event->user->last_name }}</p>
+									<p>@lang('app.auctioner'): {{ $event->auctioner }}</p>
 									<p>@lang('app.venue'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="col-md-4 text-center">
-									<p class="text-red countdown" data-expire-date="{{ $event->auction_ends }}"></p>
+									<p class="text-red countdown" data-expire-date="{{ $event->auction_begins }}"></p>
 								</div>
 								<div class="col-md-4 text-right">
 									<p>@lang('app.date'): {{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }}</p>
@@ -58,53 +58,5 @@
 			</div>
 		</div>
 	</div>
-
-    <div class="footer-features">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>@lang('app.sell_your_items_through')</h2>
-                    <p>@lang('app.thousands_of_people_selling')</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.excellent_value')
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.ease_of_use')
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.huge_variety')
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.human_support')
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <a href="{{route('category')}}" class="btn btn-warning btn-lg"><i class="fa fa-search"></i> @lang('app.browse_ads')</a>
-                    <a href="{{route('create_ad')}}" class="btn btn-warning btn-lg"><i class="fa fa-save"></i> @lang('app.post_an_ad')</a>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
 
 @endsection

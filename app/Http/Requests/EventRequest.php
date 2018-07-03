@@ -26,9 +26,11 @@ class EventRequest extends FormRequest
         return [
             'products' => 'required',
             'title' => 'required',
+            'auctioner' => 'required',
             'address' => 'required',
             'zip_code' => 'required',
             'city' => 'required',
+            'auction_begins' => 'required',
             'auction_deadline' => 'required',
             // 'view_dates' => 'required',
             // 'description' => 'required',

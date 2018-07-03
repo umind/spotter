@@ -50,6 +50,14 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('auctioner')? 'has-error':'' }}">
+                            <label for="auctioner" class="col-sm-4 control-label">@lang('app.auctioner')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="auctioner" value="{{ old('auctioner')? old('auctioner') : $event->auctioner }}" name="auctioner" placeholder="@lang('app.auctioner')">
+                                {!! $errors->has('auctioner')? '<p class="help-block">'.$errors->first('auctioner').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
                             <label for="products" class="col-sm-4 control-label">@lang('app.address')</label>
                             <div class="col-sm-8">
@@ -71,6 +79,18 @@
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="city" value="{{ old('city')? old('city') : $event->city }}" name="city" placeholder="@lang('app.city')">
                                 {!! $errors->has('city')? '<p class="help-block">'.$errors->first('city').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('auction_begins')? 'has-error':'' }}">
+                            <label for="products" class="col-sm-4 control-label">@lang('app.auction_begins')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" 
+                                    id="auction_begins" 
+                                    value="{{ old('auction_begins')? old('auction_begins') : Carbon\Carbon::parse($event->auction_begins)->format('d-m-y HH:i') }}" 
+                                    name="auction_begins" 
+                                    placeholder="@lang('app.auction_begins')">
+                                {!! $errors->has('auction_begins')? '<p class="help-block">'.$errors->first('auction_begins').'</p>':'' !!}
                             </div>
                         </div>
 
@@ -133,7 +153,7 @@
 
     <script>
         $(function () {
-            $('#auction_deadline').datetimepicker({
+            $('#auction_deadline, #auction_begins').datetimepicker({
                 format: 'DD-MM-YYYY HH:mm'
             });
 

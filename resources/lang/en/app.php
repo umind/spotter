@@ -14,6 +14,8 @@ return [
     'total_auctions_found' => 'Total Auctions Found',
     'registration_success_activating_msg' => 'we\'ve sent you an activation email, please follow email instruction',
     'registration_error_activating_msg' => 'we can\'t sending you activation email during an email error, please contact with your admin',
+    'bidding_deadline' => 'Bidding Deadline',
+    'auction_begins' => 'Auction Begins',
 
 
     'date' => 'Date',

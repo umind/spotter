@@ -49,9 +49,11 @@ class EventController extends Controller
         $user = Auth::user();
         $event = new Event;
         $event->title = $request->title;
+        $event->auctioner = $request->auctioner;
         $event->address = $request->address;
         $event->city = $request->city;
         $event->zip_code = $request->zip_code;
+        $event->auction_begins = Carbon::parse($request->auction_begins);
         $event->auction_ends = Carbon::parse($request->auction_deadline);
         $event->view_dates = $request->view_dates;
         $event->description = $request->description;
@@ -82,9 +84,11 @@ class EventController extends Controller
     {
         $user = Auth::user();
         $event->title = $request->title;
+        $event->auctioner = $request->auctioner;
         $event->address = $request->address;
         $event->city = $request->city;
         $event->zip_code = $request->zip_code;
+        $event->auction_begins = Carbon::parse($request->auction_begins);
         $event->auction_ends = Carbon::parse($request->auction_deadline);
         $event->view_dates = $request->view_dates;
         $event->description = $request->description;
@@ -103,7 +107,7 @@ class EventController extends Controller
         if ($event->status == '2') {
             return redirect()->route('closed_events')->with('success', trans('app.ad_created_msg'));
         } elseif($event->status == '1') {
-            return redirect()->route('closed_events')->with('success', trans('app.ad_created_msg'));
+            return redirect()->route('active_events')->with('success', trans('app.ad_created_msg'));
         } elseif ($event->status == '0') {
             return redirect()->route('pending_events')->with('success', trans('app.ad_created_msg'));
         }

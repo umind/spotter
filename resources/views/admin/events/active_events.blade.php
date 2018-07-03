@@ -24,12 +24,14 @@
                                 @foreach($events as $event)
                                     <tr>
                                         <td width="100">
-                                            <img src="{{ media_url($event->feature_img) }}" class="thumb-listing-table" alt="">
+                                            <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
+                                                <img class="primary-img thumb-listing-table" src="{{ media_url($event->auctions()->first()->feature_img) }}" alt="primary image" />
+                                            </div>
                                         </td>
                                         <td>
                                             <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
                                             <p class="text-muted">
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.expires_on'):</span> <span>{{ \Carbon\Carbon::parse($event->auctions_ends)->format('F d Y, H:i') }}</span>
+                                                <i class="fa fa-clock-o"></i> <span>@lang('app.expires_on'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_ends)->format('F d Y, H:i') }}</span>
                                             </p>
                                         </td>
 
@@ -57,9 +59,13 @@
 @endsection
 
 @section('page-js')
-
+<script src="{{ asset('assets/js/jquery.images-rotation.js') }}"></script>
     <script>
         $(document).ready(function() {
+
+            // init image rotation
+            $('.images-rotation').imagesRotation();
+
             $('.deleteAds').on('click', function () {
                 if (!confirm('{{ trans('app.are_you_sure') }}')) {
                     return '';

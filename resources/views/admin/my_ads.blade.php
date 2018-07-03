@@ -32,7 +32,7 @@
                                         <td>
                                             <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a> ({!! $ad->status_context() !!})</h5>
                                             <p class="text-muted">
-                                                <i class="fa fa-map-marker"></i> {!! $ad->full_address() !!} <br />  <i class="fa fa-clock-o"></i> {{ $ad->posting_datetime()  }}
+
                                             </p>
                                         </td>
 
