@@ -155,7 +155,7 @@ class BidController extends Controller
                 $notification = new Notification;
                 $notification->title = 'You won';
                 $notification->text = 'You won on an auction. Product bought for ' . themeqx_price($bid->won_bid_amount);
-                $notification->url = route('single_ad', [$bid->auction->id, $bid->auction->slug]);
+                $notification->url = route('single_ad', [$bid->ad_id]);
                 $notification->date = Carbon::now();
 
                 $wonUser->notifications()->save($notification);
