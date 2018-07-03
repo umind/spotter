@@ -13,10 +13,10 @@
 					@foreach($events as $event)
 						<div class="auction-header">
 							<div class="row">
-								<div class="col-xs-6 auction-name">
+								<div class="col-sm-6 auction-name">
 									<p>{{ $event->title }}</p>
 								</div>
-								<div class="col-xs-6 all-products text-right">
+								<div class="col-sm-6 all-products text-right">
 									<a href="{{ route('single_event', $event->id) }}" id="btn-allProducts">@lang('app.all_products')</a>
 								</div>
 							</div>

@@ -2018,6 +2018,10 @@ Auction
 	.auction .row {
 		display: block;
 	}
+	.auction-header .all-products {
+		text-align: left;
+		margin-top: 5px;
+	}
 	.auction-header #btn-allProducts {
 		font-size: 12px;
 	}
@@ -2036,13 +2040,27 @@ Auction
 	}
 }
 
-@media only screen and (max-width: 766px) {
+@media only screen and (min-width: 321px) and (max-width: 766px) {
 	.navbar-default {
 		padding: 5px 0;
 	}
 	.navbar-nav.in li a,
 	#example-show {
 		padding-left: 20px;
+	}
+	.auction .row {
+		display: block;
+	}
+	.auction-header .all-products {
+		text-align: left;
+		margin-top: 10px;
+	}
+	.auction-footer p {
+		text-align: left;
+		font-size: 13px;
+	}
+	.auction-footer .text-red {
+		padding: 5px 0;
 	}
 	.comments-container {
 		width: 100%;
