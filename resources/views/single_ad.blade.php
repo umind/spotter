@@ -759,14 +759,15 @@
                 }
             });
 
-                $("#zoom_01").elevateZoom({gallery:'gallery_01'}); 
 
-                //pass the images to Fancybox
-                $("#zoom_01").bind("click", function(e) {  
-                  var ez =   $('#zoom_01').data('elevateZoom'); 
-                    $.fancybox(ez.getGalleryList());
-                  return false;
-                });
+            // init zoom
+            $("#zoom_01").elevateZoom({gallery:'gallery_01'}); 
+            //pass the images to Fancybox
+            $("#zoom_01").bind("click", function(e) {  
+              var ez =   $('#zoom_01').data('elevateZoom'); 
+                $.fancybox(ez.getGalleryList());
+              return false;
+            });
 
         });
     </script>

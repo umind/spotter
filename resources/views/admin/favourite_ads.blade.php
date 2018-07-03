@@ -30,9 +30,16 @@
                                         <td>
                                             <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a> </h5>
                                             <p class="text-muted">
+                                                @php $event = $ad->events()->first(); @endphp
+
                                                 <i class="fa fa-clock-o"></i>
-                                                {{ Carbon\Carbon::parse($ad->expired_at)->isPast() ? trans('app.expired_on') : trans('app.expires_on') }}: 
-                                                {{ Carbon\Carbon::parse($ad->expired_at)->format('F d Y, H:i') }}
+                                                <span>{{ Carbon\Carbon::parse($ad->expired_at)->isPast() ? trans('app.expired_on') : trans('app.expires_on') }}: 
+                                                {{ Carbon\Carbon::parse($ad->expired_at)->format('F d Y, H:i') }}</span>
+                                                <br>
+                                                <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
+                                                <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+                                                     <span>{{ $event->title }}</span>
+                                                </a>
                                             </p>
                                         </td>
 

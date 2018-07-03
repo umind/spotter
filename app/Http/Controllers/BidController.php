@@ -6,6 +6,7 @@ use App\Ad;
 use App\Bid;
 use App\User;
 use Carbon\Carbon;
+use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -148,6 +149,21 @@ class BidController extends Controller
                 $bid->is_accepted = 1;
                 $bid->won_bid_amount = $won_bid_amount;
                 $bid->save();
+
+                $wonUser = $bid->user;
+
+                $notification = new Notification;
+                $notification->title = 'You won';
+                $notification->text = 'You won on an auction. Product bought for ' . themeqx_price($bid->won_bid_amount);
+                $notification->url = route('single_ad', [$bid->auction->id, $bid->auction->slug]);
+                $notification->date = Carbon::now();
+
+                $wonUser->notifications()->save($notification);
+
+                // activate notification bell
+                $wonUser->notification_bell = 1;
+                $wonUser->save();
+
                 break;
             case 'delete':
                 $bid->delete();

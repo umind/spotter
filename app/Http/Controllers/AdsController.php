@@ -950,7 +950,7 @@ class AdsController extends Controller
      * @param $slug
      * @return mixed
      */
-    public function singleAuction($id, $slug){
+    public function singleAuction($id = null, $slug = null){
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
         //$ad = Ad::whereSlug($slug)->first();
         $ad = Ad::find($id);

@@ -32,7 +32,14 @@
                                         <td>
                                             <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a></h5>
                                             <p class="text-muted">
+                                                @php $event = $ad->events()->first(); @endphp
+
                                                 <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ number_format($ad->accepted_bid_amount, 2) }}
+                                                <br>
+                                                <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
+                                                <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+                                                    <span>{{ $event->title }}</span>
+                                                </a>
                                             </p>
                                         </td>
 

@@ -93,65 +93,34 @@
 					<div class="col-xs-5">
 						<div class="right-info">
 							<ul>
-								{{-- <li class="notification-li">
-									<div class="notification">
-										<i class="fa fa-bell"></i>
-										<span class="notification-number">1</span>
-									</div>
-									<div class="notification-div">
-										<h3>Notification</h3>
-										<ul class="notification-list">
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-											<li>
-												<a href="">Lorem Ipsum</a>
-											</li>
-										</ul>
-									</div>
-								</li> --}}
+								@if(Auth::check())
+									@php 
+										$notifications = Auth::user()->notifications;
+										$notifNum = $notifications->where('is_read', 0)->count();
+									@endphp
+									<li class="notification-li" id="notifications">
+										<div class="notification">
+											<i class="fa fa-bell"></i>
+											@if($notifNum > 0 && Auth::user()->notification_bell == 1)
+												<span class="notification-number">{{ $notifNum }}</span>
+											@endif
+										</div>
+										<div class="notification-div">
+											<h3>{{ trans('app.notifications') }}</h3>
+											<ul class="notification-list">
+												@if($notifications->count() > 0)
+													@foreach($notifications as $notification)
+														<li style="{{ !$notification->is_read ? 'background-color: #edf2fa;' : '' }}">
+															<a href="{{ route('show_notification', $notification->id) }}">{{ $notification->text }}</a>
+														</li>
+													@endforeach
+												@else
+													<p>@lang('app.no_notifications_found')</p>
+												@endif
+											</ul>
+										</div>
+									</li>
+								@endif
 
 								@if (Auth::guest())
 									<li><a href="{{ route('login') }}">@lang('app.login')</a></li>
@@ -332,6 +301,20 @@
 @if(get_option('additional_js'))
     {!! get_option('additional_js') !!}
 @endif
+
+<script>
+	$('#notifications').on('click', function () {
+		$(this).find('.notification-number').remove();
+		$.ajax({
+			data: {_token: '{{csrf_token()}}'},
+			url: '{{ route('remove_notification_number') }}',
+			type: 'post',
+			success: function (data) {
+				return true;
+			}
+		});
+	});
+</script>
 
 @yield('page-js')
 </body>

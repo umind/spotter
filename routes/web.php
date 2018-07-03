@@ -296,5 +296,10 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         });
     });
 
+    Route::group(['middleware' => 'web'], function () {
+        Route::get('notifications/{notification}', ['as' => 'show_notification', 'uses' => 'NotificationController@show']);
+        Route::post('notifications/ajax/remove-number', ['as' => 'remove_notification_number', 'uses' => 'NotificationController@removeNumber']);
+    });
+
     //Route::get('logout', ['as'=>'logout', 'uses' => 'DashboardController@logout']);
 });

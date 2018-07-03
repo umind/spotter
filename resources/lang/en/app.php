@@ -18,6 +18,8 @@ return [
     'auction_begins' => 'Auction Begins',
     'event' => 'Event',
     'edit_an_event' => 'Edit Event',
+    'notifications' => 'Notifications',
+    'no_notifications_found' => 'Your don\'t hae any notifications.',
 
 
     'date' => 'Date',
