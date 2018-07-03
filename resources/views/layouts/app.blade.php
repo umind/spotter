@@ -57,7 +57,7 @@
 		@endif
 		<div id="sub-header">
 			<div class="container">
-				<div class="row">
+				<div class="row-eq-height">
 					<div class="col-sm-6">
 						<div class="social-icons">
 							@php
