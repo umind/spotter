@@ -1179,6 +1179,20 @@ ul.footer-menu li a {
 	margin-top: 20px;
 }
 
+.ads-gallery > img {
+	width: 100%;
+}
+
+.ads-gallery #gallery_01 {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 20px;
+}
+
+.ads-gallery #gallery_01 img {
+	width: 100px;
+}
+
 .ads-detail {
 	margin-top: 20px;
 	text-align: justify;

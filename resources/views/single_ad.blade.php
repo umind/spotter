@@ -130,11 +130,11 @@
                             ?>
                         @else
                             <div class="ads-gallery">
-                                <img id="zoom_01" src="{{ media_url($ad->media_img()->first(), 'medium') }}" data-zoom-image="{{ media_url($ad->media_img()->first(), 'big') }}" alt="b-1" style="width: 100%;">
-                                <div id="gallery_01" style="display: flex; justify-content: space-evenly; margin-top: 20px;">
+                                <img id="zoom_01" src="{{ media_url($ad->media_img()->first(), 'medium') }}" data-zoom-image="{{ media_url($ad->media_img()->first(), 'big') }}" alt="b-1">
+                                <div id="gallery_01">
                                     @foreach($ad->media_img as $img)
                                         <a href="#" data-image="{{ media_url($img, 'medium') }}" data-zoom-image="{{ media_url($img, 'big') }}">
-                                            <img id="zoom_01" src="{{ media_url($img, 'thumb') }}" alt="{{ $ad->title }}" style="width: 100px;">
+                                            <img id="zoom_01" src="{{ media_url($img, 'thumb') }}" alt="{{ $ad->title }}">
                                         </a>
                                     @endforeach
                                 </div>
