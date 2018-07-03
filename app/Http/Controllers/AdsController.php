@@ -587,7 +587,7 @@ class AdsController extends Controller
                     $constraint->aspectRatio();
                 })->stream();
 
-                $resized_medium = Image::make($image)->resize(640, 426)->stream();
+                $resized_medium = Image::make($image)->resize(750, 499)->stream();
                 $resized_thumb = Image::make($image)->resize(320, 213)->stream();
 
                 $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();

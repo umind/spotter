@@ -16,6 +16,8 @@ return [
     'registration_error_activating_msg' => 'we can\'t sending you activation email during an email error, please contact with your admin',
     'bidding_deadline' => 'Bidding Deadline',
     'auction_begins' => 'Auction Begins',
+    'event' => 'Event',
+    'edit_an_event' => 'Edit Event',
 
 
     'date' => 'Date',

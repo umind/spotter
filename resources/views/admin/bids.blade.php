@@ -131,6 +131,8 @@
                                 $('#myModal').modal('hide');
                                 $('form')[0].reset();
                                 $('.btn-success.action').remove();
+                                // reload
+                                location.reload();
                             }
                             toastr.success(data.msg, '@lang('app.success')', toastr_options);
                         }

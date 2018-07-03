@@ -30,8 +30,15 @@
                                         </td>
                                         <td>
                                             <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
+                                            
                                             <p class="text-muted">
+                                                <i class="fa fa-user"></i> <span>@lang('app.auctioner'):</span> <span>{{ $event->auctioner }}</span>
+                                                <br>
+                                                <i class="fa fa-clock-o"></i> <span>@lang('app.begins'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_begins)->format('F d Y, H:i') }}</span>
+                                                <br>
                                                 <i class="fa fa-clock-o"></i> <span>@lang('app.expired_on'):</span> <span>{{ \Carbon\Carbon::parse($event->auctions_ends)->format('F d Y, H:i') }}</span>
+                                                <br>
+                                                <i class="fa fa-map-marker"></i> <span>@lang('app.venue'):</span> <span>{{ $event->address . ', ' . $event->zip_code . ' ' . $event->city }}</span>
                                             </p>
                                         </td>
 
