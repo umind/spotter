@@ -29,7 +29,10 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a> ({!! $event->status_context() !!})</h5>
+                                            <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
+                                            <p class="text-muted">
+                                                <i class="fa fa-clock-o"></i> <span>@lang('app.expires_on'):</span> <span>{{ \Carbon\Carbon::parse($event->auctions_ends)->format('F d Y, H:i') }}</span>
+                                            </p>
                                         </td>
 
                                         <td>

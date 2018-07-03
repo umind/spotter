@@ -472,7 +472,7 @@ class AdsController extends Controller
             $this->uploadAdsImage($request, $ad->id);
         }
 
-        return redirect()->back()->with('success', trans('app.ad_updated'));
+        return redirect(route('my_ads'))->with('success', trans('app.ad_updated'));
     }
 
 
