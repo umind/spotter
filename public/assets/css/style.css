@@ -2018,6 +2018,7 @@ Auction
 		padding: 5px 0;
 	}
 	.social-icons {
+		text-align: center;
 		font-size: 10px;
 	}
 	#sub-header .right-info ul li a {
