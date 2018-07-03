@@ -1184,13 +1184,17 @@ ul.footer-menu li a {
 }
 
 .ads-gallery #gallery_01 {
-	display: flex;
-	justify-content: space-evenly;
+	text-align: center;
 	margin-top: 20px;
 }
 
 .ads-gallery #gallery_01 img {
 	width: 100px;
+	margin-right: 20px;
+}
+
+.ads-gallery #gallery_01 img:last-child {
+	margin-right: 0;
 }
 
 .ads-detail {
@@ -2016,6 +2020,13 @@ Auction
 	}
 	.auction-header #btn-allProducts {
 		font-size: 12px;
+	}
+	.auction-footer p {
+		text-align: left;
+		font-size: 12px;
+	}
+	.auction-footer .text-red {
+		padding: 5px 0;
 	}
 	.footer-menu {
 		font-size: 12px;
