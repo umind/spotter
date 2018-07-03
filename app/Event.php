@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $dates = ['auction_ends'];
-
     public function auctions()
     {
     	return $this->belongsToMany(Ad::class);
