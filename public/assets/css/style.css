@@ -1879,7 +1879,7 @@ Auction
 #sub-header .right-info .notification-list {
 	margin: 0;
 	padding: 0;
-	overflow-y: scroll;
+	overflow-y: auto;
 	width: 280px;
 	height: 350px;
 }
@@ -2010,7 +2010,7 @@ Auction
 
 @media only screen and (max-width: 320px) {
 	.navbar-default {
-		padding: 5px 0;
+		padding: 0;
 	}
 	#sub-header {
 		padding: 15px 0;
@@ -2033,19 +2033,35 @@ Auction
 		top: 30px;
 		left: -45px;
 	}
+	#sub-header .right-info .notification-div {
+		top: 36px;
+		left: -75px;
+		right: auto;
+	}
+	#sub-header .right-info .notification-list {
+		text-align: left;
+		width: 290px;
+	}
+	#sub-header .right-info .notification-div::before {
+		right: auto;
+		left: 75px;
+	}
 	.navbar-nav.in {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
-	.navbar-nav.in li a,
-	#example-show {
-		padding-left: 20px;
+	.navbar-nav.in li a {
+		padding-left: 15px;
 	}
 	.navbar-collapse {
 		border: none;
 	}
 	.navbar-brand h2 {
-		line-height: 50px;
+		line-height: 61px;
+	}
+	.navbar-toggle {
+		margin-top: 13px;
+		margin-bottom: 0;
 	}
 	.nav-sarchbar {
 		text-align: right;
@@ -2105,7 +2121,7 @@ Auction
 
 @media only screen and (min-width: 321px) and (max-width: 766px) {
 	.navbar-default {
-		padding: 5px 0;
+		padding: 0;
 	}
 	#sub-header {
 		padding: 15px 0;
@@ -2128,13 +2144,32 @@ Auction
 		top: 30px;
 		left: -45px;
 	}
+	#sub-header .right-info .notification-div {
+		top: 36px;
+		left: -95px;
+		right: auto;
+	}
+	#sub-header .right-info .notification-list {
+		text-align: left;
+		width: 330px;
+	}
+	#sub-header .right-info .notification-div::before {
+		right: auto;
+		left: 94px;
+	}
+	.navbar-brand h2 {
+		line-height: 61px;
+	}
+	.navbar-toggle {
+		margin-top: 13px;
+		margin-bottom: 0;
+	}
 	.navbar-nav.in {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
-	.navbar-nav.in li a,
-	#example-show {
-		padding-left: 20px;
+	.navbar-nav.in li a {
+		padding-left: 15px;
 	}
 	.nav-sarchbar {
 		text-align: right;
@@ -2187,9 +2222,6 @@ Auction
 	.reply-list .comment-box {
 		width: 90%;
 	}
-	.navbar-brand h2 {
-		line-height: 50px;
-	}
 	.navbar-default {
 		border-color: #d0d0d0;
 	}
@@ -2203,7 +2235,7 @@ Auction
 
 @media only screen and (min-width: 321px) and (max-width: 766px) and (orientation: landscape) {
 	#sub-header {
-		padding: 15px 0;
+		padding: 15px 0 13px;
 	}
 	#sub-header .col-xs-6 {
 		width: 50%;
@@ -2215,6 +2247,18 @@ Auction
 	.right-info {
 		margin-top: 0;
 		float: right !important;
+	}
+	#sub-header .right-info .notification-div {
+		top: 35px;
+		left: auto;
+		right: 0;
+	}
+	#sub-header .right-info .notification-list {
+		width: 350px;
+	}
+	#sub-header .right-info .notification-div::before {
+		right: 10px;
+		left: auto;
 	}
 	.auction {
 		font-size: 16px;
