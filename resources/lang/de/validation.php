@@ -258,6 +258,11 @@ return [
         'products' => 'Produkte',
         'auctioner' => 'Auktionär',
         'auction_deadline' => 'Gebotsende',
+
+        //change password
+        "old_password" => "altes Passwort",
+        "new_password" => "neues Passwort",
+        "new_password_confirmation" => "neues Passwort bestätigen",
     ],
 
 ];

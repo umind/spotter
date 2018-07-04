@@ -303,3 +303,13 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
 
     //Route::get('logout', ['as'=>'logout', 'uses' => 'DashboardController@logout']);
 });
+
+Route::get('/optimize', function() {
+    $exitCode = Artisan::call('optimize');
+    return '<h1>Reoptimized class loader</h1>';
+});
+
+Route::get('/config-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return '<h1>Clear Config cleared</h1>';
+});

@@ -232,9 +232,9 @@ return [
         'auction_deadline' => 'Bidding Deadline',
 
         //change password
-        "old_password" => "altes Passwort ",
-        "new_password" => "neues Passwort",
-        "new_password_confirmation" => "neues Passwort bestätigen",
+        "old_password" => "Old Password",
+        "new_password" => "New Password",
+        "new_password_confirmation" => "New Password Confirmation",
 
     ],
 

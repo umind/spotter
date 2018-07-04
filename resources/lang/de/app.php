@@ -1,6 +1,8 @@
 <?php
 
 return [
+    
+
     'date' => 'Datum',
     'begins' => 'Beginn',
     'bid_no' => 'Los-Nummer',
