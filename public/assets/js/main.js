@@ -91,7 +91,7 @@ function getCookie(cname) {
  */
 
 var make_sticky_menu = function () {
-	if ($(document).scrollTop() > 52) {
+	if ($(document).scrollTop() > 40) {
 		$('.navbar-static-top').addClass('sticky-menu');
 	} else {
 		$('.navbar-static-top').removeClass('sticky-menu');
