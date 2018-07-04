@@ -34,12 +34,16 @@
                                             <p class="text-muted">
                                                 @php $event = $ad->events()->first(); @endphp
                                                 
-                                                <i class="fa fa-clock-o"></i> @lang('app.expires_on'): {{ Carbon\Carbon::parse($ad->expired_at)->format('F d Y, H:i') }}
+                                                <i class="fa fa-clock-o"></i> @lang('app.expires_on'): {{ Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}
                                                 <br>
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
-                                                <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
-                                                     <span>{{ $event->title }}</span>
-                                                </a>
+                                                @if($event)
+                                                    <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+                                                         <span>{{ $event->title }}</span>
+                                                    </a>
+                                                @else
+                                                    <span>@lang('app.event_not_assigned')</span>
+                                                @endif
                                             </p>
                                         </td>
 

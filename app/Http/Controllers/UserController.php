@@ -44,7 +44,7 @@ class UserController extends Controller
                 return $html;
             })
             ->editColumn('created_at',function($user){
-                return $user->signed_up_datetime();
+                return Carbon::parse($user->created_at)->formatLocalized(get_option('date_format'));
             })
             ->removeColumn('id')
             ->make();

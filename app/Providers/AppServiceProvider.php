@@ -82,6 +82,9 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(['lUser' => $loggedUser, 'enable_monetize' => $enable_monetize, 'header_menu_pages' => $header_menu_pages, 'show_in_footer_menu' => $show_in_footer_menu, 'current_lang' => $current_lang] );
         });
+
+        // set locale
+        setLocale(LC_TIME, 'de_DE');
     }
 
     /**

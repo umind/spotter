@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ad;
 use App\Category;
+use Carbon\Carbon;
 use App\Contact_query;
 use App\Country;
 use App\Post;
@@ -55,7 +56,7 @@ class HomeController extends Controller
 
         return  Datatables::of($contact_messages)
             ->editColumn('created_at',function($contact_message){
-                return $contact_message->created_at_datetime();
+                return Carbon::parse($contact_message->created_at)->formatLocalized(get_option('date_format'));
             })
             ->make();
     }

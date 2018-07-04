@@ -164,7 +164,7 @@ return [
         'nickname_1'            => 'Nickname',
         'client_photo'           => 'Photo',
         "type" => 'Typ',
-        "city" => 'Ort',
+        "city" => 'Stadt',
         "radius" => 'Radius',
         "canton" => 'Kanton',
         "services" => 'Services',
@@ -236,6 +236,28 @@ return [
         "sexes.1" => 'Typ',
         'subject' => 'Betreff',
         'comment' => 'Kommentar',
+
+
+        // post an auction
+        'category' => 'Kategorie',
+        'category_name' => 'Kategorie Name',
+        'ad_title' => 'Titel',
+        'bid_no' => 'Los-Nummer',
+        'auction_no' => 'Auktion-Nummer',
+        'price_increaser' => 'Preis erhöhen',
+        'ad_description' => 'Beschreibung',
+        'seller_phone' => 'Verkäufer Telefon',
+        'seller_email' => 'Verkäufer Email',
+        'seller_name' => 'Verkäufer Name',
+        'price' => 'Startpreis',
+
+        // contact us
+        'message' => 'Nachricht',
+
+        // post an event
+        'products' => 'Produkte',
+        'auctioner' => 'Auktionär',
+        'auction_deadline' => 'Gebotsende',
     ],
 
 ];

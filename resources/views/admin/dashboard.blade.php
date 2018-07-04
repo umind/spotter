@@ -34,20 +34,46 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="huge">{{ $approved_ads }}</div>
-                                    <div>@lang('app.approved_ads')</div>
+                                    <div class="huge">{{ $active_events }}</div>
+                                    <div>@lang('app.active_events')</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="huge">{{ $active_ads }}</div>
+                                    <div>@lang('app.active_auctions')</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="huge">{{ $pending_events }}</div>
+                                    <div>@lang('app.pending_events')</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="huge">{{ $pending_ads }}</div>
-                                    <div>@lang('app.pending_ads')</div>
+                                    <div>@lang('app.pending_auctions')</div>
                                 </div>
                             </div>
                         </div>

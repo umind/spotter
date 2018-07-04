@@ -26,14 +26,14 @@
                             <tr>
                                 <th>{{ trans('app.name') }}</th>
                                 <th>{{ trans('app.email') }}</th>
-                                <th>{{ trans('app.last_login') }}</th>
+                                {{-- <th>{{ trans('app.last_login') }}</th> --}}
                                 <th>{{ trans('app.action') }}</th>
                             </tr>
                             @foreach($users as $u)
                             <tr>
                                 <td>{{ $u->name }}</td>
                                 <td>{{ $u->email }}</td>
-                                <td>{{ $u->last_login }}</td>
+                                {{-- <td>{{ $u->last_login }}</td> --}}
                                 <td>
 
                                     @if($u->id >2)

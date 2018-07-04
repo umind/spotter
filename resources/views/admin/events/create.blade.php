@@ -81,6 +81,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('auction_begins')? 'has-error':'' }}">
+                            <label for="products" class="col-sm-4 control-label">@lang('app.auction_begins')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" 
+                                    id="auction_begins" 
+                                    value="{{ old('auction_begins') }}" 
+                                    name="auction_begins" 
+                                    placeholder="@lang('app.auction_begins')">
+                                {!! $errors->has('auction_begins')? '<p class="help-block">'.$errors->first('auction_begins').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('auction_deadline')? 'has-error':'' }}">
 	                        <label for="auction_deadline" class="col-sm-4 control-label">@lang('app.bidding_deadline')</label>
                             <div class="col-sm-8">
@@ -136,7 +148,7 @@
 
 	<script>
         $(function () {
-        	$('#auction_deadline').datetimepicker({
+        	$('#auction_deadline, #auction_begins').datetimepicker({
 	            format: 'DD-MM-YYYY HH:mm'
 	        });
         })

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Media;
 use App\Post;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,7 +31,7 @@ class PostController extends Controller
 
         return  Datatables::of($pages)
             ->editColumn('created_at',function($page){
-                return $page->created_at_datetime();
+                return Carbon::parse($page->created_at)->formatLocalized(get_option('date_format'));
             })
             ->addColumn('actions', function($page){
 

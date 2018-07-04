@@ -40,9 +40,13 @@
                                                 <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
                                                 <br>
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
-                                                <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
-                                                    <span>{{ $event->title }}</span>
-                                                </a>
+                                                @if($event)
+                                                    <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+                                                         <span>{{ $event->title }}</span>
+                                                    </a>
+                                                @else
+                                                    <span>@lang('app.event_not_assigned')</span>
+                                                @endif
                                             </p>
                                         </td>
 

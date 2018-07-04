@@ -63,7 +63,7 @@
                     <div class="btn-group btn-breadcrumb">
                         <a href="{{ route('home') }}" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
 
-                        <a href="{{ route('search', [$ad->country->country_code] ) }}" class="btn btn-warning">{{$ad->country->country_code}}</a>
+                        {{-- <a href="{{ route('search', [$ad->country->country_code] ) }}" class="btn btn-warning">{{$ad->country->country_code}}</a> --}}
 
                         @if($ad->category)
                             <a href="{{ route('search', [ $ad->country->country_code,  'category' => 'cat-'.$ad->category->id.'-'.$ad->category->category_slug] ) }}" class="btn btn-warning">  {{ $ad->category->category_name }} </a>
@@ -163,7 +163,7 @@
                                         <tr>
                                             <td>{{ $bid->user->user_name }}</td>
                                             {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
-                                            <td>{{ \Carbon\Carbon::parse($bid->created_at)->format('F d Y, H:i') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($bid->created_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
                                     @endforeach
 
@@ -208,7 +208,7 @@
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" id="author_email" value="@if(auth()->check() ) {{auth()->user()->email}}@else{{old('author_email')}}@endif" name="author_email" placeholder="@lang('app.author_email')">
                                             {!! $errors->has('author_email')? '<p class="help-block">'.$errors->first('author_email').'</p>':'' !!}
-                                            <p class="text-info">@lang('app.email_secured')</p>
+                                            {{-- <p class="text-info">@lang('app.email_secured')</p> --}}
                                         </div>
                                     </div>
                                 @endif
@@ -353,7 +353,7 @@
                                     @endif
 
                                     <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
-                                    @if(Auth::user()->is_admin() && $wonBid && $wonUser)
+                                    @if(Auth::check() && Auth::user()->is_admin() && $wonBid && $wonUser)
                                         <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
                                         <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
                                     @endif
@@ -406,7 +406,7 @@
                             @endif
 
                             {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p> --}}
-                            <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expires_on')</span> <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->format('F d Y, H:i') }}</span></p>
+                            <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expires_on')</span> <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span></p>
 
                             <div class="modern-social-share-btn-group">
                                 <h4>@lang('app.share_this_ad')</h4>

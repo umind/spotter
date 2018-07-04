@@ -141,7 +141,8 @@ $(document).ready(function () {
 
 			var timeinterval = setInterval(function (countDownItem, endtime) {
 				var t = getTimeRemaining(endtime);
-				var clockHtml = jsonData.time_remaining + ' <b>' + t.days + ' days ' + t.hours + ':' + t.minutes + ':' + t.seconds + '<b>';
+				var daysWord = t.days < 2 ? 'Tag' : 'Tage';
+				var clockHtml = jsonData.time_remaining + ' <b>' + t.days + ' ' + daysWord + ' ' + t.hours + ':' + t.minutes + ':' + t.seconds + '<b>';
 
 				$(countDownItem).html(clockHtml);
 				if (t.total <= 0) {

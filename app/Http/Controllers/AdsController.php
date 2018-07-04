@@ -122,13 +122,9 @@ class AdsController extends Controller
             'ad_title'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
+            'price'          => 'required',
             'price_increaser'          => 'required',
             'ad_description'    => 'required',
-            'country'           => 'required',
-            'seller_name'       => 'required',
-            'seller_email'      => 'required',
-            'seller_phone'      => 'required',
-            'address'           => 'required',
         ];
 
         if( $ads_price_plan != 'all_ads_free'){
@@ -381,13 +377,9 @@ class AdsController extends Controller
             'ad_title'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
+            'price'          => 'required',
             'price_increaser'          => 'required',
             'ad_description'    => 'required',
-            'country'           => 'required',
-            'seller_name'       => 'required',
-            'seller_email'      => 'required',
-            'seller_phone'      => 'required',
-            'address'           => 'required',
         ];
 
         if ($sub_category->category_type == 'jobs'){

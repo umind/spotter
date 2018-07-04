@@ -9,7 +9,7 @@
                 <div class="panel-body">
 
                     @include('admin.flash_msg')
-                    @include('auth.social_login')
+                    {{-- @include('auth.social_login') --}}
 
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
@@ -19,7 +19,7 @@
                             <label for="name" class="col-md-4 control-label">@lang('app.name')</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"  autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -33,7 +33,7 @@
                             <label for="user_name" class="col-md-4 control-label">@lang('app.user_name')</label>
 
                             <div class="col-md-6">
-                                <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required autofocus>
+                                <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}"  autofocus>
 
                                 @if ($errors->has('user_name'))
                                     <span class="help-block">
@@ -47,7 +47,7 @@
                             <label for="email" class="col-md-4 control-label">@lang('app.email_address')</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" >
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -61,7 +61,7 @@
                             <label for="password" class="col-md-4 control-label">@lang('app.password')</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" >
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -75,7 +75,7 @@
                             <label for="password-confirm" class="col-md-4 control-label">@lang('app.confirm_password')</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
                             </div>
                         </div>
 

@@ -171,7 +171,7 @@
                             </div>
                         </div>
                         
-                        <div class="form-group {{ $errors->has('enable_comments')? 'has-error':'' }}">
+                        {{-- <div class="form-group {{ $errors->has('enable_comments')? 'has-error':'' }}">
                             <label class="col-md-4 control-label">@lang('app.enable_disable') </label>
                             <div class="col-md-8">
                                 <label for="enable_comments" class="checkbox-inline">
@@ -179,7 +179,7 @@
                                     @lang('app.enable_comments')
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="form-group {{ $errors->has('enable_fb_comments')? 'has-error':'' }}">
                             <label class="col-md-4 control-label">@lang('app.enable_disable') </label>

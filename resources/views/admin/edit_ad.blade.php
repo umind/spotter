@@ -33,7 +33,7 @@
                         <legend> <span class="ad_text"> @lang('app.ad') </span> @lang('app.info')</legend>
 
                         <div class="form-group {{ $errors->has('ad_title')? 'has-error':'' }}">
-                            <label for="ad_title" class="col-sm-4 control-label"><span class="ad_text"> @lang('app.ad') </span> @lang('app.title')</label>
+                            <label for="ad_title" class="col-sm-4 control-label">@lang('app.ad_title')</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="ad_title" value="{{ old('ad_title') ? old('ad_title') : $ad->title }}" name="ad_title" placeholder="@lang('app.ad_title')">
                                 {!! $errors->has('ad_title')? '<p class="help-block">'.$errors->first('ad_title').'</p>':'' !!}
@@ -88,6 +88,10 @@
                                     <input type="text" placeholder="@lang('app.price_increaser')" class="form-control" name="price_increaser" id="price_increaser" value="{{ old('price_increaser')? old('price_increaser') : $ad->price_increaser }}">
                                 </div>
                             </div>
+
+                            <div class="col-sm-8 col-md-offset-4">
+                                {!! $errors->has('price_increaser')? '<p class="help-block">'.$errors->first('price_increaser').'</p>':'' !!}
+                            </div>
                         </div>
 
                         <legend>@lang('app.image')</legend>
@@ -134,7 +138,7 @@
                         </div>
 
 
-                        <legend>@lang('app.location_info')</legend>
+                        {{-- <legend>@lang('app.location_info')</legend>
 
                         <div class="form-group  {{ $errors->has('country')? 'has-error':'' }}">
                             <label for="category_name" class="col-sm-4 control-label">@lang('app.country')</label>
@@ -180,26 +184,9 @@
                                     <span id="city_loader" style="display: none;"><i class="fa fa-spin fa-spinner"></i> </span>
                                 </p>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        @if($ad->category_type == 'jobs')
-                            <div class="job_field">
-                                <div class="form-group  {{ $errors->has('is_any_where')? 'has-error':'' }}">
-                                    <label for="is_any_where_select" class="col-sm-4 control-label"></label>
-                                    <div class="col-sm-8">
-
-                                        <label>
-                                            <input type="checkbox" name="is_any_where" value="1" @if($ad->job->is_any_where == '1') checked="checked" @endif /> @lang('app.is_any_where')
-                                        </label>
-                                        <p class="text-info">
-                                            @lang('app.is_any_where_in_country')
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-
-                        <legend><span class="seller_text"> @lang('app.seller') </span> @lang('app.info')</legend>
+{{--                         <legend><span class="seller_text"> @lang('app.seller') </span> @lang('app.info')</legend>
 
                         <div class="form-group {{ $errors->has('seller_name')? 'has-error':'' }}">
                             <label for="seller_name" class="col-sm-4 control-label"> <span class="seller_text"> @lang('app.seller') </span> @lang('app.name')</label>
@@ -232,7 +219,7 @@
                                 <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $ad->address }}" name="address" placeholder="@lang('app.address')">
                                 {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> --}}
 
                         <hr />
 

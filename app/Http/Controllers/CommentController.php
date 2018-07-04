@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ad;
 use App\Comment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
@@ -54,7 +55,7 @@ class CommentController extends Controller
                 return $html;
             })
             ->editColumn('created_at',function($comment){
-                return $comment->created_at_datetime();
+                return Carbon::parse($comment->created_at)->formatLocalized(get_option('date_format'));
             })
             ->editColumn('comment',function($comment){
                 $html = '';

@@ -469,6 +469,7 @@ return [
     //04/10/2016
     'change_password'               => 'Passwort ändern',
     'old_password_confirmation'     => 'altes Passwort bestätigen',
+    'new_password_confirmation'     => 'neues Passwort bestätigen',
     'new_password'                  => 'neues Passwort',
     'old_password'                  => 'altes Passwort',
     'password_changed_msg'          => 'Passwort wurde erfolgreich geändert',

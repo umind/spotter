@@ -49,7 +49,7 @@
 
 
                     <div class="form-group {{ $errors->has('ad_title')? 'has-error':'' }}">
-                        <label for="ad_title" class="col-sm-4 control-label"> <span class="ad_text"> @lang('app.ad') </span> @lang('app.title')</label>
+                        <label for="ad_title" class="col-sm-4 control-label">@lang('app.ad_title')</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="ad_title" value="{{ old('ad_title') }}" name="ad_title" placeholder="@lang('app.ad_title')">
                             {!! $errors->has('ad_title')? '<p class="help-block">'.$errors->first('ad_title').'</p>':'' !!}
@@ -102,6 +102,10 @@
                                 <input type="text" placeholder="@lang('app.price_increaser')" class="form-control" name="price_increaser" id="price_increaser" value="{{ old('price_increaser') }}">
                             </div>
                         </div>
+
+                        <div class="col-sm-8 col-md-offset-4">
+                            {!! $errors->has('price_increaser')? '<p class="help-block">'.$errors->first('price_increaser').'</p>':'' !!}
+                        </div>
                     </div>
 
                     {{-- <div class="form-group {{ $errors->has('bid_deadline')? 'has-error':'' }}">
@@ -143,7 +147,7 @@
                     </div>
 
 
-                    <legend>@lang('app.location_info')</legend>
+{{--                     <legend>@lang('app.location_info')</legend>
 
                     <div class="form-group  {{ $errors->has('country')? 'has-error':'' }}">
                         <label class="col-sm-4 control-label">@lang('app.country')</label>
@@ -189,9 +193,9 @@
                                 <span id="city_loader" style="display: none;"><i class="fa fa-spin fa-spinner"></i> </span>
                             </p>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <legend><span class="seller_text"> @lang('app.seller') </span> @lang('app.info')</legend>
+                    {{-- <legend><span class="seller_text"> @lang('app.seller') </span> @lang('app.info')</legend>
 
                     <div class="form-group {{ $errors->has('seller_name')? 'has-error':'' }}">
                         <label for="seller_name" class="col-sm-4 control-label"> <span class="seller_text"> @lang('app.seller') </span> @lang('app.name')</label>
@@ -225,7 +229,7 @@
                             {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
                         </div>
                     </div>
-
+ --}}
                    {{--  @if(get_option('ads_price_plan') != 'all_ads_free')
                         <div class="panel panel-default">
                             <div class="panel-heading">

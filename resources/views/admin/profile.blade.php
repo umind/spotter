@@ -70,7 +70,7 @@
                             </tr>
                             <tr>
                                 <th>@lang('app.created_at')</th>
-                                <td>{{ $user->signed_up_datetime() }}</td>
+                                <td>{{ \Carbon\Carbon::parse($user->created_at)->formatLocalized(get_option('date_format')) }}</td>
                             </tr>
                             <tr>
                                 <th>@lang('app.status')</th>

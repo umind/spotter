@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\Event;
 use App\Contact_query;
 use App\Payment;
 use App\Report_ad;
@@ -18,6 +19,8 @@ class DashboardController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
 
+        $active_events = 0;
+        $pending_events = 0;
         $total_users = 0;
         $total_reports = 0;
         $total_payments = 0;
@@ -26,7 +29,9 @@ class DashboardController extends Controller
         $total_payments_amount = 0;
 
         if ($user->is_admin()){
-            $approved_ads = Ad::whereStatus('1')->count();
+            $active_ads = Ad::whereStatus('1')->count();
+            $active_events = Event::whereStatus('1')->count();
+            $pending_events = Event::whereStatus('0')->count();
             $pending_ads = Ad::whereStatus('0')->count();
             $blocked_ads = Ad::whereStatus('2')->count();
 
@@ -42,7 +47,7 @@ class DashboardController extends Controller
             $blocked_ads = Ad::whereStatus('2')->whereUserId($user_id)->count();
         }
 
-        return view('admin.dashboard', compact('approved_ads', 'pending_ads', 'blocked_ads', 'total_users', 'total_reports', 'total_payments', 'total_payments_amount', 'ten_contact_messages', 'reports'));
+        return view('admin.dashboard', compact('active_ads', 'pending_ads', 'blocked_ads', 'total_users', 'total_reports', 'total_payments', 'total_payments_amount', 'ten_contact_messages', 'reports', 'active_events', 'pending_events'));
     }
 
 

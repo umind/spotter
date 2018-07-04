@@ -2,11 +2,16 @@
 
 return [
     // newest
+    'assign_to_event' => 'Assign An Event',
+    'event_not_assigned' => 'Event Not Assigned',
     'sold_to' => 'Sold To',
     'won_and_bought_for' => 'You won on an auction. Product bought for :won_bid_amount',
     'you_won' => 'Auction is closed and only you are allowed to see it.',
     'ad_closed' => 'Auction is closed and only you are allowed to see it.',
     'active_events' => 'Active Events',
+    'active_auctions' => 'Active Auctions',
+    'pending_events' => 'Pending Events',
+    'pending_auctions' => 'Pending Auctions',
     'closed_events' => 'Closed Events',
     'max_bid_same_error_msg' => 'This bid is already the highest one. Please enter higher max bid.',
     'closed' => 'Closed',
@@ -493,6 +498,7 @@ return [
     //04/10/2016
     'change_password'               => 'Change Password',
     'old_password_confirmation'     => 'Old password confirmation',
+    'new_password_confirmation'     => 'New password confirmation',
     'new_password'                  => 'New password',
     'old_password'                  => 'Old password',
     'password_changed_msg'          => 'Password has been changed successfully',
