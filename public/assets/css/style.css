@@ -2030,7 +2030,7 @@ Auction
 		margin-top: 10px;
 	}
 	#sub-header .right-info .dropdown-menu {
-		top: 30px;
+		top: 34px;
 		left: -45px;
 	}
 	#sub-header .right-info .notification-div {
@@ -2112,10 +2112,13 @@ Auction
 		text-align: left;
 	}
 	.footer-menu {
-		font-size: 12px;
+		font-size: 11px;
 	}
 	.footer-features .btn-warning:last-child {
 		margin-bottom: 0;
+	}
+	ul.footer-menu li a {
+		padding: 0 5px;
 	}
 }
 
@@ -2141,7 +2144,7 @@ Auction
 		margin-top: 10px;
 	}
 	#sub-header .right-info .dropdown-menu {
-		top: 30px;
+		top: 34px;
 		left: -45px;
 	}
 	#sub-header .right-info .notification-div {
@@ -2231,6 +2234,12 @@ Auction
 	.navbar-default .navbar-toggle:focus {
 		background-color: transparent;
 	}
+	.footer-menu {
+		font-size: 12px;
+	}
+	ul.footer-menu li a {
+		padding: 0 8px;
+	}
 }
 
 @media only screen and (min-width: 321px) and (max-width: 766px) and (orientation: landscape) {
@@ -2283,6 +2292,12 @@ Auction
 	}
 	.widget .form-group {
 		width: 40%;
+	}
+	.footer-menu {
+		font-size: 14px;
+	}
+	ul.footer-menu li a {
+		padding: 0 10px;
 	}
 }
 
