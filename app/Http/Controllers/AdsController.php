@@ -566,7 +566,7 @@ class AdsController extends Controller
             $user_id = Auth::user()->id;
         }
 
-        if ($request->hasFile('images')){
+        if ($request->file('images')){
             $images = $request->file('images');
             foreach ($images as $image){
                 $valid_extensions = ['jpg','jpeg','png'];

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'ad_not_published' => 'Austion not published yet',
+    'ad_not_published' => 'Auktion wurde noch nicht veröffentlicht',
     'assign_to_event' => 'Einer Auktion zuweisen',
     'event_not_assigned' => 'Keiner Auktion zugewiesen',
     'sold_to' => 'verkauft an',
