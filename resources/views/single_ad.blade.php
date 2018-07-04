@@ -161,7 +161,7 @@
                                     </tr>
                                     @foreach($bids as $bid)
                                         <tr>
-                                            <td>{{ $bid->user->user_name }}</td>
+                                            <td>{{ $bid->user->name }}</td>
                                             {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
                                             <td>{{ \Carbon\Carbon::parse($bid->created_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
@@ -356,7 +356,7 @@
 
                                         <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
                                         @if(Auth::check() && Auth::user()->is_admin() && $wonBid && $wonUser)
-                                            <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
+                                            <p>@lang('app.sold_to'): {{ $wonUser->name }}</p>
                                             <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
                                         @endif
 
@@ -531,96 +531,6 @@
 
     </div>
 
-
-    <div class="footer-features">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>@lang('app.sell_your_items_through')</h2>
-                    <p>@lang('app.thousands_of_people_selling')</p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.trusted_buyers')
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.swift_and_secure')
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.spam_free')
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="icon-text-feature">
-                        <i class="fa fa-check-circle-o"></i>
-                        @lang('app.sell_your_items_quickly')
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <a href="{{route('category')}}" class="btn btn-warning btn-lg"><i class="fa fa-search"></i> @lang('app.browse_ads')</a>
-                    <a href="{{route('create_ad')}}" class="btn btn-warning btn-lg"><i class="fa fa-save"></i> @lang('app.post_an_ad')</a>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="replyByEmail" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title"></h4>
-                </div>
-
-                {!! Form::open(['id' => 'replyByEmailForm']) !!}
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name" class="control-label">@lang('app.name'):</label>
-                        <input type="text" class="form-control" id="name" name="name" data-validation="required">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="control-label">@lang('app.email'):</label>
-                        <input type="text" class="form-control" id="email" name="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone_number" class="control-label">@lang('app.phone_number'):</label>
-                        <input type="text" class="form-control" id="phone_number" name="phone_number">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">@lang('app.message'):</label>
-                        <textarea class="form-control" id="message" name="message"></textarea>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <input type="hidden" name="ad_id" value="{{ $ad->id }}" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.close')</button>
-                    <button type="submit" class="btn btn-primary" id="reply_by_email_btn">@lang('app.send_email')</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
 @endsection
 
 @section('page-js')
@@ -671,27 +581,6 @@
                                 location.href= data.redirect_url;
                             }
                         }
-                    }
-                });
-            });
-
-            $('#replyByEmailForm').submit(function(e){
-                e.preventDefault();
-                var reply_email_form_data = $(this).serialize();
-
-                $('#loadingOverlay').show();
-                $.ajax({
-                    type : 'POST',
-                    url : '{{ route('reply_by_email_post') }}',
-                    data : reply_email_form_data,
-                    success : function (data) {
-                        if (data.status == 1){
-                            toastr.success(data.msg, '@lang('app.success')', toastr_options);
-                        }else {
-                            toastr.error(data.msg, '@lang('app.error')', toastr_options);
-                        }
-                        $('#replyByEmail').modal('hide');
-                        $('#loadingOverlay').hide();
                     }
                 });
             });
