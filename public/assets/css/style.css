@@ -2046,12 +2046,14 @@ Auction
 		right: auto;
 		left: 75px;
 	}
+	.navbar-nav,
 	.navbar-nav.in {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+	.navbar-default .navbar-nav li a,
 	.navbar-nav.in li a {
-		padding-left: 15px;
+		padding: 0 15px;
 	}
 	.navbar-collapse {
 		border: none;
@@ -2066,6 +2068,11 @@ Auction
 	.nav-sarchbar {
 		text-align: right;
 		margin-top: 0;
+		padding-bottom: 10px;
+	}
+	#example-show,
+	#example-hide {
+		padding: 0;
 	}
 	.auction {
 		font-size: 14px;
@@ -2167,16 +2174,23 @@ Auction
 		margin-top: 13px;
 		margin-bottom: 0;
 	}
+	.navbar-nav,
 	.navbar-nav.in {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+	.navbar-default .navbar-nav li a,
 	.navbar-nav.in li a {
-		padding-left: 15px;
+		padding: 0 15px;
 	}
 	.nav-sarchbar {
 		text-align: right;
 		margin-top: 0;
+		padding-bottom: 10px;
+	}
+	#example-show,
+	#example-hide {
+		padding: 0;
 	}
 	.auction {
 		font-size: 15px;
