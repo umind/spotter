@@ -66,10 +66,10 @@
                         {{-- <a href="{{ route('search', [$ad->country->country_code] ) }}" class="btn btn-warning">{{$ad->country->country_code}}</a> --}}
 
                         @if($ad->category)
-                            <a href="{{ route('search', [ $ad->country->country_code,  'category' => 'cat-'.$ad->category->id.'-'.$ad->category->category_slug] ) }}" class="btn btn-warning">  {{ $ad->category->category_name }} </a>
+                            <a href="{{ route('search', ['category' => 'cat-'.$ad->category->id.'-'.$ad->category->category_slug] ) }}" class="btn btn-warning">  {{ $ad->category->category_name }} </a>
                         @endif
                         @if($ad->sub_category)
-                            <a href="{{ route('search', [ $ad->country->country_code,  'category' => 'cat-'.$ad->sub_category->id.'-'.$ad->sub_category->category_slug] ) }}" class="btn btn-warning">  {{ $ad->sub_category->category_name }} </a>
+                            <a href="{{ route('search', ['category' => 'cat-'.$ad->sub_category->id.'-'.$ad->sub_category->category_slug] ) }}" class="btn btn-warning">  {{ $ad->sub_category->category_name }} </a>
                         @endif
 
                         <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-warning">{{ safe_output($ad->title) }}</a>
@@ -313,56 +313,64 @@
                             <div class="widget">
                                 <h3>@lang('app.highest_bid') {{themeqx_price($ad->current_bid())}}</h3>
                                 <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
-                                @if($ad->is_bid_active())
+                                @if($ad->expired_at)
+                                    @if($ad->is_bid_active())
 
-                                    <p>{{sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
-                                    <p>@lang('app.total_bids'): {{ $bids->count() }}, <a href="#bid_history">@lang('app.bid_history')</a> </p>
+                                        <p>{{sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
+                                        <p>@lang('app.total_bids'): {{ $bids->count() }}, <a href="#bid_history">@lang('app.bid_history')</a> </p>
 
-                                    {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
-                                                    <span class="glyphicon glyphicon-minus"></span>
-                                                </button>
-                                            </span>
-                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $ad->current_bid_plus_increaser() }}">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
-                                                  <span class="glyphicon glyphicon-plus"></span>
-                                                </button>
-                                            </span>
-                                            {{-- <div class="input-group-addon">.00</div> --}}
+                                        {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
+                                                        <span class="glyphicon glyphicon-minus"></span>
+                                                    </button>
+                                                </span>
+                                                <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $ad->current_bid_plus_increaser() }}">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
+                                                      <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                </span>
+                                                {{-- <div class="input-group-addon">.00</div> --}}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">@lang('app.place_bid')</button>
-                                    {!! Form::close() !!}
-								<div class="text-right">
-                                    <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
-								</div>
+                                        <button type="submit" class="btn btn-primary">@lang('app.place_bid')</button>
+                                        {!! Form::close() !!}
+                                        
+                                        <div class="text-right">
+                                            <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+                                        </div>
 
-                                @if($userMaxBid)
-                                    <p>@lang('app.your_max_bid'): {{ number_format($userMaxBid, 2) }}</p>
-                                @endif
+                                        @if($userMaxBid)
+                                            <p>@lang('app.your_max_bid'): {{ number_format($userMaxBid, 2) }}</p>
+                                        @endif
 
-                                @else
-                                    @if($ad->is_bid_accepted())
-                                        <p>@lang('app.bid_accepted')</p>
                                     @else
-                                        <p>{{sprintf(trans('app.bid_deadline_closed_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
-                                    @endif
+                                        @if($ad->is_bid_accepted())
+                                            <p>@lang('app.bid_accepted')</p>
+                                        @else
+                                            <p>{{sprintf(trans('app.bid_deadline_closed_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
+                                        @endif
 
-                                    <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
-                                    @if(Auth::check() && Auth::user()->is_admin() && $wonBid && $wonUser)
-                                        <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
-                                        <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
-                                    @endif
+                                        <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
+                                        @if(Auth::check() && Auth::user()->is_admin() && $wonBid && $wonUser)
+                                            <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
+                                            <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
+                                        @endif
 
+                                        <div class="alert alert-warning">
+                                            <h4>@lang('app.bid_closed')</h4>
+                                            <p>@lang('app.cant_bid_anymore')</p>
+                                        </div>
+
+                                    @endif
+                                @else 
                                     <div class="alert alert-warning">
-                                        <h4>@lang('app.bid_closed')</h4>
-                                        <p>@lang('app.cant_bid_anymore')</p>
+                                        <h4>@lang('app.ad_not_published')</h4>
+                                        <p>@lang('app.ad_not_published_warning')</p>
                                     </div>
-
                                 @endif
                             </div>
                         @endif

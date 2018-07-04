@@ -2,6 +2,7 @@
 
 return [
     // newest
+    'ad_not_published' => 'Auction Has Not Been Published Yet',
     'assign_to_event' => 'Assign An Event',
     'event_not_assigned' => 'Event Not Assigned',
     'sold_to' => 'Sold To',

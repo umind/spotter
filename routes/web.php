@@ -61,7 +61,7 @@ Route::get('category/{cat_id?}', ['uses'=>'CategoriesController@show'])->name('c
 
 Route::get('searchCityJson', ['uses'=>'LocationController@searchCityJson'])->name('searchCityJson');
 
-Route::get('search/{country_code?}/{state_id?}/{city_id?}/{category_slug?}/{brand_slug?}', ['as' => 'search', 'uses'=>'AdsController@search']);
+Route::get('search/{category_slug?}/{brand_slug?}', ['as' => 'search', 'uses'=>'AdsController@search']);
 Route::get('search-redirect', ['as' => 'search_redirect', 'uses'=>'AdsController@searchRedirect']);
 
 // Route::get('auctions-by-user/{id?}', ['as' => 'ads_by_user', 'uses'=>'AdsController@adsByUser']);
