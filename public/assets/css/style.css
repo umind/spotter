@@ -115,12 +115,6 @@ a:hover {
 	box-shadow: 0 1px 2px -1px rgba(0, 0, 0, 0.5);
 }
 
-.equal {
-	display: flex;
-	display: -webkit-flex;
-	flex-wrap: wrap;
-}
-
 .alert,
 .alert-info,
 .alert-success,
@@ -960,6 +954,7 @@ Ad box
 
 .auction-footer .countdown {
 	padding: 0;
+	font-size: 14px;
 }
 
 .auction-footer .text-red {
@@ -991,19 +986,13 @@ Ad box
 .ad-box .bid-price {
 	color: #ffffff;
 	background-color: #252654;
-	margin-top: 10px;
 	padding: 10px 8px 8px;
 	font-weight: bold;
-	font-size: 12px;
+	font-size: 13px;
 }
 
-.ad-box .bid-price .bid-number,
-.ad-box .bid-price .starting-price {
-	display: inline-block;
-}
-
-.ad-box .bid-price .starting-price {
-	float: right;
+.ad-box .bid-price .bid-number {
+	margin-bottom: 5px;
 }
 
 .ad-box .caption {
@@ -1814,6 +1803,7 @@ Auction
 	margin: 0;
 	padding: 0;
 	display: block;
+	border: none;
 }
 
 #sub-header .right-info .dropdown-menu li a {
@@ -1898,6 +1888,11 @@ Auction
 	padding: 0;
 	display: block;
 	border-bottom: 1px solid #dddfe2;
+}
+
+#sub-header .right-info .notification-list p {
+	padding: 8px 30px 7px 15px;
+	margin: 0;
 }
 
 #sub-header .right-info .notification-list li:hover {
@@ -1986,7 +1981,7 @@ Auction
 
 .countdown {
 	padding: 10px 5px;
-	font-size: 14px;
+	font-size: 13px;
 	text-align: center;
 }
 
@@ -2017,16 +2012,47 @@ Auction
 	.navbar-default {
 		padding: 5px 0;
 	}
+	#sub-header {
+		padding: 15px 0;
+	}
+	#sub-header .col-xs-6 {
+		width: 100%;
+		display: block;
+	}
 	.social-icons {
 		text-align: center;
 		font-size: 10px;
+		margin-bottom: 10px;
 	}
-	#sub-header .right-info ul li a {
-		font-size: 12px;
+	.right-info {
+		float: none !important;
+		text-align: center;
+		margin-top: 10px;
+	}
+	#sub-header .right-info .dropdown-menu {
+		top: 30px;
+		left: -45px;
+	}
+	.navbar-nav.in {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 	.navbar-nav.in li a,
 	#example-show {
 		padding-left: 20px;
+	}
+	.navbar-collapse {
+		border: none;
+	}
+	.navbar-brand h2 {
+		line-height: 50px;
+	}
+	.nav-sarchbar {
+		text-align: right;
+		margin-top: 0;
+	}
+	.auction {
+		font-size: 14px;
 	}
 	.auction .row {
 		display: block;
@@ -2038,12 +2064,36 @@ Auction
 	.auction-header #btn-allProducts {
 		font-size: 12px;
 	}
+	.auction-content {
+		overflow-x: scroll;
+		white-space: nowrap;
+	}
+	.auction-content .item {
+		width: 100%;
+		margin-right: 5px;
+	}
+	.auction-content .item:last-child {
+		margin-right: 0;
+	}
 	.auction-footer p {
 		text-align: left;
 		font-size: 12px;
 	}
 	.auction-footer .text-red {
 		padding: 5px 0;
+	}
+	.auction-footer .text-red {
+		padding: 5px 0;
+		font-size: 12px;
+	}
+	.widget .form-group {
+		width: 80%;
+	}
+	.widget form .btn-primary {
+		float: none;
+	}
+	.widget .text-right {
+		text-align: left;
 	}
 	.footer-menu {
 		font-size: 12px;
@@ -2057,9 +2107,41 @@ Auction
 	.navbar-default {
 		padding: 5px 0;
 	}
+	#sub-header {
+		padding: 15px 0;
+	}
+	#sub-header .col-xs-6 {
+		width: 100%;
+		display: block;
+	}
+	.social-icons {
+		text-align: center;
+		font-size: 10px;
+		margin-bottom: 10px;
+	}
+	.right-info {
+		float: none !important;
+		text-align: center;
+		margin-top: 10px;
+	}
+	#sub-header .right-info .dropdown-menu {
+		top: 30px;
+		left: -45px;
+	}
+	.navbar-nav.in {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 	.navbar-nav.in li a,
 	#example-show {
 		padding-left: 20px;
+	}
+	.nav-sarchbar {
+		text-align: right;
+		margin-top: 0;
+	}
+	.auction {
+		font-size: 15px;
 	}
 	.auction .row {
 		display: block;
@@ -2068,12 +2150,33 @@ Auction
 		text-align: left;
 		margin-top: 10px;
 	}
+	.auction-content {
+		overflow-x: scroll;
+		white-space: nowrap;
+	}
+	.auction-content .item {
+		width: 100%;
+		margin-right: 5px;
+	}
+	.auction-content .item:last-child {
+		margin-right: 0;
+	}
 	.auction-footer p {
 		text-align: left;
 		font-size: 13px;
 	}
 	.auction-footer .text-red {
 		padding: 5px 0;
+		font-size: 13px;
+	}
+	.widget .form-group {
+		width: 70%;
+	}
+	.widget form .btn-primary {
+		float: none;
+	}
+	.widget .text-right {
+		text-align: left;
 	}
 	.comments-container {
 		width: 100%;
@@ -2098,6 +2201,82 @@ Auction
 	}
 }
 
+@media only screen and (min-width: 321px) and (max-width: 766px) and (orientation: landscape) {
+	#sub-header {
+		padding: 15px 0;
+	}
+	#sub-header .col-xs-6 {
+		width: 50%;
+	}
+	.social-icons {
+		margin-bottom: 0;
+		text-align: left;
+	}
+	.right-info {
+		margin-top: 0;
+		float: right !important;
+	}
+	.auction {
+		font-size: 16px;
+	}
+	.auction-header .row {
+		display: flex;
+	}
+	.auction-header .row .col-sm-6 {
+		flex: 1;
+	}
+	.auction-header .all-products {
+		margin: 0;
+		text-align: right;
+	}
+	.auction-content .item {
+		width: 49.5%;
+	}
+	#premium-ads-container .col-sm-6 {
+		width: 49.7%;
+		display: inline-block;
+		margin: 0 auto;
+	}
+	.widget .form-group {
+		width: 40%;
+	}
+}
+
+@media only screen and (min-width: 767px) and (max-width: 1023px) {
+	.navbar-nav {
+		float: none;
+	}
+	.auction-content {
+		overflow-x: scroll;
+		white-space: nowrap;
+	}
+	.auction-content .item {
+		width: 32.85%;
+		margin-right: 5px;
+	}
+	.auction-content .item:last-child {
+		margin-right: 0;
+	}
+	.auction-footer .col-md-4 {
+		flex: 1;
+	}
+	.auction-footer p {
+		font-size: 14px;
+	}
+	.auction-footer .text-red b {
+		display: block;
+	}
+	.widget .form-group {
+		width: 80%;
+		margin-bottom: 10px;
+	}
+	.widget form .btn-primary {
+		float: none;
+	}
+	.widget .text-right {
+		text-align: left;
+	}
+}
 
 @media (max-width: 991px) {
 	.home-top-searchbar,

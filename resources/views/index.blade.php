@@ -18,7 +18,7 @@
 
 
             <div class="container">
-                <div class="row equal">
+                <div class="row">
                     @foreach($top_categories as $top_cat)
                         <div class="col-xs-6 col-sm-4 col-md-3">
                             <div class="home-cat-box">
@@ -48,7 +48,7 @@
                     </div>
 
                     @foreach($ads as $ad)
-                        <div class="col-md-3">
+                        <div class="col-sm-6 col-md-3">
 
                             <div class="ad-box">
                                 <div class="ad-box-caption-title">
