@@ -278,6 +278,9 @@
             </div>
         </div>
     </div>
+	<!-- Back-to-top start -->
+	<a href="javascript:void(0)" id="back-to-top" title="Back to top"></a>
+	<!-- Back-to-top end -->
 
 <script src="{{ asset('assets/js/vendor/jquery-1.11.2.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>

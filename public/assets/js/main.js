@@ -188,6 +188,30 @@ $(document).ready(function () {
 	});
 });
 
+$(document).ready(function () {
+	if ($("#back-to-top").length) {
+		var scrollTrigger = 300, // px
+			backToTop = function () {
+				var scrollTop = $(window).scrollTop();
+				if (scrollTop > scrollTrigger) {
+					$("#back-to-top").addClass("back-to-top-show");
+				} else {
+					$("#back-to-top").removeClass("back-to-top-show");
+				}
+			};
+		backToTop();
+		$(window).on("scroll", function () {
+			backToTop();
+		});
+		$("#back-to-top").on("click", function (e) {
+			e.preventDefault();
+			$("html, body").animate({
+				scrollTop: 0
+			}, 800);
+		});
+	}
+});
+
 // number format
 function number_format(number, decimals, dec_point, thousands_sep) {
 	// Strip all characters but numerical ones.

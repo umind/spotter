@@ -340,8 +340,10 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
                                         {!! Form::close() !!}
-                                        
-										<button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+                                        <div class="bid-max-div">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+											<button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+										</div>
 
                                         @if($userMaxBid)
                                             <p>@lang('app.your_max_bid'): {{ number_format($userMaxBid, 2) }}</p>
