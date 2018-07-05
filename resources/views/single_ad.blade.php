@@ -76,6 +76,8 @@
 
                     </div>
                     <h2>{{safe_output($ad->title)}}</h2>
+					<h4 class="bid-number-header">Bid number: 1234546</h4>
+					<h4 class="auction-number-header">Auction number: 123456</h4>
                 </div>
             </div>
         </div>
@@ -317,7 +319,7 @@
                                     @if($ad->is_bid_active())
 
                                         <p>{{sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
-                                        <p>@lang('app.total_bids'): {{ $bids->count() }}, <a href="#bid_history">@lang('app.bid_history')</a> </p>
+                                        <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p>
 
                                         {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
                                         <div class="form-group">

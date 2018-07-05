@@ -158,6 +158,13 @@ $(document).ready(function () {
 	}
 });
 
+$("#bid-history").click(function () {
+	var navbarHeight = $('.navbar-static-top').outerHeight();
+	$('html, body').animate({
+		scrollTop: $("#bid_history").offset().top - navbarHeight - 20
+	}, 1000);
+});
+
 $(document).ready(function () {
 	var height = $("#footer").outerHeight();
 	$("#app").css("margin-bottom", "-" + height + "px");

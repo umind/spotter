@@ -68,6 +68,12 @@ a:hover {
 	padding: 6px 12px;
 }
 
+button:focus,
+input:focus {
+	box-shadow: none !important;
+	outline: none !important;
+}
+
 .btn-default,
 .btn-primary,
 .btn-success,
@@ -75,7 +81,7 @@ a:hover {
 .btn-warning,
 .btn-danger {
 	box-shadow: none;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+	text-shadow: none;
 }
 
 .btn {
@@ -88,11 +94,6 @@ a:hover {
 }
 
 .navbar-default {
-	background-image: none;
-	background: #ffffff;
-	background-repeat: repeat-x;
-	border-radius: 0;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 0 rgba(0, 0, 0, 0.075);
 	margin-bottom: 0;
 	padding: 10px 0;
 }
@@ -643,6 +644,15 @@ Search page
 .search-page-header {
 	margin-bottom: 0;
 	border-bottom: 1px solid #f7f7f7;
+}
+
+.search-page-header .bid-number-header,
+.search-page-header .auction-number-header {
+	display: inline-block;
+}
+
+.search-page-header .bid-number-header {
+	margin-right: 20px;
 }
 
 .search-box-wrap {
@@ -1226,6 +1236,7 @@ ul.footer-menu li a {
 
 .widget .form-control {
 	height: auto;
+	border-color: #d9d9d9;
 	z-index: 0;
 }
 
@@ -1266,6 +1277,16 @@ ul.footer-menu li a {
 
 .modal-body .form-control {
 	height: auto;
+	z-index: 0;
+	border: 1px solid #d9d9d9;
+}
+
+.modal-body .form-control:focus {
+	border-color: #d9d9d9;
+}
+
+.modal-body .btn-number {
+	z-index: 1;
 }
 
 .input-group.max-bid {
