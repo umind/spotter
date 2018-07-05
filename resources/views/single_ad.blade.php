@@ -85,7 +85,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm-7 col-lg-8">
+                <div class="col-sm-8">
 
                     @include('admin.flash_msg')
 
@@ -306,7 +306,7 @@
 
                 </div>
 
-                <div class="col-sm-5 col-lg-4">
+                <div class="col-sm-4">
                     <div class="sidebar-widget">
 
                         @if($ad->category_type == 'auction')

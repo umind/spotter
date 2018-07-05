@@ -673,7 +673,6 @@ Search page
 	font-size: 21px;
 }
 
-
 .item-loop-list .caption {
 	width: 70%;
 	display: inline-block;
@@ -1232,7 +1231,6 @@ ul.footer-menu li a {
 .widget .btn-danger.bid {
 	display: block;
 	padding: 6px 12px 4px;
-	min-width: 160px;
 }
 
 .widget .form-group {
@@ -1240,8 +1238,10 @@ ul.footer-menu li a {
 	margin-bottom: 10px;
 }
 
-.widget .input-group {
-	width: 62%;
+.widget .input-group,
+.widget .btn-primary,
+.widget .btn-danger.bid {
+	width: 65%;
 }
 
 .widget .glyphicon {
@@ -2002,7 +2002,6 @@ Auction
 }
 
 .place-bid-btn .btn-primary {
-	min-width: 150px;
 	padding: 6px 12px 5px;
 	font-size: 16px;
 	background-color: #252652;
@@ -2120,7 +2119,9 @@ Auction
 		padding: 5px 0;
 		font-size: 12px;
 	}
-	.widget .input-group {
+	.widget .input-group,
+	.widget .btn-primary,
+	.widget .btn-danger.bid {
 		width: 80%;
 	}
 	.widget .text-right {
@@ -2232,8 +2233,10 @@ Auction
 		padding: 5px 0;
 		font-size: 13px;
 	}
-	.widget .input-group {
-		width: 69%;
+	.widget .input-group,
+	.widget .btn-primary,
+	.widget .btn-danger.bid {
+		width: 70%;
 	}
 	.widget .text-right {
 		text-align: left;
@@ -2268,6 +2271,13 @@ Auction
 }
 
 @media only screen and (min-width: 321px) and (max-width: 766px) and (orientation: landscape) {
+	.item-loop {
+		width: 45%;
+		display: inline-block;
+	}
+	.item-loop:nth-child(odd) {
+		float: right;
+	}
 	#sub-header {
 		padding: 15px 0 13px;
 	}
@@ -2315,7 +2325,9 @@ Auction
 		display: inline-block;
 		margin: 0 auto;
 	}
-	.widget .input-group {
+	.widget .input-group,
+	.widget .btn-primary,
+	.widget .btn-danger.bid {
 		width: 40%;
 	}
 	.modal-body .input-group.max-bid {
@@ -2357,8 +2369,10 @@ Auction
 	.auction-footer .text-red b {
 		display: block;
 	}
-	.widget .input-group {
-		width: 82%;
+	.widget .input-group,
+	.widget .btn-primary,
+	.widget .btn-danger.bid {
+		width: 100%;
 	}
 	.widget .text-right {
 		text-align: left;
