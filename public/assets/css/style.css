@@ -2129,7 +2129,7 @@ Auction
 	}
 	#sub-header .right-info .dropdown-menu {
 		top: 34px;
-		left: -45px;
+		left: -25px;
 	}
 	#sub-header .right-info .notification-div {
 		top: 36px;
@@ -2255,7 +2255,7 @@ Auction
 	}
 	#sub-header .right-info .dropdown-menu {
 		top: 34px;
-		left: -45px;
+		left: -25px;
 	}
 	#sub-header .right-info .notification-div {
 		top: 36px;
@@ -2391,6 +2391,9 @@ Auction
 		right: 10px;
 		left: auto;
 	}
+	#sub-header .right-info .dropdown-menu {
+		left: -15px;
+	}
 	.auction {
 		font-size: 16px;
 	}
@@ -2447,6 +2450,9 @@ Auction
 @media only screen and (min-width: 767px) and (max-width: 1023px) {
 	.navbar-nav {
 		float: none;
+	}
+	#sub-header .right-info .dropdown-menu {
+		left: -40px;
 	}
 	.auction-content {
 		overflow-x: scroll;
