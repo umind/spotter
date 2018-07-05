@@ -3,6 +3,8 @@
 return [
     // new
     'choose_event' => 'Auktion auswählen',
+    'max_bid_desc' => 'Max. Gebot ermöglicht Ihnen Ihre maximale Gebotssumme einzutragen. Das System bietet für Sie automatisch weiter bis zu dieser Summe.',
+    'no_bids_after_deadline' => 'Für diesen Artikel sind keine Gebote vorhanden',
 
 
     'ends' => 'Endet am',

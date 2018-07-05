@@ -79,6 +79,12 @@ class Ad extends Model
             return true;
         return false;
     }
+
+    public function is_past_but_active(){
+        if ($this->status == 1 || $this->status == 3 || $this->status = 4)
+            return true;
+        return false;
+    }
     
     public function full_address(){
         $location = '';

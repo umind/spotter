@@ -97,6 +97,11 @@ class AppServiceProvider extends ServiceProvider
                     $auctions = $event->auctions()->where('status', '1')->get();
 
                     foreach ($auctions as $auction) {
+
+                        
+                        // auction not sold (has not been bidded)
+                        $auction->update(['status' => '4']);
+                        
                         // won bid
                         $bid = $auction->bids()
                                         ->where('is_accepted', 0)
@@ -114,6 +119,7 @@ class AppServiceProvider extends ServiceProvider
                             $notification = new Notification;
                             $notification->title = trans('app.you_won');
                             $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($bid->won_bid_amount)]);
+                            $notification->url = url('auction/' . $auction->id);
                             $notification->date = Carbon::now();
 
                             $wonUser->notifications()->save($notification);
@@ -121,13 +127,16 @@ class AppServiceProvider extends ServiceProvider
                             // activate notification bell
                             $wonUser->notification_bell = 1;
                             $wonUser->save();
+
+                            // auction sold
+                            $auction->update(['status' => '3']);
                         }
                     }
 
                     // close an event and auctions inside
-                    $event->status = '2';
-                    $event->save();
-                    $event->auctions()->update(['status' => '2']);
+                    // $event->status = '2';
+                    // $event->save();
+                    // $event->auctions()->update(['status' => '3']);
                 }
             }
         }

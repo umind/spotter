@@ -110,7 +110,7 @@
                     <div class="auction-img-video-wrap">
                         @if ($ad->status == '2')
                             <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_closed')</div>
-                        @elseif ( ! $ad->is_published())
+                        @elseif ( ! $ad->is_past_but_active())
                             <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_not_published_warning')</div>
                         @endif
                         @if( ! empty($ad->video_url))
@@ -341,7 +341,7 @@
                                         <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
                                         {!! Form::close() !!}
                                         <div class="bid-max-div">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+											<p>@lang('app.max_bid_desc')</p>
 											<button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
 										</div>
 
@@ -357,9 +357,13 @@
                                         @endif
 
                                         <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
-                                        @if(Auth::check() && Auth::user()->is_admin() && $wonBid && $wonUser)
-                                            <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
-                                            <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
+                                        @if(Auth::check() && Auth::user()->is_admin())
+                                            @if($wonBid && $wonUser)
+                                                <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
+                                                <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
+                                            @elseif ($ad->status == '4')
+                                                <p>@lang('app.no_bids_after_deadline')</p>
+                                            @endif
                                         @endif
 
                                         <div class="alert alert-warning">

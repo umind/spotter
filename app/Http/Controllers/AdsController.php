@@ -973,7 +973,7 @@ class AdsController extends Controller
             return view('error_404');
         }
 
-        if ( ! $ad->is_published()){
+        if ( ! $ad->is_past_but_active()){
             if (Auth::check()){
                 $user_id = $user->id;
                 if ($user_id != $ad->user_id){
@@ -998,7 +998,8 @@ class AdsController extends Controller
         })->max('max_bid_amount');
         
         // get all bids without max bid 
-        $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get();
+        // whereNull('max_bid_amount')->
+        $bids = $ad->bids()->with('user')->get();
 
         // get the user who won
         $wonBid = $ad->bids()->where('is_accepted', 1)->first();
