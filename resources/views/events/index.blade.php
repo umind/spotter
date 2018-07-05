@@ -43,11 +43,11 @@
 									<p>@lang('app.venue'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="col-md-4 text-center">
-									<p class="text-red countdown" data-expire-date="{{ $event->auction_begins }}"></p>
+									<p class="text-red countdown" data-expire-date="{{ $event->auction_ends }}"></p>
 								</div>
 								<div class="col-md-4 text-right">
 									<p>@lang('app.date'): {{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }}</p>
-									<p>@lang('app.begins'): {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }}</p>
+									<p>@lang('app.begins'): {{ Carbon\Carbon::parse($event->auction_begins)->format('H:i') }}</p>
 								</div>
 							</div>
 						</div>
