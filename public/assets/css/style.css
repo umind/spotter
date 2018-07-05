@@ -752,6 +752,12 @@ Search page
 	height: auto;
 }
 
+.item-loop {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
 /** Search filter bar */
 
 .listingTopFilterBar {
@@ -974,7 +980,7 @@ Ad box
 	display: block;
 	overflow: hidden;
 	position: relative;
-	height: 158px;
+	height: 200px;
 }
 
 .ad-box .ads-thumbnail .img-responsive {
@@ -2120,6 +2126,9 @@ Auction
 		padding: 5px 0;
 		font-size: 12px;
 	}
+	.ad-box .ads-thumbnail {
+		height: 240px;
+	}
 	.widget .input-group,
 	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
@@ -2231,6 +2240,9 @@ Auction
 		padding: 5px 0;
 		font-size: 13px;
 	}
+	.ad-box .ads-thumbnail {
+		height: 250px;
+	}
 	.widget .input-group,
 	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
@@ -2266,13 +2278,6 @@ Auction
 }
 
 @media only screen and (min-width: 321px) and (max-width: 766px) and (orientation: landscape) {
-	.item-loop {
-		width: 45%;
-		display: inline-block;
-	}
-	.item-loop:nth-child(odd) {
-		float: right;
-	}
 	#sub-header {
 		padding: 15px 0 13px;
 	}
@@ -2315,10 +2320,22 @@ Auction
 	.auction-content .item {
 		width: 49.5%;
 	}
-	#premium-ads-container .col-sm-6 {
-		width: 49.7%;
+	.ad-box .ads-thumbnail {
+		height: 230px;
+	}
+	.item-loop {
+		width: 47%;
 		display: inline-block;
-		margin: 0 auto;
+	}
+	.item-loop:nth-child(odd) {
+		float: right;
+	}
+	#premium-ads-container .col-sm-6 {
+		width: 49.5%;
+		display: inline-block;
+	}
+	#premium-ads-container .row .col-sm-6:nth-child(odd) {
+		float: right;
 	}
 	.widget .input-group,
 	.widget .btn-primary.bid,
@@ -2364,6 +2381,9 @@ Auction
 	.auction-footer .text-red b {
 		display: block;
 	}
+	.ad-box .ads-thumbnail {
+		height: 250px;
+	}
 	.widget .input-group,
 	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
@@ -2371,6 +2391,9 @@ Auction
 	}
 	.item-loop .countdown b {
 		display: block;
+	}
+	.item-loop .ads-thumbnail {
+		height: 200px;
 	}
 }
 

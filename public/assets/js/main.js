@@ -91,10 +91,14 @@ function getCookie(cname) {
  */
 
 var make_sticky_menu = function () {
-	if ($(document).scrollTop() > 40) {
+	var headerHeight = $('#sub-header').outerHeight();
+	var navbarHeight = $('.navbar-static-top').outerHeight();
+	if ($(document).scrollTop() >= headerHeight) {
 		$('.navbar-static-top').addClass('sticky-menu');
+		$('#sub-header').css('margin-bottom', navbarHeight);
 	} else {
 		$('.navbar-static-top').removeClass('sticky-menu');
+		$('#sub-header').css('margin-bottom', '0');
 	}
 };
 $(document).bind('scroll', make_sticky_menu);
