@@ -648,11 +648,11 @@ Search page
 
 .search-page-header .bid-number-header,
 .search-page-header .auction-number-header {
-	display: inline-block;
-}
-
-.search-page-header .bid-number-header {
-	margin-right: 20px;
+	color: #666666;
+	font-style: italic;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-bottom: 0;
 }
 
 .search-box-wrap {
@@ -1237,11 +1237,16 @@ ul.footer-menu li a {
 .widget .form-control {
 	height: auto;
 	border-color: #d9d9d9;
+	border-left: none;
 	z-index: 0;
 }
 
+.widget .input-group-btn:first-child > .btn {
+	margin-right: 0;
+}
+
 .widget form {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .widget .btn-primary.bid,
@@ -1259,6 +1264,23 @@ ul.footer-menu li a {
 .widget .btn-primary.bid,
 .widget .btn-danger.bid {
 	width: 65%;
+}
+
+.widget .btn-danger.bid {
+	margin: 0 auto;
+}
+
+.widget .bid-max-div {
+	padding: 20px;
+	background-color: #faf3d1;
+	-webkit-box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
+}
+
+.widget .bid-max-div p {
+	font-weight: 700;
+	margin-bottom: 15px;
 }
 
 .widget .glyphicon {
@@ -1293,14 +1315,18 @@ ul.footer-menu li a {
 	width: 35%;
 }
 
+.modal-body {
+	text-align: center;
+}
+
 .modal-body .btn-primary,
 .modal-body .btn-danger.bid {
 	padding: 6px 12px 4px;
-	min-width: 160px;
+	width: 35%;
 }
 
 .modal-body .form {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 .modal-body .glyphicon {
@@ -2042,6 +2068,40 @@ Auction
 	background-color: #EEA439;
 }
 
+/*----------------------------
+    Back-to-top start
+----------------------------*/
+
+#back-to-top {
+	position: fixed;
+	bottom: 50px;
+	right: 15px;
+	width: 38px;
+	height: 38px;
+	z-index: 998;
+	cursor: pointer;
+	background: url("../img/back-to-top.png") center no-repeat;
+	background-size: 28px;
+	background-color: #252652;
+	border-radius: 50%;
+	transition: all .3s ease;
+	visibility: hidden;
+	opacity: 0;
+}
+
+#back-to-top:hover {
+	background-color: #47499e;
+}
+
+.back-to-top-show {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+/*----------------------------
+    Back-to-top end
+----------------------------*/
+
 /** =====================
  * Responsive
  ========================*/
@@ -2166,6 +2226,9 @@ Auction
 	}
 	ul.footer-menu li a {
 		padding: 0 5px;
+	}
+	#back-to-top {
+		bottom: 25px;
 	}
 }
 
@@ -2295,6 +2358,9 @@ Auction
 	}
 	ul.footer-menu li a {
 		padding: 0 8px;
+	}
+	#back-to-top {
+		bottom: 25px;
 	}
 }
 
