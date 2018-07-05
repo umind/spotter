@@ -1228,22 +1228,29 @@ ul.footer-menu li a {
 	margin-bottom: 10px;
 }
 
-.widget form .btn-primary {
-	float: right;
-}
-
 .widget .btn-primary,
 .widget .btn-danger.bid {
+	display: block;
 	padding: 6px 12px 4px;
-	min-width: 115px;
+	min-width: 160px;
 }
 
 .widget .form-group {
-	width: 60%;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.widget .input-group {
+	width: 62%;
 }
 
 .widget .glyphicon {
 	top: 2px;
+}
+
+.modal-dialog {
+	top: 50%;
+	transform: translate(-0, -50%) !important;
 }
 
 .modal-body .btn,
@@ -1255,14 +1262,14 @@ ul.footer-menu li a {
 	height: auto;
 }
 
-.modal-body form {
-	margin-bottom: 10px;
+.input-group.max-bid {
+	width: 35%;
 }
 
 .modal-body .btn-primary,
 .modal-body .btn-danger.bid {
 	padding: 6px 12px 4px;
-	min-width: 115px;
+	min-width: 160px;
 }
 
 .modal-body .form {
@@ -1271,6 +1278,10 @@ ul.footer-menu li a {
 
 .modal-body .glyphicon {
 	top: 2px;
+}
+
+.modal-footer .btn-default {
+	padding: 6px 12px 4px;
 }
 
 .ad-info-name {
@@ -2109,14 +2120,14 @@ Auction
 		padding: 5px 0;
 		font-size: 12px;
 	}
-	.widget .form-group {
+	.widget .input-group {
 		width: 80%;
-	}
-	.widget form .btn-primary {
-		float: none;
 	}
 	.widget .text-right {
 		text-align: left;
+	}
+	.modal-body .input-group.max-bid {
+		width: 74%;
 	}
 	.footer-menu {
 		font-size: 11px;
@@ -2221,14 +2232,14 @@ Auction
 		padding: 5px 0;
 		font-size: 13px;
 	}
-	.widget .form-group {
-		width: 70%;
-	}
-	.widget form .btn-primary {
-		float: none;
+	.widget .input-group {
+		width: 69%;
 	}
 	.widget .text-right {
 		text-align: left;
+	}
+	.modal-body .input-group.max-bid {
+		width: 64%;
 	}
 	.comments-container {
 		width: 100%;
@@ -2304,8 +2315,15 @@ Auction
 		display: inline-block;
 		margin: 0 auto;
 	}
-	.widget .form-group {
+	.widget .input-group {
 		width: 40%;
+	}
+	.modal-body .input-group.max-bid {
+		width: 45%;
+	}
+	.modal-dialog {
+		margin: 0 auto;
+		width: 80%;
 	}
 	.footer-menu {
 		font-size: 14px;
@@ -2339,12 +2357,8 @@ Auction
 	.auction-footer .text-red b {
 		display: block;
 	}
-	.widget .form-group {
-		width: 80%;
-		margin-bottom: 10px;
-	}
-	.widget form .btn-primary {
-		float: none;
+	.widget .input-group {
+		width: 82%;
 	}
 	.widget .text-right {
 		text-align: left;
