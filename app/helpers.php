@@ -801,3 +801,11 @@ function rotationImages($auctions) {
 
     return rtrim($images, ',');
 }
+
+function getArray($field){
+    $arr = [];
+    foreach(__('app.'. $field) as $k => $v){
+        $arr[$k] = $v;
+    }
+    return $arr;
+}

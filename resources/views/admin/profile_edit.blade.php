@@ -24,52 +24,58 @@
                     <div class="col-xs-12">
 
                         {!! Form::open(['class'=>'form-horizontal', 'files'=>'true']) !!}
-                        <div class="form-group {{ $errors->has('name')? 'has-error':'' }}">
-                            <label for="name" class="col-sm-4 control-label">@lang('app.name')</label>
+
+                        <div class="form-group {{ $errors->has('title')? 'has-error':'' }}">
+                            <label for="title" class="col-sm-4 control-label">@lang('app.anrede')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="name" value="{{ old('name')? old('name') : $user->name }}" name="name" placeholder="@lang('app.name')">
-                                {!! $errors->has('name')? '<p class="help-block">'.$errors->first('name').'</p>':'' !!}
+                                @foreach(getArray('title_types') as $key => $titleType)
+                                    <label>
+                                        <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}"> {{ $titleType }}
+                                    </label>
+                                @endforeach
+                                {!! $errors->has('title')? '<p class="help-block">'.$errors->first('title').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('email')? 'has-error':'' }}">
-                            <label for="email" class="col-sm-4 control-label">@lang('app.email')</label>
+                        <div class="form-group {{ $errors->has('first_name')? 'has-error':'' }}">
+                            <label for="first_name" class="col-sm-4 control-label">@lang('app.first_name')</label>
                             <div class="col-sm-8">
-                                <input type="email" class="form-control" id="email" value="{{ old('email')? old('email') : $user->email }}" name="email" placeholder="@lang('app.email')">
-                                {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
+                                <input type="text" class="form-control" id="first_name" value="{{ old('first_name')? old('first_name') : $user->first_name }}" name="first_name" placeholder="@lang('app.first_name')">
+                                {!! $errors->has('first_name')? '<p class="help-block">'.$errors->first('first_name').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('gender')? 'has-error':'' }}">
-                            <label for="gender" class="col-sm-4 control-label">@lang('app.gender')</label>
+                        <div class="form-group {{ $errors->has('last_name')? 'has-error':'' }}">
+                            <label for="last_name" class="col-sm-4 control-label">@lang('app.last_name')</label>
                             <div class="col-sm-8">
-                                <select id="gender" name="gender" class="form-control select2">
-                                    <option value="">Select Gender</option>
-                                    <option value="male" {{ $user->gender == 'male'?'selected':'' }}>Male</option>
-                                    <option value="female" {{ $user->gender == 'female'?'selected':'' }}>Fe-Male</option>
-                                    <option value="third_gender" {{ $user->gender == 'third_gender'?'selected':'' }}>Third Gender</option>
-                                </select>
-
-                                {!! $errors->has('gender')? '<p class="help-block">'.$errors->first('gender').'</p>':'' !!}
+                                <input type="text" class="form-control" id="last_name" value="{{ old('last_name')? old('last_name') : $user->last_name }}" name="last_name" placeholder="@lang('app.last_name')">
+                                {!! $errors->has('last_name')? '<p class="help-block">'.$errors->first('last_name').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('mobile')? 'has-error':'' }}">
-                            <label for="mobile" class="col-sm-4 control-label">@lang('app.mobile')</label>
+                        <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
+                            <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="mobile" value="{{ old('mobile')? old('mobile') : $user->mobile }}" name="mobile" placeholder="@lang('app.mobile')">
-                                {!! $errors->has('mobile')? '<p class="help-block">'.$errors->first('mobile').'</p>':'' !!}
+                                <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $user->address }}" name="address" placeholder="@lang('app.address')">
+                                {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('phone')? 'has-error':'' }}">
-                            <label for="phone" class="col-sm-4 control-label">@lang('app.phone')</label>
+                        <div class="form-group {{ $errors->has('zip_code')? 'has-error':'' }}">
+                            <label for="zip_code" class="col-sm-4 control-label">@lang('app.zip_code')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="phone" value="{{ old('phone')? old('phone') : $user->phone }}" name="phone" placeholder="@lang('app.phone')">
-                                {!! $errors->has('phone')? '<p class="help-block">'.$errors->first('phone').'</p>':'' !!}
+                                <input type="text" class="form-control" id="zip_code" value="{{ old('zip_code')? old('zip_code') : $user->zip_code }}" name="zip_code" placeholder="@lang('app.zip_code')">
+                                {!! $errors->has('zip_code')? '<p class="help-block">'.$errors->first('zip_code').'</p>':'' !!}
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('city')? 'has-error':'' }}">
+                            <label for="city" class="col-sm-4 control-label">@lang('app.city')</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="city" value="{{ old('city')? old('city') : $user->city }}" name="city" placeholder="@lang('app.city')">
+                                {!! $errors->has('city')? '<p class="help-block">'.$errors->first('city').'</p>':'' !!}
+                            </div>
+                        </div>
 
                         <div class="form-group {{ $errors->has('country_id')? 'has-error':'' }}">
                             <label for="phone" class="col-sm-4 control-label">@lang('app.country')</label>
@@ -84,20 +90,27 @@
                             </div>
                         </div>
 
-
-                        <div class="form-group {{ $errors->has('address')? 'has-error':'' }}">
-                            <label for="address" class="col-sm-4 control-label">@lang('app.address')</label>
+                        <div class="form-group {{ $errors->has('phone')? 'has-error':'' }}">
+                            <label for="phone" class="col-sm-4 control-label">@lang('app.phone')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="address" value="{{ old('address')? old('address') : $user->address }}" name="address" placeholder="@lang('app.address')">
-                                {!! $errors->has('address')? '<p class="help-block">'.$errors->first('address').'</p>':'' !!}
+                                <input type="text" class="form-control" id="phone" value="{{ old('phone')? old('phone') : $user->phone }}" name="phone" placeholder="@lang('app.phone')">
+                                {!! $errors->has('phone')? '<p class="help-block">'.$errors->first('phone').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('website')? 'has-error':'' }}">
-                            <label for="website" class="col-sm-4 control-label">@lang('app.website')</label>
+                        <div class="form-group {{ $errors->has('user_name')? 'has-error':'' }}">
+                            <label for="user_name" class="col-sm-4 control-label">@lang('app.user_name')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="website" value="{{ old('website')? old('website') : $user->website }}" name="website" placeholder="@lang('app.website')">
-                                {!! $errors->has('website')? '<p class="help-block">'.$errors->first('website').'</p>':'' !!}
+                                <input type="text" class="form-control" id="user_name" value="{{ old('user_name')? old('user_name') : $user->user_name }}" name="user_name" placeholder="@lang('app.user_name')">
+                                {!! $errors->has('user_name')? '<p class="help-block">'.$errors->first('user_name').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group {{ $errors->has('email')? 'has-error':'' }}">
+                            <label for="email" class="col-sm-4 control-label">@lang('app.email')</label>
+                            <div class="col-sm-8">
+                                <input type="email" class="form-control" id="email" value="{{ old('email')? old('email') : $user->email }}" name="email" placeholder="@lang('app.email')">
+                                {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
                             </div>
                         </div>
 

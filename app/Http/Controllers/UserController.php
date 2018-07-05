@@ -212,6 +212,15 @@ class UserController extends Controller
 
         //Validating
         $rules = [
+            'title' => 'required',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'zip_code' => 'required|string|max:255',
+            'country_id' => 'required',
+            'user_name' => 'required',
             'email'    => 'required|email|unique:users,email,'.$user_id,
         ];
         $this->validate($request, $rules);

@@ -2,11 +2,15 @@
 
 return [
     //newest
-    'ends' => 'Ends',
     'choose_event' => 'Choose An Event',
 
 
     // newest
+    'ends' => 'Ends',
+    'anrede' => 'Title',
+    'title_types' => ['Mr.', 'Mrs.', 'Company'],
+    'last_name' => 'First Name',
+    'first_name' => 'Last Name',
     'ad_not_published' => 'Auction Has Not Been Published Yet',
     'assign_to_event' => 'Assign An Event',
     'event_not_assigned' => 'Event Not Assigned',

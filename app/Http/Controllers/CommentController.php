@@ -104,7 +104,7 @@ class CommentController extends Controller
         }else{
             $user = Auth::user();
             $user_id = $user->id;
-            $author_name = $user->name;
+            $author_name = $user->user_name;
             $author_email = $user->email;
         }
         $this->validate($request, $rules);

@@ -27,10 +27,17 @@
                         </div>
 
                         <table class="table table-bordered table-striped">
-
                             <tr>
-                                <th>@lang('app.name')</th>
-                                <td>{{ $user->name }}</td>
+                                <th>@lang('app.anrede')</th>
+                                <td>{{ getArray('title_types')[$user->title] }}</td>
+                            </tr>
+                            <tr>
+                                <th>@lang('app.first_name')</th>
+                                <td>{{ $user->first_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>@lang('app.last_name')</th>
+                                <td>{{ $user->last_name }}</td>
                             </tr>
                             <tr>
                                 <th>@lang('app.user_name')</th>
@@ -40,14 +47,14 @@
                                 <th>@lang('app.email')</th>
                                 <td>{{ $user->email }}</td>
                             </tr>
-                            <tr>
+                           {{--  <tr>
                                 <th>@lang('app.gender')</th>
                                 <td>{{ ucfirst($user->gender) }}</td>
-                            </tr>
-                            <tr>
+                            </tr> --}}
+                         {{--    <tr>
                                 <th>@lang('app.mobile')</th>
                                 <td>{{ $user->mobile }}</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <th>@lang('app.phone')</th>
                                 <td>{{ $user->phone }}</td>
@@ -57,6 +64,14 @@
                                 <td>{{ $user->address }}</td>
                             </tr>
                             <tr>
+                                <th>@lang('app.zip_code')</th>
+                                <td>{{ $user->zip_code }}</td>
+                            </tr>
+                            <tr>
+                                <th>@lang('app.city')</th>
+                                <td>{{ $user->city }}</td>
+                            </tr>
+                            <tr>
                                 <th>@lang('app.country')</th>
                                 <td>
                                     @if($user->country)
@@ -64,18 +79,18 @@
                                     @endif
                                 </td>
                             </tr>
-                            <tr>
+                            <tr>{{-- 
                                 <th>@lang('app.website')</th>
                                 <td>{{ $user->website }}</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <th>@lang('app.created_at')</th>
                                 <td>{{ \Carbon\Carbon::parse($user->created_at)->formatLocalized(get_option('date_format')) }}</td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <th>@lang('app.status')</th>
                                 <td>{{ $user->status_context() }}</td>
-                            </tr>
+                            </tr> --}}
                         </table>
 
                         @if($user->id == auth()->user()->id)

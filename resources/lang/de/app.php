@@ -2,9 +2,14 @@
 
 return [
     // new
-    'ends' => 'Endet am',
     'choose_event' => 'Auktion auswählen',
 
+
+    'ends' => 'Endet am',
+    'anrede' => 'Anrede',
+    'title_types' => ['Herr', 'Frau', 'Firma'],
+    'last_name' => 'Nachname',
+    'first_name' => 'Vorname',
     'ad_not_published' => 'Auktion wurde noch nicht veröffentlicht',
     'assign_to_event' => 'Einer Auktion zuweisen',
     'event_not_assigned' => 'Keiner Auktion zugewiesen',
@@ -120,11 +125,11 @@ return [
     'ad_title'              => 'Titel Auktion',
     'country'               => 'Land',
     'state'                 => 'Kanton',
-    'city'                  => 'Stadt',
+    'city'                  => 'Ort',
     'zip_code'                  => 'PLZ',
     'view_dates'                  => 'Datum',
     'auction_deadline'                  => 'Auktionsende',
-    'address'               => 'Addresse',
+    'address'               => 'Adresse',
     'great_title_info'      => '70-100 Zeichen wären ideal für den Titeltext',
     'address_line_help_text' => 'Das Adressfeld hilft Ihren Kunden Sie leichter zu finden',
     'skip_brand_text'       => 'Marken-Auswahl überspringen',
@@ -319,7 +324,7 @@ return [
     'user_info'                 => 'Nutzer-Info',
     'gender'                    => 'Geschlecht',
     'mobile'                    => 'Mobil',
-    'phone'                     => 'Telefon',
+    'phone'                     => 'Telefonnummer',
     'website'                   => 'Webseite',
     'status'                    => 'Status',
     'posted_ads'                => 'Veröffentlichte Auktionen',

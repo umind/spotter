@@ -163,7 +163,7 @@
                                     </tr>
                                     @foreach($bids as $bid)
                                         <tr>
-                                            <td>{{ $bid->user->name }}</td>
+                                            <td>{{ $bid->user->user_name }}</td>
                                             {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
                                             <td>{{ \Carbon\Carbon::parse($bid->created_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
@@ -356,7 +356,7 @@
 
                                         <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
                                         @if(Auth::check() && Auth::user()->is_admin() && $wonBid && $wonUser)
-                                            <p>@lang('app.sold_to'): {{ $wonUser->name }}</p>
+                                            <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
                                             <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
                                         @endif
 
@@ -436,7 +436,7 @@
                                     </div>
 
                                     <div class="ad-single-user-info">
-                                        <h5>{{ $ad->user->name }}</h5>
+                                        <h5>{{ $ad->user->user_name }}</h5>
                                         @php $user_address = $ad->user->get_address(); @endphp
                                         @if($user_address)
                                             <p class="text-muted"><i class="fa fa-map-marker"></i> {!! $user_address !!}</p>
