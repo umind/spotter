@@ -1227,7 +1227,7 @@ ul.footer-menu li a {
 	margin-bottom: 10px;
 }
 
-.widget .btn-primary,
+.widget .btn-primary.bid,
 .widget .btn-danger.bid {
 	display: block;
 	padding: 6px 12px 4px;
@@ -1239,7 +1239,7 @@ ul.footer-menu li a {
 }
 
 .widget .input-group,
-.widget .btn-primary,
+.widget .btn-primary.bid,
 .widget .btn-danger.bid {
 	width: 65%;
 }
@@ -2002,6 +2002,7 @@ Auction
 }
 
 .place-bid-btn .btn-primary {
+	min-width: 160px;
 	padding: 6px 12px 5px;
 	font-size: 16px;
 	background-color: #252652;
@@ -2120,12 +2121,9 @@ Auction
 		font-size: 12px;
 	}
 	.widget .input-group,
-	.widget .btn-primary,
+	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
 		width: 80%;
-	}
-	.widget .text-right {
-		text-align: left;
 	}
 	.modal-body .input-group.max-bid {
 		width: 74%;
@@ -2234,12 +2232,9 @@ Auction
 		font-size: 13px;
 	}
 	.widget .input-group,
-	.widget .btn-primary,
+	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
 		width: 70%;
-	}
-	.widget .text-right {
-		text-align: left;
 	}
 	.modal-body .input-group.max-bid {
 		width: 64%;
@@ -2326,7 +2321,7 @@ Auction
 		margin: 0 auto;
 	}
 	.widget .input-group,
-	.widget .btn-primary,
+	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
 		width: 40%;
 	}
@@ -2370,12 +2365,12 @@ Auction
 		display: block;
 	}
 	.widget .input-group,
-	.widget .btn-primary,
+	.widget .btn-primary.bid,
 	.widget .btn-danger.bid {
 		width: 100%;
 	}
-	.widget .text-right {
-		text-align: left;
+	.item-loop .countdown b {
+		display: block;
 	}
 }
 
