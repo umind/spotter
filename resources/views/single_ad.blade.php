@@ -50,7 +50,7 @@
           {!! Form::close() !!}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.close')</button>
     </div>
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -76,8 +76,8 @@
 
                     </div>
                     <h2>{{safe_output($ad->title)}}</h2>
-					<h4 class="bid-number-header">Bid number: 1234546</h4>
-					<h4 class="auction-number-header">Auction number: 123456</h4>
+					<p class="bid-number-header">{{ trans('app.bid_no') }}: {{ $ad->bid_no }}</p>
+					<p class="auction-number-header">{{ trans('app.auction_no') }}: {{ $ad->auction_no }}</p>
                 </div>
             </div>
         </div>
