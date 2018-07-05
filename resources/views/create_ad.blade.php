@@ -34,6 +34,19 @@
                         </div>
                     @endif
 
+                    <div class="form-group  {{ $errors->has('event')? 'has-error':'' }}">
+                        <label for="event" class="col-sm-4 control-label">@lang('app.event')</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="event" name="event">
+                                <option value="">@lang('app.choose_event')</option>
+                                @foreach($events as $event)
+                                    <option value="{{ $event->id }}" {{ old('event') == $event->id ? 'selected': '' }}>{{ $event->title }}</option>
+                                @endforeach
+                            </select>
+                            {!! $errors->has('event')? '<p class="help-block">'.$errors->first('event').'</p>':'' !!}
+                        </div>
+                    </div>
+
                     <div class="form-group  {{ $errors->has('category')? 'has-error':'' }}">
                         <label for="category_name" class="col-sm-4 control-label">@lang('app.category')</label>
                         <div class="col-sm-8">

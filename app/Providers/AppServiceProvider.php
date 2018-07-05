@@ -4,6 +4,11 @@ namespace App\Providers;
 
 use App\Country;
 use App\Post;
+use Carbon\Carbon;
+use App\Bid;
+use App\Notification;
+use App\Ad;
+use App\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
@@ -82,6 +87,50 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(['lUser' => $loggedUser, 'enable_monetize' => $enable_monetize, 'header_menu_pages' => $header_menu_pages, 'show_in_footer_menu' => $show_in_footer_menu, 'current_lang' => $current_lang] );
         });
+
+        // loop through events there are finished, declare user a winner, close events and auctions in that event
+        $events = Event::whereDate('auction_ends', '<=', Carbon::now())->where('status', '1')->get();
+
+        if ($events->count() > 0) {
+            foreach ($events as $event) {
+                if (Carbon::parse($event->auction_ends)->isPast()) {
+                    $auctions = $event->auctions()->where('status', '1')->get();
+
+                    foreach ($auctions as $auction) {
+                        // won bid
+                        $bid = $auction->bids()
+                                        ->where('is_accepted', 0)
+                                        ->orderBy('max_bid_amount', 'desc')
+                                        ->orderBy('bid_amount', 'desc')
+                                        ->first();
+
+                        if ($bid) {
+                            $bid->is_accepted = 1;
+                            $bid->won_bid_amount = $bid->bid_amount;
+                            $bid->save();
+
+                            $wonUser = $bid->user;
+
+                            $notification = new Notification;
+                            $notification->title = trans('app.you_won');
+                            $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($bid->won_bid_amount)]);
+                            $notification->date = Carbon::now();
+
+                            $wonUser->notifications()->save($notification);
+
+                            // activate notification bell
+                            $wonUser->notification_bell = 1;
+                            $wonUser->save();
+                        }
+                    }
+
+                    // close an event and auctions inside
+                    $event->status = '2';
+                    $event->save();
+                    $event->auctions()->update(['status' => '2']);
+                }
+            }
+        }
 
         // set locale
         setLocale(LC_TIME, 'de_DE');

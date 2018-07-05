@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ad;
 use App\Brand;
+use App\Event;
 use App\CarsVehicle;
 use App\Category;
 use App\City;
@@ -93,10 +94,12 @@ class AdsController extends Controller
         $categories = Category::orderBy('category_name', 'asc')->get();
         $countries = Country::all();
 
+        $events = Event::where('status', '0')->orWhere('status', '1')->get();
+
         $previous_states = State::where('country_id', old('country'))->get();
         $previous_cities = City::where('state_id', old('state'))->get();
 
-        return view('create_ad', compact('title', 'categories', 'countries', 'ads_images', 'previous_states', 'previous_cities'));
+        return view('create_ad', compact('title', 'categories', 'countries', 'ads_images', 'previous_states', 'previous_cities', 'events'));
     }
 
     /**
@@ -240,6 +243,14 @@ class AdsController extends Controller
          * iF add created
          */
         if ($created_ad){
+            // sync event to product
+            $syncData = [];
+            $event = Event::find($request->event);
+            if ($event) {
+                $syncData = $event->id;
+            } 
+            $created_ad->events()->sync($syncData);
+            
             //If job
             if ($sub_category->category_type == 'jobs'){
                 $job_data = [
@@ -344,12 +355,14 @@ class AdsController extends Controller
             }
         }
 
+        $events = Event::where('status', '0')->orWhere('status', '1')->get();
+
         $countries = Country::all();
 
         $previous_states = State::where('country_id', $ad->country_id)->get();
         $previous_cities = City::where('state_id', $ad->state_id)->get();
 
-        return view('admin.edit_ad', compact('title', 'countries', 'ad', 'previous_states', 'previous_cities'));
+        return view('admin.edit_ad', compact('title', 'countries', 'ad', 'previous_states', 'previous_cities', 'events'));
     }
 
     /**
@@ -435,6 +448,14 @@ class AdsController extends Controller
          * iF add created
          */
         if ($updated_ad){
+            // sync event to product
+            $syncData = [];
+            $event = Event::find($request->event);
+            if ($event) {
+                $syncData = $event->id;
+            } 
+            $ad->events()->sync($syncData);
+
             if ($sub_category->category_type == 'jobs'){
                 $job_data = [
                     'job_nature'            => $request->job_nature,

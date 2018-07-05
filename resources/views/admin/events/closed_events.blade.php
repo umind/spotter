@@ -43,7 +43,7 @@
                                         </td>
 
                                         <td>
-                                            <a href="{{ route('edit_event', ['event' => $event->id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+{{--                                             <a href="{{ route('edit_event', ['event' => $event->id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a> --}}
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>

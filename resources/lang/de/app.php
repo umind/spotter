@@ -1,11 +1,15 @@
 <?php
 
 return [
+    // new
+    'ends' => 'Endet am',
+    'choose_event' => 'Auktion auswählen',
+
     'ad_not_published' => 'Auktion wurde noch nicht veröffentlicht',
     'assign_to_event' => 'Einer Auktion zuweisen',
     'event_not_assigned' => 'Keiner Auktion zugewiesen',
     'sold_to' => 'verkauft an',
-    'won_and_bought_for' => 'Sie haben an einer Auktion gewonnen. Artikel gekauft für:won_bid_amount',
+    'won_and_bought_for' => 'Sie haben an einer Auktion gewonnen. Artikel gekauft für :won_bid_amount',
     'you_won' => 'Die Auktion ist beendet. Nur Sie können noch diese sehen sehen.',
     'ad_closed' => 'Die Auktion ist beendet. Nur Sie können noch diese Seite sehen.',
     'active_events' => 'Aktive Auktionen',
@@ -689,7 +693,7 @@ return [
     'price_increaser'                    => 'Preis erhöhen',
     'bid_deadline'                      => 'Gebotsende',
     'current_bid'                       => 'Aktuelles Gebot',
-    'before_bidding_sign_in_info'       => 'Sie müssen <a href="'.route('login').'">eingeloggt</a> sein oder <a href="'.route('register').'">registriren</a> Sie sich, um bieten zu können.',
+    'before_bidding_sign_in_info'       => 'Sie müssen <a href="'.url('login').'">eingeloggt</a> sein oder <a href="'.url('register').'">registriren</a> Sie sich, um bieten zu können.',
     'bid_deadline_info'                 => 'Gebotsende %s läuft ab in %s',
     'bid_deadline_closed_info'          => 'Gebot %s wurde abgeschlossen am %s',
     'place_bid'                         => 'Gebot abgeben',
@@ -714,7 +718,7 @@ return [
     'enter_min_bid_amount'              => 'Bitte fügen Sie ein Gebotsbetrag ein, dass nicht weniger oder gleich gross wie %s ist',
     'posted_at'                         => 'veröffentlicht am',
     'bid_closed'                        => 'Gebot abgeschlossen',
-    'cant_bid_anymore'                  => 'Sie können für diese Auktion keine Gebote mehr abgegebenYou can no longer place any bids on this auction',
+    'cant_bid_anymore'                  => 'Sie können für diese Auktion keine Gebote mehr abgegeben. Sie können nicht mehr für diesen Artikel bieten.',
     'bid_accepted'                      => 'Gebot wurde akzeptiert',
     'bids'                              => 'Gebote',
     'bids_for'                          => 'Gebote für',

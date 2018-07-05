@@ -39,7 +39,8 @@ class EventController extends Controller
     public function create()
     {
         $title = trans('app.post_an_event');
-        $products = Auth::user()->ads;
+        // get all products of logged in user that are not assinged to any event
+        $products = Auth::user()->ads()->doesntHave('events')->get();
 
         return view('admin.events.create', compact('title', 'products'));
     }
@@ -75,8 +76,9 @@ class EventController extends Controller
 
     public function edit(Event $event) {
         $title = trans('app.edit_an_event');
-        $products = Auth::user()->ads;
+        $products = Auth::user()->ads()->doesntHave('events')->get();
         $selectedProducts = isset($event->auctions) ? $event->auctions->pluck('id')->toArray() : [];
+        
         return view('admin.events.edit', compact('products', 'title', 'selectedProducts', 'event'));
     }
 

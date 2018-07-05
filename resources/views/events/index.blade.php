@@ -47,7 +47,7 @@
 								</div>
 								<div class="col-md-4 text-right">
 									<p>@lang('app.date'): {{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }}</p>
-									<p>@lang('app.begins'): {{ Carbon\Carbon::parse($event->auction_begins)->format('H:i') }}</p>
+									<p>@lang('app.ends'): {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }}</p>
 								</div>
 							</div>
 						</div>

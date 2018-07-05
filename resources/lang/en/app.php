@@ -1,6 +1,11 @@
 <?php
 
 return [
+    //newest
+    'ends' => 'Ends',
+    'choose_event' => 'Choose An Event',
+
+
     // newest
     'ad_not_published' => 'Auction Has Not Been Published Yet',
     'assign_to_event' => 'Assign An Event',
@@ -691,7 +696,7 @@ return [
     'price_increaser'                    => 'Price Increaser',
     'bid_deadline'                      => 'Bid Deadline',
     'current_bid'                       => 'Current Bid',
-    'before_bidding_sign_in_info'       => 'You\'ll need to <a href="'.route('login').'">sign in</a> or <a href="'.route('register').'">register</a> before bidding.',
+    'before_bidding_sign_in_info'       => 'You\'ll need to <a href="'.url('login').'">sign in</a> or <a href="'.url('register').'">register</a> before bidding.',
     'bid_deadline_info'                 => 'Bid deadline %s and closes in %s',
     'bid_deadline_closed_info'          => 'Bid deadline %s and closed %s',
     'place_bid'                         => 'Place Bid',
