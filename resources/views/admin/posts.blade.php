@@ -8,17 +8,18 @@
 @section('content')
 
     <div class="container">
-        <div id="wrapper">
-            @include('admin.sidebar_menu')
-            <div id="page-wrapper">
+		
+		<div id="admin-panel" class="row">
+			
+			<div class="col-sm-5 col-md-4 col-lg-3">
+				@include('admin.sidebar_menu')
+			</div>
+
+			<div class="col-sm-7 col-md-8 col-lg-9">
                 @if( ! empty($title))
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header"> {{ $title }}
-                                <a href="{{ route('create_new_post') }}" class="btn btn-info pull-right"> <i class="fa fa-floppy-o"></i> @lang('app.create_new_post')</a>
-                            </h1>
-                        </div> <!-- /.col-lg-12 -->
-                    </div> <!-- /.row -->
+				<h1 class="page-header"> {{ $title }}
+					<a href="{{ route('create_new_post') }}" class="btn btn-info pull-right"> <i class="fa fa-floppy-o"></i> @lang('app.create_new_post')</a>
+				</h1>
                 @endif
 
                 @include('admin.flash_msg')
@@ -39,15 +40,11 @@
                     </div>
 
 
-            </div>   <!-- /#page-wrapper -->
+            </div>
 
+        </div>
 
-
-
-        </div>   <!-- /#wrapper -->
-
-
-    </div> <!-- /#container -->
+    </div>
 @endsection
 
 @section('page-js')
