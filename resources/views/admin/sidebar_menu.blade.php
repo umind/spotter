@@ -10,6 +10,7 @@
                     <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.events')<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>  <a href="{{ route('active_events') }}">@lang('app.active_events')</a> </li>
+                        <li>  <a href="{{ route('finished_events') }}">@lang('app.finished_events')</a> </li>
                         <li>  <a href="{{ route('closed_events') }}">@lang('app.closed_events')</a> </li>
                         <li>  <a href="{{ route('create_event') }}">@lang('app.post_an_event')</a> </li>
                         <li>  <a href="{{ route('pending_events') }}">@lang('app.pending_for_approval')</a> </li>

@@ -45,8 +45,20 @@ class Event extends Model
         return $html;
     }
 
-    public function scopePublished($query)
+    public function scopeActive($query)
     {
-        return $query->where('status', '1');
+        return $query->where('status', '1')->orWhere('status', '3');
     }
+
+    public function is_editable() {
+        if ($this->status == 0 || $this->status == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    // public function scopePublished($query)
+    // {
+    //     return $query->where('status', '1');
+    // }
 }

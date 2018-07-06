@@ -31,6 +31,7 @@ Route::group(['middleware' => 'only_admin_access'], function () {
     Route::get('dashboard/my_events/pending', ['as' => 'pending_events', 'uses'=>'EventController@pending']);
     Route::get('dashboard/my_events/active', ['as' => 'active_events', 'uses'=>'EventController@active']);
     Route::get('dashboard/my_events/closed', ['as' => 'closed_events', 'uses'=>'EventController@closed']);
+    Route::get('dashboard/my_events/finished', ['as' => 'finished_events', 'uses'=>'EventController@finished']);
     Route::post('ajax/my_events/change_status', ['as' => 'change_event_status', 'uses'=>'EventController@changeStatus']);
     Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
     Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);

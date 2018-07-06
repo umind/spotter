@@ -30,7 +30,7 @@ class EventRequest extends FormRequest
             'address' => 'required',
             'zip_code' => 'required',
             'city' => 'required',
-            'auction_begins' => 'required',
+            // 'auction_begins' => 'required',
             'auction_deadline' => 'required',
             // 'view_dates' => 'required',
             // 'description' => 'required',

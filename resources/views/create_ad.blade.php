@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="form-group {{ $errors->has('ad_description')? 'has-error':'' }}">
-                        <label class="col-sm-4 control-label"><span class="ad_text"> @lang('app.ad') </span> @lang('app.description')</label>
+                        <label class="col-sm-4 control-label"></span> @lang('app.description')</label>
                         <div class="col-sm-8">
                             <textarea name="ad_description" class="form-control" id="content_editor" rows="8">{{ old('ad_description') }}</textarea>
                             {!! $errors->has('ad_description')? '<p class="help-block">'.$errors->first('ad_description').'</p>':'' !!}

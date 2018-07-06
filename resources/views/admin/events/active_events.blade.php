@@ -33,8 +33,8 @@
                                             <p class="text-muted">
                                                 <i class="fa fa-user"></i> <span>@lang('app.auctioner'):</span> <span>{{ $event->auctioner }}</span>
                                                 <br>
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.begins'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_begins)->formatLocalized(get_option('date_format')) }}</span>
-                                                <br>
+                                                {{-- <i class="fa fa-clock-o"></i> <span>@lang('app.begins'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_begins)->formatLocalized(get_option('date_format')) }}</span>
+                                                <br> --}}
                                                 <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</span>
                                                 <br>
                                                 <i class="fa fa-map-marker"></i> <span>@lang('app.venue'):</span> <span>{{ $event->address . ', ' . $event->zip_code . ' ' . $event->city }}</span>
@@ -84,7 +84,7 @@
                 $.ajax({
                     url: '{{ route('delete_event') }}',
                     type: "POST",
-                    data: {slug: event, _token: '{{ csrf_token() }}'},
+                    data: {event: event, _token: '{{ csrf_token() }}'},
                     success: function (data) {
                         if (data.success == 1) {
                             selector.closest('tr').hide('slow');
