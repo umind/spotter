@@ -46,7 +46,7 @@ class AdsController extends Controller
         $title = trans('app.pending_ads');
         $ads = Ad::with('city', 'country', 'state')->whereStatus('0')->orderBy('id', 'desc')->paginate(20);
 
-        return view('admin.all_ads', compact('title', 'ads'));
+        return view('admin.pending_ads', compact('title', 'ads'));
     }
     public function adminBlockedAds()
     {

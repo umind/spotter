@@ -76,8 +76,10 @@ class EventController extends Controller
 
     public function edit(Event $event) {
         $title = trans('app.edit_an_event');
-        $products = Auth::user()->ads()->doesntHave('events')->get();
-        $selectedProducts = isset($event->auctions) ? $event->auctions->pluck('id')->toArray() : [];
+        $productsWithNoEvent = Auth::user()->ads()->doesntHave('events')->get();
+        $thisEventProducts = $event->auctions;
+        $products = $productsWithNoEvent->concat($event->auctions);
+        $selectedProducts = isset($thisEventProducts) ? $thisEventProducts->pluck('id')->toArray() : [];
         
         return view('admin.events.edit', compact('products', 'title', 'selectedProducts', 'event'));
     }
