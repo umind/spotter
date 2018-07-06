@@ -1337,6 +1337,10 @@ ul.footer-menu li a {
 	transform: translate(-0, -50%) !important;
 }
 
+.modal-body {
+	padding: 30px 15px;
+}
+
 .modal-body .btn,
 .modal-body .form-control {
 	padding: 6px 12px 4px;
@@ -2291,7 +2295,11 @@ Auction
 		width: 80%;
 	}
 	.modal-body .input-group.max-bid {
-		width: 74%;
+		width: 65%;
+		margin: 0 auto;
+	}
+	.modal-body .btn-danger.bid {
+		width: 65%;
 	}
 	.footer-menu {
 		font-size: 11px;
@@ -2421,7 +2429,11 @@ Auction
 		width: 70%;
 	}
 	.modal-body .input-group.max-bid {
-		width: 64%;
+		width: 65%;
+		margin: 0 auto;
+	}
+	.modal-body .btn-danger.bid {
+		width: 65%;
 	}
 	.comments-container {
 		width: 100%;
@@ -2532,6 +2544,10 @@ Auction
 	}
 	.modal-body .input-group.max-bid {
 		width: 45%;
+		margin: 0 auto;
+	}
+	.modal-body .btn-danger.bid {
+		width: 45%;
 	}
 	.modal-dialog {
 		margin: 0 auto;
@@ -2592,6 +2608,9 @@ Auction
 	.widget .btn-danger.bid {
 		width: 100%;
 	}
+	.widget .btn-danger.bid {
+		font-size: 12px;
+	}
 	.item-loop .countdown b {
 		display: block;
 	}
@@ -2600,7 +2619,13 @@ Auction
 	}
 	#admin-panel .btn-info.pull-right {
 		margin-top: 5px;
-		float: none!important;
+		float: none !important;
+	}
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1365px) {
+	.widget .btn-danger.bid {
+		width: 75%;
 	}
 }
 
