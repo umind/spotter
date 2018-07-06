@@ -18,9 +18,9 @@
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title" class="col-md-4 control-label">@lang('app.anrede')</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 registration">
                                 @foreach(getArray('title_types') as $key => $titleType)
-                                    <label>
+                                    <label class="radio-button">
                                         <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}"> {{ $titleType }}
                                     </label>
                                 @endforeach

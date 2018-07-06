@@ -5,17 +5,15 @@
 
     <div class="container">
 
-        <div id="wrapper">
+		<div id="admin-panel" class="row">
+			
+			<div class="col-sm-5 col-md-4 col-lg-3">
+				@include('admin.sidebar_menu')
+			</div>
 
-            @include('admin.sidebar_menu')
-
-            <div id="page-wrapper">
+			<div class="col-sm-7 col-md-8 col-lg-9">
                 @if( ! empty($title))
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header"> {{ $title }}  </h1>
-                        </div> <!-- /.col-lg-12 -->
-                    </div> <!-- /.row -->
+				<h1 class="page-header"> {{ $title }}  </h1>
                 @endif
 
                 @include('admin.flash_msg')
@@ -94,21 +92,15 @@
                         </table>
 
                         @if($user->id == auth()->user()->id)
-                            <a href="{{ route('profile_edit') }}"><i class="fa fa-pencil-square-o"></i> @lang('app.edit') </a>
+                            <a href="{{ route('profile_edit') }}" class="edit-profile"><i class="fa fa-pencil-square-o"></i> @lang('app.edit') </a>
                         @endif
                     </div>
                 </div>
+            </div>
 
+        </div>
 
-            </div>   <!-- /#page-wrapper -->
-
-
-
-
-        </div>   <!-- /#wrapper -->
-
-
-    </div> <!-- /#container -->
+    </div>
 @endsection
 
 @section('page-js')

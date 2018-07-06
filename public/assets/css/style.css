@@ -471,14 +471,59 @@ a.cat-view-more {
 	border: none;
 }
 
+/* Admin panel */
+
+#admin-panel {
+	margin: 40px 0;
+}
+
+#admin-panel .navbar-default {
+	padding: 0;
+}
+
+#admin-panel #side-menu a {
+	padding: 14px 15px 11px;
+	font-size: 15px;
+}
+
+#admin-panel #side-menu li > a > i {
+	margin-right: 10px;
+}
+
+#admin-panel #side-menu li > a > .fa {
+	width: 15px;
+	text-align: center;
+	vertical-align: text-top;
+}
+
+#admin-panel #side-menu li .label {
+	position: absolute;
+	right: 35px;
+	padding: 5px;
+}
+
+#admin-panel [type="radio"] {
+	height: 20px;
+	margin-bottom: 5px;
+	box-shadow: none;
+}
+
+#admin-panel .radio-button {
+	margin-right: 20px;
+}
+
+#admin-panel .btn-info.pull-right {
+	margin-top: 3px;
+}
+
 /**
 Page header
  */
 
 .page-header {
 	background: #eeeeee;
-	padding: 30px 0;
 	margin-top: 0;
+	padding: 10px 15px 8px;
 }
 
 .page-header h2 {
@@ -1465,6 +1510,18 @@ Auth Form
 	font-size: 25px;
 }
 
+/* Registration */
+
+.registration .radio-button {
+	margin-right: 20px;
+}
+
+.registration [type="radio"] {
+	height: 20px;
+	margin-bottom: 5px;
+	box-shadow: none;
+}
+
 /**
 Admin
  */
@@ -1472,16 +1529,6 @@ Admin
 img.thumb-listing-table {
 	max-width: 100px;
 	height: auto;
-}
-
-#side-menu a {
-	font-size: 15px;
-}
-
-#side-menu li .label {
-	position: absolute;
-	right: 30px;
-	padding: 5px;
 }
 
 /** Google map */
@@ -2068,6 +2115,34 @@ Auction
 	background-color: #EEA439;
 }
 
+/* Profile edit */
+
+.profile-avatar {
+	margin-bottom: 20px;
+}
+
+.profile-avatar img {
+	width: 120px;
+	height: 120px;
+}
+
+.edit-profile {
+	font-size: 16px;
+	color: #ffffff;
+	padding: 8px 15px 7px;
+	background-color: #337ab7;
+}
+
+.edit-profile:hover,
+.edit-profile:focus {
+	background-color: #265a88;
+	color: #ffffff;
+}
+
+.edit-profile i {
+	margin-right: 1px;
+}
+
 /*----------------------------
     Back-to-top start
 ----------------------------*/
@@ -2227,6 +2302,19 @@ Auction
 	ul.footer-menu li a {
 		padding: 0 5px;
 	}
+	#admin-panel {
+		margin: 30px 0;
+	}
+	#admin-panel .page-header {
+		margin-top: 20px;
+	}
+	#admin-panel .btn-info.pull-right {
+		margin-top: 5px;
+		float: none !important;
+	}
+	#admin-panel .admin h1 {
+		font-size: 30px;
+	}
 	#back-to-top {
 		bottom: 25px;
 	}
@@ -2359,6 +2447,16 @@ Auction
 	ul.footer-menu li a {
 		padding: 0 8px;
 	}
+	#admin-panel {
+		margin: 30px 0;
+	}
+	#admin-panel .page-header {
+		margin-top: 20px;
+	}
+	#admin-panel .btn-info.pull-right {
+		margin-top: 5px;
+		float: none !important;
+	}
 	#back-to-top {
 		bottom: 25px;
 	}
@@ -2445,6 +2543,18 @@ Auction
 	ul.footer-menu li a {
 		padding: 0 10px;
 	}
+	#admin-panel .col-sm-6.col-lg-3 {
+		width: 50%;
+		display: inline-block;
+		margin: 0;
+	}
+	#admin-panel .col-sm-6.col-lg-3:nth-child(2n) {
+		float: right;
+	}
+	#admin-panel .btn-info.pull-right {
+		margin-top: 3px;
+		float: right !important;
+	}
 }
 
 @media only screen and (min-width: 767px) and (max-width: 1023px) {
@@ -2487,6 +2597,10 @@ Auction
 	}
 	.item-loop .ads-thumbnail {
 		height: 200px;
+	}
+	#admin-panel .btn-info.pull-right {
+		margin-top: 5px;
+		float: none!important;
 	}
 }
 

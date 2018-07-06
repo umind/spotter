@@ -6,29 +6,27 @@
 
     <div class="container">
 
-        <div id="wrapper">
+		<div id="admin-panel" class="row">
+			
+			<div class="col-sm-5 col-md-4 col-lg-3">
+				@include('admin.sidebar_menu')
+			</div>
 
-            @include('admin.sidebar_menu')
-
-            <div id="page-wrapper">
+			<div class="col-sm-7 col-md-8 col-lg-9">
                 @if( ! empty($title))
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header"> {{ $title }}  </h1>
-                        </div> <!-- /.col-lg-12 -->
-                    </div> <!-- /.row -->
+				<h1 class="page-header"> {{ $title }}  </h1>
                 @endif
 
                 @include('admin.flash_msg')
 
                 <div class="row">
-                    <div class="col-sm-8 col-sm-offset-1 col-xs-12">
+                    <div class="col-sm-8 col-sm-offset-1">
 
                         {{ Form::open(['class' => 'form-horizontal']) }}
 
                         <div class="form-group {{ $errors->has('category_name')? 'has-error':'' }}">
-                            <label for="category_name" class="col-sm-4 control-label">@lang('app.category_name')</label>
-                            <div class="col-sm-8">
+                            <label for="category_name" class="col-sm-5 control-label">@lang('app.category_name')</label>
+                            <div class="col-sm-7">
                                 <input type="text" class="form-control" id="category_name" value="{{ old('category_name') }}" name="category_name" placeholder="@lang('app.category_name')">
                                 {!! $errors->has('category_name')? '<p class="help-block">'.$errors->first('category_name').'</p>':'' !!}
                             </div>
@@ -36,8 +34,8 @@
 
 
                         <div class="form-group {{ $errors->has('description')? 'has-error':'' }}">
-                            <label for="description" class="col-sm-4 control-label">@lang('app.description')</label>
-                            <div class="col-sm-8">
+                            <label for="description" class="col-sm-5 control-label">@lang('app.description')</label>
+                            <div class="col-sm-7">
                                 <textarea name="description" id="description" class="form-control" rows="6">{{ old('description') }}</textarea>
                                 {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
                             </div>
@@ -84,15 +82,11 @@
 
 
 
-            </div>   <!-- /#page-wrapper -->
+            </div>
 
+        </div>
 
-
-
-        </div>   <!-- /#wrapper -->
-
-
-    </div> <!-- /#container -->
+    </div>
 @endsection
 
 @section('page-js')

@@ -8,31 +8,6 @@ body {
     background-color: #f8f8f8;
 }
 
-#wrapper {
-    width: 100%;
-    background-color: #fff;
-    min-height: 800px;
-}
-
-#page-wrapper {
-    padding: 0 15px;
-    min-height: 800px;
-    background-color: #fff;
-}
-#page-wrapper h1.page-header{
-    margin: 15px 0;
-}
-#page-wrapper {
-    display: inline-block;
-    width: 70%;
-    padding: 0 30px;
-    border-left: 1px solid #e7e7e7;
-}
-
-@media(min-width:768px) {
-
-}
-
 .navbar-top-links {
     margin-right: 0;
 }
@@ -133,12 +108,6 @@ body {
 
 .sidebar .nav-third-level li a {
     padding-left: 52px;
-}
-
-.sidebar {
-    z-index: 1;
-    float: left;
-    width: 250px;
 }
 
 @media(min-width:768px) {
