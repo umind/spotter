@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('auction_begins')? 'has-error':'' }}">
+{{--                         <div class="form-group {{ $errors->has('auction_begins')? 'has-error':'' }}">
                             <label for="products" class="col-sm-4 control-label">@lang('app.auction_begins')</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" 
@@ -92,7 +92,7 @@
                                     placeholder="@lang('app.auction_begins')">
                                 {!! $errors->has('auction_begins')? '<p class="help-block">'.$errors->first('auction_begins').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group {{ $errors->has('auction_deadline')? 'has-error':'' }}">
                             <label for="products" class="col-sm-4 control-label">@lang('app.auction_deadline')</label>

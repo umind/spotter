@@ -85,6 +85,13 @@ class Ad extends Model
             return true;
         return false;
     }
+
+    public function is_editable() {
+        if ($this->status == 0 || $this->status == 1) {
+            return true;
+        }
+        return false;
+    }
     
     public function full_address(){
         $location = '';

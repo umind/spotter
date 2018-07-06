@@ -53,6 +53,16 @@ class BidController extends Controller
         // get max bid that you enter inside place MAX bid field
         $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
 
+
+        // check if user that is bidding has already the highest bid (so that he cannot bid himself)
+        $userWithCurrentMaxBid = User::whereHas('bids', function ($q) {
+            $q->orderBy('max_bid_amount', 'desc');
+        })->first();
+
+        if (condition) {
+            return back()->with('error', trans('app.cannot_bid_yourself'));
+        }
+
         // for notification also
         $userWithCurrentMaxBid = User::whereHas('bids', function ($q) {
             $q->orderBy('max_bid_amount', 'desc');

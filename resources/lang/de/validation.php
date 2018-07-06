@@ -237,13 +237,12 @@ return [
         'subject' => 'Betreff',
         'comment' => 'Kommentar',
 
-
         // post an auction
         'category' => 'Kategorie',
         'category_name' => 'Kategorie Name',
         'ad_title' => 'Titel',
         'bid_no' => 'Los-Nummer',
-        'auction_no' => 'Auktion-Nummer',
+        'auction_no' => 'Artikel-Nummer',
         'price_increaser' => 'Preis erhöhen',
         'ad_description' => 'Beschreibung',
         'seller_phone' => 'Verkäufer Telefon',
@@ -255,7 +254,7 @@ return [
         'message' => 'Nachricht',
 
         // post an event
-        'products' => 'Produkte',
+        'products' => 'Artikel',
         'auctioner' => 'Auktionär',
         'auction_deadline' => 'Gebotsende',
 

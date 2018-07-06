@@ -54,7 +54,7 @@
                                                 <a href="{{route('job_applicants', $ad->id)}}" class="btn btn-info" data-toggle="tooltip" title="@lang('app.applicants')"><i class="fa fa-briefcase"></i> {{$ad->applicants->count()}} </a>
                                             @endif
 
-                                            @if($ad->status == '0')
+                                            @if($ad->status == '0' || $ad->status == '1')
                                                 <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
                                             @endif
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>

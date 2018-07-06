@@ -2,6 +2,8 @@
 
 return [
     //newest
+    'cannot_bid_yourself' => 'You cannot bid yourself. Your current bid is the highest one.',
+    'finished_events' => 'Finished Events',
     'choose_event' => 'Choose An Event',
     'max_bid_desc' => 'Max. Bid allows you to enter your maximum bid amount. The system automatically offers you up to this total.',
     'no_bids_after_deadline' => 'There were no bids regarding this article.',

@@ -15,7 +15,7 @@ class EventController extends Controller
 {
     public function index(){
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
-        $events = Event::published()->paginate(10);
+        $events = Event::active()->paginate(10);
         return view('events.index', compact('events'));
     }
 
@@ -71,7 +71,7 @@ class EventController extends Controller
             $ad->save();
         }
 
-        return redirect()->route('pending_events')->with('success', trans('app.ad_created_msg'));
+        return redirect()->route('pending_events')->with('success', trans('app.auction_created_msg'));
     }
 
     public function edit(Event $event) {
@@ -110,11 +110,13 @@ class EventController extends Controller
         }
 
         if ($event->status == '2') {
-            return redirect()->route('closed_events')->with('success', trans('app.ad_created_msg'));
+            return redirect()->route('closed_events')->with('success', trans('app.auction_created_msg'));
         } elseif($event->status == '1') {
-            return redirect()->route('active_events')->with('success', trans('app.ad_created_msg'));
+            return redirect()->route('active_events')->with('success', trans('app.auction_created_msg'));
         } elseif ($event->status == '0') {
-            return redirect()->route('pending_events')->with('success', trans('app.ad_created_msg'));
+            return redirect()->route('pending_events')->with('success', trans('app.auction_created_msg'));
+        } elseif ($event->status == '3') {
+            return redirect()->route('finished_events')->with('success', trans('app.auction_created_msg'));
         }
     }
 
@@ -122,7 +124,7 @@ class EventController extends Controller
     {
         $event = Auth::user()->events()->findOrFail($request->event);
         $event->delete();
-        return ['success'=>1, 'msg'=>trans('app.ad_deleted_msg')];
+        return ['success'=>1, 'msg'=>trans('app.auction_deleted_msg')];
     }
 
     public function pending()
@@ -141,12 +143,20 @@ class EventController extends Controller
         return view('admin.events.active_events', compact('title', 'events'));
     }
 
-        public function closed()
+    public function closed()
     {
         $title = trans('app.closed_events');
         $events = Auth::user()->events()->whereStatus('2')->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.events.closed_events', compact('title', 'events'));
+    }
+
+    public function finished()
+    {
+        $title = trans('app.finished_events');
+        $events = Auth::user()->events()->whereStatus('3')->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.events.finished_events', compact('title', 'events'));
     }
 
     public function changeStatus(Request $request){
@@ -174,6 +184,6 @@ class EventController extends Controller
 
         $event->auctions()->update(['status' => '2']);
 
-        return redirect()->route('active_events')->with('success', trans('app.auction_closed_msg'));
+        return redirect()->route('active_events')->with('success', trans('app.event_closed_msg'));
     }
 }

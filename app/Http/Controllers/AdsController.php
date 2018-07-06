@@ -248,6 +248,8 @@ class AdsController extends Controller
             $event = Event::find($request->event);
             if ($event) {
                 $syncData = $event->id;
+                $created_ad->expired_at = $event->auction_ends;
+                $created_ad->save();
             } 
             $created_ad->events()->sync($syncData);
             
@@ -453,6 +455,9 @@ class AdsController extends Controller
             $event = Event::find($request->event);
             if ($event) {
                 $syncData = $event->id;
+                $ad->expired_at = $event->auction_ends;
+                $ad->status = $event->status;
+                $ad->save();
             } 
             $ad->events()->sync($syncData);
 

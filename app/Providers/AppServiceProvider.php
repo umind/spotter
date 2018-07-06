@@ -134,8 +134,8 @@ class AppServiceProvider extends ServiceProvider
                     }
 
                     // close an event and auctions inside
-                    // $event->status = '2';
-                    // $event->save();
+                    $event->status = '3';
+                    $event->save();
                     // $event->auctions()->update(['status' => '3']);
                 }
             }
