@@ -474,7 +474,8 @@ a.cat-view-more {
 /* Admin panel */
 
 #admin-panel {
-	margin: 40px 0;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 #admin-panel .navbar-default {
@@ -2319,7 +2320,8 @@ Auction
 		padding: 0 5px;
 	}
 	#admin-panel {
-		margin: 30px 0;
+		margin-top: 30px;
+		margin-bottom: 30px;
 	}
 	#admin-panel .page-header {
 		margin-top: 20px;
@@ -2467,7 +2469,8 @@ Auction
 		padding: 0 8px;
 	}
 	#admin-panel {
-		margin: 30px 0;
+		margin-top: 30px;
+		margin-bottom: 30px;
 	}
 	#admin-panel .page-header {
 		margin-top: 20px;

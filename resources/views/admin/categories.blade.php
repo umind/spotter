@@ -25,8 +25,8 @@
                         {{ Form::open(['class' => 'form-horizontal']) }}
 
                         <div class="form-group {{ $errors->has('category_name')? 'has-error':'' }}">
-                            <label for="category_name" class="col-sm-5 control-label">@lang('app.category_name')</label>
-                            <div class="col-sm-7">
+                            <label for="category_name" class="col-sm-4 control-label">@lang('app.category_name')</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" id="category_name" value="{{ old('category_name') }}" name="category_name" placeholder="@lang('app.category_name')">
                                 {!! $errors->has('category_name')? '<p class="help-block">'.$errors->first('category_name').'</p>':'' !!}
                             </div>
@@ -34,8 +34,8 @@
 
 
                         <div class="form-group {{ $errors->has('description')? 'has-error':'' }}">
-                            <label for="description" class="col-sm-5 control-label">@lang('app.description')</label>
-                            <div class="col-sm-7">
+                            <label for="description" class="col-sm-4 control-label">@lang('app.description')</label>
+                            <div class="col-sm-8">
                                 <textarea name="description" id="description" class="form-control" rows="6">{{ old('description') }}</textarea>
                                 {!! $errors->has('description')? '<p class="help-block">'.$errors->first('description').'</p>':'' !!}
                             </div>
