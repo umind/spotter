@@ -55,11 +55,11 @@ class BidController extends Controller
 
 
         // check if user that is bidding has already the highest bid (so that he cannot bid himself)
-        $userWithCurrentMaxBid = User::whereHas('bids', function ($q) {
-            $q->orderBy('max_bid_amount', 'desc');
-        })->first();
+        $userIDWithCurrentHighestBid = User::whereHas('bids', function ($q) {
+            $q->orderBy('bid_amount', 'desc');
+        })->value('id');
 
-        if (condition) {
+        if ($userIDWithCurrentHighestBid == $user->id) {
             return back()->with('error', trans('app.cannot_bid_yourself'));
         }
 

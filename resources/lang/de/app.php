@@ -2,6 +2,7 @@
 
 return [
     // new
+    'cannot_bid_yourself' => 'Sie können sich nicht selbst überbieten. Ihr aktuelles Gebot ist das höchste.',
     'finished_events' => 'abgelaufene Auktionen',
     'choose_event' => 'Auktion auswählen',
     'max_bid_desc' => 'Max. Gebot ermöglicht Ihnen Ihre maximale Gebotssumme einzutragen. Das System bietet für Sie automatisch weiter bis zu dieser Summe.',
