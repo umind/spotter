@@ -507,6 +507,7 @@ a.cat-view-more {
 	height: 20px;
 	margin-bottom: 5px;
 	box-shadow: none;
+	cursor: pointer;
 }
 
 #admin-panel .radio-button {
@@ -1533,6 +1534,7 @@ Auth Form
 	height: 20px;
 	margin-bottom: 5px;
 	box-shadow: none;
+	cursor: pointer;
 }
 
 /**
