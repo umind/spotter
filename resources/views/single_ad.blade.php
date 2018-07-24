@@ -671,7 +671,10 @@
 
 
             // init zoom
-            $("#zoom_01").elevateZoom({gallery:'gallery_01'}); 
+            $("#zoom_01").elevateZoom({
+				gallery:'gallery_01',
+				scrollZoom:'True'
+			}); 
             //pass the images to Fancybox
             $("#zoom_01").bind("click", function(e) {  
               var ez =   $('#zoom_01').data('elevateZoom'); 
