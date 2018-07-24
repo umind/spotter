@@ -382,6 +382,8 @@ class AdsController extends Controller
         $user = Auth::user();
         $user_id = $user->id;
 
+        // dd(Carbon::parse($request->bid_deadline));
+
         if (! $user->is_admin()){
             if ($ad->user_id != $user_id){
                 return view('admin.error.error_404');
@@ -459,7 +461,7 @@ class AdsController extends Controller
             $event = Event::find($request->event);
             if ($event) {
                 $syncData = $event->id;
-                $ad->expired_at = $event->auction_ends;
+                // $ad->expired_at = $event->auction_ends;
                 $ad->status = $event->status;
                 $ad->save();
             } 
@@ -997,9 +999,15 @@ class AdsController extends Controller
         }
 
         $title = $ad->title;
+        $event = $ad->events()->first();
 
         //Get Related Ads, add [->whereCountryId($ad->country_id)] for more specific results
-        $related_ads = Ad::active()->whereCategoryId($ad->category_id)->where('id', '!=',$ad->id)->with('category', 'city')->limit($limit_regular_ads)->orderByRaw('RAND()')->get();
+        $related_ads = Ad::active()->whereHas('events', function ($q) use ($event) {
+                                        $q->where('events.id', $event->id);
+                                    })->where('id', '!=', $ad->id)
+                                        ->with('category', 'city')
+                                        ->orderBy('expired_at')
+                                        ->get();
 
         // get all bids for this auction and also the max bid by the logged in user if set
         $userMaxBid = $ad->bids()->whereHas('user', function ($q) {

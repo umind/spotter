@@ -98,44 +98,54 @@ class AppServiceProvider extends ServiceProvider
 
                     foreach ($auctions as $auction) {
 
-                        
-                        // auction not sold (has not been bidded)
-                        $auction->update(['status' => '4']);
-                        
-                        // won bid
-                        $bid = $auction->bids()
-                                        ->where('is_accepted', 0)
-                                        ->orderBy('max_bid_amount', 'desc')
-                                        ->orderBy('bid_amount', 'desc')
-                                        ->first();
 
-                        if ($bid) {
-                            $bid->is_accepted = 1;
-                            $bid->won_bid_amount = $bid->bid_amount;
-                            $bid->save();
+                        if (Carbon::parse($auction->expired_at)->isPast()) {
+                            // auction not sold (has not been bidded)
+                            $auction->update(['status' => '4']);
+                            
+                            // won bid
+                            $bid = $auction->bids()
+                                            ->where('is_accepted', 0)
+                                            ->orderBy('max_bid_amount', 'desc')
+                                            ->orderBy('bid_amount', 'desc')
+                                            ->first();
 
-                            $wonUser = $bid->user;
+                            if ($bid) {
+                                $bid->is_accepted = 1;
+                                $bid->won_bid_amount = $bid->bid_amount;
+                                $bid->save();
 
-                            $notification = new Notification;
-                            $notification->title = trans('app.you_won');
-                            $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($bid->won_bid_amount)]);
-                            $notification->url = url('auction/' . $auction->id);
-                            $notification->date = Carbon::now();
+                                $wonUser = $bid->user;
 
-                            $wonUser->notifications()->save($notification);
+                                $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
 
-                            // activate notification bell
-                            $wonUser->notification_bell = 1;
-                            $wonUser->save();
+                                $notification = new Notification;
+                                $notification->title = trans('app.you_won');
+                                $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
+                                $notification->url = url('auction/' . $auction->id);
+                                $notification->date = Carbon::now();
 
-                            // auction sold
-                            $auction->update(['status' => '3']);
+                                $wonUser->notifications()->save($notification);
+
+                                // activate notification bell
+                                $wonUser->notification_bell = 1;
+                                $wonUser->save();
+
+                                // auction sold
+                                $auction->update(['status' => '3']);
+                            }
                         }
                     }
 
-                    // close an event and auctions inside
-                    $event->status = '3';
-                    $event->save();
+                    // check if all the articles inside the auction are expired 
+                    $countArticles = $event->auctions()->where('status', '1')->whereDate('expired_at', '<=', Carbon::now())->count();
+
+                    // close an event inside if all articles underneath him are finished
+                    if ($countArticles < 1) {
+                        $event->status = '3';
+                        $event->save();
+                    }
+
                     // $event->auctions()->update(['status' => '3']);
                 }
             }

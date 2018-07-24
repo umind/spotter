@@ -41,6 +41,8 @@
                                                 @else
                                                     <span>@lang('app.event_not_assigned')</span>
                                                 @endif
+                                                <br>
+                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
                                                 
                                             </p>
                                         </td>

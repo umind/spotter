@@ -22,7 +22,7 @@ return [
     'assign_to_event' => 'Einer Auktion zuweisen',
     'event_not_assigned' => 'Keiner Auktion zugewiesen',
     'sold_to' => 'verkauft an',
-    'won_and_bought_for' => 'Sie haben an einer Artikel gewonnen. Artikel gekauft für :won_bid_amount',
+    'won_and_bought_for' => 'Sie haben an einer Artikel gewonnen. Artikel gekauft für <strong>:won_bid_amount</strong>.',
     'you_won' => 'Die Artikel ist beendet. Nur Sie können noch diese Seite sehen.',
     'ad_closed' => 'Die Artikel ist beendet. Nur Sie können noch diese Seite sehen.',
     'active_events' => 'Aktive Auktionen',

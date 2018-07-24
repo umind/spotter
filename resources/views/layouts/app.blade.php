@@ -111,7 +111,10 @@
 												@if($notifications->count() > 0)
 													@foreach($notifications as $notification)
 														<li style="{{ !$notification->is_read ? 'background-color: #edf2fa;' : '' }}">
-															<a href="{{ route('show_notification', $notification->id) }}">{{ $notification->text }}</a>
+															<a href="{{ route('show_notification', $notification->id) }}">
+																<span>{!! $notification->text !!}</span>
+																<span>{{ Carbon\Carbon::parse($notification->created_at)->formatLocalized(get_option('date_format')) }}</span>
+															</a>
 														</li>
 													@endforeach
 												@else

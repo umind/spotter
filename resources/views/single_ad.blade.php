@@ -360,7 +360,7 @@
                                         @if(Auth::check() && Auth::user()->is_admin())
                                             @if($wonBid && $wonUser)
                                                 @php 
-                                                    $wonBidAmountWithTax = $wonBid->won_bid_amount + ($wonBid->won_bid_amount*7.7/100) 
+                                                    $wonBidAmountWithTax = $wonBid->won_bid_amount + ($wonBid->won_bid_amount*7.7/100)
                                                 @endphp
                                                 <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
                                                 <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} inkl. MwSt <strong>{{ themeqx_price($wonBidAmountWithTax) }}</strong></p>
@@ -497,7 +497,7 @@
                                             <div class="ad-box-caption-title">
                                                 <h3>
                                                     <a class="ad-box-title" href="{{ route('single_ad', [$rad->id, $rad->slug]) }}" title="{{ $rad->title }}">
-                                                        {{ str_limit($ad->title, 40) }}
+                                                        {{ str_limit($rad->title, 40) }}
                                                     </a>
                                                 </h3>
                                             </div>

@@ -27,7 +27,9 @@
                                             <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
                                         </td>
                                         <td>
-                                            <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a> ({!! $ad->status_context() !!})</h5>
+                                            <h5>
+                                                <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a> ({!! $ad->status_context() !!})</h5>
+                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
                                         </td>
 
                                         <td>
