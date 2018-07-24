@@ -91,7 +91,7 @@
                             </tr> --}}
                         </table>
 
-                        @if($user->id == auth()->user()->id)
+                        @if($user->id == auth()->user()->id || $auth_user->is_admin())
                             <a href="{{ route('profile_edit') }}" class="edit-profile"><i class="fa fa-pencil-square-o"></i> @lang('app.edit') </a>
                         @endif
                     </div>

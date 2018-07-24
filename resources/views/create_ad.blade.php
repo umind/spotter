@@ -121,13 +121,13 @@
                         </div>
                     </div>
 
-                    {{-- <div class="form-group {{ $errors->has('bid_deadline')? 'has-error':'' }}">
+                    <div class="form-group {{ $errors->has('bid_deadline')? 'has-error':'' }}">
                         <label for="bid_deadline" class="col-sm-4 control-label"> @lang('app.bid_deadline')</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="bid_deadline" value="{{ old('bid_deadline') }}" name="bid_deadline" placeholder="@lang('app.bid_deadline')">
                             {!! $errors->has('bid_deadline')? '<p class="help-block">'.$errors->first('bid_deadline').'</p>':'' !!}
                         </div>
-                    </div> --}}
+                    </div>
 
                     <legend>@lang('app.image')</legend>
 
@@ -322,20 +322,15 @@
         // instance, using default configuration.
         CKEDITOR.replace( 'content_editor' );
     </script>
-    <script src="{{asset('assets/plugins/bootstrap-datepicker-1.6.4/js/bootstrap-datepicker.js')}}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
-        $('#application_deadline, #bid_deadline').datepicker({
-            format: "yyyy-mm-dd",
-            todayHighlight: true,
-            startDate: new Date(),
-            autoclose: true
-        });
-        $('#build_year').datepicker({
-            format: "yyyy",
-            viewMode: "years",
-            minViewMode: "years",
-            autoclose: true
-        });
+        $(function () {
+            $('#bid_deadline').datetimepicker({
+                format: 'DD-MM-YYYY HH:mm'
+            });
+        })
     </script>
 
     <script>

@@ -183,7 +183,7 @@
 				<div class="collapse navbar-collapse" id="app-navbar-collapse">
 					<!-- Left Side Of Navbar -->
 					<ul class="nav navbar-nav">
-						<li><a href="{{route('home')}}">@lang('app.auctions')</a></li>
+						<li><a href="{{route('home')}}">@lang('app.events')</a></li>
 						<li><a href="{{ route('products')}}">@lang('app.products')</a> </li>
 						@if($header_menu_pages->count() > 0)
 							@foreach($header_menu_pages as $page)

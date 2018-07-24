@@ -75,7 +75,7 @@
                                     <div class="starting-price">@lang('app.starting_price') {{ themeqx_price($ad->price) }}</div>
                                 </div>
 
-                                <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
+                                <div class="countdown product-countdown" data-expire-date="{{ $ad->expired_at }}" ></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
                                 </div>

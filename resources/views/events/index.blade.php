@@ -6,9 +6,6 @@
     <div id="regular-ads-container">
         <div class="container">
 			<div class="auction">
-				<div class="front-ads-head">
-					<h2 class="text-uppercase">@lang('app.ads')</h2>
-				</div>
 				@if($events->count())
 					@foreach($events as $event)
 						<div class="auction-header">
@@ -43,11 +40,24 @@
 									<p>@lang('app.venue'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="col-md-4 text-center">
-									<p class="text-red countdown" data-expire-date="{{ $event->auction_ends }}"></p>
+									@php 
+										$latestProductToExpire = $event->auctions()->latest('expired_at')->first();
+										// $dateUsedForCountdown = 
+										$dataExpireDate = "data-expire-date='{$event->auction_ends}'"
+									@endphp
+									<p class="text-red {{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown' }}">
+										@if(Carbon\Carbon::parse($event->auction_ends)->isPast())
+											@if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
+												@lang('app.auction_has_ended')
+											@else
+												@lang('app.auction_soon_ends')
+											@endif
+										@endif
+									</p>
 								</div>
 								<div class="col-md-4 text-right">
 									<p>@lang('app.date'): {{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }}</p>
-									<p>@lang('app.ends'): {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }}</p>
+									<p>@lang('app.auction_starts_to_end'): {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }}</p>
 								</div>
 							</div>
 						</div>

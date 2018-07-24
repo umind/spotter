@@ -164,7 +164,7 @@ return [
         'nickname_1'            => 'Nickname',
         'client_photo'           => 'Photo',
         "type" => 'Typ',
-        "city" => 'Stadt',
+        "city" => 'Ort',
         "radius" => 'Radius',
         "canton" => 'Kanton',
         "services" => 'Services',
@@ -266,6 +266,9 @@ return [
         // register
         'title' => 'Anrede',
         'user_name' => 'Nutzername',
+
+        // 
+        'country_id' => 'Land',
     ],
 
 ];

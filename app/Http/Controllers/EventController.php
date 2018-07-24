@@ -64,13 +64,6 @@ class EventController extends Controller
 
         $event->auctions()->sync($request->products);
 
-        // assign bid deadline to every product the same as the event deadline
-        foreach ($request->products as $product) {
-            $ad = Ad::find($product);
-            $ad->expired_at = Carbon::parse($request->auction_deadline);
-            $ad->save();
-        }
-
         return redirect()->route('pending_events')->with('success', trans('app.auction_created_msg'));
     }
 
@@ -107,7 +100,6 @@ class EventController extends Controller
             if ($event->status == '1') {
                 $ad->status = '1';
             }
-            $ad->expired_at = Carbon::parse($request->auction_deadline);
             $ad->save();
         }
 

@@ -198,7 +198,7 @@ class BidController extends Controller
 
         $user = User::find($bid->user_id);
 
-        return view('admin.profile', compact('title', 'user'));
+        return view('admin.profile', compact('title', 'user', 'auth_user'));
     }
 
 

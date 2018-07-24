@@ -359,8 +359,11 @@
                                         <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
                                         @if(Auth::check() && Auth::user()->is_admin())
                                             @if($wonBid && $wonUser)
+                                                @php 
+                                                    $wonBidAmountWithTax = $wonBid->won_bid_amount + ($wonBid->won_bid_amount*7.7/100) 
+                                                @endphp
                                                 <p>@lang('app.sold_to'): {{ $wonUser->user_name }}</p>
-                                                <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} </p>
+                                                <p>@lang('app.sold_for'): {{ themeqx_price($wonBid->won_bid_amount) }} inkl. MwSt <strong>{{ themeqx_price($wonBidAmountWithTax) }}</strong></p>
                                             @elseif ($ad->status == '4')
                                                 <p>@lang('app.no_bids_after_deadline')</p>
                                             @endif
@@ -415,7 +418,7 @@
                             @else
 
                                 <h3>@lang('app.general_info')</h3>
-                                <p><span class="ad-info-name"><i class="fa fa-money"></i> @lang('app.price')</span> <span class="ad-info-value">{{ themeqx_price_ng($ad->price) }}</span></p>
+                                <p><span class="ad-info-name"><i class="fa fa-money"></i> @lang('app.starting_price')</span> <span class="ad-info-value">{{ themeqx_price_ng($ad->price) }}</span></p>
 
                             @endif
 

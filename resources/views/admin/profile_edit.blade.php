@@ -28,7 +28,7 @@
                             <div class="col-sm-8">
                                 @foreach(getArray('title_types') as $key => $titleType)
                                     <label class="radio-button">
-                                        <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}"> {{ $titleType }}
+                                        <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}" {{ $user->title == $key ? 'checked' : '' }}> {{ $titleType }}
                                     </label>
                                 @endforeach
                                 {!! $errors->has('title')? '<p class="help-block">'.$errors->first('title').'</p>':'' !!}
@@ -124,7 +124,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-4">
-                                <button type="submit" class="btn btn-primary">@lang('app.edit')</button>
+                                <button type="submit" class="btn btn-primary">@lang('app.save')</button>
                             </div>
                         </div>
 

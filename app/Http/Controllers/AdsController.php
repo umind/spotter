@@ -127,6 +127,7 @@ class AdsController extends Controller
             'auction_no'          => 'required',
             'price'          => 'required',
             'price_increaser'          => 'required',
+            'bid_deadline'          => 'required',
             'ad_description'    => 'required',
         ];
 
@@ -197,6 +198,7 @@ class AdsController extends Controller
             'ad_condition'      => $request->condition,
             'price'             => $request->price,
             'price_increaser'   => $request->price_increaser,
+            'expired_at'        => Carbon::parse($request->bid_deadline),
             'is_negotiable'     => $is_negotialble,
 
             'seller_name'       => $request->seller_name,
@@ -394,6 +396,7 @@ class AdsController extends Controller
             'auction_no'          => 'required',
             'price'          => 'required',
             'price_increaser'          => 'required',
+            'bid_deadline'          => 'required',
             'ad_description'    => 'required',
         ];
 
@@ -425,11 +428,12 @@ class AdsController extends Controller
 
         $data = [
             'title'             => $request->ad_title,
-            'auction_no'             => $request->auction_no,
-            'bid_no'             => $request->bid_no,
+            'auction_no'        => $request->auction_no,
+            'bid_no'            => $request->bid_no,
             'description'       => $request->ad_description,
             'price'             => $request->price,
-            'price_increaser'             => $request->price_increaser,
+            'price_increaser'   => $request->price_increaser,
+            'expired_at'        => Carbon::parse($request->bid_deadline),
             'is_negotiable'     => $is_negotialble,
 
             'seller_name'       => $request->seller_name,

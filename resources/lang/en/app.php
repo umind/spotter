@@ -11,6 +11,10 @@ return [
 
     // newest
     'ends' => 'Ends',
+    'auction_starts_to_end' => 'Auction starts to end',
+    'auction_has_ended' => 'Auktion ended',
+    'auction_soon_ends' => 'Auktion soon to be ended',
+    'save' => 'Save',
     'anrede' => 'Title',
     'title_types' => ['Mr.', 'Mrs.', 'Company'],
     'last_name' => 'First Name',

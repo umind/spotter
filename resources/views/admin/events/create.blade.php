@@ -94,9 +94,9 @@
                         </div> --}}
 
                         <div class="form-group {{ $errors->has('auction_deadline')? 'has-error':'' }}">
-	                        <label for="auction_deadline" class="col-sm-4 control-label">@lang('app.bidding_deadline')</label>
+	                        <label for="auction_deadline" class="col-sm-4 control-label">@lang('app.auction_starts_to_end')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="auction_deadline" value="{{ old('auction_deadline') }}" name="auction_deadline" placeholder="@lang('app.bidding_deadline')">
+                                <input type="text" class="form-control" id="auction_deadline" value="{{ old('auction_deadline') }}" name="auction_deadline" placeholder="@lang('app.auction_starts_to_end')">
                                 {!! $errors->has('auction_deadline')? '<p class="help-block">'.$errors->first('auction_deadline').'</p>':'' !!}
                             </div>
                         </div>
