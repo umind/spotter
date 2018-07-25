@@ -31,7 +31,7 @@
 									<p><span>@lang('app.description'):</span><span>{!! nl2br($event->description) !!}</span></p>
                                 </div>
 							</div>
-							<div class="col-md-4 text-md-right">
+							<div class="col-md-4 text-right">
 								<img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" />
 							</div>
 						</div>
