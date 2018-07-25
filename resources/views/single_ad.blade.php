@@ -318,7 +318,7 @@
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
 
-                                        <p>{{sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
+                                        {{-- <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p> --}}
                                         <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p>
 
                                         {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}

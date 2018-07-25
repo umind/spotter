@@ -708,7 +708,7 @@ return [
     'price_increaser'                    => 'Preis erhöhen',
     'bid_deadline'                      => 'Gebotsende',
     'current_bid'                       => 'Aktuelles Gebot',
-    'before_bidding_sign_in_info'       => 'Sie müssen <a href="'.url('login').'">eingeloggt</a> sein oder <a href="'.url('register').'">registriren</a> Sie sich, um bieten zu können.',
+    'before_bidding_sign_in_info'       => 'Sie müssen <a href="'.url('login').'">eingeloggt</a> sein oder <a href="'.url('register').'">registrieren</a> Sie sich, um bieten zu können.',
     'bid_deadline_info'                 => 'Gebotsende %s läuft ab in %s',
     'bid_deadline_closed_info'          => 'Gebot %s wurde abgeschlossen am %s',
     'place_bid'                         => 'Gebot abgeben',
