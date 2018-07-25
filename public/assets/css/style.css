@@ -2053,6 +2053,11 @@ Auction
 	background-color: rgb(230, 230, 230);
 }
 
+#sub-header .right-info .notification-list .date-notification {
+	display: block;
+	font-size: 12px;
+}
+
 .nav-sarchbar li {
 	height: 40px;
 }

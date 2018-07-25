@@ -113,7 +113,7 @@
 														<li style="{{ !$notification->is_read ? 'background-color: #edf2fa;' : '' }}">
 															<a href="{{ route('show_notification', $notification->id) }}">
 																<span>{!! $notification->text !!}</span>
-																<span>{{ Carbon\Carbon::parse($notification->created_at)->formatLocalized(get_option('date_format')) }}</span>
+																<span class="date-notification">{{ Carbon\Carbon::parse($notification->created_at)->formatLocalized(get_option('date_format')) }}</span>
 															</a>
 														</li>
 													@endforeach
