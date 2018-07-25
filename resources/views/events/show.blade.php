@@ -23,11 +23,11 @@
 									<p>@lang('app.auction_starts_to_end'): {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</p>
 								</div>
                                 <div class="event_view_dates">
-                                    <img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
+                                    <img src="{{ asset('assets/img/calendar.png') }}" alt="assets/img/calendar.png" />
 									<p><span>@lang('app.view_dates'):</span><span>{!! nl2br($event->view_dates) !!}</span></p>
                                 </div>
                                 <div class="event_description">
-                                    <img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
+                                    <img src="{{ asset('assets/img/description.png') }}" alt="assets/img/description.png" />
 									<p><span>@lang('app.description'):</span><span>{!! nl2br($event->description) !!}</span></p>
                                 </div>
 							</div>
