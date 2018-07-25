@@ -10,9 +10,15 @@
 						<div class="row">
 							<div class="col-md-8">
 								<h2 class="text-uppercase">{{ $event->title }}</h2>
+<!--
 								<div class="category">
 									<img src="{{ asset('assets/img/category.png') }}" title="Category" alt="assets/img/category.png" />
 									<p>All Categories</p>
+								</div>
+-->							
+								<div class="auctioneer">
+									<img src="{{ asset('assets/img/auctioneer.png') }}" title="Auctioneer" alt="assets/img/auctioneer.png" />
+									<p>Auktionator: </p>
 								</div>
 								<div class="location">
 									<img src="{{ asset('assets/img/location.png') }}" title="Location" alt="assets/img/location.png" />
@@ -20,7 +26,7 @@
 								</div>
 								<div class="time">
 									<img src="{{ asset('assets/img/time.png') }}" title="Time" alt="assets/img/time.png" />
-									<p>Time remaining: 52 days, 11:45 hours</p>
+									<p>Ende der Auktionen ab: 24.07.2018, 11:45 Uhr</p>
 								</div>
 							</div>
 							<div class="col-md-4 text-right">

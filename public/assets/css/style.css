@@ -2189,7 +2189,7 @@ Auction
 	margin: 0;
 }
 
-#auction-info .category,
+#auction-info .auctioneer,
 #auction-info .location {
 	margin: 20px;
 	margin-left: 0;
