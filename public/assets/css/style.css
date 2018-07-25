@@ -2196,10 +2196,16 @@ Auction
 	display: inline-block;
 }
 
+
+#auction-info .event_view_dates,
+#auction-info .event_description {
+	margin-top: 20px;
+}
+
 #auction-info img {
 	width: 25px;
 	margin-right: 5px;
-	vertical-align: text-bottom;
+	vertical-align: top;
 }
 
 #auction-info p {
@@ -2210,6 +2216,16 @@ Auction
 #auction-info .auction {
 	margin: 0;
 	width: 200px;
+}
+
+#auction-info .event_view_dates span,
+#auction-info .event_description span {
+	float: left;
+}
+
+#auction-info .event_view_dates span:first-child,
+#auction-info .event_description span:first-child {
+	margin-right: 5px;
 }
 
 /*----------------------------

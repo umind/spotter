@@ -24,11 +24,11 @@
 								</div>
                                 <div class="event_view_dates">
                                     <img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
-                                    <p>@lang('app.view_dates'): {!! nl2br($event->view_dates) !!}</p>
+									<p><span>@lang('app.view_dates'):</span><span>{!! nl2br($event->view_dates) !!}</span></p>
                                 </div>
                                 <div class="event_description">
                                     <img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
-                                    <p>@lang('app.description'): {!! nl2br($event->description) !!}</p>
+									<p><span>@lang('app.description'):</span><span>{!! nl2br($event->description) !!}</span></p>
                                 </div>
 							</div>
 							<div class="col-md-4 text-right">
