@@ -2165,6 +2165,58 @@ Auction
 }
 
 /*----------------------------
+    Auction start
+----------------------------*/
+
+#auction {
+	background-color: #252654;
+	margin-bottom: 50px;
+}
+
+#auction-info {
+	color: #ffffff;
+	padding: 30px 40px;
+	margin: 0;
+	font-size: 16px;
+}
+
+#auction-info .row {
+  display: flex;
+  align-items: center;
+}
+
+#auction-info h2 {
+	margin: 0;
+}
+
+#auction-info .category,
+#auction-info .location {
+	margin: 20px;
+	margin-left: 0;
+	display: inline-block;
+}
+
+#auction-info img {
+	width: 25px;
+	margin-right: 5px;
+	vertical-align: text-bottom;
+}
+
+#auction-info p {
+	display: inline-block;
+	margin: 0;
+}
+
+#auction-info .auction {
+	margin: 0;
+	width: 200px;
+}
+
+/*----------------------------
+    Auction end
+----------------------------*/
+
+/*----------------------------
     Back-to-top start
 ----------------------------*/
 

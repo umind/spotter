@@ -4,14 +4,35 @@
 @section('content')
     @if($ads->count())
         <div id="regular-ads-container">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <div class="front-ads-head">
-                            <h2>{{ $event->title }}</h2>
-                        </div>
-                    </div>
+			<div id="auction">
+				<div class="container">
+					<div id="auction-info">
+						<div class="row">
+							<div class="col-md-8">
+								<h2 class="text-uppercase">Open auction 05.08.2018.</h2>
+								<div class="category">
+									<img src="{{ asset('assets/img/category.png') }}" title="Category" alt="assets/img/category.png" />
+									<p>All Categories</p>
+								</div>
+								<div class="location">
+									<img src="{{ asset('assets/img/location.png') }}" title="Location" alt="assets/img/location.png" />
+									<p>Vienna, Austria</p>
+								</div>
+								<div class="time">
+									<img src="{{ asset('assets/img/time.png') }}" title="Time" alt="assets/img/time.png" />
+									<p>Time remaining: 52 days, 11:45 hours</p>
+								</div>
+							</div>
+							<div class="col-md-4 text-right">
+								<img class="auction" src="{{ asset('assets/img/auction-2.png') }}" title="Auction" alt="assets/img/auction.png" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="row">
 
                     @foreach($ads as $ad)
                         <div class="col-md-3">
