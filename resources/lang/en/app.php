@@ -23,7 +23,7 @@ return [
     'assign_to_event' => 'Assign An Event',
     'event_not_assigned' => 'Event Not Assigned',
     'sold_to' => 'Sold To',
-    'won_and_bought_for' => 'You won on an auction. Product bought for <strong>:won_bid_amount</strong>.',
+    'won_and_bought_for' => 'You won on an auction. Product bought for <strong>:won_bid_amount (incl. VAT)</strong>.',
     'you_won' => 'Auction is closed and only you are allowed to see it.',
     'ad_closed' => 'Auction is closed and only you are allowed to see it.',
     'active_events' => 'Active Events',
