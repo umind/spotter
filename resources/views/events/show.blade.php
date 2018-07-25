@@ -22,7 +22,7 @@
 								</div>
 								<div class="location">
 									<img src="{{ asset('assets/img/location.png') }}" title="Location" alt="assets/img/location.png" />
-									<p>Vienna, Austria</p>
+									<p>{{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="time">
 									<img src="{{ asset('assets/img/time.png') }}" title="Time" alt="assets/img/time.png" />
