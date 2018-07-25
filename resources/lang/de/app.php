@@ -135,7 +135,7 @@ return [
     'state'                 => 'Kanton',
     'city'                  => 'Ort',
     'zip_code'                  => 'PLZ',
-    'view_dates'                  => 'Datum',
+    'view_dates'                  => 'Vorbesichtigung',
     'auction_deadline'                  => 'Auktionsende',
     'address'               => 'Adresse',
     'great_title_info'      => '70-100 Zeichen wären ideal für den Titeltext',

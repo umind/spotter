@@ -9,7 +9,7 @@
 					<div id="auction-info">
 						<div class="row">
 							<div class="col-md-8">
-								<h2 class="text-uppercase">Open auction 05.08.2018.</h2>
+								<h2 class="text-uppercase">{{ $event->title }}</h2>
 								<div class="category">
 									<img src="{{ asset('assets/img/category.png') }}" title="Category" alt="assets/img/category.png" />
 									<p>All Categories</p>

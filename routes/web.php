@@ -270,10 +270,9 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
                 Route::get('append-post-media-image', ['as'=>'append_post_media_image', 'uses' => 'PostController@appendPostMediaImage']);
                 Route::get('pending-lists', ['as'=>'pending_ads', 'uses' => 'AdsController@pendingAds']);
                 // Route::get('archive-lists', ['as'=>'favourite_ad', 'uses' => 'AdsController@create']);
-
                 // Route::get('reports-by/{slug}', ['as'=>'reports_by_ads', 'uses' => 'AdsController@reportsByAds']);
 
-                //bids
+                // bids
                 Route::get('bids/{ad_id}', ['as'=>'auction_bids', 'uses' => 'BidController@index']);
                 Route::post('bids/action', ['as'=>'bid_action', 'uses' => 'BidController@bidAction']);
                 Route::get('bidder_info/{bid_id}', ['as'=>'bidder_info', 'uses' => 'BidController@bidderInfo']);
