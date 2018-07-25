@@ -16,7 +16,7 @@
 								</div>
 								<div class="location">
 									<img src="{{ asset('assets/img/location.png') }}" alt="assets/img/location.png" />
-									<p>{{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
+									<p>@lang('app.address'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="time">
 									<img src="{{ asset('assets/img/time.png') }}" alt="assets/img/time.png" />
@@ -31,7 +31,7 @@
 									<p><span>@lang('app.description'):</span><span>{!! nl2br($event->description) !!}</span></p>
                                 </div>
 							</div>
-							<div class="col-md-4 text-right">
+							<div class="col-md-4 text-md-right">
 								<img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" />
 							</div>
 						</div>
