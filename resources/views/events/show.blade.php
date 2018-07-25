@@ -24,7 +24,7 @@
 								</div>
 							</div>
 							<div class="col-md-4 text-right">
-								<img class="auction" src="{{ asset('assets/img/auction-2.png') }}" title="Auction" alt="assets/img/auction.png" />
+								<img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" />
 							</div>
 						</div>
 					</div>
