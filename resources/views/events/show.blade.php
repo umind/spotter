@@ -10,24 +10,26 @@
 						<div class="row">
 							<div class="col-md-8">
 								<h2 class="text-uppercase">{{ $event->title }}</h2>
-<!--
-								<div class="category">
-									<img src="{{ asset('assets/img/category.png') }}" title="Category" alt="assets/img/category.png" />
-									<p>All Categories</p>
-								</div>
--->							
 								<div class="auctioneer">
-									<img src="{{ asset('assets/img/auctioneer.png') }}" title="Auctioneer" alt="assets/img/auctioneer.png" />
-									<p>Auktionator: </p>
+									<img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
+									<p>@lang('app.auctioner'): {{ $event->auctioner }}</p>
 								</div>
 								<div class="location">
-									<img src="{{ asset('assets/img/location.png') }}" title="Location" alt="assets/img/location.png" />
+									<img src="{{ asset('assets/img/location.png') }}" alt="assets/img/location.png" />
 									<p>{{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="time">
-									<img src="{{ asset('assets/img/time.png') }}" title="Time" alt="assets/img/time.png" />
-									<p>Ende der Auktionen ab: 24.07.2018, 11:45 Uhr</p>
+									<img src="{{ asset('assets/img/time.png') }}" alt="assets/img/time.png" />
+									<p>@lang('app.auction_starts_to_end'): {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</p>
 								</div>
+                                <div class="event_view_dates">
+                                    <img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
+                                    <p>@lang('app.view_dates'): {!! nl2br($event->view_dates) !!}</p>
+                                </div>
+                                <div class="event_description">
+                                    <img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
+                                    <p>@lang('app.description'): {!! nl2br($event->description) !!}</p>
+                                </div>
 							</div>
 							<div class="col-md-4 text-right">
 								<img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" />
