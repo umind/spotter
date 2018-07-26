@@ -10,11 +10,13 @@
 
     <div class="container">
 
-        <div id="wrapper">
+		<div id="admin-panel" class="row">
+			
+			<div class="col-sm-5 col-md-4 col-lg-3">
+				@include('admin.sidebar_menu')
+			</div>
 
-            @include('admin.sidebar_menu')
-
-            <div id="page-wrapper">
+			<div class="col-sm-7 col-md-8 col-lg-9">
                 @if( ! empty($title))
                     <div class="row">
                         <div class="col-lg-12">
@@ -256,12 +258,11 @@
 
                 </div>
 
-            </div>   <!-- /#page-wrapper -->
+            </div>
 
-        </div>   <!-- /#wrapper -->
+        </div>
 
-
-    </div> <!-- /#container -->
+    </div>
 
 @endsection
 
