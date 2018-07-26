@@ -24,7 +24,7 @@ class EventRequest extends FormRequest
     public function rules()
     {
         return [
-            'products' => 'required',
+            // 'products' => 'required',
             'title' => 'required',
             'auctioner' => 'required',
             'address' => 'required',

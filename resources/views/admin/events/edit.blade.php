@@ -29,7 +29,7 @@
 
                         {{ Form::open(['url' => route('update_event', $event->id), 'class' => 'form-horizontal', 'files'=>'true'] ) }}
 
-                        <div class="form-group  {{ $errors->has('products')? 'has-error':'' }}">
+                        {{-- <div class="form-group  {{ $errors->has('products')? 'has-error':'' }}">
                             <label for="products" class="col-sm-4 control-label">@lang('app.products')</label>
                             <div class="col-sm-8">
                                 <select class="form-control" id="products" name="products[]" multiple="multiple">
@@ -41,7 +41,7 @@
                                 </select>
                                 {!! $errors->has('products')? '<p class="help-block">'.$errors->first('products').'</p>':'' !!}
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group {{ $errors->has('title')? 'has-error':'' }}">
                             <label for="products" class="col-sm-4 control-label">@lang('app.title')</label>

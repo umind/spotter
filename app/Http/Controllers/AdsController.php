@@ -227,7 +227,7 @@ class AdsController extends Controller
         }
         if ($sub_category->category_type == 'auction') {
             $data['category_type']  = 'auction';
-            $data['expired_at']     = $request->bid_deadline;
+            $data['expired_at']     = Carbon::parse($request->bid_deadline);
         }
         //Check ads moderation settings
         if (get_option('ads_moderation') == 'direct_publish'){
