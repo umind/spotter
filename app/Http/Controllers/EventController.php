@@ -62,7 +62,7 @@ class EventController extends Controller
 
         $user->events()->save($event);
 
-        $event->auctions()->sync($request->products);
+        // $event->auctions()->sync($request->products);
 
         return redirect()->route('pending_events')->with('success', trans('app.auction_created_msg'));
     }
@@ -92,7 +92,7 @@ class EventController extends Controller
         $event->save();
 
         $user->events()->save($event);
-        $event->auctions()->sync($request->products);
+        // $event->auctions()->sync($request->products);
 
         // assign bid deadline to every product the same as the event deadline
         foreach ($request->products as $product) {

@@ -24,12 +24,14 @@
                                 @foreach($events as $event)
                                     <tr>
                                         <td width="100">
-                                            <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
-                                                <img class="primary-img thumb-listing-table" src="{{ media_url($event->auctions()->first()->feature_img) }}" alt="primary image" />
-                                            </div>
+                                            @if(isset($event->auctions))
+                                                <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
+                                                    <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/classified-placeholder.png') }}" alt="primary image" />
+                                                </div>
+                                            @endif
                                         </td>
                                         <td>
-                                            <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
+                                            <h5><a href="{{ route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
                                             
                                             <p class="text-muted">
                                                 <i class="fa fa-user"></i> <span>@lang('app.auctioner'):</span> <span>{{ $event->auctioner }}</span>
