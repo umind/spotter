@@ -29,11 +29,11 @@ class DashboardController extends Controller
         $total_payments_amount = 0;
 
         if ($user->is_admin()){
-            $active_ads = Ad::whereStatus('1')->count();
-            $active_events = Event::whereStatus('1')->count();
-            $pending_events = Event::whereStatus('0')->count();
-            $pending_ads = Ad::whereStatus('0')->count();
-            $blocked_ads = Ad::whereStatus('2')->count();
+            $active_ads = $user->ads()->whereStatus('1')->count();
+            $active_events = $user->events()->whereStatus('1')->count();
+            $pending_events = $user->events()->whereStatus('0')->count();
+            $pending_ads = $user->ads()->whereStatus('0')->count();
+            $blocked_ads = $user->ads()->whereStatus('2')->count();
 
             $total_users = User::count();
             $total_reports = Report_ad::count();
