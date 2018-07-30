@@ -249,7 +249,7 @@
                                                 <div class="comment-box" data-comment-id="{{$comment->id}}">
                                                     <div class="comment-head">
                                                         <h6 class="comment-name by-author">{{$comment->author_name}}</h6>
-                                                        <span>{{$comment->created_at->diffForHumans()}}</span>
+                                                        <span>{{ $comment->created_at->diffForHumans() }}</span>
                                                         <i class="fa fa-reply"></i>
                                                     </div>
                                                     <div class="comment-content">
@@ -318,7 +318,7 @@
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
 
-                                        {{-- <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p> --}}
+                                        <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>
                                         <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p>
 
                                         {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
@@ -353,7 +353,7 @@
                                         @if($ad->is_bid_accepted())
                                             <p>@lang('app.bid_accepted')</p>
                                         @else
-                                            <p>{{sprintf(trans('app.bid_deadline_closed_info'), $ad->bid_deadline(), $ad->bid_deadline_left())}}</p>
+                                            <p>{{ sprintf(trans('app.bid_deadline_closed_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>
                                         @endif
 
                                         <p>@lang('app.total_bids'): {{ $bids->count() }} </p>

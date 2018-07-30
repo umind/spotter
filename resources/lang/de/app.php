@@ -2,6 +2,9 @@
 
 return [
     // new
+    'at' => 'ab',
+    'last_bidding' => 'Ablauf',
+    'bid_now' => 'jetzt bieten',
     'cannot_bid_yourself' => 'Sie können sich nicht selbst überbieten. Ihr aktuelles Gebot ist das höchste.',
     'finished_events' => 'abgelaufene Auktionen',
     'choose_event' => 'Auktion auswählen',
@@ -10,7 +13,7 @@ return [
 
 
     'ends' => 'Endet am',
-    'auction_has_ended' => 'Auktion is beendet',
+    'auction_has_ended' => 'Auktion ist beendet',
     'auction_soon_ends' => 'Auktion endet bald',
     'auction_starts_to_end' => 'Ende der Auktionen ab',
     'save' => 'speichern',
@@ -106,7 +109,7 @@ return [
     'events'                => 'Auktionen',
     'my_ads'                => 'Meine Artikel',
     'my_events'             => 'Meine Auktionen',
-    'all_products'             => 'Alle Artikel',
+    'all_products'             => 'Zur Auktion',
     'venue'             => 'Ort',
     'approved_ads'          => 'Genehmigte Artikel',
     'blocked_ads'           => 'Blockierte Artikel',
@@ -116,7 +119,7 @@ return [
     'expired_on'           => 'Abgelaufen am',
     'expires_on'           => 'Läuft ab',
     'finished_auctions'           => 'geschlossene Artikel',
-    'won_auctions'           => 'gewonnenne Artikel',
+    'won_auctions'           => 'gewonnene Artikel',
     'pending_events'           => 'schwebende Auktionen',
     'bought_for'           => 'Gekauft für',
     'post_an_ad'            => 'Artikel hinzufügen',
@@ -129,7 +132,7 @@ return [
     'ad_approved_msg'       => 'Diese Artikel wurde genehmigt',
     'ad_blocked_msg'        => 'Diese Artikel wurde blockiert',
     'ad_archived_msg'       => 'Artikel erfolgreich archiviert',
-    'event_approved_msg'       => 'Diese Artikel wurde genehmigt',
+    'event_approved_msg'       => 'Diese Auktion wurde genehmigt',
     'ad_title'              => 'Titel Artikel',
     'country'               => 'Land',
     'state'                 => 'Kanton',
@@ -705,7 +708,7 @@ return [
     'no_user'                           => 'No User',
     'auction'                           => 'Auktion',
     'starting_price'                    => 'Startpreis',
-    'price_increaser'                    => 'Preis erhöhen',
+    'price_increaser'                    => 'minimaler Erhöhungsschritt',
     'bid_deadline'                      => 'Gebotsende',
     'current_bid'                       => 'Aktuelles Gebot',
     'before_bidding_sign_in_info'       => 'Sie müssen <a href="'.url('login').'">eingeloggt</a> sein oder <a href="'.url('register').'">registrieren</a> Sie sich, um bieten zu können.',

@@ -99,7 +99,7 @@
                         <div class="col-md-4">
                             <div class="input-group">
                                 <span class="input-group-addon">{{ get_option('currency_sign') }}</span>
-                                <input type="text" placeholder="@lang('app.ex_price')" class="form-control" name="price" id="price" value="{{ old('price') }}">
+                                <input type="text" placeholder="@lang('app.starting_price')" class="form-control" name="price" id="price" value="{{ old('price') }}">
                             </div>
                         </div>
 
@@ -328,7 +328,7 @@
     <script type="text/javascript">
         $(function () {
             $('#bid_deadline').datetimepicker({
-                format: 'DD-MM-YYYY HH:mm'
+                format: 'HH:mm'
             });
         })
     </script>

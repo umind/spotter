@@ -231,6 +231,9 @@ return [
         'auctioner' => 'Auctioner',
         'auction_deadline' => 'Bidding Deadline',
 
+        'bid_deadline' => 'Bid Deadline',
+        'event' => 'Event',
+
         //change password
         "old_password" => "Old Password",
         "new_password" => "New Password",

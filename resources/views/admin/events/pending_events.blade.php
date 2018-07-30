@@ -26,7 +26,7 @@
                                         <td width="100">
                                             @if(isset($event->auctions))
                                                 <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
-                                                    <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/classified-placeholder.png') }}" alt="primary image" />
+                                                    <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
                                                 </div>
                                             @endif
                                         </td>

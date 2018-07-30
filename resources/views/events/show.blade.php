@@ -10,17 +10,17 @@
 						<div class="row">
 							<div class="col-md-8">
 								<h2 class="text-uppercase">{{ $event->title }}</h2>
-								<div class="auctioneer">
+								{{-- <div class="auctioneer">
 									<img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
 									<p>@lang('app.auctioner'): {{ $event->auctioner }}</p>
-								</div>
+								</div> --}}
 								<div class="location">
-									<img src="{{ asset('assets/img/location.png') }}" alt="assets/img/location.png" />
-									<p>@lang('app.address'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
+									<img src="{{ asset('assets/img/auctioneer.png') }}" alt="assets/img/auctioneer.png" />
+									<p>@lang('app.city'): {{ $event->auctioner }}, {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="time">
 									<img src="{{ asset('assets/img/time.png') }}" alt="assets/img/time.png" />
-									<p>@lang('app.auction_starts_to_end'): {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</p>
+									<p>@lang('app.last_bidding'): {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%d %B %Y') }} {{ __('app.at') }} {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%H:%M') }}</p>
 								</div>
                                 <div class="event_view_dates">
                                     <img src="{{ asset('assets/img/calendar.png') }}" alt="assets/img/calendar.png" />
@@ -28,11 +28,12 @@
                                 </div>
                                 <div class="event_description">
                                     <img src="{{ asset('assets/img/description.png') }}" alt="assets/img/description.png" />
-									<p><span>@lang('app.description'):</span><span>{!! nl2br($event->description) !!}</span></p>
+									<p><span></span><span>{!! nl2br($event->description) !!}</span></p>
                                 </div>
 							</div>
 							<div class="col-md-4 text-right">
-								<img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" />
+                                <h1>@lang('app.bid_now')</h1>
+								{{-- <img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" /> --}}
 							</div>
 						</div>
 					</div>

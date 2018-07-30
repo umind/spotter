@@ -123,6 +123,7 @@ class AdsController extends Controller
         $rules = [
             'category'          => 'required',
             'ad_title'          => 'required',
+            'event'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
             'price'          => 'required',
@@ -249,8 +250,9 @@ class AdsController extends Controller
             $syncData = [];
             $event = Event::find($request->event);
             if ($event) {
+                $event->auction_ends;
                 $syncData = $event->id;
-                $created_ad->expired_at = $event->auction_ends;
+                $created_ad->expired_at = Carbon::parse(Carbon::parse($event->auction_ends)->toDateString() . ' ' . $request->bid_deadline);
                 $created_ad->save();
             } 
             $created_ad->events()->sync($syncData);
@@ -394,6 +396,7 @@ class AdsController extends Controller
 
         $rules = [
             'ad_title'          => 'required',
+            'event'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
             'price'          => 'required',
@@ -461,7 +464,7 @@ class AdsController extends Controller
             $event = Event::find($request->event);
             if ($event) {
                 $syncData = $event->id;
-                // $ad->expired_at = $event->auction_ends;
+                $ad->expired_at = Carbon::parse(Carbon::parse($event->auction_ends)->toDateString() . ' ' . $request->bid_deadline);
                 $ad->status = $event->status;
                 $ad->save();
             } 
@@ -1002,12 +1005,15 @@ class AdsController extends Controller
         $event = $ad->events()->first();
 
         //Get Related Ads, add [->whereCountryId($ad->country_id)] for more specific results
-        $related_ads = Ad::active()->whereHas('events', function ($q) use ($event) {
+        $related_ads = collect([]);
+        if ($event) {
+            $related_ads = Ad::active()->whereHas('events', function ($q) use ($event) {
                                         $q->where('events.id', $event->id);
                                     })->where('id', '!=', $ad->id)
                                         ->with('category', 'city')
                                         ->orderBy('expired_at')
                                         ->get();
+        }
 
         // get all bids for this auction and also the max bid by the logged in user if set
         $userMaxBid = $ad->bids()->whereHas('user', function ($q) {

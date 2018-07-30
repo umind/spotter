@@ -85,7 +85,7 @@
                             <div class="col-md-4">
                                 <div class="input-group">
                                     <span class="input-group-addon">{{ get_option('currency_sign') }}</span>
-                                    <input type="text" placeholder="@lang('app.ex_price')" class="form-control" name="price" id="price" value="{{ old('price')? old('price') : $ad->price }}">
+                                    <input type="text" placeholder="@lang('app.starting_price')" class="form-control" name="price" id="price" value="{{ old('price')? old('price') : $ad->price }}">
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
                         <div class="form-group {{ $errors->has('bid_deadline')? 'has-error':'' }}">
                             <label for="bid_deadline" class="col-sm-4 control-label"> @lang('app.bid_deadline')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="bid_deadline" value="{{ old('bid_deadline')? old('bid_deadline') : Carbon\Carbon::parse($ad->expired_at)->format('d-m-y H:i') }}" name="bid_deadline" placeholder="@lang('app.bid_deadline')">
+                                <input type="text" class="form-control" id="bid_deadline" value="{{ old('bid_deadline')? old('bid_deadline') : Carbon\Carbon::parse($ad->expired_at)->format('H:i') }}" name="bid_deadline" placeholder="@lang('app.bid_deadline')">
                                 {!! $errors->has('bid_deadline')? '<p class="help-block">'.$errors->first('bid_deadline').'</p>':'' !!}
                             </div>
                         </div>
@@ -281,7 +281,7 @@
     <script type="text/javascript">
         $(function () {
             $('#bid_deadline').datetimepicker({
-                format: 'DD-MM-YYYY HH:mm'
+                format: 'HH:mm'
             });
         })
     </script>

@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot(){
+
         //Check if app is demo?
         if (env('APP_DEMO') == true){
             //Set default country to US if demo
@@ -153,6 +154,7 @@ class AppServiceProvider extends ServiceProvider
 
         // set locale
         setLocale(LC_TIME, 'de_DE');
+        \Carbon\Carbon::setLocale(config('app.locale'));
     }
 
     /**

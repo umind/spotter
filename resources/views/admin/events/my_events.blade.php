@@ -26,7 +26,11 @@
                                 @foreach($events as $event)
                                     <tr>
                                         <td width="100">
-                                            <img src="{{ media_url($event->feature_img) }}" class="thumb-listing-table" alt="">
+                                            @if(isset($event->auctions))
+                                                <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
+                                                    <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
+                                                </div>
+                                            @endif
                                         </td>
                                         <td>
                                             <h5><a href="{{  route('single_event', ['event' => $event->id]) }}" target="_blank">{{ $event->title }}</a> ({!! $event->status_context() !!})</h5>

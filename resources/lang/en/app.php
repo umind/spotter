@@ -2,6 +2,9 @@
 
 return [
     //newest
+    'at' => 'at',
+    'last_bidding' => 'Last Bidding',
+    'bid_now' => 'Bid Now',
     'cannot_bid_yourself' => 'You cannot bid yourself. Your current bid is the highest one.',
     'finished_events' => 'Finished Events',
     'choose_event' => 'Choose An Event',
@@ -705,7 +708,7 @@ return [
     'no_user'                           => 'No User',
     'auction'                           => 'Auction',
     'starting_price'                    => 'Starting Price',
-    'price_increaser'                    => 'Price Increaser',
+    'price_increaser'                    => 'minimaler Erhöhungsschritt',
     'bid_deadline'                      => 'Bid Deadline',
     'current_bid'                       => 'Current Bid',
     'before_bidding_sign_in_info'       => 'You\'ll need to <a href="'.url('login').'">sign in</a> or <a href="'.url('register').'">register</a> before bidding.',

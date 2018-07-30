@@ -243,7 +243,7 @@ return [
         'ad_title' => 'Titel',
         'bid_no' => 'Los-Nummer',
         'auction_no' => 'Artikel-Nummer',
-        'price_increaser' => 'Preis erhöhen',
+        'price_increaser' => 'minimaler Erhöhungsschritt',
         'ad_description' => 'Beschreibung',
         'seller_phone' => 'Verkäufer Telefon',
         'seller_email' => 'Verkäufer Email',
@@ -257,6 +257,10 @@ return [
         'products' => 'Artikel',
         'auctioner' => 'Auktionär',
         'auction_deadline' => 'Gebotsende',
+
+        // post add
+        'bid_deadline' => 'Gebotsende',
+        'event' => 'Auktion',
 
         //change password
         "old_password" => "altes Passwort",
