@@ -19,7 +19,7 @@
             @endif
 
             <li>
-                <a href="#"><i class="fa fa-bullhorn"></i> @lang('app.ads')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span>  </a>
+                <a href="#"><i class="fa fa-barcode"></i></i> @lang('app.ads')<span class="fa arrow"></span> <span class="label label-default pull-right"><i class="fa fa-user"></i> </span>  </a>
                 <ul class="nav nav-second-level">
                     @if($lUser->is_admin())
                         <li>  <a href="{{ route('my_ads') }}">@lang('app.my_ads')</a> </li>
