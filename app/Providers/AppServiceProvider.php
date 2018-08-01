@@ -153,8 +153,8 @@ class AppServiceProvider extends ServiceProvider
         }
 
         // set locale
-        setLocale(LC_TIME, 'de_DE');
-        \Carbon\Carbon::setLocale(config('app.locale'));
+        setlocale(LC_TIME, "de_DE.UTF-8");
+        // \Carbon\Carbon::setLocale(config('app.locale'));
     }
 
     /**
