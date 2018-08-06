@@ -42,7 +42,6 @@
 								<div class="col-md-4 text-center">
 									@php 
 										$latestProductToExpire = $event->auctions()->latest('expired_at')->first();
-										// $dataExpireDate = "='{$event->auction_ends}'"s
 									@endphp
 									<p class="text-red {{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown' }}" data-expire-date="{{ $event->auction_ends }}">
 										@if(Carbon\Carbon::parse($event->auction_ends)->isPast())

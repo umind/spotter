@@ -2,6 +2,15 @@
 
 return [
     //newest
+    'my_spotter' => 'My Spotter',
+    'sold_word' => 'Sold',
+    'not_sold_word' => 'Not Sold',
+    'all_articles' => 'All Articles',
+    'published_word' => 'Published',
+    'pending_word' => 'Pending',
+    'closed_word' => 'Closed',
+    'archived_word' => 'Archived',
+    'add_word' => 'Add',
     'at' => 'at',
     'last_bidding' => 'Last Bidding',
     'bid_now' => 'Bid Now',

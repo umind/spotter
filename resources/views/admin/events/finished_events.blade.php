@@ -24,9 +24,7 @@
                                 @foreach($events as $event)
                                     <tr>
                                         <td width="100">
-                                            <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
-                                                <img class="primary-img thumb-listing-table" src="{{ media_url($event->auctions()->first()->feature_img) }}" alt="primary image" />
-                                            </div>
+                                            <img class="primary-img thumb-listing-table" src="{{ media_url($event->auctions()->first()->feature_img) }}" alt="primary image" />
                                         </td>
                                         <td>
                                             <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
@@ -69,10 +67,6 @@
 <script src="{{ asset('assets/js/jquery.images-rotation.js') }}"></script>
     <script>
         $(document).ready(function() {
-
-            // init image rotation
-            $('.images-rotation').imagesRotation();
-
             $('.deleteAds').on('click', function () {
                 if (!confirm('{{ trans('app.are_you_sure') }}')) {
                     return '';
@@ -82,7 +76,7 @@
                 $.ajax({
                     url: '{{ route('delete_event') }}',
                     type: "POST",
-                    data: {slug: event, _token: '{{ csrf_token() }}'},
+                    data: {event: event, _token: '{{ csrf_token() }}'},
                     success: function (data) {
                         if (data.success == 1) {
                             selector.closest('tr').hide('slow');

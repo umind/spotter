@@ -132,11 +132,11 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
 
         Route::get('/', ['as'=>'dashboard', 'uses' => 'DashboardController@dashboard']);
 
-        Route::group(['prefix'=>'settings'], function(){
+        // Route::group(['prefix'=>'settings'], function(){
             // Route::get('theme-settings', ['as'=>'theme_settings', 'uses' => 'SettingsController@ThemeSettings']);
             // Route::get('modern-theme-settings', ['as'=>'modern_theme_settings', 'uses' => 'SettingsController@modernThemeSettings']);
             // Route::get('social-url-settings', ['as'=>'social_url_settings', 'uses' => 'SettingsController@SocialUrlSettings']);
-            Route::get('general', ['as'=>'general_settings', 'uses' => 'SettingsController@GeneralSettings']);
+            // Route::get('general', ['as'=>'general_settings', 'uses' => 'SettingsController@GeneralSettings']);
             // Route::get('payments', ['as'=>'payment_settings', 'uses' => 'SettingsController@PaymentSettings']);
             // Route::get('ad', ['as'=>'ad_settings', 'uses' => 'SettingsController@AdSettings']);
             // Route::get('languages', ['as'=>'language_settings', 'uses' => 'LanguageController@index']);
@@ -146,15 +146,15 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
             // Route::get('storage', ['as'=>'file_storage_settings', 'uses' => 'SettingsController@StorageSettings']);
             // Route::get('social', ['as'=>'social_settings', 'uses' => 'SettingsController@SocialSettings']);
             // Route::get('blog', ['as'=>'blog_settings', 'uses' => 'SettingsController@BlogSettings']);
-            Route::get('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettings']);
-            Route::post('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettingsPost']);
+            // Route::get('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettings']);
+            // Route::post('other', ['as'=>'other_settings', 'uses' => 'SettingsController@OtherSettingsPost']);
 
             // Route::get('recaptcha', ['as'=>'re_captcha_settings', 'uses' => 'SettingsController@reCaptchaSettings']);
 
             //Save settings / options
-            Route::post('save-settings', ['as'=>'save_settings', 'uses' => 'SettingsController@update']);
+            // Route::post('save-settings', ['as'=>'save_settings', 'uses' => 'SettingsController@update']);
             // Route::get('monetization', ['as'=>'monetization', 'uses' => 'SettingsController@monetization']);
-        });
+        // });
 
         // Route::group(['prefix'=>'location'], function(){
         //     Route::get('country', ['as'=>'country_list', 'uses' => 'LocationController@countries']);
@@ -216,6 +216,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
 
         // Route::get('approved', ['as'=>'approved_ads', 'uses' => 'AdsController@index']);
         Route::get('pending', ['as'=>'admin_pending_ads', 'uses' => 'AdsController@adminPendingAds']);
+        Route::get('sold', ['as'=>'sold_ads', 'uses' => 'AdsController@soldAds']);
+        Route::get('not-sold', ['as'=>'not_sold_ads', 'uses' => 'AdsController@notSoldAds']);
         // Route::get('blocked', ['as'=>'admin_blocked_ads', 'uses' => 'AdsController@adminBlockedAds']);
         // Route::post('status-change', ['as'=>'ads_status_change', 'uses' => 'AdsController@adStatusChange']);
 

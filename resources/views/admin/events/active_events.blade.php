@@ -25,9 +25,7 @@
                                     <tr>
                                         <td width="100">
                                             @if(isset($event->auctions))
-                                                <div class="images-rotation" data-images='[{{ rotationImages($event->auctions) }}]'>
-                                                    <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
-                                                </div>
+                                                <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
                                             @endif
                                         </td>
                                         <td>
@@ -72,10 +70,6 @@
 <script src="{{ asset('assets/js/jquery.images-rotation.js') }}"></script>
     <script>
         $(document).ready(function() {
-
-            // init image rotation
-            $('.images-rotation').imagesRotation();
-
             $('.deleteAds').on('click', function () {
                 if (!confirm('{{ trans('app.are_you_sure') }}')) {
                     return '';

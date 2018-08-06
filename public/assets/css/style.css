@@ -705,8 +705,12 @@ Search page
 	color: #666666;
 	font-style: italic;
 	font-size: 16px;
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-bottom: 0;
+}
+
+.search-page-header .auction-number-header {
+	font-size: 13px;
 }
 
 .search-box-wrap {
@@ -2200,6 +2204,10 @@ Auction
 #auction-info .event_view_dates,
 #auction-info .event_description {
 	margin-top: 20px;
+}
+
+.event-show-countdown {
+	font-size: 22px;
 }
 
 #auction-info img {

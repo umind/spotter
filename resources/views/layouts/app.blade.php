@@ -138,7 +138,7 @@
 											@if(auth()->user()->is_admin())
 											<li><a href="{{route('dashboard')}}"> @lang('app.dashboard') </a> </li>
 											@else
-											<li><a href="{{route('active_bidding_auctions')}}"> @lang('app.auctions') </a> </li>
+											<li><a href="{{route('active_bidding_auctions')}}"> @lang('app.my_spotter') </a> </li>
 											@endif
 											<li>
 												<a href="{{ route('logout') }}"

@@ -32,7 +32,20 @@
                                 </div>
 							</div>
 							<div class="col-md-4 text-right">
-                                <h1>@lang('app.bid_now')</h1>
+                                @php 
+                                    $latestProductToExpire = $event->auctions()->latest('expired_at')->first();
+                                @endphp
+                                <div class="{{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown event-show-countdown' }}" data-expire-date="{{$event->auction_ends}}"></div>
+                                    <div class="event-show-countdown">
+                                        @if(Carbon\Carbon::parse($event->auction_ends)->isPast())
+                                            @if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
+                                                @lang('app.auction_has_ended')
+                                            @else
+                                                @lang('app.auction_soon_ends')
+                                            @endif
+                                        @endif
+                                    </div>
+                                {{-- <h1>@lang('app.bid_now')</h1> --}}
 								{{-- <img class="auction" src="{{ asset('assets/img/auction.png') }}" title="Auction" alt="assets/img/auction.png" /> --}}
 							</div>
 						</div>
