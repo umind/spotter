@@ -47,7 +47,7 @@ class Event extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status', '1')->orWhere('status', '3');
+        return $query->where('status', '1')->orWhere('status', '2');
     }
 
     public function is_editable() {
@@ -56,9 +56,4 @@ class Event extends Model
         }
         return false;
     }
-
-    // public function scopePublished($query)
-    // {
-    //     return $query->where('status', '1');
-    // }
 }

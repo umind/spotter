@@ -2,6 +2,13 @@
 
 return [
     //newest
+    'not_paid' => 'Not Paid',
+    'paid' => 'Paid',
+    'ad_paid_msg' => 'Status changed to paid',
+    'sold_ads' => 'Sold Ads',
+    'not_sold_ads' => 'Not Sold Ads',
+    'published_ads' => 'Published Articles',
+    'archived_events' => 'Archived Auctions',
     'my_spotter' => 'My Spotter',
     'sold_word' => 'Sold',
     'not_sold_word' => 'Not Sold',

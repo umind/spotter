@@ -2,6 +2,7 @@
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('content')
+
     <div class="container">
 		
 		<div id="admin-panel" class="row">
@@ -14,36 +15,46 @@
                 @if( ! empty($title))
 				<h1 class="page-header"> {{ $title }}  </h1>
                 @endif
-
                 @include('admin.flash_msg')
+
                 <div class="row">
                     <div class="col-xs-12">
-                        @if($events->total() > 0)
+
+                        @if($ads->total() > 0)
                             <table class="table table-bordered table-striped table-responsive">
 
-                                @foreach($events as $event)
+                                @foreach($ads as $ad)
                                     <tr>
                                         <td width="100">
-                                            <img class="primary-img thumb-listing-table" src="{{ media_url($event->auctions()->first()->feature_img) }}" alt="primary image" />
+                                            <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
                                         </td>
                                         <td>
-                                            <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
-                                            
+                                            <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }} </a></h5>
                                             <p class="text-muted">
-                                                <i class="fa fa-user"></i> <span>@lang('app.auctioner'):</span> <span>{{ $event->auctioner }}</span>
-                                                <br>
-                                                {{-- <i class="fa fa-clock-o"></i> <span>@lang('app.begins'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_begins)->formatLocalized(get_option('date_format')) }}</span>
-                                                <br> --}}
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.expired_on'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</span>
-                                                <br>
-                                                <i class="fa fa-map-marker"></i> <span>@lang('app.venue'):</span> <span>{{ $event->address . ', ' . $event->zip_code . ' ' . $event->city }}</span>
+                                                @php 
+                                                    $event = $ad->events()->first(); 
+                                                    $wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
+                                                @endphp
+
+												@if($wonBidAmount)
+                                                	<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
+                                                	<br>
+												@endif
+												
+                                                <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
+                                                @if($event)
+                                                    <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+                                                         <span>{{ $event->title }}</span>
+                                                    </a>
+                                                @else
+                                                    <span>@lang('app.event_not_assigned')</span>
+                                                @endif
                                             </p>
                                         </td>
 
                                         <td>
-{{--                                             <a href="{{ route('edit_event', ['event' => $event->id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a> --}}
-                                            <a href="{{ route('close_event', $event->id) }}" onclick="return confirm('{{ trans('app.are_you_sure') }}');" class="btn btn-danger"><i class="fa fa-close"></i> </a>
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
+                                            <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -51,20 +62,20 @@
                             </table>
                         @endif
 
-                        {!! $events->links() !!}
+                        {!! $ads->links() !!}
 
                     </div>
                 </div>
 
             </div>
-
+			
         </div>
 
     </div>
 @endsection
 
 @section('page-js')
-<script src="{{ asset('assets/js/jquery.images-rotation.js') }}"></script>
+
     <script>
         $(document).ready(function() {
             $('.deleteAds').on('click', function () {
@@ -72,11 +83,11 @@
                     return '';
                 }
                 var selector = $(this);
-                var event = selector.data('event');
+                var slug = selector.data('slug');
                 $.ajax({
-                    url: '{{ route('delete_event') }}',
+                    url: '{{ route('delete_ads') }}',
                     type: "POST",
-                    data: {event: event, _token: '{{ csrf_token() }}'},
+                    data: {slug: slug, _token: '{{ csrf_token() }}'},
                     success: function (data) {
                         if (data.success == 1) {
                             selector.closest('tr').hide('slow');

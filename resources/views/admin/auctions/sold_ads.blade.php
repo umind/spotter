@@ -2,6 +2,7 @@
 @section('title') @if( ! empty($title)) {{ $title }} | @endif @parent @endsection
 
 @section('content')
+
     <div class="container">
 		
 		<div id="admin-panel" class="row">
@@ -14,10 +15,11 @@
                 @if( ! empty($title))
 				<h1 class="page-header"> {{ $title }}  </h1>
                 @endif
-
                 @include('admin.flash_msg')
+
                 <div class="row">
                     <div class="col-xs-12">
+
                         @if($ads->total() > 0)
                             <table class="table table-bordered table-striped table-responsive">
 
@@ -27,10 +29,21 @@
                                             <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
                                         </td>
                                         <td>
-                                            @php $event = $ad->events()->first(); @endphp
                                             <h5>
-                                                <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }} </a></h5>
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
+                                                <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }}</a>
+                                            </h5>
+                                            <p class="text-muted">
+                                                @php 
+                                                    $event = $ad->events()->first(); 
+                                                    $wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
+                                                @endphp
+
+                                                <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
+                                                @if($ad->paid)
+                                                    <span class="label label-success">@lang('app.paid')</span>
+                                                @else
+                                                    <span class="label label-danger">@lang('app.not_paid')</span>
+                                                @endif
                                                 <br>
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
                                                 @if($event)
@@ -40,10 +53,12 @@
                                                 @else
                                                     <span>@lang('app.event_not_assigned')</span>
                                                 @endif
+                                            </p>
                                         </td>
 
                                         <td>
-                                            <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+                                            {{-- <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a> --}}
+                                            <a href="javascript:;" class="btn btn-success changePaymentStatus" data-slug="{{ $ad->slug }}" data-value="1"><i class="fa fa-check-circle-o"></i> </a>
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>
@@ -60,7 +75,6 @@
             </div>
 			
         </div>
-
 
     </div>
 @endsection
@@ -86,6 +100,26 @@
                         }
                     }
                 });
+            });
+        });
+
+        $('.changePaymentStatus').on('click', function () {
+            if (!confirm('{{ trans('app.are_you_sure') }}')) {
+                return '';
+            }
+            var selector = $(this);
+            var slug = selector.data('slug');
+            var value = selector.data('value');
+            $.ajax({
+                url: '{{ route('change_payment_status') }}',
+                type: "POST",
+                data: {slug: slug, value: value, _token: '{{ csrf_token() }}'},
+                success: function (data) {
+                    if (data.success == 1) {
+                        selector.closest('tr').hide('slow');
+                        toastr.success(data.msg, '@lang('app.success')', toastr_options);
+                    }
+                }
             });
         });
     </script>

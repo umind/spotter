@@ -134,6 +134,8 @@ class AppServiceProvider extends ServiceProvider
 
                                 // auction sold
                                 $auction->update(['status' => '3']);
+                            } else {
+                                $auction->update(['status' => '4']);
                             }
                         }
                     }
@@ -143,7 +145,7 @@ class AppServiceProvider extends ServiceProvider
 
                     // close an event inside if all articles underneath him are finished
                     if ($countArticles < 1) {
-                        $event->status = '3';
+                        $event->status = '2';
                         $event->save();
                     }
 

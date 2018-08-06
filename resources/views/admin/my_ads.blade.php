@@ -29,7 +29,7 @@
                                             <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
                                         </td>
                                         <td>
-                                            <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }}</a> ({!! $ad->status_context() !!})</h5>
+                                            <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }}</a></h5>
                                             <p class="text-muted">
                                                 @php $event = $ad->events()->first(); @endphp
 

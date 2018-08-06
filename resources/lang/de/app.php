@@ -2,6 +2,13 @@
 
 return [
     // new
+    'not_paid' => 'nicht bezahlt',
+    'paid' => 'bezahlt',
+    'ad_paid_msg' => 'Status changed to payed',
+    'sold_ads' => 'Sold Ads',
+    'not_sold_ads' => 'Not Sold Ads',
+    'published_ads' => 'Published Articles',
+    'archived_events' => 'Archived Auctions',
     'my_spotter' => 'My Spotter',
     'sold_word' => 'Sold',
     'not_sold_word' => 'Not Sold',
@@ -44,6 +51,7 @@ return [
     'max_bid_same_error_msg' => 'Dieses Gebot ist momentan das Höchste. Bitte geben Sie das maximale Gebot ein.',
     'closed' => 'abgeschlossen',
     'event_closed_msg' => 'Auktion erfolgreich abgeschlossen',
+    'event_archived_msg' => 'Die Auktion wurde erfolgreich ins Archiv hinterlegt',
     'winning_amount' => 'gewonnenes Gebot',
     'sold_for' => 'Verkauft für',
     'no_auctions_found' => 'Momentan befinden sich noch keine Artikel',
@@ -122,7 +130,7 @@ return [
     'approved_ads'          => 'Genehmigte Artikel',
     'blocked_ads'           => 'Blockierte Artikel',
     'all_ads'               => 'Alle Artikel',
-    'pending_ads'           => 'schwebende Artikel',
+    'pending_ads'           => 'Pending Articles',
     'active_bidding_auctions'           => 'Aktive Artikel',
     'expired_on'           => 'Abgelaufen am',
     'expires_on'           => 'Läuft ab',

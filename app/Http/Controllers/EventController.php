@@ -95,13 +95,13 @@ class EventController extends Controller
         // $event->auctions()->sync($request->products);
 
         // assign bid deadline to every product the same as the event deadline
-        foreach ($request->products as $product) {
-            $ad = Ad::find($product);
-            if ($event->status == '1') {
-                $ad->status = '1';
-            }
-            $ad->save();
-        }
+        // foreach ($request->products as $product) {
+        //     $ad = Ad::find($product);
+        //     if ($event->status == '1') {
+        //         $ad->status = '1';
+        //     }
+        //     $ad->save();
+        // }
 
         if ($event->status == '2') {
             return redirect()->route('closed_events')->with('success', trans('app.auction_created_msg'));
@@ -145,12 +145,12 @@ class EventController extends Controller
         return view('admin.events.closed_events', compact('title', 'events'));
     }
 
-    public function finished()
+    public function archived()
     {
-        $title = trans('app.finished_events');
+        $title = trans('app.archived_events');
         $events = Auth::user()->events()->whereStatus('3')->orderBy('id', 'desc')->paginate(20);
 
-        return view('admin.events.finished_events', compact('title', 'events'));
+        return view('admin.events.archived_events', compact('title', 'events'));
     }
 
     public function changeStatus(Request $request){
@@ -171,13 +171,13 @@ class EventController extends Controller
         return ['success'=> 0, 'msg' => trans('app.error_msg')];
     }
 
-    public function close(Event $event)
+    public function archive(Event $event)
     {
-        $event->status = '2';
+        $event->status = '3';
         $event->save();
 
-        $event->auctions()->update(['status' => '2']);
+        $event->auctions()->update(['status' => '3']);
 
-        return redirect()->route('active_events')->with('success', trans('app.event_closed_msg'));
+        return redirect()->route('closed_events')->with('success', trans('app.event_archived_msg'));
     }
 }

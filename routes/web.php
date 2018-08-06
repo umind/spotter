@@ -31,12 +31,12 @@ Route::group(['middleware' => 'only_admin_access'], function () {
     Route::get('dashboard/my_events/pending', ['as' => 'pending_events', 'uses'=>'EventController@pending']);
     Route::get('dashboard/my_events/active', ['as' => 'active_events', 'uses'=>'EventController@active']);
     Route::get('dashboard/my_events/closed', ['as' => 'closed_events', 'uses'=>'EventController@closed']);
-    Route::get('dashboard/my_events/finished', ['as' => 'finished_events', 'uses'=>'EventController@finished']);
+    Route::get('dashboard/my_events/archived', ['as' => 'archived_events', 'uses'=>'EventController@archived']);
     Route::post('ajax/my_events/change_status', ['as' => 'change_event_status', 'uses'=>'EventController@changeStatus']);
     Route::post('dashboard/my_events/update/{event}', ['as' => 'update_event', 'uses'=>'EventController@update']);
     Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
     Route::post('dashboard/my_events/delete', ['as' => 'delete_event', 'uses'=>'EventController@delete']);
-    Route::get('dashboard/my_events/close/{event}', ['as' => 'close_event', 'uses'=>'EventController@close']);
+    Route::get('dashboard/my_events/archive/{event}', ['as' => 'archive_event', 'uses'=>'EventController@archive']);
 });
 
 Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show'])->middleware('auction_closed');
@@ -218,6 +218,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         Route::get('pending', ['as'=>'admin_pending_ads', 'uses' => 'AdsController@adminPendingAds']);
         Route::get('sold', ['as'=>'sold_ads', 'uses' => 'AdsController@soldAds']);
         Route::get('not-sold', ['as'=>'not_sold_ads', 'uses' => 'AdsController@notSoldAds']);
+        Route::post('change-payment-status', ['as'=>'change_payment_status', 'uses' => 'AdsController@changePaymentStatus']);
         // Route::get('blocked', ['as'=>'admin_blocked_ads', 'uses' => 'AdsController@adminBlockedAds']);
         // Route::post('status-change', ['as'=>'ads_status_change', 'uses' => 'AdsController@adStatusChange']);
 

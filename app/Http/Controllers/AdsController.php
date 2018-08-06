@@ -57,16 +57,16 @@ class AdsController extends Controller
     }
 
     public function myAds(){
-        $title = trans('app.my_ads');
+        $title = trans('app.published_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+        $ads = $user->ads()->active()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.my_ads', compact('title', 'ads'));
     }
 
     public function pendingAds(){
-        $title = trans('app.my_ads');
+        $title = trans('app.pending_ads');
 
         $user = Auth::user();
         $ads = $user->ads()->whereStatus('0')->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
@@ -81,6 +81,24 @@ class AdsController extends Controller
         $ads = $user->favourite_ads()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.favourite_ads', compact('title', 'ads'));
+    }
+
+    public function soldAds(){
+        $title = trans('app.sold_ads');
+
+        $user = Auth::user();
+        $ads = $user->ads()->whereStatus('3')->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.auctions.sold_ads', compact('title', 'ads'));
+    }
+
+    public function notSoldAds(){
+        $title = trans('app.not_sold_ads');
+
+        $user = Auth::user();
+        $ads = $user->ads()->whereStatus('4')->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+
+        return view('admin.auctions.not_sold_ads', compact('title', 'ads'));
     }
 
     /**
@@ -318,13 +336,10 @@ class AdsController extends Controller
             }
 
             if ( Auth::check()){
-                return redirect(route('my_ads'))->with('success', trans('app.ad_created_msg'));
+                return redirect(route('pending_ads'))->with('success', trans('app.ad_created_msg'));
             }
             return back()->with('success', trans('app.ad_created_msg'));
         }
-
-
-        //dd($request->input());
     }
 
     /**
@@ -520,6 +535,19 @@ class AdsController extends Controller
             elseif($value ==3){
                 return ['success'=>1, 'msg' => trans('app.ad_archived_msg')];
             }
+        }
+        return ['success'=>0, 'msg' => trans('app.error_msg')];
+
+    }
+
+    public function changePaymentStatus(Request $request){
+        $slug = $request->slug;
+        $ad = Ad::whereSlug($slug)->first();
+        if ($ad){
+            $ad->paid = 1;
+            $ad->save();
+
+            return ['success'=>1, 'msg' => trans('app.ad_paid_msg')];
         }
         return ['success'=>0, 'msg' => trans('app.error_msg')];
 

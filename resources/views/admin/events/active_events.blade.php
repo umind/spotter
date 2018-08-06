@@ -43,9 +43,9 @@
 
                                         <td>
                                             <a href="{{ route('edit_event', ['event' => $event->id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>                                            
-                                            @if(Carbon\Carbon::parse($event->auction_ends)->isPast() && $event->status != '2')
+                                            {{-- @if(Carbon\Carbon::parse($event->auction_ends)->isPast() && $event->status != '2')
                                                 <a href="{{ route('close_event', $event->id) }}" onclick="return confirm('{{ trans('app.are_you_sure') }}');" class="btn btn-danger"><i class="fa fa-close"></i> </a>
-                                            @endif
+                                            @endif --}}
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>

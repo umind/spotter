@@ -13,7 +13,7 @@
                         <li>  <a href="{{ route('pending_events') }}">@lang('app.pending_word')</a> </li>
                         <li>  <a href="{{ route('active_events') }}">@lang('app.published_word')</a> </li>
                         <li>  <a href="{{ route('closed_events') }}">@lang('app.closed_word')</a> </li>
-                        <li>  <a href="{{ route('finished_events') }}">@lang('app.archived_word')</a> </li>
+                        <li>  <a href="{{ route('archived_events') }}">@lang('app.archived_word')</a> </li>
                     </ul>
                 </li>
             @endif
@@ -23,7 +23,7 @@
                 <ul class="nav nav-second-level">
                     @if($lUser->is_admin())
                         <li>  <a href="{{ route('create_ad') }}">@lang('app.add_word')</a> </li>
-                        <li>  <a href="{{ route('my_ads') }}">@lang('app.all_articles')</a> </li>
+                        <li>  <a href="{{ route('my_ads') }}">@lang('app.published_word')</a> </li>
                         <li>  <a href="{{ route('admin_pending_ads') }}">@lang('app.pending_word')</a> </li>
                         <li>  <a href="{{ route('sold_ads') }}">@lang('app.sold_word')</a> </li>
                         <li>  <a href="{{ route('not_sold_ads') }}">@lang('app.not_sold_word')</a> </li>

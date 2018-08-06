@@ -26,13 +26,13 @@ class RedirectIfAuctionClosed
                 $auction = Ad::findOrFail($request->id);
             }
             // if auction is closed
-            if (isset($auction) && $auction->status == '2') {
+            if (isset($auction) && $auction->events()->first()->status == '3') {
                 return redirect('/');
             }
 
             // if event is closed
             if ($request->event) {
-                if ($request->event->status == '2') {                    
+                if ($request->event->status == '3') {                    
                     return redirect('/');
                 }
             }
