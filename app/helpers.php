@@ -809,3 +809,7 @@ function getArray($field){
     }
     return $arr;
 }
+
+function getCheckboxValue($value) {
+    return $value == 'on' ? 1 : 0;
+}

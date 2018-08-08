@@ -187,6 +187,16 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="email_notifications" {{ old('email_notifications') ? 'checked' : '' }}> @lang('app.receive_notification_emails')
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         @if(get_option('enable_recaptcha_registration') == 1)
                             <div class="form-group {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                                 <div class="col-md-6 col-md-offset-4">

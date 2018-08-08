@@ -219,8 +219,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $countries = Country::all();
 
-        if (!Auth::user()->is_admin() || $user->id != $id) {
-            return view('admin.error.error_404');            
+        if ($user->id != $id) {
+            return view('admin.error.error_404');
         }
 
         return view('admin.profile_edit', compact('title', 'user', 'countries'));
@@ -229,7 +229,7 @@ class UserController extends Controller
     public function profileEditPost(Request $request, $user_id){
         $user = User::find($user_id);
 
-        if (!Auth::user()->is_admin() || $user->id != $user_id) {
+        if ($user->id != $user_id) {
             return view('admin.error.error_404');            
         }
 
@@ -247,6 +247,8 @@ class UserController extends Controller
             'email'    => 'required|email|unique:users,email,'.$user_id,
         ];
         $this->validate($request, $rules);
+
+        $request->merge(['email_notifications' => getCheckboxValue($request->email_notifications)]);
 
         $inputs = array_except($request->input(), ['_token', 'photo']);
         $user_update = $user->whereId($user_id)->update($inputs);

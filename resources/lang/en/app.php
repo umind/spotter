@@ -2,6 +2,7 @@
 
 return [
     //newest
+    'receive_notification_emails' => 'Receive Notification Emails',
     'overbidding_mail_subject' => 'Spotter Overbidding',
     'overbidding_message' => 'Someone placed a higher bid on an article (:article_title) that you are currently bidding. Click <a href=":url">HERE</a> to check.',
     'bid_same_as_max_bid' => 'Someone\'s already posted the same bid. Please, place a higher bid.',

@@ -2,6 +2,7 @@
 
 return [
     // new
+    'receive_notification_emails' => 'Ich wünsche Benachrichtigungen über Mail zu erhalten',
     'overbidding_mail_subject' => 'Gebot überboten',
     'overbidding_message' => 'Ihr aktuelles Gebot an Artikel (:article_title) wurde überboten. Klicken Sie <a href=":url">HIER</a>, um ein neues Gebot zu setzen.',
     'bid_same_as_max_bid' => 'Ein Nutzer hat bereits dieses Gebot abgegeben. Bitte erhöhen Sie Ihr Gebot.',

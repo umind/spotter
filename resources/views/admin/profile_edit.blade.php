@@ -120,6 +120,17 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="email_notifications" {{ $user->email_notifications ? 'checked' : '' }}> @lang('app.receive_notification_emails')
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <hr />
 
                         <div class="form-group">

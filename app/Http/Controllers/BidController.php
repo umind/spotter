@@ -93,10 +93,14 @@ class BidController extends Controller
         // notification here
         if (isset($userWithCurrentMaxBid)) {
             if ($bid_amount > $currentMaxBid) {
-                Mail::to($userWithCurrentMaxBid->email)->send(new OverbiddingUsersBidMail($ad));
+                if ($userWithCurrentMaxBid->email_notifications == 1) {
+                    Mail::to($userWithCurrentMaxBid->email)->send(new OverbiddingUsersBidMail($ad));
+                }
             }
         } elseif(isset($userWithCurrentHighestBid)) {
-            Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
+            if ($userWithCurrentHighestBid->email_notifications == 1) {
+                Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
+            }
         }
 
         return back()->with('success', trans('app.your_bid_posted'));
@@ -144,11 +148,15 @@ class BidController extends Controller
                 $bid->is_accepted = 0;
                 $bid->save();
 
-                Mail::to($currentHighestBid->user->email)->send(new OverbiddingUsersBidMail($ad));
+                if ($currentHighestBid->user->email_notifications == 1) {
+                    Mail::to($currentHighestBid->user->email)->send(new OverbiddingUsersBidMail($ad));
+                }
             }
 
             if ($currentUserThatHasMaxBid->user->id != $user->id) {
-                Mail::to($currentUserThatHasMaxBid->user->email)->send(new OverbiddingUsersBidMail($ad));
+                if ($currentUserThatHasMaxBid->user->email_notifications == 1) {
+                    Mail::to($currentUserThatHasMaxBid->user->email)->send(new OverbiddingUsersBidMail($ad));
+                }
             }
         } else {
             $bid = new Bid;
