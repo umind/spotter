@@ -110,7 +110,7 @@ class EventController extends Controller
         } elseif ($event->status == '0') {
             return redirect()->route('pending_events')->with('success', trans('app.auction_created_msg'));
         } elseif ($event->status == '3') {
-            return redirect()->route('finished_events')->with('success', trans('app.auction_created_msg'));
+            return redirect()->route('archived_events')->with('success', trans('app.auction_created_msg'));
         }
     }
 

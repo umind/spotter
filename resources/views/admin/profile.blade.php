@@ -73,7 +73,7 @@
                                 <th>@lang('app.country')</th>
                                 <td>
                                     @if($user->country)
-                                        {{ $user->country->country_name }}
+                                        {{ $user->country->name_de }}
                                     @endif
                                 </td>
                             </tr>
@@ -92,7 +92,7 @@
                         </table>
 
                         @if($user->id == auth()->user()->id || $auth_user->is_admin())
-                            <a href="{{ route('profile_edit') }}" class="edit-profile"><i class="fa fa-pencil-square-o"></i> @lang('app.edit') </a>
+                            <a href="{{ route('profile_edit', $user->id) }}" class="edit-profile"><i class="fa fa-pencil-square-o"></i> @lang('app.edit') </a>
                         @endif
                     </div>
                 </div>

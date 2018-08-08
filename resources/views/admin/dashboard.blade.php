@@ -24,7 +24,7 @@
 						<div class="panel panel-green">
 							<div class="panel-heading">
 								<div class="huge">{{ $active_events }}</div>
-								<div>@lang('app.active_events')</div>
+								<div>@lang('app.published_events')</div>
 							</div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 						<div class="panel panel-green">
 							<div class="panel-heading">
 								<div class="huge">{{ $active_ads }}</div>
-								<div>@lang('app.active_auctions')</div>
+								<div>@lang('app.published_auctions')</div>
 							</div>
 						</div>
 					</div>

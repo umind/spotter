@@ -36,6 +36,7 @@ class AdsController extends Controller
     public function index()
     {
         $title = trans('app.all_ads');
+
         $ads = Ad::with('city', 'country', 'state')->whereStatus('1')->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.all_ads', compact('title', 'ads'));
@@ -60,6 +61,9 @@ class AdsController extends Controller
         $title = trans('app.published_ads');
 
         $user = Auth::user();
+
+        // start search
+
         $ads = $user->ads()->active()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
 
         return view('admin.my_ads', compact('title', 'ads'));
@@ -271,6 +275,7 @@ class AdsController extends Controller
                 $event->auction_ends;
                 $syncData = $event->id;
                 $created_ad->expired_at = Carbon::parse(Carbon::parse($event->auction_ends)->toDateString() . ' ' . $request->bid_deadline);
+                $created_ad->status = $event->status;
                 $created_ad->save();
             } 
             $created_ad->events()->sync($syncData);
@@ -480,7 +485,7 @@ class AdsController extends Controller
             if ($event) {
                 $syncData = $event->id;
                 $ad->expired_at = Carbon::parse(Carbon::parse($event->auction_ends)->toDateString() . ' ' . $request->bid_deadline);
-                $ad->status = $event->status;
+                // $ad->status = $event->status;
                 $ad->save();
             } 
             $ad->events()->sync($syncData);
@@ -514,7 +519,15 @@ class AdsController extends Controller
             $this->uploadAdsImage($request, $ad->id);
         }
 
-        return redirect(route('my_ads'))->with('success', trans('app.ad_updated'));
+        if ($ad->status == '3') {
+            return redirect()->route('sold_ads')->with('success', trans('app.ad_updated'));
+        } elseif($ad->status == '1') {
+            return redirect()->route('my_ads')->with('success', trans('app.ad_updated'));
+        } elseif ($ad->status == '0') {
+            return redirect()->route('admin_pending_ads')->with('success', trans('app.ad_updated'));
+        } elseif ($ad->status == '4') {
+            return redirect()->route('not_sold_ads')->with('success', trans('app.ad_updated'));
+        }
     }
 
 
@@ -1044,19 +1057,17 @@ class AdsController extends Controller
         }
 
         // get all bids for this auction and also the max bid by the logged in user if set
-        $userMaxBid = $ad->bids()->whereHas('user', function ($q) {
-            $q->where('user_id', Auth::id());
-        })->max('max_bid_amount');
+        $maxBid = $ad->bids()->whereNotNull('max_bid_amount')->first();
+        $userMaxBid = $maxBid ? $maxBid->max_bid_amount : null;
         
         // get all bids without max bid 
-        // whereNull('max_bid_amount')->
-        $bids = $ad->bids()->with('user')->get();
+        $bids = $ad->bids()->with('user')->whereNull('max_bid_amount')->get()->sortByDesc('bid_amount');
 
         // get the user who won
         $wonBid = $ad->bids()->where('is_accepted', 1)->first();
         $wonUser = $wonBid ? User::find($wonBid->user_id) : null;
 
-        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', 'wonUser', 'wonBid'));
+        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', 'wonUser', 'wonBid', 'maxBid'));
     }
 
     public function switchGridListView(Request $request){

@@ -37,7 +37,7 @@
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid, 2) : number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $ad->current_bid_plus_increaser() }}">
+                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid + $ad->price_increaser, 2) : number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid + $ad->price_increaser, 2) : number_format($ad->current_bid_plus_increaser(), 2) }}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="max_bid_amount">
                           <span class="glyphicon glyphicon-plus"></span>
@@ -159,14 +159,14 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>@lang('app.bidder')</th>
-                                        {{-- <th>@lang('app.bid_amount')</th> --}}
+                                        <th>@lang('app.bid_amount')</th>
                                         <th>@lang('app.date_time')</th>
                                     </tr>
                                     @foreach($bids as $bid)
                                         <tr>
                                             <td>{{ $bid->user->user_name }}</td>
-                                            {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
-                                            <td>{{ \Carbon\Carbon::parse($bid->created_at)->formatLocalized(get_option('date_format')) }}</td>
+                                            <td>{{ themeqx_price($bid->bid_amount) }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($bid->updated_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
                                     @endforeach
 
@@ -345,9 +345,9 @@
 											<p>@lang('app.max_bid_desc')</p>
 											<button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
 										</div>
-
-                                        @if($userMaxBid)
-                                            <p>@lang('app.your_max_bid'): {{ number_format($userMaxBid, 2) }}</p>
+                                        <br>
+                                        @if($userMaxBid && $maxBid->user_id == Auth::id())
+                                            <p>@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
                                         @endif
 
                                     @else

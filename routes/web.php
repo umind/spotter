@@ -37,6 +37,9 @@ Route::group(['middleware' => 'only_admin_access'], function () {
     Route::post('dashboard/my_events/publish/{event}', ['as' => 'publish_event', 'uses'=>'EventController@publish']);
     Route::post('dashboard/my_events/delete', ['as' => 'delete_event', 'uses'=>'EventController@delete']);
     Route::get('dashboard/my_events/archive/{event}', ['as' => 'archive_event', 'uses'=>'EventController@archive']);
+
+    Route::get('dashboard/users/edit/{user_id}', ['uses' => 'UserController@editUser']);
+    Route::post('dashboard/users/delete/{id}', ['uses' => 'UserController@profileEditPost']);
 });
 
 Route::get('events/{event}', ['as' => 'single_event', 'uses'=>'EventController@show'])->middleware('auction_closed');
@@ -283,8 +286,11 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
 
             // all users access
             Route::get('profile', ['as'=>'profile', 'uses' => 'UserController@profile']);
-            Route::get('profile/edit', ['as'=>'profile_edit', 'uses' => 'UserController@profileEdit']);
-            Route::post('profile/edit', ['uses' => 'UserController@profileEditPost']);
+            Route::get('profile/edit/{user_id}', ['as'=>'profile_edit', 'uses' => 'UserController@profileEdit']);
+            Route::post('profile/edit/{user_id}', ['as'=>'update_user', 'uses' => 'UserController@profileEditPost']);
+            Route::get('profile/delete/{user_id}', ['as'=>'delete_user', 'uses' => 'UserController@deleteUser']);
+            Route::get('profile/block/{user_id}', ['as'=>'block_user', 'uses' => 'UserController@blockUser']);
+            Route::get('profile/unblock/{user_id}', ['as'=>'unblock_user', 'uses' => 'UserController@unblockUser']);
             Route::get('profile/change-avatar', ['as'=>'change_avatar', 'uses' => 'UserController@changeAvatar']);
             Route::post('upload-avatar', ['as'=>'upload_avatar',  'uses' => 'UserController@uploadAvatar']);
 

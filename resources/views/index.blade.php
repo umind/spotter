@@ -41,11 +41,11 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-12">
+{{--                     <div class="col-md-12">
                         <div class="front-ads-head">
                             <h2>@lang('app.all_products')</h2>
                         </div>
-                    </div>
+                    </div> --}}
 
                     @foreach($ads as $ad)
                         <div class="col-sm-6 col-md-3">

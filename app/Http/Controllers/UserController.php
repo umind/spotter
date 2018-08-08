@@ -37,16 +37,29 @@ class UserController extends Controller
     }
 
     public function usersData(){
-        $users = User::select('id','name', 'user_name', 'email', 'created_at')->whereUserType('user')->get();
+        $users = User::select('id', 'user_name', 'email', 'created_at', 'active_status')->whereUserType('user')->get();
         return  Datatables::of($users)
-            ->editColumn('name', function($user){
-                $html = '<a href="'.route('user_info', $user->id).'">'.$user->name.'</a>';
+            ->editColumn('user_name', function($user){
+                $html = '<a href="'.route('user_info', $user->id).'">'.$user->user_name.'</a>';
                 return $html;
             })
             ->editColumn('created_at',function($user){
                 return Carbon::parse($user->created_at)->formatLocalized(get_option('date_format'));
             })
+            ->editColumn(__('app.manage'),function($user){
+                $html = '<a href="'.route('profile_edit', $user->id).'" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+                        <a href="'.route('delete_user', $user->id).'" class="btn btn-danger" onclick="return confirm(\'' . __('app.are_you_sure') . '\');"><i class="fa fa-trash"></i> </a>';
+
+                if ($user->active_status == '1') {
+                    $html .= '<a href="'.route('block_user', $user->id).'" class="btn btn-danger" onclick="return confirm(\'' . __('app.are_you_sure') . '\');"><i class="fa fa-ban"></i> </a>';
+                } elseif ($user->active_status == '2') {
+                    $html .= '<a href="'.route('unblock_user', $user->id).'" class="btn btn-success" onclick="return confirm(\'' . __('app.are_you_sure') . '\');"><i class="fa fa-check-circle-o"></i> </a>';
+                }
+
+                return $html;
+            })
             ->removeColumn('id')
+            ->removeColumn('active_status')
             ->make();
     }
 
@@ -58,8 +71,11 @@ class UserController extends Controller
         if (!$user){
             return view('admin.error.error_404');
         }
-
-        return view('admin.user_info', compact('title', 'user', 'ads'));
+        if (Auth::user()->is_admin() || $user->id == $id) {
+            return view('admin.user_info', compact('title', 'user', 'ads'));
+        } else {
+            return redirect()->back();
+        }
 
     }
 
@@ -198,17 +214,24 @@ class UserController extends Controller
         return view('admin.profile', compact('title', 'user'));
     }
 
-    public function profileEdit(){
+    public function profileEdit($id){
         $title = trans('app.profile_edit');
-        $user = Auth::user();
+        $user = User::findOrFail($id);
         $countries = Country::all();
+
+        if (!Auth::user()->is_admin() || $user->id != $id) {
+            return view('admin.error.error_404');            
+        }
 
         return view('admin.profile_edit', compact('title', 'user', 'countries'));
     }
 
-    public function profileEditPost(Request $request){
-        $user_id = Auth::user()->id;
+    public function profileEditPost(Request $request, $user_id){
         $user = User::find($user_id);
+
+        if (!Auth::user()->is_admin() || $user->id != $user_id) {
+            return view('admin.error.error_404');            
+        }
 
         //Validating
         $rules = [
@@ -261,7 +284,7 @@ class UserController extends Controller
             }
         }
 
-        return redirect(route('profile'))->with('success', trans('app.profile_edit_success_msg'));
+        return redirect()->back()->with('success', trans('app.profile_edit_success_msg'));
     }
 
     public function administrators(){
@@ -404,4 +427,38 @@ class UserController extends Controller
         return ['status'=>0, 'msg'=> trans('app.error_msg')];
     }
 
+    public function deleteUser($id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Auth::user()->is_admin()) {
+            $user->delete();
+        }
+
+        return redirect()->back();
+    }
+
+    public function blockUser($id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Auth::user()->is_admin()) {
+            $user->active_status = '2';
+            $user->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function unblockUser($id)
+    {
+        $user = User::findOrFail($id);
+
+        if (Auth::user()->is_admin()) {
+            $user->active_status = '1';
+            $user->save();
+        }
+
+        return redirect()->back();
+    }
 }

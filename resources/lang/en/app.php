@@ -2,6 +2,10 @@
 
 return [
     //newest
+    'overbidding_mail_subject' => 'Spotter Overbidding',
+    'overbidding_message' => 'Someone placed a higher bid on an article (:article_title) that you are currently bidding. Click <a href=":url">HERE</a> to check.',
+    'bid_same_as_max_bid' => 'Someone\'s already posted the same bid. Please, place a higher bid.',
+    'manage' => 'Manage',
     'not_paid' => 'Not Paid',
     'paid' => 'Paid',
     'ad_paid_msg' => 'Status changed to paid',
@@ -749,7 +753,7 @@ return [
     'highest_bid'                       => 'Highest bid',
     'plus_pdv'                          => 'Zusätzlich',
     'total_bids'                        => 'Total Bids',
-    'enter_min_bid_amount'              => 'Please enter bid amount that is not less then or equal to %s',
+    'enter_min_bid_amount'              => 'Please enter a bid amount higher than %s',
     'posted_at'                         => 'Posted at',
     'bid_closed'                        => 'Bid Closed',
     'cant_bid_anymore'                  => 'You can no longer place any bids on this auction',

@@ -57,6 +57,7 @@
                                         </td>
 
                                         <td>
+                                            <a href="{{route('auction_bids', $ad->id)}}" class="btn btn-info" data-toggle="tooltip" title="@lang('app.bids')"><i class="fa fa-gavel"></i> {{$ad->bids->count()}} </a>
                                             {{-- <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a> --}}
                                             <a href="javascript:;" class="btn btn-success changePaymentStatus" data-slug="{{ $ad->slug }}" data-value="1"><i class="fa fa-check-circle-o"></i> </a>
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
@@ -116,7 +117,6 @@
                 data: {slug: slug, value: value, _token: '{{ csrf_token() }}'},
                 success: function (data) {
                     if (data.success == 1) {
-                        selector.closest('tr').hide('slow');
                         toastr.success(data.msg, '@lang('app.success')', toastr_options);
                     }
                 }

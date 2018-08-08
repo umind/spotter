@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Mail;
 use App\Ad;
 use App\Bid;
 use App\User;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\OverbiddingUsersBidMail;
 
 class BidController extends Controller
 {
@@ -47,50 +49,55 @@ class BidController extends Controller
             return back()->with('error', trans('app.bidding_time_expired'));
         }
 
-        // get max bid that you enter inside place bid field
-        $current_max_bid = $ad->current_bid_plus_increaser();
+        $minimumBid = $ad->current_bid_plus_increaser();
+        $maxBidObj = $ad->bids()->whereNotNull('max_bid_amount')->first();
+        $currentMaxBid = $maxBidObj ? $maxBidObj->max_bid_amount : NULL;
+        $minimumMaxBid = $currentMaxBid ? $currentMaxBid + $ad->price_increaser : $minimumBid;
 
-        // get max bid that you enter inside place MAX bid field
-        $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
-
-        // check if user that is bidding has already the highest bid (so that he cannot bid himself)
-        $userIDWithCurrentHighestBid = User::whereHas('bids', function ($q) use ($ad) {
-            $q->where('ad_id', $ad->id)
-                ->orderBy('bid_amount', 'desc');
-        })->value('id');
-
-        if ($userIDWithCurrentHighestBid == $user->id) {
-            return back()->with('error', trans('app.cannot_bid_yourself'));
+        if ($bid_amount < $minimumBid){
+            return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($minimumBid)));
         }
 
-        // for notification also
-        $userWithCurrentMaxBid = User::whereHas('bids', function ($q) {
-            $q->orderBy('max_bid_amount', 'desc');
-        })->first();
-
-
-        if ($bid_amount < $current_max_bid ){
-            return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
+        if ($bid_amount == $currentMaxBid) {
+            return back()->with('error', trans('app.bid_same_as_max_bid'));
         }
 
-        if($userWithCurrentMaxBid && $maxBid > $bid_amount) {
-            $bid_amount += $ad->price_increaser;
+        $currentHighestBid = $ad->bids()->whereNotNull('bid_amount')->orderBy('bid_amount', 'desc')->first();
+        if ($currentHighestBid) {
+            $userWithCurrentHighestBid = User::find($currentHighestBid->user_id);
+
+            if ($userWithCurrentHighestBid->id == $user->id) {
+                return back()->with('error', trans('app.cannot_bid_yourself'));
+            }
         }
 
-        $data = [
-            'ad_id'         => $ad_id,
-            'user_id'       => $userWithCurrentMaxBid && $maxBid > $bid_amount ? $userWithCurrentMaxBid->id : $user->id,
-            'bid_amount'    => $bid_amount,
-            'is_accepted'   => 0,
-        ];
+        $bid = new Bid;
+        $bid->ad_id = $ad->id;
+        $bid->user_id = $user->id;
+        $bid->bid_amount = $bid_amount;
+        $bid->is_accepted = 0;
+        $bid->save();
 
-        Bid::create($data);
+        if ($maxBidObj && $currentMaxBid > $bid_amount) {
+            if($currentMaxBid > $bid_amount) {
+                $bid_amount += $ad->price_increaser;
+            }
+            $bid = new Bid;
+            $bid->ad_id = $ad->id;
+            $bid->user_id = $maxBidObj->user_id;
+            $bid->bid_amount = $bid_amount;
+            $bid->is_accepted = 0;
+            $bid->save();
+        }
 
         // notification here
-        // if ($bid_amount > $maxBid) {
-        //     $notification = new Notification
-        //     $user->
-        // }
+        if (isset($userWithCurrentMaxBid)) {
+            if ($bid_amount > $currentMaxBid) {
+                Mail::to($userWithCurrentMaxBid->email)->send(new OverbiddingUsersBidMail($ad));
+            }
+        } elseif(isset($userWithCurrentHighestBid)) {
+            Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
+        }
 
         return back()->with('success', trans('app.your_bid_posted'));
     }
@@ -101,38 +108,62 @@ class BidController extends Controller
         }
         $user = Auth::user();
         $bid_amount = toFloat($request->max_bid_amount);
-
         $ad = Ad::find($ad_id);
-        $current_max_bid = $ad->current_bid_plus_increaser();
-        $maxBid = $ad->bids()->where('user_id', '!=', $user->id)->max('max_bid_amount');
 
-        if ($bid_amount < $current_max_bid ){
-            return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($current_max_bid)) );
+        // check if expired
+        if (Carbon::parse($ad->expired_at)->isPast()) {
+            return back()->with('error', trans('app.bidding_time_expired'));
         }
 
-        if ($bid_amount == $maxBid){
-            return back()->with('error', trans('app.max_bid_same_error_msg'));
+        $minimumBid = $ad->current_bid_plus_increaser();
+        $maxBidObj = $ad->bids()->whereNotNull('max_bid_amount')->first();
+        $currentMaxBid = $maxBidObj ? $maxBidObj->max_bid_amount : NULL;
+        $minimumMaxBid = $currentMaxBid ? $currentMaxBid + $ad->price_increaser : $minimumBid;
+
+        if ($bid_amount < $minimumMaxBid){
+            return back()->with('error', sprintf(trans('app.enter_min_bid_amount'), themeqx_price($minimumMaxBid)));
         }
 
-        $data = [
-            'ad_id'         => $ad_id,
-            'user_id'       => $user->id,
-            'bid_amount'    => $current_max_bid == $bid_amount ? $bid_amount : $current_max_bid,
-            'max_bid_amount'    => $bid_amount,
-            'is_accepted'   => 0,
-        ];
+        if ($maxBidObj) {
+            $currentUserThatHasMaxBid = $maxBidObj;
+            $maxBidObj->max_bid_amount = $bid_amount;
+            if ($maxBidObj->user_id != $user->id) {
+                $maxBidObj->user_id = $user->id;
+            } else {
+                $maxBidObj->user_id = $maxBidObj->user_id;
+            }
+            $maxBidObj->save();
 
-        // find if this user already has placed max bid
-        $bid = $ad->bids()->where('user_id', $user->id)->whereNotNull('max_bid_amount')->first();
+            $currentHighestBid = $ad->bids()->whereNotNull('bid_amount')->orderBy('bid_amount', 'desc')->first();
 
-        // if max bids by this user already exists replace by new max bid
-        // if thats not the case then just create new max bid
-        if ($bid) {
-            $bid->bid_amount = $current_max_bid == $bid_amount ? $bid_amount : null;
-            $bid->max_bid_amount = $bid_amount;
-            $bid->save();
+            if ($currentHighestBid->user->id != $user->id) {
+                $bid = new Bid;
+                $bid->ad_id = $ad->id;
+                $bid->user_id = $user->id;
+                $bid->bid_amount = $minimumBid;
+                $bid->is_accepted = 0;
+                $bid->save();
+
+                Mail::to($currentHighestBid->user->email)->send(new OverbiddingUsersBidMail($ad));
+            }
+
+            if ($currentUserThatHasMaxBid->user->id != $user->id) {
+                Mail::to($currentUserThatHasMaxBid->user->email)->send(new OverbiddingUsersBidMail($ad));
+            }
         } else {
-            Bid::create($data);
+            $bid = new Bid;
+            $bid->ad_id = $ad->id;
+            $bid->user_id = $user->id;
+            $bid->max_bid_amount = $bid_amount;
+            $bid->is_accepted = 0;
+            $bid->save();
+
+            $bid = new Bid;
+            $bid->ad_id = $ad->id;
+            $bid->user_id = $user->id;
+            $bid->bid_amount = $minimumBid;
+            $bid->is_accepted = 0;
+            $bid->save();
         }
         
         return back()->with('success', trans('app.your_bid_posted'));

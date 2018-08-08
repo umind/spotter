@@ -30,10 +30,10 @@
                         <table class="table table-bordered table-striped" id="jDataTable">
                             <thead>
                                 <tr>
-                                    <th>@lang('app.name')</th>
-                                    <th>@lang('app.via')</th>
+                                    <th>@lang('app.user_name')</th>
                                     <th>@lang('app.email')</th>
                                     <th>@lang('app.created_at')</th>
+                                    <th>@lang('app.manage')</th>
                                 </tr>
                             </thead>
 

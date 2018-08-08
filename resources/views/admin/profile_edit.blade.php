@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                        {!! Form::open(['class'=>'form-horizontal', 'files'=>'true']) !!}
+                        {!! Form::open(['url' => route('update_user', $user->id), 'class'=>'form-horizontal', 'files'=>'true']) !!}
 
                         <div class="form-group {{ $errors->has('title')? 'has-error':'' }}">
                             <label for="title" class="col-sm-4 control-label">@lang('app.anrede')</label>
@@ -81,7 +81,7 @@
                                 <select id="country_id" name="country_id" class="form-control select2">
                                     <option value="">@lang('app.select_a_country')</option>
                                     @foreach($countries as $country)
-                                        <option value="{{ $country->id }}" {{ $user->country_id == $country->id ? 'selected' :'' }}>{{ $country->country_name }}</option>
+                                        <option value="{{ $country->id }}" {{ $user->country_id == $country->id ? 'selected' :'' }}>{{ $country->name_de }}</option>
                                     @endforeach
                                 </select>
                                 {!! $errors->has('country_id')? '<p class="help-block">'.$errors->first('country_id').'</p>':'' !!}
