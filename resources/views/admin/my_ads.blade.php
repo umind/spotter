@@ -33,6 +33,8 @@
                                             <p class="text-muted">
                                                 @php $event = $ad->events()->first(); @endphp
 
+                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
+                                                <br>
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
                                                 @if($event)
                                                     <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
@@ -41,9 +43,6 @@
                                                 @else
                                                     <span>@lang('app.event_not_assigned')</span>
                                                 @endif
-                                                <br>
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
-                                                
                                             </p>
                                         </td>
 

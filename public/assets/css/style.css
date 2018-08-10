@@ -61,6 +61,10 @@ a:hover {
 	color: #252652;
 }
 
+.navbar-brand img {
+	width: 200px;
+}
+
 .form-control {
 	border-radius: 1px;
 	box-shadow: none;
@@ -474,7 +478,6 @@ a.cat-view-more {
 /* Admin panel */
 
 #admin-panel {
-	margin-top: 40px;
 	margin-bottom: 40px;
 }
 
@@ -527,6 +530,25 @@ a.cat-view-more {
 /**
 Page header
  */
+
+.filter-holder {
+	display: flex;
+	margin: 20px 0px;
+}
+
+.account-search {
+	margin-right: 30px;
+}
+
+.account-search input {
+	padding: 6px;
+	height: 34px;
+	vertical-align: bottom;
+}
+
+.account-sort-by select {
+	height: 34px;
+}
 
 .page-header.search-page-header {
 	background: #eeeeee;
@@ -1245,13 +1267,26 @@ ul.footer-menu li a {
 	width: 100%;
 }
 
+.ads-gallery {
+	text-align: center;
+}
+
+.ads-gallery .photos-holder {
+	display: block;
+	background: #eeeeee;
+}
+
+.photos-holder img {
+	max-width: 100%;
+}
+
 .ads-gallery #gallery_01 {
 	text-align: center;
 	margin-top: 20px;
 }
 
 .ads-gallery #gallery_01 img {
-	width: 100px;
+	width: 80px;
 	margin-right: 20px;
 }
 

@@ -370,6 +370,19 @@
 
         $(document).ready(function(){
 
+            $('#event').change(function () {
+                $.ajax({
+                    type : 'get',
+                    url : '{{ route('get_event_time') }}',
+                    data : { event_id : $(this).val() },
+                    success : function (data) {
+                        if (data.success) {
+                            $('#bid_deadline').val(data.eventTime);
+                        }
+                    }
+                });
+            });
+
             $('[name="country"]').change(function(){
                 var country_id = $(this).val();
                 $('#state_loader').show();

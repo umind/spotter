@@ -133,7 +133,9 @@
                             ?>
                         @else
                             <div class="ads-gallery">
-                                <img id="zoom_01" src="{{ media_url($ad->media_img()->first(), 'medium') }}" data-zoom-image="{{ media_url($ad->media_img()->first(), 'big') }}" alt="b-1">
+                                <a href="#" class="photos-holder">
+                                    <img id="zoom_01" src="{{ media_url($ad->media_img()->first(), 'medium') }}" data-zoom-image="{{ media_url($ad->media_img()->first(), 'big') }}" alt="b-1">
+                                </a>
                                 <div id="gallery_01">
                                     @foreach($ad->media_img as $img)
                                         <a href="#" data-image="{{ media_url($img, 'medium') }}" data-zoom-image="{{ media_url($img, 'big') }}">
@@ -164,7 +166,12 @@
                                     </tr>
                                     @foreach($bids as $bid)
                                         <tr>
-                                            <td>{{ $bid->user->user_name }}</td>
+                                            <td>
+                                                {{ $bid->user->user_name }}
+                                                @if($bid->won_bid_amount)
+                                                    <i class="fa fa-check-circle text-primary"></i>
+                                                @endif
+                                            </td>
                                             <td>{{ themeqx_price($bid->bid_amount) }}</td>
                                             <td>{{ \Carbon\Carbon::parse($bid->updated_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
@@ -434,38 +441,7 @@
                                 <a href="#" class="btn btn-default share s_linkedin"><i class="fa fa-linkedin"></i> </a>
                             </div>
 
-                        </div>
-
-                        <div class="widget">
-
-                            {{--<h3>@lang('app.seller_info')</h3>--}}
-                            @if( ! empty($ad->user))
-                                <div class="sidebar-user-info">
-                                    <div class="ad-single-user-avatar">
-                                        <img src="{{ $ad->user->get_gravatar() }}" class="img-circle img-responsive" />
-                                    </div>
-
-                                    <div class="ad-single-user-info">
-                                        <h5>{{ $ad->user->user_name }}</h5>
-                                        @php $user_address = $ad->user->get_address(); @endphp
-                                        @if($user_address)
-                                            <p class="text-muted"><i class="fa fa-map-marker"></i> {!! $user_address !!}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endif
-
-                            <div class="sidebar-user-link">
-
-                                @if( ! $ad->category_type== 'jobs')
-                                    <button class="btn btn-block" id="onClickShowPhone">
-                                        <strong> <span id="ShowPhoneWrap"></span> </strong> <br />
-                                        <span class="text-muted">@lang('app.click_to_show_phone_number')</span>
-                                    </button>
-                                @endif
-
-                                <ul class="ad-action-list">
-
+                            <ul class="ad-action-list">
                                     <li>
                                         <a href="javascript:;" id="save_as_favorite" data-slug="{{ $ad->slug }}">
                                             @if( ! $ad->is_my_favorite())
@@ -483,13 +459,42 @@
                                     @endif
                                 </ul>
 
-                            </div>
-
                         </div>
+
+                        {{-- <div class="widget"> --}}
+
+                            {{--<h3>@lang('app.seller_info')</h3>--}}
+                            {{-- @if( ! empty($ad->user))
+                                <div class="sidebar-user-info">
+                                    <div class="ad-single-user-avatar">
+                                        <img src="{{ $ad->user->get_gravatar() }}" class="img-circle img-responsive" />
+                                    </div>
+
+                                    <div class="ad-single-user-info">
+                                        <h5>{{ $ad->user->user_name }}</h5>
+                                        @php $user_address = $ad->user->get_address(); @endphp
+                                        @if($user_address)
+                                            <p class="text-muted"><i class="fa fa-map-marker"></i> {!! $user_address !!}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif --}}
+
+                            {{-- <div class="sidebar-user-link">
+                                @if( ! $ad->category_type== 'jobs')
+                                    <button class="btn btn-block" id="onClickShowPhone">
+                                        <strong> <span id="ShowPhoneWrap"></span> </strong> <br />
+                                        <span class="text-muted">@lang('app.click_to_show_phone_number')</span>
+                                    </button>
+                                @endif
+
+                            </div> --}}
+
+                        {{-- </div> --}}
 
                         @if($related_ads->count() > 0 && get_option('enable_related_ads') == 1)
                             <div class="widget similar-ads">
-                                <h3>@lang('app.similar_ads')</h3>
+                                <h3>@lang('app.next_bidding')</h3>
 
                                 @foreach($related_ads as $rad)
                                     <div class="item-loop">
@@ -504,7 +509,7 @@
                                             </div>
                                             <div class="ads-thumbnail">
                                                 <a href="{{ route('single_ad', [$rad->id, $rad->slug]) }}">
-                                                    <img itemprop="image" src="{{ media_url($rad->feature_img) }}" class="img-responsive" alt="{{ $rad->title }}">
+                                                    <img itemprop="image" src="{{ media_url($rad->feature_img, 'crop') }}" class="img-responsive" alt="{{ $rad->title }}">
                                                     <span class="modern-img-indicator">
                                                     @if(! empty($rad->video_url))
                                                             <i class="fa fa-file-video-o"></i>

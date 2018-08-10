@@ -127,7 +127,7 @@
                                     @if($ad->media_img->count() > 0)
                                         @foreach($ad->media_img as $img)
                                             <div class="creating-ads-img-wrap">
-                                                <img src="{{ media_url($img, 'thumb') }}" class="img-responsive" />
+                                                <img src="{{ media_url($img, 'crop') }}" class="img-responsive" />
                                                 <div class="img-action-wrap" id="{{ $img->id }}">
                                                     <a href="javascript:;" class="imgDeleteBtn"><i class="fa fa-trash-o"></i> </a>
                                                 </div>
@@ -339,6 +339,19 @@
 
 
         $(document).ready(function(){
+
+            $('#event').change(function () {
+                $.ajax({
+                    type : 'get',
+                    url : '{{ route('get_event_time') }}',
+                    data : { event_id : $(this).val() },
+                    success : function (data) {
+                        if (data.success) {
+                            $('#bid_deadline').val(data.eventTime);
+                        }
+                    }
+                });
+            });
 
             $('[name="country"]').change(function(){
                 var country_id = $(this).val();

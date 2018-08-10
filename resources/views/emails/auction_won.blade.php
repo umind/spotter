@@ -1,0 +1,1 @@
+{!! __('app.you_won_mail_text', ['event_title' => $event->title, 'article_title' => $ad->title]) !!}

@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="ads-thumbnail">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}">
-                                        <img itemprop="image" src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="{{ $ad->title }}">
+                                        <img itemprop="image" src="{{ media_url($ad->feature_img, 'crop') }}" class="img-responsive" alt="{{ $ad->title }}">
                                         <span class="modern-img-indicator">
                                         @if(! empty($ad->video_url))
                                                 <i class="fa fa-file-video-o"></i>

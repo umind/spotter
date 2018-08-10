@@ -93,6 +93,7 @@ Route::post('get-brand-by-category', ['as'=>'get_brand_by_category', 'uses' => '
 Route::post('get-category-info', ['as'=>'get_category_info', 'uses' => 'AdsController@getParentCategoryInfo']);
 Route::post('get-state-by-country', ['as'=>'get_state_by_country', 'uses' => 'AdsController@getStateByCountry']);
 Route::post('get-city-by-state', ['as'=>'get_city_by_state', 'uses' => 'AdsController@getCityByState']);
+Route::get('get-event-time', ['as'=>'get_event_time', 'uses' => 'EventController@getEventTime']);
 Route::post('switch/product-view', ['as'=>'switch_grid_list_view', 'uses' => 'AdsController@switchGridListView']);
 
 
@@ -225,6 +226,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         // Route::get('blocked', ['as'=>'admin_blocked_ads', 'uses' => 'AdsController@adminBlockedAds']);
         // Route::post('status-change', ['as'=>'ads_status_change', 'uses' => 'AdsController@adStatusChange']);
 
+
+
         // Route::get('ad-reports', ['as'=>'ad_reports', 'uses' => 'AdsController@reports']);
         Route::get('users', ['as'=>'users', 'uses' => 'UserController@index']);
         Route::get('users-data', ['as'=>'get_users_data', 'uses' => 'UserController@usersData']);
@@ -309,6 +312,8 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
         Route::get('notifications/{notification}', ['as' => 'show_notification', 'uses' => 'NotificationController@show']);
         Route::post('notifications/ajax/remove-number', ['as' => 'remove_notification_number', 'uses' => 'NotificationController@removeNumber']);
     });
+
+    Route::get('articles/search', ['as' => 'get_search_results', 'uses' => 'SearchController@getArticlesResults']);
 
     //Route::get('logout', ['as'=>'logout', 'uses' => 'DashboardController@logout']);
 });

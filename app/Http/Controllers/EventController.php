@@ -15,7 +15,7 @@ class EventController extends Controller
 {
     public function index(){
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
-        $events = Event::active()->paginate(10);
+        $events = Event::active()->orderBy('status')->orderBy('auction_ends')->paginate(20);
         return view('events.index', compact('events'));
     }
 
@@ -23,7 +23,7 @@ class EventController extends Controller
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();
 
-        $ads = $event->auctions()->paginate(10);
+        $ads = $event->auctions()->paginate(20);
 
         return view('events.show', compact('ads', 'total_ads_count', 'user_count', 'event'));
     }
@@ -32,7 +32,7 @@ class EventController extends Controller
     public function myEvents() {
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
         $title = trans('app.my_events');
-        $events = Auth::user()->events()->paginate(10);
+        $events = Auth::user()->events()->paginate(20);
         return view('admin.events.my_events', compact('events', 'title'));
     }
 
@@ -179,5 +179,16 @@ class EventController extends Controller
         $event->auctions()->update(['status' => '3']);
 
         return redirect()->route('closed_events')->with('success', trans('app.event_archived_msg'));
+    }
+
+    public function getEventTime(Request $request)
+    {
+        $event = Event::findOrFail($request->event_id);
+        $eventTime = Carbon::parse($event->auction_ends)->format('H:i');
+        if ($eventTime) {
+            return response()->json(['success' => true, 'eventTime' => $eventTime]);
+        }
+
+        return response()->json(['success' => false]);
     }
 }

@@ -48,7 +48,7 @@
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
                                                 @if($event)
                                                     <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
-                                                         <span>{{ $event->title }}</span>
+                                                        <span>{{ $event->title }}</span>
                                                     </a>
                                                 @else
                                                     <span>@lang('app.event_not_assigned')</span>
@@ -59,7 +59,9 @@
                                         <td>
                                             <a href="{{route('auction_bids', $ad->id)}}" class="btn btn-info" data-toggle="tooltip" title="@lang('app.bids')"><i class="fa fa-gavel"></i> {{$ad->bids->count()}} </a>
                                             {{-- <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a> --}}
-                                            <a href="javascript:;" class="btn btn-success changePaymentStatus" data-slug="{{ $ad->slug }}" data-value="1"><i class="fa fa-check-circle-o"></i> </a>
+                                            @if(!$ad->paid)
+                                                <a href="javascript:;" class="btn btn-success changePaymentStatus" data-slug="{{ $ad->slug }}" data-value="1"><i class="fa fa-check-circle-o"></i> </a>
+                                            @endif
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
                                         </td>
                                     </tr>
@@ -117,6 +119,8 @@
                 data: {slug: slug, value: value, _token: '{{ csrf_token() }}'},
                 success: function (data) {
                     if (data.success == 1) {
+                        selector.closest('tr').find('.label-danger').toggleClass('label-danger label-success').text('{{ __('app.paid') }}');
+                        selector.remove();
                         toastr.success(data.msg, '@lang('app.success')', toastr_options);
                     }
                 }

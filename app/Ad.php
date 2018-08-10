@@ -122,19 +122,24 @@ class Ad extends Model
         return $created_date_time;
     }
 
-
     public function status_context(){
         $status = $this->status;
         $html = '';
         switch ($status){
             case 0:
-                $html = '<span class="text-muted">'.trans('app.pending').'</span>';
+                $html = '<span class="text-muted">'.trans('app.pending_word').'</span>';
                 break;
             case 1:
-                $html = '<span class="text-success">'.trans('app.published').'</span>';
+                $html = '<span class="text-success">'.trans('app.published_word').'</span>';
                 break;
-            case 2:
-                $html = '<span class="text-muted">'.trans('app.closed').'</span>';
+            // case 2:
+            //     $html = '<span class="text-muted">'.trans('app.closed').'</span>';
+            //     break;
+            case 3:
+                $html = '<span class="text-muted">'.trans('app.sold_word').'</span>';
+                break;
+            case 4:
+                $html = '<span class="text-muted">'.trans('app.not_sold_word').'</span>';
                 break;
         }
         return $html;

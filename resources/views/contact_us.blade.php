@@ -55,14 +55,8 @@
                                 </div>
                                 <div class="form-group {{ $errors->has('email')? 'has-error':'' }}">
                                     <label for="email">@lang('app.email_address')</label>
-                                    <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-envelope"></span>
-                                </span>
-                                        <input type="text" class="form-control" id="email" placeholder="@lang('app.enter_email_address')" name="email" value="{{ old('email') }}"/>
-                                    </div>
+                                    <input type="text" class="form-control" id="email" placeholder="@lang('app.enter_email_address')" name="email" value="{{ old('email') }}"/>
                                     {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
-
                                 </div>
 
                                 <div class="form-group {{ $errors->has('message')? 'has-error':'' }}">

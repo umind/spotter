@@ -2,6 +2,14 @@
 
 return [
     //newest
+    'sort_by' => 'Sort By',
+    'created_at_desc' => 'Latest',
+    'created_at_asc' => 'Newest',
+    'bid_no_asc' => 'Bid Number Ascending',
+    'bid_no_desc' => 'Bid Number Descending',
+    'you_won_mail_text' => 'Hello!<br><br>You won on a bidding auction (:event_title) an article (:article_title).<br><br>The Spotter team will contact you within 48 hours.<br><br>Best Regards<br><br>Spotter Team',
+    'you_won_mail_subject' => 'You Won',
+    'next_bidding' => 'Next Bidding',
     'receive_notification_emails' => 'Receive Notification Emails',
     'overbidding_mail_subject' => 'Spotter Overbidding',
     'overbidding_message' => 'Someone placed a higher bid on an article (:article_title) that you are currently bidding. Click <a href=":url">HERE</a> to check.',
@@ -192,6 +200,7 @@ return [
     'location'              => 'Location',
     'upload_image'          => 'Upload image...',
     'valid_extension_msg'   => 'are only valid extension',
+    'article_deleted_msg'     => 'Article has been deleted',
     'media_deleted_msg'     => 'Media has been deleted',
     'media_featured_msg'    => 'Media has been featured',
     'payment_settings'      => 'Payment Settings',

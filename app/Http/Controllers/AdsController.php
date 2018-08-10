@@ -341,7 +341,11 @@ class AdsController extends Controller
             }
 
             if ( Auth::check()){
-                return redirect(route('pending_ads'))->with('success', trans('app.ad_created_msg'));
+                if ($created_ad->status == '1') {
+                    return redirect(route('my_ads'))->with('success', trans('app.ad_created_msg'));
+                } else {
+                    return redirect(route('pending_ads'))->with('success', trans('app.ad_created_msg'));
+                }
             }
             return back()->with('success', trans('app.ad_created_msg'));
         }
@@ -596,7 +600,7 @@ class AdsController extends Controller
                 }
             }
             $ad->delete();
-            return ['success'=>1, 'msg' => trans('app.media_deleted_msg')];
+            return ['success'=>1, 'msg' => trans('app.article_deleted_msg')];
         }
         return ['success'=>0, 'msg' => trans('app.error_msg')];
     }
@@ -651,15 +655,28 @@ class AdsController extends Controller
                 }
 
                 $file_base_name = str_replace('.'.$image->getClientOriginalExtension(), '', $image->getClientOriginalName());
-                $resized = Image::make($image)->resize(1920, null, function ($constraint) {
+                $resized = Image::make($image)->resize(null, 1277, function ($constraint) { // 1278
                     $constraint->aspectRatio();
+                    $constraint->upsize();
                 })->stream();
 
-                $resized_medium = Image::make($image)->resize(750, 499)->stream();
-                $resized_thumb = Image::make($image)->resize(320, 213)->stream();
+                $resized_medium = Image::make($image)->resize(null, 499, function ($constraint) { // 750
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->stream();
+                $resized_thumb = Image::make($image)->resize(null, 213, function ($constraint) { // 320
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->stream(); 
+
+                $cropped = Image::make($image)->fit(750, 499, function ($constraint) {
+                    // $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->stream(); 
 
                 $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
 
+                $croppedFileName = 'uploads/images/crop/'.$image_name;
                 $imageFileName = 'uploads/images/'.$image_name;
                 $imageMediumName = 'uploads/images/medium/'.$image_name;
                 $imageThumbName = 'uploads/images/thumbs/'.$image_name;
@@ -679,6 +696,10 @@ class AdsController extends Controller
                         //upload thumb image
                         current_disk()->put($imageThumbName, $resized_thumb->__toString(), 'public');
                         $img_url = media_url($created_img_db, 'thumb');
+
+                        //upload thumb image
+                        current_disk()->put($croppedFileName, $cropped->__toString(), 'public');
+                        $img_url = media_url($created_img_db, 'crop');
                     }
                 } catch (\Exception $e){
                     return redirect()->back()->withInput($request->input())->with('error', $e->getMessage()) ;
@@ -1134,7 +1155,7 @@ class AdsController extends Controller
             $q->where('bids.user_id', Auth::id());
         })
         ->where('expired_at', '<', Carbon::now())
-        ->paginate(10);
+        ->paginate(20);
 
         return view('admin.auctions.finished_auctions', compact('title', 'ads'));
     }
@@ -1147,7 +1168,7 @@ class AdsController extends Controller
             $q->where('bids.user_id', Auth::id());
         })
         ->where('expired_at', '>=', Carbon::now())
-        ->paginate(10);
+        ->paginate(20);
 
         return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));
     }
@@ -1159,7 +1180,7 @@ class AdsController extends Controller
         $ads = Ad::whereHas('bids', function ($q) {
             $q->where('bids.user_id', Auth::id())
                 ->where('bids.is_accepted', 1);
-        })->paginate(10);
+        })->paginate(20);
 
         return view('admin.auctions.won_auctions', compact('title', 'ads'));
     }

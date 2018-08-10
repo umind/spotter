@@ -113,7 +113,7 @@
 														<li style="{{ !$notification->is_read ? 'background-color: #edf2fa;' : '' }}">
 															<a href="{{ route('show_notification', $notification->id) }}">
 																<span>{!! $notification->text !!}</span>
-																<span class="date-notification">{{ Carbon\Carbon::parse($notification->created_at)->formatLocalized(get_option('date_format')) }}</span>
+																<span class="date-notification">{{ Carbon\Carbon::parse($notification->date)->formatLocalized(get_option('date_format')) }}</span>
 															</a>
 														</li>
 													@endforeach
@@ -179,7 +179,8 @@
 
 					<!-- Branding Image -->
 					<a class="navbar-brand" href="{{ route('home') }}">
-						<h2 class="text-uppercase">Spotter</h2>
+						<img src="{{ asset('uploads/logo/spotter_logo.png') }}" alt="spotter logo">
+						{{-- <h2 class="text-uppercase">Spotter</h2> --}}
 					</a>
 				</div>
 
@@ -205,8 +206,7 @@
 							<a href="#" id="example-show" class="showLink" onclick="showHide('example');return false;" style="display: inline;"><i class="fa fa-search"></i></a>
 							<div id="example" class="more" style="display: none;">
 								{!! Form::open(['route' => 'search_redirect','method' => 'get', 'class' => 'form-inline']) !!}
-								<input type="text" class="form-control" id="searchKeyword" name="q" placeholder="@lang('app.what_are_u_looking')">
-
+									<input type="text" class="form-control" id="searchKeyword" name="q" placeholder="@lang('app.what_are_u_looking')">
 								{!! Form::close() !!}
 								<a href="#" id="example-hide" class="hideLink" onclick="showHide('example');return false;"><i class="fa fa-close"></i></a>
 							</div>
@@ -216,6 +216,28 @@
 				</div>
 			</div>
 		</nav>
+
+
+		@if(Request::segment(1) == 'dashboard')
+			<div class="container">
+				<div class="filter-holder">
+					    <div class="account-search">
+					        {!! Form::open(['url' => route('get_search_results'), 'method' => 'GET']) !!}
+					            <input type="text" name="q" value="{{ old('q') }}">
+					            <button type="submit" class="btn btn-primary">@lang('app.search')</button>
+					        {!! Form::close() !!}
+					    </div>
+					    <div class="account-sort-by">
+					        <label class="sort-none">@lang('app.sort_by')</label>
+					        <select name="order_by" onchange="location=this.value;">
+					            @foreach(getOrderBy() as $key => $order)
+					                <option value="{{ urldecode(route('get_search_results', array_merge(request()->query(), ['order_by' => $key]), false)) }}"                  {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
+					            @endforeach
+					        </select>
+					    </div>
+				</div>
+			</div>
+		@endif
 
 		@yield('content')
 		<!-- Push-footer start -->

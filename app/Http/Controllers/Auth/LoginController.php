@@ -89,6 +89,8 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        $user->is_online = '1';
+        $user->save();
         return redirect()->route('dashboard');
     }
 

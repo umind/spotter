@@ -27,6 +27,10 @@ function media_url($img = '', $full_size = 'big'){
                     if (file_exists(public_path('uploads/images/thumbs/'.$img->media_name))) {
                         $url_path = asset('uploads/images/thumbs/' . $img->media_name);
                     }
+                } elseif($full_size == 'crop'){
+                    if (file_exists(public_path('uploads/images/crop/'.$img->media_name))) {
+                        $url_path = asset('uploads/images/crop/' . $img->media_name);
+                    }
                 }
             }elseif ($img->storage == 's3'){
                 if ($full_size == 'big'){
@@ -35,6 +39,8 @@ function media_url($img = '', $full_size = 'big'){
                     $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/medium/'.$img->media_name);
                 }elseif($full_size == 'thumb'){
                     $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/thumb/'.$img->media_name);
+                }elseif($full_size == 'crop'){
+                    $url_path = \Illuminate\Support\Facades\Storage::disk('s3')->url('uploads/images/crop/'.$img->media_name);
                 }
             }
         }
@@ -813,3 +819,21 @@ function getArray($field){
 function getCheckboxValue($value) {
     return $value == 'on' ? 1 : 0;
 }
+
+function getAfterLastChar($str, $char) {
+    return substr($str, strrpos($str, $char) + 1);
+}
+
+function getBeforeLastChar($str, $char) {
+    return substr($str, 0, strrpos( $str, $char));
+}
+
+function getOrderBy() {
+    return [
+        'created_at_desc' => __('app.created_at_desc'),
+        'created_at_asc' => __('app.created_at_asc'),
+        'bid_no_asc' => __('app.bid_no_asc'),
+        'bid_no_desc' => __('app.bid_no_desc'),
+    ];
+}
+

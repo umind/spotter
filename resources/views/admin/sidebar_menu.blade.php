@@ -1,4 +1,3 @@
-
 <div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav">
         <ul class="nav" id="side-menu">
@@ -29,8 +28,8 @@
                         <li>  <a href="{{ route('not_sold_ads') }}">@lang('app.not_sold_word')</a> </li>
                     @else
                         <li>  <a href="{{ route('active_bidding_auctions') }}">@lang('app.active_bidding_auctions')</a> </li>
-                        <li>  <a href="{{ route('finished_auctions') }}">@lang('app.finished_auctions')</a> </li>
                         <li>  <a href="{{ route('won_auctions') }}">@lang('app.won_auctions')</a> </li>
+                        <li>  <a href="{{ route('finished_auctions') }}">@lang('app.finished_auctions')</a></li>
                         <li>  <a href="{{ route('favorite_ads') }}">@lang('app.favourite_ads')</a> </li>
                     @endif
 

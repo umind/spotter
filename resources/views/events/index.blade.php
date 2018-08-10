@@ -23,7 +23,7 @@
 								@foreach($event->auctions as $auction)
 									<li class="item">
 										<a href="{{ route('single_ad', [$auction->id, $auction->slug]) }}">
-											<img src="{{ media_url($auction->feature_img) }}" class="img-responsive" />
+											<img src="{{ media_url($auction->feature_img, 'crop') }}" class="img-responsive" />
 										</a>
 										<div class="information">
 											<h4>{{ $auction->title }}</h4>

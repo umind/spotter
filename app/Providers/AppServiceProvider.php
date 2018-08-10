@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Mail;
+use App\Mail\AuctionWonMail;
 use App\Country;
 use App\Post;
 use Carbon\Carbon;
@@ -107,7 +109,7 @@ class AppServiceProvider extends ServiceProvider
                             // won bid
                             $bid = $auction->bids()
                                             ->where('is_accepted', 0)
-                                            ->orderBy('max_bid_amount', 'desc')
+                                            ->whereNotNull('bid_amount')
                                             ->orderBy('bid_amount', 'desc')
                                             ->first();
 
@@ -132,10 +134,10 @@ class AppServiceProvider extends ServiceProvider
                                 $wonUser->notification_bell = 1;
                                 $wonUser->save();
 
+                                Mail::to($wonUser->email)->send(new AuctionWonMail($auction, $event));
+
                                 // auction sold
                                 $auction->update(['status' => '3']);
-                            } else {
-                                $auction->update(['status' => '4']);
                             }
                         }
                     }
@@ -156,7 +158,7 @@ class AppServiceProvider extends ServiceProvider
 
         // set locale
         setlocale(LC_TIME, "de_DE.UTF-8");
-        // \Carbon\Carbon::setLocale(config('app.locale'));
+        \Carbon\Carbon::setLocale(config('app.locale'));
     }
 
     /**
