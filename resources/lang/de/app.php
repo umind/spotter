@@ -3,6 +3,9 @@
 return [
     // new
     'all' => 'Alle',
+    'active_word' => 'aktive',
+    'won_word' => 'gewonnene',
+    'lost_word' => 'verwolene',
     'sort_by' => 'Sortierung',
     'created_at_desc' => 'Neueste',
     'created_at_asc' => 'Älteste',
@@ -147,7 +150,7 @@ return [
     'blocked_ads'           => 'Blockierte Artikel',
     'all_ads'               => 'Alle Artikel',
     'pending_ads'           => 'Pending Articles',
-    'active_bidding_auctions'           => 'Aktive Artikel',
+    'active_bidding_auctions'           => 'aktive Artikel',
     'expired_on'           => 'Abgelaufen am',
     'expires_on'           => 'Läuft ab',
     'finished_auctions'           => 'verlorene Artikel',

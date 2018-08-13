@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Ad;
 use App\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -20,11 +21,12 @@ class SearchController extends Controller
     	$user = Auth::user();
 
 		$orderBy = $request->order_by ? $request->order_by : null;
-		$status = $request->status ? array_search($request->status, getArticleStatuses()) : null;
 
     	if ($user->is_admin()) {
+			$status = $request->status ? array_search($request->status, getArticleStatuses()) : null;
+
     		$ads = Ad::where(function ($q) use ($request) {
-    					$q->where('title', 'LIKE', '%' . $request->q . '%')
+						$q->where('title', 'LIKE', '%' . $request->q . '%')
 	        				->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
     		});
 
@@ -34,10 +36,25 @@ class SearchController extends Controller
 		}
 
     	if (!$user->is_admin()) {
-    		$ads = Ad::whereHas('bids', function ($q) use ($user) {
-	            $q->where('bids.user_id', $user->id);
-	        })->where('title', 'LIKE', '%' . $request->q . '%')
-	        	->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
+			$status = $request->status ? $request->status : null;
+
+    		$ads = Ad::whereHas('bids', function ($q) use ($status) {
+	            if ($status == 'won') {
+	            	$q->where('bids.user_id', Auth::id())
+                		->where('bids.is_accepted', 1);
+	            } else {
+	            	$q->where('bids.user_id', Auth::id());
+	            }
+	        })->where(function ($q) use ($request) {
+						$q->where('title', 'LIKE', '%' . $request->q . '%')
+	        				->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
+	        			});
+
+    		if ($status == 'active') {
+    			$ads = $ads->where('expired_at', '>=', Carbon::now());
+    		} else if ($status == 'lost') {
+    			$ads = $ads->where('expired_at', '<', Carbon::now());
+    		}
     	}
 
 		$ads = isset($orderBy) ? $ads->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) : $ads->latest();

@@ -245,6 +245,11 @@
 						                <option value="{{ urldecode(route('get_search_results', array_merge(request()->query(), ['status' => $status]), false)) }}" 
 						                	{{ request('status') == $status ? 'selected' : '' }}>@lang('app.' . $status . '_word')</option>
 						            @endforeach
+						        @else
+						        	@foreach(getUserArticleStatuses() as $status)
+						                <option value="{{ urldecode(route('get_search_results', array_merge(request()->query(), ['status' => $status]), false)) }}" 
+						                	{{ request('status') == $status ? 'selected' : '' }}>@lang('app.' . $status . '_word')</option>
+						            @endforeach
 				            	@endif
 					        </select>
 					    </div>

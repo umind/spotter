@@ -846,3 +846,10 @@ function getArticleStatuses() {
     ];
 }
 
+function getUserArticleStatuses() {
+    return [
+        '1' => 'active',
+        '2' => 'won',
+        '3' => 'lost',
+    ];
+}

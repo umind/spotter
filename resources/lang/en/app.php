@@ -3,6 +3,9 @@
 return [
     //newest
     'all' => 'All',
+    'active_word' => 'Active',
+    'won_word' => 'Won',
+    'lost_word' => 'Lost',
     'sort_by' => 'Sort By',
     'created_at_desc' => 'Latest',
     'created_at_asc' => 'Newest',
