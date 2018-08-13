@@ -20,10 +20,17 @@ class SearchController extends Controller
     	$user = Auth::user();
 
 		$orderBy = $request->order_by ? $request->order_by : null;
+		$status = $request->status ? array_search($request->status, getArticleStatuses()) : null;
 
     	if ($user->is_admin()) {
-    		$ads = Ad::where('title', 'LIKE', '%' . $request->q . '%')
-	        	->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
+    		$ads = Ad::where(function ($q) use ($request) {
+    					$q->where('title', 'LIKE', '%' . $request->q . '%')
+	        				->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
+    		});
+
+    		if ($request->has('status')) {
+    			$ads = $ads->where('status', (string)$status);
+    		}
 		}
 
     	if (!$user->is_admin()) {

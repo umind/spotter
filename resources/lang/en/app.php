@@ -2,6 +2,7 @@
 
 return [
     //newest
+    'all' => 'All',
     'sort_by' => 'Sort By',
     'created_at_desc' => 'Latest',
     'created_at_asc' => 'Newest',

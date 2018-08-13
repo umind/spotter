@@ -837,3 +837,12 @@ function getOrderBy() {
     ];
 }
 
+function getArticleStatuses() {
+    return [
+        '0' => 'pending',
+        '1' => 'published',
+        '3' => 'sold',
+        '4' => 'not_sold',
+    ];
+}
+

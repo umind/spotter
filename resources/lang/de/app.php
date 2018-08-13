@@ -2,6 +2,7 @@
 
 return [
     // new
+    'all' => 'Alle',
     'sort_by' => 'Sortierung',
     'created_at_desc' => 'Neueste',
     'created_at_asc' => 'Älteste',

@@ -546,8 +546,12 @@ Page header
 	vertical-align: bottom;
 }
 
-.account-sort-by select {
+.filter-holder select {
 	height: 34px;
+}
+
+.account-status {
+	margin-left: 20px;
 }
 
 .page-header.search-page-header {

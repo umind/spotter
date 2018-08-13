@@ -231,8 +231,21 @@
 					        <label class="sort-none">@lang('app.sort_by')</label>
 					        <select name="order_by" onchange="location=this.value;">
 					            @foreach(getOrderBy() as $key => $order)
-					                <option value="{{ urldecode(route('get_search_results', array_merge(request()->query(), ['order_by' => $key]), false)) }}"                  {{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
+					                <option value="{{ urldecode(route('get_search_results', array_merge(request()->query(), ['order_by' => $key]), false)) }}"                  
+					                	{{ request('order_by') == $key ? 'selected' : '' }}>{{ $order }}</option>
 					            @endforeach
+					        </select>
+					    </div>
+					    <div class="account-status">
+					        <label class="sort-none">@lang('app.status')</label>
+					        <select name="status" onchange="location=this.value;">
+					        	<option value="{{ urldecode(route('get_search_results')) }}">@lang('app.all')</option>
+				            	@if(Auth::user()->is_admin())
+									@foreach(getArticleStatuses() as $status)
+						                <option value="{{ urldecode(route('get_search_results', array_merge(request()->query(), ['status' => $status]), false)) }}" 
+						                	{{ request('status') == $status ? 'selected' : '' }}>@lang('app.' . $status . '_word')</option>
+						            @endforeach
+				            	@endif
 					        </select>
 					    </div>
 				</div>
