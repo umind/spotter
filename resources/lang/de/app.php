@@ -2,6 +2,7 @@
 
 return [
     // new
+    'auction_ends' => 'Auktions-Ende',
     'all' => 'Alle',
     'active_word' => 'aktive',
     'won_word' => 'gewonnene',

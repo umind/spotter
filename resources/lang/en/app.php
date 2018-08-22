@@ -2,6 +2,7 @@
 
 return [
     //newest
+    'auction_ends' => 'Auction Ends',
     'all' => 'All',
     'active_word' => 'Active',
     'won_word' => 'Won',

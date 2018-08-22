@@ -26,8 +26,8 @@
 											<img src="{{ media_url($auction->feature_img, 'crop') }}" class="img-responsive" />
 										</a>
 										<div class="information">
-											<h4>{{ $auction->title }}</h4>
-											<p>@lang('app.starting_price'): {{ number_format($auction->price, 2) }}</p>
+											<h3 style="font-weight: 600">{{ $auction->bid_no }}</h3>
+											<p>@lang('app.starting_price') {{ themeqx_price($auction->price, 2) }}</p>
 										</div>
 									</li>
 								@endforeach
@@ -36,8 +36,13 @@
 							<div class="auction-footer">
 							<div class="row">
 								<div class="col-md-4">
-									<p>@lang('app.auctioner'): {{ $event->auctioner }}</p>
-									<p>@lang('app.venue'): {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
+									<p>{{ $event->auctioner }}</p>
+									<p>{{ $event->address }}</p>
+									<p>{{ $event->zip_code }} {{ $event->city }}</p>
+								</div>
+								<div class="col-md-4 text-right">
+									<p>@lang('app.auction_ends')</p>
+									<p>{{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }} ab {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }} Uhr</p>
 								</div>
 								<div class="col-md-4 text-center">
 									@php 
@@ -52,10 +57,6 @@
 											@endif
 										@endif
 									</p>
-								</div>
-								<div class="col-md-4 text-right">
-									<p>@lang('app.date'): {{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }}</p>
-									<p>@lang('app.auction_starts_to_end'): {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }}</p>
 								</div>
 							</div>
 						</div>
