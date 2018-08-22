@@ -2,6 +2,9 @@
 
 return [
     //newest
+    'has_company' => ':field is required if you select that you have a company',
+    'company_vat' => 'Company VAT.',
+    'company_no' => 'Company No.',
     'auction_ends' => 'Auction Ends',
     'all' => 'All',
     'active_word' => 'Active',

@@ -21,7 +21,7 @@
                             <div class="col-md-6 registration">
                                 @foreach(getArray('title_types') as $key => $titleType)
                                     <label class="radio-button">
-                                        <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}"> {{ $titleType }}
+                                        <input type="radio" class="form-control" name="title" value="{{ $key }}" {{ old('title') == $key ? 'checked' : '' }}> {{ $titleType }}
                                     </label>
                                 @endforeach
 
@@ -30,6 +30,48 @@
                                         <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="company-info {{ old('title') != 2 ? 'hidden' : '' }}">
+                            <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
+                                <label for="company_name" class="col-md-4 control-label">@lang('app.company_name')</label>
+
+                                <div class="col-md-6">
+                                    <input id="company_name" type="text" class="form-control" name="company_name" value="{{ old('company_name') }}"  autofocus>
+
+                                    @if ($errors->has('company_name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company_name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('company_vat') ? ' has-error' : '' }}">
+                                <label for="company_vat" class="col-md-4 control-label">@lang('app.company_vat')</label>
+
+                                <div class="col-md-6">
+                                    <input id="company_vat" type="text" class="form-control" name="company_vat" value="{{ old('company_vat') }}"  autofocus>
+
+                                    @if ($errors->has('company_vat'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company_vat') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('company_no') ? ' has-error' : '' }}">
+                                <label for="company_no" class="col-md-4 control-label">@lang('app.company_no')</label>
+
+                                <div class="col-md-6">
+                                    <input id="company_no" type="text" class="form-control" name="company_no" value="{{ old('company_no') }}"  autofocus>
+
+                                    @if ($errors->has('company_no'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company_no') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
@@ -65,7 +107,7 @@
                             <label for="address" class="col-md-4 control-label">@lang('app.address')</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" >
+                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}">
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -79,7 +121,7 @@
                             <label for="zip_code" class="col-md-4 control-label">@lang('app.zip_code')</label>
 
                             <div class="col-md-6">
-                                <input id="zip_code" type="text" class="form-control" name="zip_code" >
+                                <input id="zip_code" type="text" class="form-control" name="zip_code" value="{{ old('zip_code') }}">
 
                                 @if ($errors->has('zip_code'))
                                     <span class="help-block">
@@ -93,7 +135,7 @@
                             <label for="city" class="col-md-4 control-label">@lang('app.city')</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control" name="city" >
+                                <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }}">
 
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -127,7 +169,7 @@
                             <label for="phone" class="col-md-4 control-label">@lang('app.phone')</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control" name="phone" >
+                                <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}">
 
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
@@ -228,3 +270,15 @@
 @if(get_option('enable_recaptcha_registration') == 1)
     <script src='https://www.google.com/recaptcha/api.js'></script>
 @endif
+
+@section('page-js')
+    <script>
+        $('.radio-button input').change(function () {
+            if ($(this).val() == 2) {
+                $('.company-info').removeClass('hidden');
+            } else {
+                $('.company-info').addClass('hidden');
+            }
+        });
+    </script>
+@stop

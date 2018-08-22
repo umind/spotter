@@ -2,6 +2,9 @@
 
 return [
     // new
+    'has_company' => 'Das Feld :field ist für Unternehmen obligatorisch',
+    'company_vat' => 'MwSt-Nr.',
+    'company_no' => 'Firmen-Nr.',
     'auction_ends' => 'Auktions-Ende',
     'all' => 'Alle',
     'active_word' => 'aktive',

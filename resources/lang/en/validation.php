@@ -242,6 +242,7 @@ return [
         // register
         'title' => 'Title',
         'user_name' => 'Username',
+        'country_id' => 'Country',
 
     ],
 
