@@ -17,6 +17,7 @@
 
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('assets/fancybox/jquery.fancybox.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.css">
 @endsection
 
 @section('content')
@@ -37,7 +38,10 @@
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </span>
-                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid + $ad->price_increaser, 2) : number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid + $ad->price_increaser, 2) : number_format($ad->current_bid_plus_increaser(), 2) }}">
+                @php
+                    $inputMaxBid = $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid + $ad->price_increaser, 2) : number_format($ad->current_bid_plus_increaser(), 2);
+                @endphp
+                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $inputMaxBid }}" min="{{ $inputMaxBid }}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="max_bid_amount">
                           <span class="glyphicon glyphicon-plus"></span>
@@ -75,10 +79,10 @@
                         <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-warning">{{ safe_output($ad->title) }}</a>
 
                     </div>
-					<div>
+					<div style="display: flex; align-items: center;">
 						<h2 class="bid-number-header">{{ $ad->bid_no }}</h2>
+                        <h2>{{safe_output($ad->title)}}</h2>
 					</div>
-					<h2>{{safe_output($ad->title)}}</h2>
 					{{-- <p class="bid-number-header">{{ trans('app.bid_no') }}: {{ $ad->bid_no }}</p> --}}
 					<p class="auction-number-header">{{ trans('app.auction_no') }}: {{ $ad->auction_no }}</p>
                 </div>
@@ -104,12 +108,12 @@
                         </div>
                     @endif
 
-                    @if($ad->category_type == 'auction' && ! auth()->check())
+{{--                     @if($ad->category_type == 'auction' && ! auth()->check())
                         <div class="alert alert-warning">
                             <i class="fa fa-exclamation-circle"></i> @lang('app.before_bidding_sign_in_info')
                         </div>
                     @endif
-
+ --}}
                     <div class="auction-img-video-wrap">
                         @if ($ad->status == '2')
                             <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_closed')</div>
@@ -323,7 +327,7 @@
 
                         @if($ad->category_type == 'auction')
                             <div class="widget">
-                                <h3>@lang('app.highest_bid') {{themeqx_price($ad->current_bid())}}</h3>
+                                <h3>@lang('app.starting_price') {{ themeqx_price($ad->price) }}</h3>
                                 <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
@@ -339,7 +343,11 @@
                                                         <span class="glyphicon glyphicon-minus"></span>
                                                     </button>
                                                 </span>
-                                                <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->current_bid_plus_increaser(), 2) }}" min="{{ $ad->current_bid_plus_increaser() }}">
+                                                @if(Auth::check())
+                                                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
+                                                @else
+                                                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
+                                                @endif
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                                                       <span class="glyphicon glyphicon-plus"></span>
@@ -426,10 +434,7 @@
                                 <p><span class="ad-info-name"><i class="fa fa-clock-o"></i> @lang('app.application_deadline')</span> <span class="ad-info-value">{{ date('M d, Y', strtotime($ad->job->application_deadline)) }}</span></p>
 
                             @else
-
                                 <h3>@lang('app.general_info')</h3>
-                                <p><span class="ad-info-name"><i class="fa fa-money"></i> @lang('app.starting_price')</span> <span class="ad-info-value">{{ themeqx_price_ng($ad->price) }}</span></p>
-
                             @endif
 
                             {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p> --}}
@@ -555,6 +560,17 @@
     <script src="{{ asset('assets/fancybox/jquery.fancybox.js') }}"></script>
     <script src="{{ asset('assets/plugins/SocialShare/SocialShare.js') }}"></script>
     <script src="{{ asset('assets/plugins/form-validator/form-validator.min.js') }}"></script>
+
+    @if(!Auth::check())
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.js"></script> 
+        <script>
+            swal(
+                'Warnung!',
+                '{!! __('app.before_bidding_sign_in_info') !!}',
+                'warning'
+            );
+        </script>
+    @endif
 
     <script>
         $('.share').ShareLink({
@@ -692,5 +708,4 @@
 
         });
     </script>
-
 @endsection

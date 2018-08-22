@@ -172,7 +172,7 @@ class BidController extends Controller
 
             $currentHighestBid = $ad->bids()->whereNotNull('bid_amount')->orderBy('bid_amount', 'desc')->first();
 
-            if ($currentHighestBid->user_id != $user->id) {
+            if ($currentHighestBid && $currentHighestBid->user_id != $user->id) {
                 $bid = new Bid;
                 $bid->ad_id = $ad->id;
                 $bid->user_id = $user->id;
