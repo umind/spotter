@@ -75,7 +75,7 @@
                         <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-warning">{{ safe_output($ad->title) }}</a>
 
                     </div>
-                    <h2>{{ trans('app.bid_no') }}: {{ $ad->bid_no }}</h2>
+                    <h2 class="bid-number-header">{{ $ad->bid_no }}</h2>
                     <h2>{{safe_output($ad->title)}}</h2>
 					{{-- <p class="bid-number-header">{{ trans('app.bid_no') }}: {{ $ad->bid_no }}</p> --}}
 					<p class="auction-number-header">{{ trans('app.auction_no') }}: {{ $ad->auction_no }}</p>
@@ -326,8 +326,8 @@
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
 
-                                        <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>
-                                        <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p>
+                                        <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>{{-- 
+                                        <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p> --}}
 
                                         {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
                                         <div class="form-group">
@@ -364,7 +364,7 @@
                                             <p>{{ sprintf(trans('app.bid_deadline_closed_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>
                                         @endif
 
-                                        <p>@lang('app.total_bids'): {{ $bids->count() }} </p>
+                                        {{-- <p>@lang('app.total_bids'): {{ $bids->count() }} </p> --}}
                                         @if(Auth::check() && Auth::user()->is_admin())
                                             @if($wonBid && $wonUser)
                                                 @php 

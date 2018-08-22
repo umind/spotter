@@ -236,6 +236,8 @@ class UserController extends Controller
         //Validating
         $rules = [
             'title' => 'required',
+            'company_name' => 'required_if:title,2',
+            'company_vat' => 'required_if:title,2',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
@@ -246,7 +248,11 @@ class UserController extends Controller
             'user_name' => 'required',
             'email'    => 'required|email|unique:users,email,'.$user_id,
         ];
-        $this->validate($request, $rules);
+
+        $this->validate($request, $rules, [
+            'company_name.required_if' => __('app.has_company', ['field' => __('app.company_name')]),
+            'company_vat.required_if' => __('app.has_company', ['field' => __('app.company_vat')]),
+        ]);
 
         $request->merge(['email_notifications' => getCheckboxValue($request->email_notifications)]);
 

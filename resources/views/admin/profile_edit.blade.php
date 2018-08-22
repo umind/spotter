@@ -28,10 +28,52 @@
                             <div class="col-sm-8">
                                 @foreach(getArray('title_types') as $key => $titleType)
                                     <label class="radio-button">
-                                        <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}" {{ $user->title == $key ? 'checked' : '' }}> {{ $titleType }}
+                                        <input id="title" type="radio" class="form-control" name="title" value="{{ $key }}" {{ old('title') == $key ? 'checked' : '' }} {{ $user->title == $key && old('title') != $key ? 'checked' : '' }}> {{ $titleType }}
                                     </label>
                                 @endforeach
                                 {!! $errors->has('title')? '<p class="help-block">'.$errors->first('title').'</p>':'' !!}
+                            </div>
+                        </div>
+
+                        <div class="company-info {{ old('title') != 2 && $user->title != '2' ? 'hidden' : '' }}">
+                            <div class="form-group{{ $errors->has('company_name') ? ' has-error' : '' }}">
+                                <label for="company_name" class="col-md-4 control-label">@lang('app.company_name')</label>
+
+                                <div class="col-md-8">
+                                    <input id="company_name" type="text" class="form-control" name="company_name" value="{{ old('company_name') ? old('company_name') : $user->company_name }}"  autofocus>
+
+                                    @if ($errors->has('company_name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company_name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('company_vat') ? ' has-error' : '' }}">
+                                <label for="company_vat" class="col-md-4 control-label">@lang('app.company_vat')</label>
+
+                                <div class="col-md-8">
+                                    <input id="company_vat" type="text" class="form-control" name="company_vat" value="{{ old('company_vat') ? old('company_vat') : $user->company_vat }}"  autofocus>
+
+                                    @if ($errors->has('company_vat'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company_vat') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('company_no') ? ' has-error' : '' }}">
+                                <label for="company_no" class="col-md-4 control-label">@lang('app.company_no')</label>
+
+                                <div class="col-md-8">
+                                    <input id="company_no" type="text" class="form-control" name="company_no" value="{{ old('company_no') ? old('company_no') : $user->company_no }}"  autofocus>
+
+                                    @if ($errors->has('company_no'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company_no') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
@@ -156,5 +198,13 @@
     <script src="{{ asset('assets/js/bootstrap-filestyle.min.js') }}"></script>
     <script>
         $(":file").filestyle({buttonName: "btn-primary", buttonBefore: true});
+
+        $('.radio-button input').change(function () {
+            if ($(this).val() == 2) {
+                $('.company-info').removeClass('hidden');
+            } else {
+                $('.company-info').addClass('hidden');
+            }
+        });
     </script>
 @endsection
