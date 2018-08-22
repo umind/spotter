@@ -251,16 +251,10 @@ function toFloat(num) {
 }
 
 $(document).ready(function () {
-	$("select[name='order_by']").click(function () {
+	$(".filter-holder select").click(function () {
 		$(this).toggleClass("select-focus");
 	});
-	$("select[name='order_by']").blur(function () {
-		$(this).removeClass("select-focus");
-	});
-		$("select[name='status']").click(function () {
-		$(this).toggleClass("select-focus");
-	});
-	$("select[name='status']").blur(function () {
+	$(".filter-holder select").blur(function () {
 		$(this).removeClass("select-focus");
 	});
 });
