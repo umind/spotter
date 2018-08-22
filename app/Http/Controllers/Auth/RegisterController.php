@@ -84,6 +84,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'title' => 'required',
+            'company_name' => 'required_if:title,2',
+            'company_vat' => 'required_if:title,2',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
@@ -94,6 +96,9 @@ class RegisterController extends Controller
             'user_name' => 'required|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+            'company_name.required_if' => __('app.has_company', ['field' => __('app.company_name')]),
+            'company_vat.required_if' => __('app.has_company', ['field' => __('app.company_vat')]),
         ]);
     }
 

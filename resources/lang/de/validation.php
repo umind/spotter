@@ -270,9 +270,8 @@ return [
         // register
         'title' => 'Anrede',
         'user_name' => 'Nutzername',
-
-        // 
         'country_id' => 'Land',
+
     ],
 
 ];
