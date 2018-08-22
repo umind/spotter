@@ -40,11 +40,11 @@
 									<p>{{ $event->address }}</p>
 									<p>{{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
-								<div class="col-md-4 text-right">
+								<div class="col-md-4 text-center">
 									<p>@lang('app.auction_ends')</p>
 									<p>{{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }} ab {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }} Uhr</p>
 								</div>
-								<div class="col-md-4 text-center">
+								<div class="col-md-4 text-right">
 									@php 
 										$latestProductToExpire = $event->auctions()->latest('expired_at')->first();
 									@endphp
