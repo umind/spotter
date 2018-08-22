@@ -249,3 +249,18 @@ function toFloat(num) {
 		num.substr(sep + Number(1), num.length).replace(/[^\d]/g, "")
 	);
 }
+
+$(document).ready(function () {
+	$("select[name='order_by']").click(function () {
+		$(this).toggleClass("select-focus");
+	});
+	$("select[name='order_by']").blur(function () {
+		$(this).removeClass("select-focus");
+	});
+		$("select[name='status']").click(function () {
+		$(this).toggleClass("select-focus");
+	});
+	$("select[name='status']").blur(function () {
+		$(this).removeClass("select-focus");
+	});
+});

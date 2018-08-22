@@ -51,14 +51,8 @@ a:hover {
 .navbar-brand {
 	height: auto;
 	padding: 0 15px;
-}
-
-.navbar-brand h2 {
-	line-height: 40px;
-	margin: 0;
-	font-weight: bold;
-	letter-spacing: 2px;
-	color: #252652;
+	line-height: 0;
+	margin-top: 5px;
 }
 
 .navbar-brand img {
@@ -543,15 +537,47 @@ Page header
 .account-search input {
 	padding: 6px;
 	height: 34px;
+	min-width: 200px;
 	vertical-align: bottom;
+	border: 1px solid #c0c0c0;
+	margin-right: -4px;
+}
+
+.account-search .btn.btn-primary {
+	border-color: transparent;
 }
 
 .filter-holder select {
 	height: 34px;
+	border: 1px solid #c0c0c0;
+	padding: 5px 5px 3px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	background: #ffffff url('../img/arrow-down.png') 97% 55% no-repeat;
+	background-size: 20px;
+	cursor: pointer;
 }
 
-.account-status {
-	margin-left: 20px;
+.filter-holder select:focus {
+	outline: none;
+}
+
+.account-sort-by label,
+.account-status label {
+	margin-right: 5px;
+}
+
+.account-sort-by select {
+	min-width: 200px;
+	margin-right: 20px;
+}
+
+.account-status select {
+	min-width: 100px;
+}
+
+.select-focus {
+	background-image: url('../img/arrow-up.png') !important;
 }
 
 .page-header.search-page-header {
@@ -2374,12 +2400,8 @@ Auction
 	.navbar-collapse {
 		border: none;
 	}
-	.navbar-brand h2 {
-		line-height: 61px;
-	}
-	.navbar-toggle {
-		margin-top: 13px;
-		margin-bottom: 0;
+	.navbar-brand {
+		margin-top: 10px;
 	}
 	.nav-sarchbar {
 		text-align: right;
@@ -2530,12 +2552,8 @@ Auction
 		right: auto;
 		left: 94px;
 	}
-	.navbar-brand h2 {
-		line-height: 61px;
-	}
-	.navbar-toggle {
-		margin-top: 13px;
-		margin-bottom: 0;
+	.navbar-brand {
+		margin-top: 10px;
 	}
 	.navbar-nav,
 	.navbar-nav.in {
@@ -2765,6 +2783,9 @@ Auction
 @media only screen and (min-width: 767px) and (max-width: 1023px) {
 	.navbar-nav {
 		float: none;
+	}
+	.navbar-brand {
+		margin-top: 0;
 	}
 	.auction-content {
 		overflow-x: scroll;
