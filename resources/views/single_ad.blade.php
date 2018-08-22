@@ -75,8 +75,10 @@
                         <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-warning">{{ safe_output($ad->title) }}</a>
 
                     </div>
-                    <h2 class="bid-number-header">{{ $ad->bid_no }}</h2>
-                    <h2>{{safe_output($ad->title)}}</h2>
+					<div>
+						<h2 class="bid-number-header">{{ $ad->bid_no }}</h2>
+					</div>
+					<h2>{{safe_output($ad->title)}}</h2>
 					{{-- <p class="bid-number-header">{{ trans('app.bid_no') }}: {{ $ad->bid_no }}</p> --}}
 					<p class="auction-number-header">{{ trans('app.auction_no') }}: {{ $ad->auction_no }}</p>
                 </div>

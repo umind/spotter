@@ -741,28 +741,32 @@ Home search box
 Search page
  */
 
-.search-box-wrap {}
-
 .search-box-wrap .home-search-section-inner {
 	display: block;
 }
 
 .search-page-header {
 	margin-bottom: 0;
-	border-bottom: 1px solid #f7f7f7;
+	border-bottom: 1px solid #c0c0c0;
 }
 
-.search-page-header .bid-number-header,
-.search-page-header .auction-number-header {
+.search-page-header .bid-number-header {
 	color: #666666;
-	font-style: italic;
-	font-size: 16px;
-	margin-top: 10px;
+	font-size: 30px !important;
+	padding: 8px;
+	background-color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	margin-top: 20px;
 	margin-bottom: 0;
 }
 
 .search-page-header .auction-number-header {
 	font-size: 13px;
+	font-style: italic;
+	color: #666666;
+	margin-top: 10px;
+	margin-bottom: 0;
 }
 
 .search-box-wrap {
@@ -1123,6 +1127,36 @@ Ad box
 	font-size: 18px;
 }
 
+.prices,
+.status {
+	padding-top: 30px !important;
+	color: #5983C4;
+}
+
+.status {
+	padding-top: 32px !important;
+}
+
+.white-status {
+	padding: 7px 2px;
+	border-radius: 50%;
+	margin-bottom: 16px;
+}
+
+.green-status {
+	padding: 7px 2px;
+	border-radius: 50%;
+	background-color: #008000;
+	margin-bottom: 16px;
+}
+
+.red-status {
+	padding: 7px 2px;
+	border-radius: 50%;
+	background-color: #ff0000;
+	margin-bottom: 16px;
+}
+
 .ad-box .caption {
 	background: #fff none repeat scroll 0 0;
 	padding: 10px 8px;
@@ -1203,7 +1237,7 @@ Ad box
 	clear: both;
 }
 
-.ad-box-caption-title  {
+.ad-box-caption-title {
 	padding: 10px;
 	height: 65px;
 }
@@ -2468,6 +2502,9 @@ Auction
 	.auction-content .item:last-child {
 		margin-right: 0;
 	}
+	.auction-footer {
+		padding: 10px 15px;
+	}
 	.auction-footer p {
 		text-align: left;
 		font-size: 12px;
@@ -2476,8 +2513,12 @@ Auction
 		padding: 5px 0;
 	}
 	.auction-footer .text-red {
-		padding: 5px 0;
 		font-size: 12px;
+		padding: 0;
+	}
+	.auction-footer .auction-middle,
+	.auction-footer .auction-bottom {
+		padding-top: 8px;
 	}
 	.ad-box .ads-thumbnail {
 		height: 240px;
@@ -2623,6 +2664,9 @@ Auction
 		width: 100%;
 		margin-right: 5px;
 	}
+	.auction-footer {
+		padding: 10px 15px;
+	}
 	.auction-content .item:last-child {
 		margin-right: 0;
 	}
@@ -2631,8 +2675,11 @@ Auction
 		font-size: 13px;
 	}
 	.auction-footer .text-red {
-		padding: 5px 0;
 		font-size: 13px;
+	}
+	.auction-footer .auction-middle,
+	.auction-footer .auction-bottom {
+		padding-top: 8px;
 	}
 	.ad-box .ads-thumbnail {
 		height: 250px;

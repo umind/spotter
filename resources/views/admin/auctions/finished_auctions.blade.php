@@ -45,6 +45,21 @@
                                                 @endif
                                             </p>
                                         </td>
+										<td class="prices">
+											<p>Ihr aktuelles Gebot</p>
+											<p>Ihr maximu Gebot</p>
+											<p>überboten</p>
+										</td>
+										<td class="prices">
+											<p>1002.-</p>
+											<p>1100.-</p>
+											<p>1550.-</p>
+										</td>
+										<td class="status">
+											<p class="green-status"></p>
+											<p class="white-status"></p>
+											<p class="red-status"></p>
+										</td>
 
                                         {{-- <td>
                                             <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
