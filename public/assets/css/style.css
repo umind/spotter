@@ -285,12 +285,16 @@ input:focus {
 
 /** Warning button **/
 
+.btn-breadcrumb .btn-warning {
+	border-color: transparent;
+}
+
 .btn-breadcrumb .btn.btn-warning:not(:last-child):after {
 	border-left: 10px solid #f0ad4e;
 }
 
 .btn-breadcrumb .btn.btn-warning:not(:last-child):before {
-	border-left: 10px solid #eea236;
+	border-left: 10px solid #f2f2f2;
 }
 
 .btn-breadcrumb .btn.btn-warning:hover:not(:last-child):after {
@@ -748,6 +752,11 @@ Search page
 .search-page-header {
 	margin-bottom: 0;
 	border-bottom: 1px solid #c0c0c0;
+}
+
+.search-page-header .bid-number-div {
+	display: flex;
+	align-items: center;
 }
 
 .search-page-header .bid-number-header {

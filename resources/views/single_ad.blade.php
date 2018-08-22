@@ -83,7 +83,7 @@
                         <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-warning">{{ safe_output($ad->title) }}</a>
 
                     </div>
-					<div style="display: flex; align-items: center;">
+					<div class="bid-number-div">
 						<h2 class="bid-number-header">{{ $ad->bid_no }}</h2>
                         <h2>{{safe_output($ad->title)}}</h2>
 					</div>
@@ -512,11 +512,11 @@
 
                                         <div class="ad-box">
                                             <div class="ad-box-caption-title">
-                                                <h3>
-                                                    <a class="ad-box-title" href="{{ route('single_ad', [$rad->id, $rad->slug]) }}" title="{{ $rad->title }}">
-                                                        {{ str_limit($rad->title, 40) }}
-                                                    </a>
-                                                </h3>
+												<h4>
+													<span class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
+														{{ str_limit($ad->title, 40) }}
+													</span>
+												</h4>
                                             </div>
                                             <div class="ads-thumbnail">
                                                 <a href="{{ route('single_ad', [$rad->id, $rad->slug]) }}">
@@ -531,8 +531,9 @@
                                                 </a>
                                             </div>
                                             <div class="bid-price">
-                                                <div class="bid-number">@lang('app.bid_no'): {{ $rad->auction_no }}</div>
-                                                <div class="starting-price">@lang('app.starting_price') {{ themeqx_price($rad->price) }}</div>
+												<div class="bid-number text-center">{{ $ad->bid_no }}</div>
+												<div class="starting-price pull-left">@lang('app.starting_price')</div>
+												<div class="pull-right">{{ themeqx_price($ad->price) }}</div>
                                             </div>
 
                                             <div class="countdown" data-expire-date="{{$rad->expired_at}}" ></div>
