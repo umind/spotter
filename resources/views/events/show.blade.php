@@ -54,17 +54,17 @@
 			</div>
 			
 			<div class="container">
-				<div class="row">
+				<div class="row events">
 
                     @foreach($ads as $ad)
                         <div class="col-md-3">
                             <div class="ad-box">
 								<div class="ad-box-caption-title">
-									<h3>
+									<h4>
                                         <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
                                             {{ str_limit($ad->title, 40) }}
                                         </a>
-                                    </h3>
+                                    </h4>
 								</div>
                                 <div class="ads-thumbnail">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}">
@@ -79,8 +79,9 @@
                                     </a>
                                 </div>
 								<div class="bid-price">
-									<div class="bid-number">@lang('app.bid_no'): {{ $ad->auction_no }}</div>
-									<div class="starting-price">@lang('app.starting_price') {{ themeqx_price($ad->price) }}</div>
+									<div class="bid-number text-center">{{ $ad->auction_no }}</div>
+									<div class="starting-price pull-left">@lang('app.starting_price') </div>
+									<div class="pull-right">{{ themeqx_price($ad->price) }}</div>
 								</div>
 
                                 <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
