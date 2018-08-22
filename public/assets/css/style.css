@@ -2224,8 +2224,9 @@ Auction
 	padding: 0;
 }
 
-.countdown {
-	padding: 15px 15px;
+.ad-box .countdown {
+	text-align: center;
+	padding: 15px;
 	font-size: 13px;
 }
 
@@ -2453,11 +2454,17 @@ Auction
 	#example-hide {
 		padding: 0;
 	}
+	#auction-info {
+		padding: 15px 0;
+	}
 	#auction-info .row {
 		display: block;
 	}
-	#auction-info {
-		padding: 15px 0;
+	#auction-info .col-md-4.text-right {
+		text-align: left;
+	}
+	#auction-info .event-show-countdown {
+		padding-top: 15px;
 	}
 	#auction-info .auctioneer,
 	#auction-info .location,
@@ -2470,6 +2477,7 @@ Auction
 	#auction-info .event_description span:last-child {
 		width: auto;
 	}
+	#auction-info .location p,
 	#auction-info .time p,
 	#auction-info .event_view_dates p,
 	#auction-info .event_description p {
@@ -2621,11 +2629,17 @@ Auction
 	#example-hide {
 		padding: 0;
 	}
+	#auction-info {
+		padding: 15px 0;
+	}
 	#auction-info .row {
 		display: block;
 	}
-	#auction-info {
-		padding: 15px 0;
+	#auction-info .col-md-4.text-right {
+		text-align: left;
+	}
+	#auction-info .event-show-countdown {
+		padding-top: 15px;
 	}
 	#auction-info .auctioneer,
 	#auction-info .location,
@@ -2638,6 +2652,7 @@ Auction
 	#auction-info .event_description span:last-child {
 		width: auto;
 	}
+	#auction-info .location p,
 	#auction-info .time p,
 	#auction-info .event_view_dates p,
 	#auction-info .event_description p {
@@ -2877,6 +2892,15 @@ Auction
 	}
 	.item-loop .ads-thumbnail {
 		height: 200px;
+	}
+	#auction-info {
+		padding: 30px 10px;
+	}
+	#auction-info .location p,
+	#auction-info .time p,
+	#auction-info .event_view_dates p,
+	#auction-info .event_description p {
+		width: 280px;
 	}
 	#admin-panel .btn-info.pull-right {
 		margin-top: 5px;
