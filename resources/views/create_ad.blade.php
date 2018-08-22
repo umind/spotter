@@ -69,19 +69,20 @@
                         </div>
                     </div>
 
-                    <div class="form-group {{ $errors->has('auction_no')? 'has-error':'' }}">
-                        <label for="auction_no" class="col-sm-4 control-label">@lang('app.auction_no')</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="auction_no" value="{{ old('auction_no') }}" name="auction_no" placeholder="@lang('app.auction_no')">
-                            {!! $errors->has('auction_no')? '<p class="help-block">'.$errors->first('auction_no').'</p>':'' !!}
-                        </div>
-                    </div>
-
+                    
                     <div class="form-group {{ $errors->has('bid_no')? 'has-error':'' }}">
                         <label for="bid_no" class="col-sm-4 control-label">@lang('app.bid_no')</label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="bid_no" value="{{ old('bid_no') }}" name="bid_no" placeholder="@lang('app.bid_no')">
                             {!! $errors->has('bid_no')? '<p class="help-block">'.$errors->first('bid_no').'</p>':'' !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group {{ $errors->has('auction_no')? 'has-error':'' }}">
+                        <label for="auction_no" class="col-sm-4 control-label">@lang('app.auction_no')</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="auction_no" value="{{ old('auction_no') }}" name="auction_no" placeholder="@lang('app.auction_no')">
+                            {!! $errors->has('auction_no')? '<p class="help-block">'.$errors->first('auction_no').'</p>':'' !!}
                         </div>
                     </div>
 

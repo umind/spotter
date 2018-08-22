@@ -998,18 +998,17 @@ Ad box
 	right: 0;
 	bottom: 0;
 	left: 0;
-	height: 0;
+	height: 38%;
 	overflow: hidden;
 	transition: all .3s ease;
 	text-align: center;
-	font-weight: bold;
-	background-color: rgba(0, 0, 0, 0.5);
+	/*background-color: rgba(0, 0, 0, 0.5);*/
 	color: #ffffff;
 }
 
-.auction-content .item:hover .information {
+/*.auction-content .item:hover .information {
 	height: 35%;
-}
+}*/
 
 .auction-content a {
 	display: block;
@@ -1022,15 +1021,19 @@ Ad box
 	height: 200px;
 }
 
-.auction-content .item:hover img {
+/*.auction-content .item:hover img {
 	-moz-transform: scale(1.1);
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
-}
+}*/
 
 .auction-content .information p {
-	color: #ff0000;
-	font-size: 14px;
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+
+.auction-content .information h3 {
+	margin-top: 5px;
 }
 
 .auction-footer {
