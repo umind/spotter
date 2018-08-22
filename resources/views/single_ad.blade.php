@@ -40,6 +40,10 @@
                     </span>
                 @php
                     $inputMaxBid = $userMaxBid && $userMaxBid > $ad->current_bid_plus_increaser() ? number_format($userMaxBid + $ad->price_increaser, 2) : number_format($ad->current_bid_plus_increaser(), 2);
+                    
+                    if (!$bids->count()) {
+                        $inputMaxBid = $ad->price;
+                    }
                 @endphp
                     <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $inputMaxBid }}" min="{{ $inputMaxBid }}">
                     <span class="input-group-btn">
@@ -167,7 +171,7 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>@lang('app.bidder')</th>
-                                        <th>@lang('app.bid_amount')</th>
+                                        {{-- <th>@lang('app.bid_amount')</th> --}}
                                         <th>@lang('app.date_time')</th>
                                     </tr>
                                     @foreach($bids as $bid)
@@ -178,7 +182,7 @@
                                                     <i class="fa fa-check-circle text-primary"></i>
                                                 @endif
                                             </td>
-                                            <td>{{ themeqx_price($bid->bid_amount) }}</td>
+                                            {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
                                             <td>{{ \Carbon\Carbon::parse($bid->updated_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
                                     @endforeach
@@ -565,7 +569,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.js"></script> 
         <script>
             swal(
-                'Warnung!',
+                'Vorsicht!',
                 '{!! __('app.before_bidding_sign_in_info') !!}',
                 'warning'
             );

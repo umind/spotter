@@ -49,7 +49,14 @@ class BidController extends Controller
             return back()->with('error', trans('app.bidding_time_expired'));
         }
 
-        $minimumBid = $ad->current_bid_plus_increaser();
+        $bids = $ad->bids()->whereNull('max_bid_amount')->get();
+
+        if ($bids->count() > 0) {
+            $minimumBid = $ad->current_bid_plus_increaser();
+        } else {
+            $minimumBid = $ad->price;
+        }
+
         $maxBidObj = $ad->bids()->whereNotNull('max_bid_amount')->first();
         $currentMaxBid = $maxBidObj ? $maxBidObj->max_bid_amount : NULL;
         $minimumMaxBid = $currentMaxBid ? $currentMaxBid + $ad->price_increaser : $minimumBid;
@@ -79,15 +86,17 @@ class BidController extends Controller
         $bid->save();
 
         if ($maxBidObj && $currentMaxBid > $bid_amount) {
-            if($currentMaxBid > $bid_amount) {
-                $bid_amount += $ad->price_increaser;
+
+            $bid_amount += $ad->price_increaser;
+
+            if ($maxBidObj->user->id != $user->id) {
+                $bid = new Bid;
+                $bid->ad_id = $ad->id;
+                $bid->user_id = $maxBidObj->user_id;
+                $bid->bid_amount = $bid_amount;
+                $bid->is_accepted = 0;
+                $bid->save();
             }
-            $bid = new Bid;
-            $bid->ad_id = $ad->id;
-            $bid->user_id = $maxBidObj->user_id;
-            $bid->bid_amount = $bid_amount;
-            $bid->is_accepted = 0;
-            $bid->save();
         }
 
         // notification here
@@ -120,7 +129,14 @@ class BidController extends Controller
             return back()->with('error', trans('app.bidding_time_expired'));
         }
 
-        $minimumBid = $ad->current_bid_plus_increaser();
+        $bids = $ad->bids()->whereNotNull('max_bid_amount')->get();
+
+        if ($bids->count() > 0) {
+            $minimumBid = $ad->current_bid_plus_increaser();
+        } else {
+            $minimumBid = $ad->price;
+        }
+
         $maxBidObj = $ad->bids()->whereNotNull('max_bid_amount')->first();
         $currentMaxBid = $maxBidObj ? $maxBidObj->max_bid_amount : NULL;
         $minimumMaxBid = $currentMaxBid ? $currentMaxBid + $ad->price_increaser : $minimumBid;
@@ -172,7 +188,7 @@ class BidController extends Controller
 
             $currentHighestBid = $ad->bids()->whereNotNull('bid_amount')->orderBy('bid_amount', 'desc')->first();
 
-            if ($currentHighestBid && $currentHighestBid->user_id != $user->id) {
+            if (!$bids->count() || ($currentHighestBid && $currentHighestBid->user_id != $user->id)) {
                 $bid = new Bid;
                 $bid->ad_id = $ad->id;
                 $bid->user_id = $user->id;

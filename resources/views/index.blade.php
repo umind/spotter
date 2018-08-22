@@ -71,7 +71,7 @@
                                     </a>
                                 </div>
                                 <div class="bid-price">
-                                    <div class="bid-number text-center">{{ $ad->auction_no }}</div>
+                                    <div class="bid-number text-center">{{ $ad->bid_no }}</div>
                                     <div class="starting-price pull-left">@lang('app.starting_price')</div>
 									<div class="pull-right">{{ themeqx_price($ad->price) }}</div>
                                 </div>
