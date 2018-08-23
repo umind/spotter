@@ -513,9 +513,7 @@
                                         <div class="ad-box">
                                             <div class="ad-box-caption-title">
 												<h4>
-													<span class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
-														{{ str_limit($ad->title, 40) }}
-													</span>
+													<span class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">{{ $ad->title }}</span>
 												</h4>
                                             </div>
                                             <div class="ads-thumbnail">
