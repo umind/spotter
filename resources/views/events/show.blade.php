@@ -57,7 +57,7 @@
 				<div class="row events">
 
                     @foreach($ads as $ad)
-                        <div class="col-md-3">
+                        <div class="col-sm-6 col-md-3">
                             <div class="ad-box">
 								<div class="ad-box-caption-title">
 									<h4>

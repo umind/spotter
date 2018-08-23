@@ -549,6 +549,7 @@ Page header
 
 .account-search .btn.btn-primary {
 	border-color: transparent;
+	padding: 7px 12px 5px;
 }
 
 .filter-holder select {
@@ -571,9 +572,12 @@ Page header
 	margin-right: 5px;
 }
 
+.account-sort-by {
+	margin-right: 20px;
+}
+
 .account-sort-by select {
 	min-width: 200px;
-	margin-right: 20px;
 }
 
 .account-status select {
@@ -1141,30 +1145,22 @@ Ad box
 .status {
 	padding-top: 30px !important;
 	color: #5983C4;
+	font-weight: bold;
 }
 
 .status {
-	padding-top: 32px !important;
+	padding-top: 28px !important;
 }
 
+.status img {
+	width: 15px;
+}
+
+.green-status,
+.red-status,
 .white-status {
-	padding: 7px 2px;
-	border-radius: 50%;
-	margin-bottom: 16px;
-}
-
-.green-status {
-	padding: 7px 2px;
-	border-radius: 50%;
-	background-color: #008000;
-	margin-bottom: 16px;
-}
-
-.red-status {
-	padding: 7px 2px;
-	border-radius: 50%;
-	background-color: #ff0000;
-	margin-bottom: 16px;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 .ad-box .caption {
@@ -1524,8 +1520,6 @@ ul.footer-menu li a {
 	width: 120px;
 	font-weight: 400;
 }
-
-.ad-info-value {}
 
 .ad-info-value,
 .ad-info-name {
@@ -1960,6 +1954,12 @@ img.thumb-listing-table {
 	z-index: 2;
 	padding: 5px 0;
 	text-align: center;
+}
+
+/* Table --- */
+
+.table-scrollable {
+	overflow: auto;
 }
 
 /**
@@ -2528,9 +2528,6 @@ Auction
 		font-size: 12px;
 	}
 	.auction-footer .text-red {
-		padding: 5px 0;
-	}
-	.auction-footer .text-red {
 		font-size: 12px;
 		padding: 0;
 	}
@@ -2540,6 +2537,25 @@ Auction
 	}
 	.ad-box .ads-thumbnail {
 		height: 240px;
+	}
+	.filter-holder {
+		display: block;
+		margin-bottom: 0;
+	}
+	.filter-holder .account-search input {
+		min-width: 195px;
+	}
+	.filter-holder .account-sort-by select,
+	.filter-holder .account-status select {
+		min-width: 180px;
+	}
+	.filter-holder .account-search,
+	.filter-holder .account-sort-by {
+		margin-bottom: 20px;
+	}
+	.filter-holder .account-sort-by label,
+	.filter-holder .account-status label {
+		width: 70px;
 	}
 	.widget .input-group,
 	.widget .btn-primary.bid,
@@ -2575,6 +2591,15 @@ Auction
 	}
 	#admin-panel .admin h1 {
 		font-size: 30px;
+	}
+	.table-scrollable .info-text {
+		min-width: 200px;
+	}
+	.table-scrollable .prices {
+		min-width: 150px;
+	}
+	.table-scrollable .prices.number {
+		min-width: 60px;
 	}
 	#back-to-top {
 		bottom: 25px;
@@ -2706,6 +2731,34 @@ Auction
 	.auction-footer .auction-bottom {
 		padding-top: 8px;
 	}
+	.filter-holder {
+		display: block;
+		margin-bottom: 0;
+	}
+	.filter-holder .account-search input {
+		min-width: 195px;
+	}
+	.filter-holder .account-sort-by select,
+	.filter-holder .account-status select {
+		min-width: 180px;
+	}
+	.filter-holder .account-search,
+	.filter-holder .account-sort-by {
+		margin-bottom: 20px;
+	}
+	.filter-holder .account-sort-by label,
+	.filter-holder .account-status label {
+		width: 70px;
+	}
+	.table-scrollable .info-text {
+		min-width: 250px;
+	}
+	.table-scrollable .prices {
+		min-width: 150px;
+	}
+	.table-scrollable .prices.number {
+		min-width: 60px;
+	}
 	.ad-box .ads-thumbnail {
 		height: 250px;
 	}
@@ -2791,6 +2844,16 @@ Auction
 	#auction-info {
 		padding: 30px 15px;
 	}
+	.events .col-md-3:nth-child(even) .ad-box,
+	#premium-ads-container .col-sm-6:nth-child(even) .ad-box {
+		width: 48%;
+		float: left;
+	}
+	.events .col-md-3:nth-child(odd) .ad-box,
+	#premium-ads-container .col-sm-6:nth-child(odd) .ad-box {
+		width: 48%;
+		float: right;
+	}
 	.auction {
 		font-size: 16px;
 	}
@@ -2815,13 +2878,6 @@ Auction
 		display: inline-block;
 	}
 	.item-loop:nth-child(odd) {
-		float: right;
-	}
-	#premium-ads-container .col-sm-6 {
-		width: 49.5%;
-		display: inline-block;
-	}
-	#premium-ads-container .row .col-sm-6:nth-child(odd) {
 		float: right;
 	}
 	.widget .input-group,
@@ -2886,6 +2942,30 @@ Auction
 	.auction-footer .text-red b {
 		display: block;
 	}
+	.filter-holder .account-search input {
+		min-width: auto;
+		width: 180px;
+	}
+	.filter-holder .account-search {
+		margin-right: 70px;
+	}
+	.filter-holder .account-sort-by select {
+		min-width: auto;
+		width: 160px;
+	}
+	.filter-holder .account-status select {
+		min-width: auto;
+		width: 100px;
+	}
+	.table-scrollable .info-text {
+		min-width: 200px;
+	}
+	.table-scrollable .prices {
+		min-width: 150px;
+	}
+	.table-scrollable .prices.number {
+		min-width: 60px;
+	}
 	.ad-box .ads-thumbnail {
 		height: 250px;
 	}
@@ -2922,7 +3002,21 @@ Auction
 	.widget .btn-danger.bid {
 		width: 75%;
 	}
+	.filter-holder .account-sort-by {
+		float: right;
+	}
+	.table-scrollable .info-text {
+		min-width: 200px;
+	}
+	.table-scrollable .prices {
+		min-width: 150px;
+	}
+	.table-scrollable .prices.number {
+		min-width: 60px;
+	}
 }
+
+
 
 @media (max-width: 991px) {
 	.home-top-searchbar,

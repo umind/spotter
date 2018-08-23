@@ -19,59 +19,67 @@
 
                 <div class="row">
                     <div class="col-xs-12">
+						<div class="table-scrollable">
 
-                        @if($ads->total() > 0)
-                            <table class="table table-bordered table-striped table-responsive">
+							@if($ads->total() > 0)
+								<table class="table table-bordered table-striped table-responsive">
 
-                                @foreach($ads as $ad)
-                                    <tr>
-                                        <td width="100">
-                                            <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
-                                        </td>
-                                        <td>
-                                            <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a></h5>
-                                            <p class="text-muted">
-                                                @php $event = $ad->events()->first(); @endphp
+									@foreach($ads as $ad)
+										<tr>
+											<td width="100">
+												<img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
+											</td>
+											<td class="info-text">
+												<h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->title }}</a></h5>
+												<p class="text-muted">
+													@php $event = $ad->events()->first(); @endphp
 
-                                                <i class="fa fa-clock-o"></i> @lang('app.expired_on'): {{ Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}
-                                                <br>
-                                                <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
-                                                @if($event)
-                                                    <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
-                                                         <span>{{ $event->title }}</span>
-                                                    </a>
-                                                @else
-                                                    <span>@lang('app.event_not_assigned')</span>
-                                                @endif
-                                            </p>
-                                        </td>
-										<td class="prices">
-											<p>Ihr aktuelles Gebot</p>
-											<p>Ihr maximu Gebot</p>
-											<p>überboten</p>
-										</td>
-										<td class="prices">
-											<p>1002.-</p>
-											<p>1100.-</p>
-											<p>1550.-</p>
-										</td>
-										<td class="status">
-											<p class="green-status"></p>
-											<p class="white-status"></p>
-											<p class="red-status"></p>
-										</td>
+													<i class="fa fa-clock-o"></i> @lang('app.expired_on'): {{ Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}
+													<br>
+													<i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
+													@if($event)
+														<a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+															 <span>{{ $event->title }}</span>
+														</a>
+													@else
+														<span>@lang('app.event_not_assigned')</span>
+													@endif
+												</p>
+											</td>
+											<td class="prices">
+												<p>Ihr aktuelles Gebot</p>
+												<p>Ihr maximu Gebot</p>
+												<p>überboten</p>
+											</td>
+											<td class="prices number">
+												<p>1002.-</p>
+												<p>1100.-</p>
+												<p>1550.-</p>
+											</td>
+											<td class="status">
+												<div class="green-status">
+													<img src="{{ asset('assets/img/green.png') }}" alt="assets/img/green.png" />
+												</div>
+												<div class="white-status">
+													<img src="{{ asset('assets/img/white.png') }}" alt="assets/img/white.png" />
+												</div>
+												<div class="red-status">
+													<img src="{{ asset('assets/img/red.png') }}" alt="assets/img/red.png" />
+												</div>
+											</td>
 
-                                        {{-- <td>
-                                            <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
-                                        </td> --}}
-                                    </tr>
-                                @endforeach
+											{{-- <td>
+												<a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+												<a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
+											</td> --}}
+										</tr>
+									@endforeach
 
-                            </table>
-                        @endif
+								</table>
+							@endif
 
-                        {!! $ads->links() !!}
+							{!! $ads->links() !!}
+						</div>
 
                     </div>
                 </div>
