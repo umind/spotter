@@ -61,14 +61,12 @@
                             <div class="ad-box">
 								<div class="ad-box-caption-title">
 									<h4>
-                                        <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
-                                            {{ str_limit($ad->title, 40) }}
-                                        </a>
+                                        <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">{{ $ad->title }}</a>
                                     </h4>
 								</div>
                                 <div class="ads-thumbnail">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}">
-                                        <img itemprop="image" src="{{ media_url($ad->feature_img) }}" class="img-responsive" alt="{{ $ad->title }}">
+                                        <img itemprop="image" src="{{ media_url($ad->feature_img, 'crop') }}" class="img-responsive" alt="{{ $ad->title }}">
                                         <span class="modern-img-indicator">
                                         @if(! empty($ad->video_url))
                                                 <i class="fa fa-file-video-o"></i>
@@ -79,7 +77,7 @@
                                     </a>
                                 </div>
 								<div class="bid-price">
-									<div class="bid-number text-center">{{ $ad->auction_no }}</div>
+									<div class="bid-number text-center">{{ $ad->bid_no }}</div>
 									<div class="starting-price pull-left">@lang('app.starting_price') </div>
 									<div class="pull-right">{{ themeqx_price($ad->price) }}</div>
 								</div>
