@@ -19,50 +19,52 @@
 
                 <div class="row">
                     <div class="col-xs-12">
+						
+						<div class="table-scrollable">
+							@if($ads->total() > 0)
+								<table class="table table-bordered table-striped table-responsive">
 
-                        @if($ads->total() > 0)
-                            <table class="table table-bordered table-striped table-responsive">
+									@foreach($ads as $ad)
+										<tr>
+											<td width="100">
+												<img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
+											</td>
+											<td class="info-text">
+												<h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }} </a></h5>
+												<p class="text-muted">
+													@php 
+														$event = $ad->events()->first(); 
+														$wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
+													@endphp
 
-                                @foreach($ads as $ad)
-                                    <tr>
-                                        <td width="100">
-                                            <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
-                                        </td>
-                                        <td>
-                                            <h5><a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }} </a></h5>
-                                            <p class="text-muted">
-                                                @php 
-                                                    $event = $ad->events()->first(); 
-                                                    $wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
-                                                @endphp
+													@if($wonBidAmount)
+														<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
+														<br>
+													@endif
 
-												@if($wonBidAmount)
-                                                	<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
-                                                	<br>
-												@endif
-												
-                                                <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
-                                                @if($event)
-                                                    <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
-                                                         <span>{{ $event->title }}</span>
-                                                    </a>
-                                                @else
-                                                    <span>@lang('app.event_not_assigned')</span>
-                                                @endif
-                                            </p>
-                                        </td>
+													<i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
+													@if($event)
+														<a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+															 <span>{{ $event->title }}</span>
+														</a>
+													@else
+														<span>@lang('app.event_not_assigned')</span>
+													@endif
+												</p>
+											</td>
 
-                                        <td>
-                                            <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+											<td class="edit-delete">
+												<a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+												<a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
+											</td>
+										</tr>
+									@endforeach
 
-                            </table>
-                        @endif
+								</table>
+							@endif
 
-                        {!! $ads->links() !!}
+							{!! $ads->links() !!}
+						</div>
 
                     </div>
                 </div>

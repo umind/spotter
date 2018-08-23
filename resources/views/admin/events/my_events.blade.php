@@ -19,36 +19,38 @@
 
                 <div class="row">
                     <div class="col-xs-12">
+						
+						<div class="table-scrollable">
+							@if($events->total() > 0)
+								<table class="table table-bordered table-striped table-responsive">
 
-                        @if($events->total() > 0)
-                            <table class="table table-bordered table-striped table-responsive">
+									@foreach($events as $event)
+										<tr>
+											<td width="100">
+												@if(isset($event->auctions))
+													<img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
+												@endif
+											</td>
+											<td class="text-info">
+												<h5><a href="{{  route('single_event', ['event' => $event->id]) }}" target="_blank">{{ $event->title }}</a> ({!! $event->status_context() !!})</h5>
+											</td>
 
-                                @foreach($events as $event)
-                                    <tr>
-                                        <td width="100">
-                                            @if(isset($event->auctions))
-                                                <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <h5><a href="{{  route('single_event', ['event' => $event->id]) }}" target="_blank">{{ $event->title }}</a> ({!! $event->status_context() !!})</h5>
-                                        </td>
+											<td class="edit-delete">
+												<a href="{{ route('edit_event', $event->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
 
-                                        <td>
-                                            <a href="{{ route('edit_event', $event->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+												@if(Carbon\Carbon::parse($event->auction_ends)->isPast() && $event->status != '2')
+													<a href="{{ route('close_event', $event->id) }}" class="btn btn-danger"><i class="fa fa-close"></i> </a>
+												@endif
+												<a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
+											</td>
+										</tr>
+									@endforeach
 
-                                            @if(Carbon\Carbon::parse($event->auction_ends)->isPast() && $event->status != '2')
-                                                <a href="{{ route('close_event', $event->id) }}" class="btn btn-danger"><i class="fa fa-close"></i> </a>
-                                            @endif
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+								</table>
+							@endif
 
-                            </table>
-                        @endif
-
-                        {!! $events->links() !!}
+							{!! $events->links() !!}
+						</div>
 
                     </div>
                 </div>

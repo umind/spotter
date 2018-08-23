@@ -18,43 +18,46 @@
                 @include('admin.flash_msg')
                 <div class="row">
                     <div class="col-xs-12">
-                        @if($events->total() > 0)
-                            <table class="table table-bordered table-striped table-responsive">
+						
+						<div class="table-scrollable">
+							@if($events->total() > 0)
+								<table class="table table-bordered table-striped table-responsive">
 
-                                @foreach($events as $event)
-                                    <tr>
-                                        <td width="100">
-                                            @if(isset($event->auctions))
-                                                <img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
-                                            <p class="text-muted">
-                                                <i class="fa fa-user"></i> <span>@lang('app.auctioner'):</span> <span>{{ $event->auctioner }}</span>
-                                                <br>
-                                                {{-- <i class="fa fa-clock-o"></i> <span>@lang('app.begins'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_begins)->formatLocalized(get_option('date_format')) }}</span>
-                                                <br> --}}
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</span>
-                                                <br>
-                                                <i class="fa fa-map-marker"></i> <span>@lang('app.venue'):</span> <span>{{ $event->address . ', ' . $event->zip_code . ' ' . $event->city }}</span>
-                                            </p>
-                                        </td>
+									@foreach($events as $event)
+										<tr>
+											<td width="100">
+												@if(isset($event->auctions))
+													<img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
+												@endif
+											</td>
+											<td class="info-text">
+												<h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>
+												<p class="text-muted">
+													<i class="fa fa-user"></i> <span>@lang('app.auctioner'):</span> <span>{{ $event->auctioner }}</span>
+													<br>
+													{{-- <i class="fa fa-clock-o"></i> <span>@lang('app.begins'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_begins)->formatLocalized(get_option('date_format')) }}</span>
+													<br> --}}
+													<i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized(get_option('date_format')) }}</span>
+													<br>
+													<i class="fa fa-map-marker"></i> <span>@lang('app.venue'):</span> <span>{{ $event->address . ', ' . $event->zip_code . ' ' . $event->city }}</span>
+												</p>
+											</td>
 
-                                        <td>
-                                            <a href="{{ route('edit_event', ['event' => $event->id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>                                            
-                                            {{-- @if(Carbon\Carbon::parse($event->auction_ends)->isPast() && $event->status != '2')
-                                                <a href="{{ route('close_event', $event->id) }}" onclick="return confirm('{{ trans('app.are_you_sure') }}');" class="btn btn-danger"><i class="fa fa-close"></i> </a>
-                                            @endif --}}
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+											<td class="edit-delete">
+												<a href="{{ route('edit_event', ['event' => $event->id]) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>                                            
+												{{-- @if(Carbon\Carbon::parse($event->auction_ends)->isPast() && $event->status != '2')
+													<a href="{{ route('close_event', $event->id) }}" onclick="return confirm('{{ trans('app.are_you_sure') }}');" class="btn btn-danger"><i class="fa fa-close"></i> </a>
+												@endif --}}
+												<a href="javascript:;" class="btn btn-danger deleteAds" data-event="{{ $event->id }}"><i class="fa fa-trash"></i> </a>
+											</td>
+										</tr>
+									@endforeach
 
-                            </table>
-                        @endif
+								</table>
+							@endif
 
-                        {!! $events->links() !!}
+							{!! $events->links() !!}
+						</div>
 
                     </div>
                 </div>

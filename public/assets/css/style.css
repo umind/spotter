@@ -1141,15 +1141,23 @@ Ad box
 	font-size: 18px;
 }
 
-.prices,
-.status {
+.table-scrollable .prices,
+.table-scrollable .status {
 	padding-top: 30px !important;
 	color: #5983C4;
 	font-weight: bold;
 }
 
-.status {
+.table-scrollable .status {
 	padding-top: 28px !important;
+}
+
+.table-scrollable .edit-delete {
+	min-width: 100px;
+}
+
+.table-scrollable .edit-delete2 {
+	min-width: 180px;
 }
 
 .status img {
@@ -2601,6 +2609,9 @@ Auction
 	.table-scrollable .prices.number {
 		min-width: 60px;
 	}
+	.table-scrollable .edit-delete {
+		min-width: 100px;
+	}
 	#back-to-top {
 		bottom: 25px;
 	}
@@ -2758,6 +2769,9 @@ Auction
 	}
 	.table-scrollable .prices.number {
 		min-width: 60px;
+	}
+	.table-scrollable .edit-delete {
+		min-width: 100px;
 	}
 	.ad-box .ads-thumbnail {
 		height: 250px;
@@ -2958,13 +2972,16 @@ Auction
 		width: 100px;
 	}
 	.table-scrollable .info-text {
-		min-width: 200px;
+		min-width: 250px;
 	}
 	.table-scrollable .prices {
 		min-width: 150px;
 	}
 	.table-scrollable .prices.number {
 		min-width: 60px;
+	}
+	.table-scrollable .edit-delete {
+		min-width: 100px;
 	}
 	.ad-box .ads-thumbnail {
 		height: 250px;

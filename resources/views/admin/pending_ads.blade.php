@@ -18,41 +18,44 @@
                 @include('admin.flash_msg')
                 <div class="row">
                     <div class="col-xs-12">
-                        @if($ads->total() > 0)
-                            <table class="table table-bordered table-striped table-responsive">
+						
+						<div class="table-scrollable">
+							@if($ads->total() > 0)
+								<table class="table table-bordered table-striped table-responsive">
 
-                                @foreach($ads as $ad)
-                                    <tr>
-                                        <td width="100">
-                                            <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
-                                        </td>
-                                        <td>
-                                            @php $event = $ad->events()->first(); @endphp
-                                            <h5>
-                                                <a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }} </a></h5>
-                                                <i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
-                                                <br>
-                                                <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
-                                                @if($event)
-                                                    <a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
-                                                         <span>{{ $event->title }}</span>
-                                                    </a>
-                                                @else
-                                                    <span>@lang('app.event_not_assigned')</span>
-                                                @endif
-                                        </td>
+									@foreach($ads as $ad)
+										<tr>
+											<td width="100">
+												<img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">
+											</td>
+											<td class="text-info">
+												@php $event = $ad->events()->first(); @endphp
+												<h5>
+													<a href="{{  route('single_ad', [$ad->id, $ad->slug]) }}" target="_blank">{{ $ad->bid_no }} / {{ $ad->title }} </a></h5>
+													<i class="fa fa-clock-o"></i> <span>@lang('app.bidding_deadline'):</span> <span>{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
+													<br>
+													<i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
+													@if($event)
+														<a href="{{ route('single_event', ['event' => $event->id]) }}" target="_blank">
+															 <span>{{ $event->title }}</span>
+														</a>
+													@else
+														<span>@lang('app.event_not_assigned')</span>
+													@endif
+											</td>
 
-                                        <td>
-                                            <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+											<td class="edit-delete">
+												<a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
+												<a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
+											</td>
+										</tr>
+									@endforeach
 
-                            </table>
-                        @endif
+								</table>
+							@endif
 
-                        {!! $ads->links() !!}
+							{!! $ads->links() !!}
+						</div>
 
                     </div>
                 </div>

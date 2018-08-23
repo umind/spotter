@@ -72,11 +72,6 @@
 												@endif
 											</td>
 											<td class="status">
-<!--
-												<div class="white-status">
-													<img src="{{ asset('assets/img/white.png') }}" alt="assets/img/white.png" />
-												</div>
--->
 												@if($highestBidObj->user_id == Auth::id())
 												<div class="green-status">
 													<img src="{{ asset('assets/img/green.png') }}" alt="assets/img/green.png" />
