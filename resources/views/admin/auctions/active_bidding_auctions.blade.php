@@ -46,6 +46,44 @@
                                             </p>
                                         </td>
 
+                                        @php
+                                            $maxBidObj = $ad->bids()->whereNotNull('max_bid_amount')->first();
+                                            $highestBidObj = $ad->bids()->whereNotNull('bid_amount')->orderBy('bid_amount', 'desc')->first();
+                                            $userHighestBid = Auth::user()->bids()->where('ad_id', $ad->id)->max('bid_amount');
+                                        @endphp
+
+                                        <td class="prices">
+                                            <p>Ihr aktuelles Gebot</p>
+                                            @if($maxBidObj && $maxBidObj->user_id == Auth::id())
+                                                <p>Ihr maximum Gebot</p>
+                                            @endif
+                                            @if($highestBidObj->user_id != Auth::id())
+                                                <p>überboten</p>
+                                            @endif
+                                        </td>
+                                        <td class="prices">
+                                            <p>{{ number_format($userHighestBid, 2) }}</p>
+                                            @if($maxBidObj && $maxBidObj->user_id == Auth::id())
+                                                <p>{{ number_format($maxBidObj->max_bid_amount, 2) }}</p>
+                                            @endif
+                                            @if($highestBidObj->user_id != Auth::id())
+                                                <p>{{ number_format($highestBidObj->bid_amount, 2) }}</p>
+                                            @endif
+                                        </td>
+                                        <td class="status">
+                                            @if($highestBidObj->user_id == Auth::id())
+                                                <p class="green-status"></p>
+                                            @else
+                                                <p class="red-status"></p>
+                                            @endif
+                                            @if($maxBidObj && $maxBidObj->user_id == Auth::id())
+                                                <p class="green-status"></p>
+                                            @endif
+                                            @if($highestBidObj->user_id != Auth::id())
+                                                <p class="red-status"></p>
+                                            @endif
+                                        </td>
+
                                         {{-- <td>
                                             <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
                                             <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
