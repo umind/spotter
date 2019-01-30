@@ -33,10 +33,10 @@
                                             <p class="text-muted">
                                                 @php 
                                                     $event = $ad->events()->first(); 
-                                                    $wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
+                                                    $wonBid = $ad->bids()->where('is_accepted', 1)->first();
                                                 @endphp
 
-                                                <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
+                                                <i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBid->won_bid_amount) }}
                                                 <br>
                                                 <i class="fa fa-calendar"></i> <span>@lang('app.event'):</span>
                                                 @if($event)
@@ -49,10 +49,17 @@
                                             </p>
                                         </td>
 
-                                        {{-- <td>
-                                            <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a>
-                                            <a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
-                                        </td> --}}
+                                        @can('view-invoice', [$ad, $wonBid])
+                                            <td>    
+                                                <a 
+                                                    href="{{ route('invoice', $ad->id) }}" 
+                                                    class="btn btn-primary" 
+                                                    title="Invoice" 
+                                                    target="_blank">
+                                                    <i class="fa fa-file"></i>
+                                                </a>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
 

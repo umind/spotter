@@ -2,17 +2,19 @@
 
 namespace App\Providers;
 
-use Mail;
-use App\Mail\AuctionWonMail;
+use App\Ad;
+use App\Bid;
 use App\Country;
+use App\Event;
+use App\Jobs\SendAuctionWonMail;
+use App\Mail\AuctionWonMail;
+use App\Notification;
 use App\Post;
 use Carbon\Carbon;
-use App\Bid;
-use App\Notification;
-use App\Ad;
-use App\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
+use Mail;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -101,7 +103,6 @@ class AppServiceProvider extends ServiceProvider
 
                     foreach ($auctions as $auction) {
 
-
                         if (Carbon::parse($auction->expired_at)->isPast()) {
                             // auction not sold (has not been bidded)
                             $auction->update(['status' => '4']);
@@ -134,7 +135,7 @@ class AppServiceProvider extends ServiceProvider
                                 $wonUser->notification_bell = 1;
                                 $wonUser->save();
 
-                                Mail::to($wonUser->email)->send(new AuctionWonMail($auction, $event));
+                                dispatch(new SendAuctionWonMail($event, $auction, $bid, $wonUser));
 
                                 // auction sold
                                 $auction->update(['status' => '3']);

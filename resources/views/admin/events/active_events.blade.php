@@ -27,7 +27,7 @@
 										<tr>
 											<td width="100">
 												@if(isset($event->auctions))
-													<img class="primary-img thumb-listing-table" src="{{ isset($event->auctions()->first()->feature_img) ? media_url($event->auctions()->first()->feature_img) : asset('assets/img/kein_artikel.jpg') }}" alt="primary image" />
+													<img class="primary-img thumb-listing-table" src="{{ event_img_url($event->image) }}" alt="primary image" />
 												@endif
 											</td>
 											<td class="info-text">

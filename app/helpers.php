@@ -49,6 +49,12 @@ function media_url($img = '', $full_size = 'big'){
     return $url_path;
 }
 
+
+function event_img_url($image_name) {
+    return asset('uploads/images/' . $image_name);
+}
+
+
 /**
  * @param null $resume
  * @return null|string

@@ -41,6 +41,19 @@
 	                        </div>
 	                    </div> --}}
 
+
+                        <div class="form-group {{ $errors->has('image')? 'has-error':'' }}">
+                            <label for="title" class="col-sm-4 control-label">@lang('app.image')</label>
+                            <div class="col-sm-12">
+                                <div class="col-sm-8 col-sm-offset-4">
+                                    <div class="upload-images-input-wrap">
+                                        <input type="file" name="image" class="form-control" />
+                                    </div>
+                                </div>
+                                {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
+                            </div>
+                        </div>
+
 						<div class="form-group {{ $errors->has('title')? 'has-error':'' }}">
 	                        <label for="title" class="col-sm-4 control-label">@lang('app.title')</label>
                             <div class="col-sm-8">

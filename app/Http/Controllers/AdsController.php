@@ -595,6 +595,9 @@ class AdsController extends Controller
                         if ($storage->has('uploads/images/medium/'.$m->media_name)){
                             $storage->delete('uploads/images/medium/'.$m->media_name);
                         }
+                        if ($storage->has('uploads/images/crop/'.$m->media_name)){
+                            $storage->delete('uploads/images/crop/'.$m->media_name);
+                        }
                     }
                     $m->delete();
                 }
@@ -727,6 +730,9 @@ class AdsController extends Controller
             }
             if ($storage->has('uploads/images/medium/'.$media->media_name)){
                 $storage->delete('uploads/images/medium/'.$media->media_name);
+            }
+            if ($storage->has('uploads/images/crop/'.$media->media_name)){
+                $storage->delete('uploads/images/crop/'.$media->media_name);
             }
         }
 

@@ -50,10 +50,12 @@
 									@endphp
 									<p class="text-red {{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown' }}" data-expire-date="{{ $event->auction_ends }}">
 										@if(Carbon\Carbon::parse($event->auction_ends)->isPast())
-											@if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
-												@lang('app.auction_has_ended')
-											@else
-												@lang('app.auction_soon_ends')
+											@if($latestProductToExpire)
+												@if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
+													@lang('app.auction_has_ended')
+												@else
+													@lang('app.auction_soon_ends')
+												@endif
 											@endif
 										@endif
 									</p>

@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use File;
 use App\Ad;
-use App\User;
-use App\Event;
 use App\Category;
-use Carbon\Carbon;
+use App\Event;
 use App\Http\Requests\EventRequest;
+use App\Http\Requests\EventUpdateRequest;
+use App\User;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Image;
 
 class EventController extends Controller
 {
     public function index(){
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
-        $events = Event::active()->orderBy('status')->orderBy('auction_ends')->paginate(20);
+        $events = Event::active()
+                        ->orderBy('status')
+                        ->orderBy('auction_ends')
+                        ->paginate(20);
+
         return view('events.index', compact('events'));
     }
 
@@ -23,7 +30,7 @@ class EventController extends Controller
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();
 
-        $ads = $event->auctions()->paginate(20);
+        $ads = $event->auctions()->active()->paginate(20);
 
         return view('events.show', compact('ads', 'total_ads_count', 'user_count', 'event'));
     }
@@ -54,12 +61,13 @@ class EventController extends Controller
         $event->address = $request->address;
         $event->city = $request->city;
         $event->zip_code = $request->zip_code;
-        $event->auction_begins = Carbon::parse($request->auction_begins);
+        // $event->auction_begins = Carbon::parse($request->auction_begins);
         $event->auction_ends = Carbon::parse($request->auction_deadline);
         $event->view_dates = $request->view_dates;
         $event->description = $request->description;
         $event->save();
 
+        $this->uploadEventImage($request, $event);
         $user->events()->save($event);
 
         // $event->auctions()->sync($request->products);
@@ -73,11 +81,11 @@ class EventController extends Controller
         $thisEventProducts = $event->auctions;
         $products = $productsWithNoEvent->concat($event->auctions);
         $selectedProducts = isset($thisEventProducts) ? $thisEventProducts->pluck('id')->toArray() : [];
-        
+
         return view('admin.events.edit', compact('products', 'title', 'selectedProducts', 'event'));
     }
 
-    public function update(EventRequest $request, Event $event)
+    public function update(EventUpdateRequest $request, Event $event)
     {
         $user = Auth::user();
         $event->title = $request->title;
@@ -85,13 +93,16 @@ class EventController extends Controller
         $event->address = $request->address;
         $event->city = $request->city;
         $event->zip_code = $request->zip_code;
-        $event->auction_begins = Carbon::parse($request->auction_begins);
+        // $event->auction_begins = Carbon::parse($request->auction_begins);
         $event->auction_ends = Carbon::parse($request->auction_deadline);
         $event->view_dates = $request->view_dates;
         $event->description = $request->description;
         $event->save();
 
+        $this->uploadEventImage($request, $event);
         $user->events()->save($event);
+
+
         // $event->auctions()->sync($request->products);
 
         // assign bid deadline to every product the same as the event deadline
@@ -117,7 +128,14 @@ class EventController extends Controller
     public function delete(Request $request)
     {
         $event = Auth::user()->events()->findOrFail($request->event);
+
+        $eventImagePath = public_path('uploads/images/' . $event->image);
+        if (file_exists($eventImagePath)) {
+            File::delete($eventImagePath);
+        }
+
         $event->delete();
+
         return ['success'=>1, 'msg'=>trans('app.auction_deleted_msg')];
     }
 
@@ -190,5 +208,44 @@ class EventController extends Controller
         }
 
         return response()->json(['success' => false]);
+    }
+
+    public function uploadEventImage(Request $request, $event){
+
+        $user_id = Auth::user()->id;
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $valid_extensions = ['jpg','jpeg','png'];
+
+            if ( ! in_array(strtolower($image->getClientOriginalExtension()), $valid_extensions) ){
+                return redirect()->back()->withInput($request->input())->with('error', 'Only .jpg, .jpeg and .png is allowed extension') ;
+            }
+
+            $file_base_name = str_replace('.'.$image->getClientOriginalExtension(), '', $image->getClientOriginalName());
+            $resized = Image::make($image)->resize(null, 1277, function ($constraint) { // 1278
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->stream();
+
+            $image_name = strtolower(time().str_random(5).'-'.str_slug($file_base_name)).'.' . $image->getClientOriginalExtension();
+
+            $imageFileName = 'uploads/images/' . $image_name;
+
+            try{
+                $currentPhotoPath = public_path('uploads/images/' . $event->image);
+                if (file_exists($currentPhotoPath)) {
+                    File::delete($currentPhotoPath);
+                }
+                
+                current_disk()->put($imageFileName, $resized->__toString(), 'public');
+
+                //Save image name into db
+                $event->update(['image' => $image_name]);
+
+            } catch (\Exception $e){
+                return redirect()->back()->withInput($request->input())->with('error', $e->getMessage()) ;
+            }
+        }
     }
 }

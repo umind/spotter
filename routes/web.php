@@ -257,6 +257,7 @@ Route::group(['prefix'=>'dashboard', 'middleware' => 'dashboard'], function(){
     Route::get('active_bidding_auctions', ['as'=>'active_bidding_auctions', 'uses' => 'AdsController@activeBiddingAuctions']);
     Route::get('won_auctions', ['as'=>'won_auctions', 'uses' => 'AdsController@wonAuctions']);
     Route::get('favorite-lists', ['as'=>'favorite_ads', 'uses' => 'AdsController@favoriteAds']);
+    Route::get('invoice/auctions/{id}', ['as'=>'invoice', 'uses' => 'InvoiceController@getInvoice']);
 
     // all user access
 

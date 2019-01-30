@@ -127,7 +127,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'user_type' => 'user',
             'active_status' => '1',
-            'email_notifications' => getCheckboxValue($data['email_notifications']),
+            'email_notifications' => isset($data['email_notifications']) ? getCheckboxValue($data['email_notifications']) : 0,
         ]);
     }
 }

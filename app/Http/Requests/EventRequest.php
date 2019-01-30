@@ -25,6 +25,7 @@ class EventRequest extends FormRequest
     {
         return [
             // 'products' => 'required',
+            'image' => 'required|image|mimes:jpeg,jpg,png',
             'title' => 'required',
             'auctioner' => 'required',
             'address' => 'required',

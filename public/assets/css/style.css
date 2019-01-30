@@ -2344,6 +2344,10 @@ Auction
 	vertical-align: top;
 }
 
+.event-full-img {
+	width: 100% !important;
+}
+
 #auction-info p {
 	display: inline-block;
 	margin: 0;
@@ -2367,6 +2371,10 @@ Auction
 #auction-info .event_view_dates span:last-child,
 #auction-info .event_description span:last-child {
 	width: 400px;
+}
+
+#auction-info .event-show-countdown {
+	text-align: center;
 }
 
 /*----------------------------

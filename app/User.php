@@ -127,4 +127,16 @@ class User extends Authenticatable
         return false;
     }
 
+    public function getTitle()
+    {
+        $title = 'Firma';
+
+        if ($this->title == '0') {
+            $title = 'Herr';
+        } else if ($this->title == '1') {
+            $title = 'Frau';
+        }
+
+        return $title;
+    }
 }

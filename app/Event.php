@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $guarded = ['id'];
+
     public function auctions()
     {
     	return $this->belongsToMany(Ad::class);
@@ -14,18 +16,6 @@ class Event extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function feature_img(){
-        $feature_img = $this->hasOne(Media::class)->whereIsFeature('1');
-        if (! $feature_img){
-            $feature_img = $this->hasOne(Media::class)->first();
-        }
-        return $this->hasOne(Media::class);
-    }
-
-    public function media_img(){
-        return $this->hasMany(Media::class)->whereType('image');
     }
 
     public function status_context(){
@@ -47,7 +37,24 @@ class Event extends Model
 
     public function scopeActive($query)
     {
-        return $query->where('status', '1')->orWhere('status', '2');
+        // closed or active
+        return $query->where('status', '1')
+                    ->orWhere(function ($query) {
+                        $query->closed();
+                    })
+                    ->orWhere(function ($query) {
+                        $query->pending();
+                    });
+    }
+
+    public function scopeClosed($query)
+    {
+        return $query->where('status', '2');
+    }
+
+    public function scopePending($query)
+    {
+        return $query->where('status', '0');
     }
 
     public function is_editable() {

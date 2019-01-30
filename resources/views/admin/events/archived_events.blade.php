@@ -26,7 +26,7 @@
 									@foreach($events as $event)
 										<tr>
 											<td width="100">
-												<img class="primary-img thumb-listing-table" src="{{ media_url($event->auctions()->first()->feature_img) }}" alt="primary image" />
+												<img class="primary-img thumb-listing-table" src="{{ event_img_url($event->image) }}" alt="primary image" />
 											</td>
 											<td class="info-text">
 												<h5><a href="{{  route('single_event', [$event->id]) }}" target="_blank">{{ $event->title }}</a></h5>

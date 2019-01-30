@@ -35,11 +35,11 @@
 												</h5>
 												<p class="text-muted">
 													@php 
-														$event = $ad->events()->first(); 
-														$wonBidAmount = $ad->bids()->where('is_accepted', 1)->value('won_bid_amount');
+                                                        $event = $ad->events()->first(); 
+                                                        $wonBid = $ad->bids()->where('is_accepted', 1)->first();
 													@endphp
 
-													<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBidAmount) }}
+													<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBid->won_bid_amount) }}
 													@if($ad->paid)
 														<span class="label label-success">@lang('app.paid')</span>
 													@else
@@ -61,8 +61,26 @@
 												<a href="{{route('auction_bids', $ad->id)}}" class="btn btn-info" data-toggle="tooltip" title="@lang('app.bids')"><i class="fa fa-gavel"></i> {{$ad->bids->count()}} </a>
 												{{-- <a href="{{ route('edit_ad', $ad->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i> </a> --}}
 												@if(!$ad->paid)
-													<a href="javascript:;" class="btn btn-success changePaymentStatus" data-slug="{{ $ad->slug }}" data-value="1"><i class="fa fa-check-circle-o"></i> </a>
+													<a 
+                                                        href="javascript:;" 
+                                                        title="Change Payment Status To Paid" 
+                                                        class="btn btn-success changePaymentStatus" 
+                                                        data-slug="{{ $ad->slug }}" 
+                                                        data-value="1">
+                                                        <i class="fa fa-check-circle-o"></i> 
+                                                    </a>
 												@endif
+
+                                                @can('view-invoice', [$ad, $wonBid])
+                                                    <a 
+                                                        href="{{ route('invoice', $ad->id) }}" 
+                                                        class="btn btn-primary" 
+                                                        title="Invoice" 
+                                                        target="_blank">
+                                                        <i class="fa fa-file"></i> 
+                                                    </a>
+                                                @endcan
+
 												<a href="javascript:;" class="btn btn-danger deleteAds" data-slug="{{ $ad->slug }}"><i class="fa fa-trash"></i> </a>
 											</td>
 										</tr>
