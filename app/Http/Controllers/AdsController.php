@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Ad;
+use App\Bid;
 use App\Brand;
-use App\Event;
 use App\CarsVehicle;
 use App\Category;
 use App\City;
 use App\Comment;
 use App\Country;
+use App\Event;
+use App\Invoice;
 use App\Job;
 use App\JobApplication;
+use App\Jobs\SendAuctionWonMail;
 use App\Media;
 use App\Payment;
 use App\Report_ad;
@@ -20,7 +23,6 @@ use App\Sub_Category;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -220,6 +222,7 @@ class AdsController extends Controller
             'type'              => $request->type,
             'ad_condition'      => $request->condition,
             'price'             => $request->price,
+            'buy_now_price'             => $request->buy_now_price,
             'price_increaser'   => $request->price_increaser,
             'expired_at'        => Carbon::parse($request->bid_deadline),
             'is_negotiable'     => $is_negotialble,
@@ -461,6 +464,7 @@ class AdsController extends Controller
             'bid_no'            => $request->bid_no,
             'description'       => $request->ad_description,
             'price'             => $request->price,
+            'buy_now_price'             => $request->buy_now_price,
             'price_increaser'   => $request->price_increaser,
             'expired_at'        => Carbon::parse($request->bid_deadline),
             'is_negotiable'     => $is_negotialble,
@@ -1189,6 +1193,42 @@ class AdsController extends Controller
         })->paginate(20);
 
         return view('admin.auctions.won_auctions', compact('title', 'ads'));
+    }
+
+    public function buyNow(Request $request, $ad_id)
+    {
+        $user = Auth::user();
+
+        if (!$user){
+            return redirect(route('login'))->with('error', trans('app.login_first_to_post_bid'));
+        }
+
+        $ad = Ad::findOrFail($ad_id);
+        $event = $ad->events()->firstOrFail();
+
+        // check if expired
+        if (Carbon::parse($ad->expired_at)->isPast()) {
+            return back()->with('error', trans('app.bidding_time_expired'));
+        }
+
+        $bid = new Bid;
+        $bid->ad_id = $ad->id;
+        $bid->user_id = $user->id;
+        $bid->bid_amount = $ad->buy_now_price;
+        $bid->won_bid_amount = $ad->buy_now_price;
+        $bid->is_accepted = 1;
+        $bid->save();
+
+        // mark as finished
+        $event->update(['status' => '2']);
+        // mark as sold
+        $ad->update(['status' => '3']);
+
+        $invoice = $ad->invoice()->save(new Invoice);
+
+        dispatch(new SendAuctionWonMail($event, $ad, $bid, $user));
+
+        return back()->with('success', trans('app.bought_now_message'));
     }
 
 }

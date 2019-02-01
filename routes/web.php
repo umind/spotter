@@ -107,6 +107,9 @@ Route::group(['middleware' => 'only_admin_access'], function () {
 Route::post('{id}/post-new', ['as' => 'post_bid','uses' => 'BidController@postBid']);
 Route::post('{id}/post-max-bid', ['as' => 'post_max_bid','uses' => 'BidController@postMaxBid']);
 
+// buy now
+Route::post('{id}/buy-now', ['as' => 'buy_now','uses' => 'AdsController@buyNow']);
+
 //Checkout payment
 // Route::get('checkout/{transaction_id}', ['as'=>'payment_checkout', 'uses' => 'PaymentController@checkout']);
 // Route::post('checkout/{transaction_id}', ['uses' => 'PaymentController@chargePayment']);

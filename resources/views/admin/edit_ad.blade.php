@@ -80,26 +80,45 @@
                         </div>
 
 
-                        <div class="form-group  {{ $errors->has('price')? 'has-error':'' }}">
-                            <label for="price" class="col-md-4 control-label"><span class="price_text">@lang('app.starting_price')</span></label>
-                            <div class="col-md-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">{{ get_option('currency_sign') }}</span>
-                                    <input type="text" placeholder="@lang('app.starting_price')" class="form-control" name="price" id="price" value="{{ old('price')? old('price') : $ad->price }}">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group  {{ $errors->has('price')? 'has-error':'' }}">
+                                    <label for="price" class="col-md-6 col-md-offset-1 control-label"> <span class="price_text">@lang('app.starting_price')</span> </label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{ get_option('currency_sign') }}</span>
+                                            <input type="text" placeholder="@lang('app.starting_price')" class="form-control" name="price" id="price" value="{{ old('price') ? old('price') : $ad->price }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 col-md-offset-7">
+                                        {!! $errors->has('price')? '<p class="help-block">'.$errors->first('price').'</p>':'' !!}
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <div class="col-md-5">
+                                <div class="form-group {{ $errors->has('buy_now_price')? 'has-error':'' }}">
+                                    <label for="buy_now_price" class="text-left col-md-4 control-label"> <span class="price_text">@lang('app.buy_now_price')</span> </label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">{{ get_option('currency_sign') }}</span>
+                                            <input type="text" placeholder="@lang('app.buy_now_price')" class="form-control" name="buy_now_price" id="buy_now_price" value="{{ old('buy_now_price') ? old('buy_now_price') : $ad->buy_now_price }}">
+                                        </div>
+                                    </div>
 
-                            <div class="col-sm-8 col-md-offset-4">
-                                {!! $errors->has('price')? '<p class="help-block">'.$errors->first('price').'</p>':'' !!}
+                                    <div class="col-md-8 col-md-offset-4">
+                                        {!! $errors->has('buy_now_price')? '<p class="help-block">'.$errors->first('buy_now_price').'</p>':'' !!}
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
-
 
                         <div class="form-group  {{ $errors->has('price_increaser')? 'has-error':'' }}">
                             <label for="price_increaser" class="col-md-4 control-label"> <span class="price_increaser_text">@lang('app.price_increaser')</span> </label>
                             <div class="col-md-4">
                                 <div class="input-group">
+                                    <span class="input-group-addon">{{ get_option('currency_sign') }}</span>
                                     <input type="text" placeholder="@lang('app.price_increaser')" class="form-control" name="price_increaser" id="price_increaser" value="{{ old('price_increaser')? old('price_increaser') : $ad->price_increaser }}">
                                 </div>
                             </div>

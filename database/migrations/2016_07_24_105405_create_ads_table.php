@@ -25,6 +25,7 @@ class CreateAdsTable extends Migration
             $table->string('ad_condition')->nullable();
             $table->string('model')->nullable();
             $table->decimal('price', 12,2)->nullable();
+            $table->decimal('buy_now_price', 12,2)->nullable();
             $table->enum('is_negotiable', [0,1])->nullable();
 
             $table->string('seller_name')->nullable();

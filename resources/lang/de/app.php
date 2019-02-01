@@ -2,6 +2,9 @@
 
 return [
     // new
+    'bought_now_message' => 'Sie haben erfolgreich das Produkt gekauft. Bitte prüfen Sie Ihre Mail für mehr Informationen.',
+    'buy_now_price' => 'Sofortkaufpreis',
+    'buy_now' => 'Sofort kaufen',
     'has_company' => 'Das Feld :field ist für Unternehmen obligatorisch',
     'company_vat' => 'MwSt-Nr.',
     'company_no' => 'Firmen-Nr.',

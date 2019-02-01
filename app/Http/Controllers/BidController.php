@@ -42,7 +42,7 @@ class BidController extends Controller
         $user = Auth::user();
         $bid_amount = toFloat($request->bid_amount);
 
-        $ad = Ad::find($ad_id);
+        $ad = Ad::findOrFail($ad_id);
 
         // check if expired
         if (Carbon::parse($ad->expired_at)->isPast()) {

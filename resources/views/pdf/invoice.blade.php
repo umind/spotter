@@ -217,7 +217,7 @@
 			                <br><br><br>
 			                <p>Zürich, {{ strftime("%d. %m. %Y") }}</p>
 			                <br>
-			                <p class="bold">Rechnung Nr. 10001</p>
+			                <p class="bold">Rechnung Nr. {{ $ad->invoice->id }}</p>
                         </div>
                     </th>
                 </tr>

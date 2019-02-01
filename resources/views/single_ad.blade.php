@@ -362,6 +362,14 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
                                         {!! Form::close() !!}
+
+                                        @if($ad->buy_now_price)
+                                            {!! Form::open(['route'=> ['buy_now', $ad->id], 'class' => 'form-inline', 'id' => 'buy-now-form']) !!}
+                                                <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
+                                                <p>Zusätzlich 7.7% MwSt</p>
+                                            {!! Form::close() !!}
+                                        @endif
+
                                         <div class="bid-max-div">
 											<p>@lang('app.max_bid_desc')</p>
 											<button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
@@ -709,6 +717,11 @@
               return false;
             });
 
+            $('#buy-now-form').submit(function () {
+                if (!confirm('{{ __('app.are_you_sure') }}')) {
+                    return false;
+                }
+            });
         });
     </script>
 @endsection

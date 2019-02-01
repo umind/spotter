@@ -6,6 +6,7 @@ use App\Ad;
 use App\Bid;
 use App\Country;
 use App\Event;
+use App\Invoice;
 use App\Jobs\SendAuctionWonMail;
 use App\Mail\AuctionWonMail;
 use App\Notification;
@@ -135,10 +136,13 @@ class AppServiceProvider extends ServiceProvider
                                 $wonUser->notification_bell = 1;
                                 $wonUser->save();
 
-                                dispatch(new SendAuctionWonMail($event, $auction, $bid, $wonUser));
-
                                 // auction sold
                                 $auction->update(['status' => '3']);
+
+                                // create invoice
+                                $invoice = $auction->invoice()->save(new Invoice);
+
+                                dispatch(new SendAuctionWonMail($event, $auction, $bid, $wonUser));
                             }
                         }
                     }
