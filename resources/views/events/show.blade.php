@@ -35,12 +35,14 @@
                                 $latestProductToExpire = $event->auctions()->latest('expired_at')->first();
                             @endphp
 
-                            <img src="{{ event_img_url($event->image) }}" class="event-full-img">
+                            @if($event->image)
+                                <img src="{{ event_img_url($event->image) }}" class="event-full-img">
+                            @endif
 
                             <div class="{{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown event-show-countdown' }}" data-expire-date="{{$event->auction_ends}}"></div>
                                 <div class="event-show-countdown">
                                     @if(Carbon\Carbon::parse($event->auction_ends)->isPast())
-                                        @if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
+                                        @if($latestProductToExpire && Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
                                             @lang('app.auction_has_ended')
                                         @else
                                             @lang('app.auction_soon_ends')

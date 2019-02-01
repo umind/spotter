@@ -49,8 +49,8 @@
                                     <div class="upload-images-input-wrap">
                                         <input type="file" name="image" class="form-control" />
                                     </div>
+                                    {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
                                 </div>
-                                {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
                             </div>
                         </div>
 

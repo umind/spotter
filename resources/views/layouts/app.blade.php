@@ -95,7 +95,7 @@
 							<ul>
 								@if(Auth::check())
 									@php 
-										$notifications = Auth::user()->notifications;
+										$notifications = Auth::user()->notifications->sortByDesc('date');
 										$notifNum = $notifications->where('is_read', 0)->count();
 									@endphp
 									<li class="notification-li" id="notifications">

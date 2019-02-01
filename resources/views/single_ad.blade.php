@@ -243,7 +243,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-8">
                                         <input type="hidden" value="" class="comment_id" name="comment_id">
-                                        <button type="submit" class="btn btn-success" name="post_comment"><i class="fa fa-pencil-square"></i> @lang('app.post_comment') </button>
+                                        <button type="submit" class="btn btn-success" id="post-comment-button" name="post_comment"><i class="fa fa-pencil-square"></i> @lang('app.post_comment') </button>
                                     </div>
                                 </div>
                                 {!! Form::close() !!}
@@ -364,7 +364,7 @@
                                         {!! Form::close() !!}
 
                                         @if($ad->buy_now_price)
-                                            {!! Form::open(['route'=> ['buy_now', $ad->id], 'class' => 'form-inline', 'id' => 'buy-now-form']) !!}
+                                            {!! Form::open(['route'=> ['buy_now', $ad->id], 'class' => 'form-inline']) !!}
                                                 <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
                                                 <p>Zusätzlich 7.7% MwSt</p>
                                             {!! Form::close() !!}
@@ -717,10 +717,14 @@
               return false;
             });
 
-            $('#buy-now-form').submit(function () {
+            $('button[type="submit"]').not('#post-comment-button').click(function (e) {
+                e.preventDefault();
+
                 if (!confirm('{{ __('app.are_you_sure') }}')) {
                     return false;
                 }
+
+                $(this).parent('form').submit(); 
             });
         });
     </script>

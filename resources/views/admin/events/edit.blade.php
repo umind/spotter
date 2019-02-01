@@ -51,8 +51,8 @@
                                         <img src="{{ event_img_url($event->image) }}" class="img-responsive" />
                                         <input type="file" name="image" class="form-control" />
                                     </div>
+                                    {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
                                 </div>
-                                {!! $errors->has('image')? '<p class="help-block">'.$errors->first('image').'</p>':'' !!}
                             </div>
                         </div>
 

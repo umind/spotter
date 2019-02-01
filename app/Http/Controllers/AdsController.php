@@ -1177,7 +1177,7 @@ class AdsController extends Controller
         $ads = Ad::whereHas('bids', function ($q) {
             $q->where('bids.user_id', Auth::id());
         })
-        ->where('expired_at', '>=', Carbon::now())
+        ->where('status', '1')
         ->paginate(20);
 
         return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));

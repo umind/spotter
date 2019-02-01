@@ -236,7 +236,7 @@
                     <th>Artikel Nr.</th>
                     <th>Bid Nr.</th>
                     <th>Artikel</th>
-                    <th>Preis pro Stück</th>
+                    <th>Stückpreis</th>
                     <th>Menge</th>
                     <th>Preis</th>
                 </tr>
