@@ -150,6 +150,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('status')? 'has-error':'' }}">
+                            <label for="status" class="col-sm-4 control-label"> @lang('app.status')</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="status">
+                                    <option value="1" {{ $ad->status == '1' ? 'selected' :'' }}>Publish</option>
+                                    <option value="0" {{ $ad->status == '0' ? 'selected' :'' }}>Unpublish</option>
+                                </select>
+                                {!! $errors->has('status')? '<p class="help-block">'.$errors->first('status').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <legend>@lang('app.image')</legend>
 
                         <div class="form-group {{ $errors->has('images')? 'has-error':'' }}">
@@ -281,7 +292,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-8">
-                                <button type="submit" class="btn btn-primary">@lang('app.edit_ad')</button>
+                                <button type="submit" class="btn btn-primary">@lang('app.update_ad')</button>
                             </div>
                         </div>
                         {{ Form::close() }}

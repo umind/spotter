@@ -18,9 +18,10 @@ class EventController extends Controller
 {
     public function index(){
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
+        // pending, closed i published
         $events = Event::active()
+                        ->orderBy('order')
                         ->orderBy('auction_ends')
-                        ->orderBy('status')
                         ->paginate(20);
 
         return view('events.index', compact('events'));
@@ -30,7 +31,10 @@ class EventController extends Controller
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();
 
-        $ads = $event->auctions()->active()->paginate(20);
+        $ads = $event->auctions()
+                    ->whereIn('status', ['1', '3', '4'])
+                    ->orderBy('expired_at')
+                    ->paginate(20);
 
         return view('events.show', compact('ads', 'total_ads_count', 'user_count', 'event'));
     }
@@ -65,6 +69,7 @@ class EventController extends Controller
         $event->auction_ends = Carbon::parse($request->auction_deadline);
         $event->view_dates = $request->view_dates;
         $event->description = $request->description;
+        $event->order = 2;
         $event->save();
 
         $this->uploadEventImage($request, $event);
@@ -142,15 +147,15 @@ class EventController extends Controller
     public function pending()
     {
         $title = trans('app.pending_events');
-        $events = Auth::user()->events()->whereStatus('0')->orderBy('id', 'desc')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('0')->orderBy('auction_ends')->paginate(20);
 
         return view('admin.events.pending_events', compact('title', 'events'));
     }
 
     public function active()
     {
-        $title = trans('app.active_events');
-        $events = Auth::user()->events()->whereStatus('1')->orderBy('id', 'desc')->paginate(20);
+        $title = trans('app.published_events');
+        $events = Auth::user()->events()->whereStatus('1')->orderBy('auction_ends')->paginate(20);
 
         return view('admin.events.active_events', compact('title', 'events'));
     }
@@ -158,7 +163,7 @@ class EventController extends Controller
     public function closed()
     {
         $title = trans('app.closed_events');
-        $events = Auth::user()->events()->whereStatus('2')->orderBy('id', 'desc')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('2')->orderBy('auction_ends')->paginate(20);
 
         return view('admin.events.closed_events', compact('title', 'events'));
     }
@@ -166,21 +171,23 @@ class EventController extends Controller
     public function archived()
     {
         $title = trans('app.archived_events');
-        $events = Auth::user()->events()->whereStatus('3')->orderBy('id', 'desc')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('3')->orderBy('auction_ends')->paginate(20);
 
         return view('admin.events.archived_events', compact('title', 'events'));
     }
 
     public function changeStatus(Request $request){
+        // put to pending
         $event = Auth::user()->events()->findOrFail($request->event);
 
         if ($event) {
             $value = $request->value;
 
             $event->status = $value;
+            $event->order = 1;
             $event->save();
 
-            $event->auctions()->update(['status' => $value]);
+            // $event->auctions()->update(['status' => $value]);
 
             if ($value == 1){
                 return ['success' => 1, 'msg' => trans('app.event_approved_msg')];
@@ -192,9 +199,10 @@ class EventController extends Controller
     public function archive(Event $event)
     {
         $event->status = '3';
+        $event->order = 4;
         $event->save();
 
-        $event->auctions()->update(['status' => '3']);
+        // $event->auctions()->update(['status' => '3', 'order' => '4']);
 
         return redirect()->route('closed_events')->with('success', trans('app.event_archived_msg'));
     }

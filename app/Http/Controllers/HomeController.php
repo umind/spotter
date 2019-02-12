@@ -22,7 +22,13 @@ class HomeController extends Controller
     public function index(){
         $top_categories = Category::whereCategoryType('auction')->orderBy('category_name', 'asc')->get();
 
-        $ads = Ad::active()->orderBy('id', 'desc')->get();
+        $ads = Ad::active()
+                ->whereHas('events', function ($query) {
+                    $query->where('events.status', '1')
+                        ->orWhere('events.status', '1');
+                })
+                ->orderBy('expired_at')
+                ->get();
 
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();

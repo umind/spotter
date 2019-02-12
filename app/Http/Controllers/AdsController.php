@@ -39,7 +39,7 @@ class AdsController extends Controller
     {
         $title = trans('app.all_ads');
 
-        $ads = Ad::with('city', 'country', 'state')->whereStatus('1')->orderBy('id', 'desc')->paginate(20);
+        $ads = Ad::with('city', 'country', 'state')->whereStatus('1')->orderBy('bid_no')->paginate(20);
 
         return view('admin.all_ads', compact('title', 'ads'));
     }
@@ -47,14 +47,14 @@ class AdsController extends Controller
     public function adminPendingAds()
     {
         $title = trans('app.pending_ads');
-        $ads = Ad::with('city', 'country', 'state')->whereStatus('0')->orderBy('id', 'desc')->paginate(20);
+        $ads = Ad::with('city', 'country', 'state')->whereStatus('0')->orderBy('bid_no')->paginate(20);
 
         return view('admin.pending_ads', compact('title', 'ads'));
     }
     public function adminBlockedAds()
     {
         $title = trans('app.blocked_ads');
-        $ads = Ad::with('city', 'country', 'state')->whereStatus('2')->orderBy('id', 'desc')->paginate(20);
+        $ads = Ad::with('city', 'country', 'state')->whereStatus('2')->orderBy('bid_no')->paginate(20);
 
         return view('admin.all_ads', compact('title', 'ads'));
     }
@@ -66,7 +66,7 @@ class AdsController extends Controller
 
         // start search
 
-        $ads = $user->ads()->active()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+        $ads = $user->ads()->active()->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
 
 
         return view('admin.my_ads', compact('title', 'ads'));
@@ -76,7 +76,7 @@ class AdsController extends Controller
         $title = trans('app.pending_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->whereStatus('0')->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+        $ads = $user->ads()->whereStatus('0')->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
 
         return view('admin.pending_ads', compact('title', 'ads'));
     }
@@ -85,7 +85,7 @@ class AdsController extends Controller
         $title = trans('app.favourite_ads');
 
         $user = Auth::user();
-        $ads = $user->favourite_ads()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+        $ads = $user->favourite_ads()->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
 
         return view('admin.favourite_ads', compact('title', 'ads'));
     }
@@ -94,7 +94,7 @@ class AdsController extends Controller
         $title = trans('app.sold_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->whereStatus('3')->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+        $ads = $user->ads()->whereStatus('3')->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
 
         return view('admin.auctions.sold_ads', compact('title', 'ads'));
     }
@@ -103,7 +103,7 @@ class AdsController extends Controller
         $title = trans('app.not_sold_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->whereStatus('4')->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
+        $ads = $user->ads()->whereStatus('4')->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
 
         return view('admin.auctions.not_sold_ads', compact('title', 'ads'));
     }
@@ -239,7 +239,8 @@ class AdsController extends Controller
             'category_type'     => 'classifieds',
             'price_plan'        => $request->price_plan,
             'mark_ad_urgent'    => $mark_ad_urgent,
-            'status'            => '0',
+            'status'            => '1',
+            'order'             => 1,
             'user_id'           => $user_id,
             'latitude'          => $request->latitude,
             'longitude'         => $request->longitude,
@@ -279,7 +280,7 @@ class AdsController extends Controller
                 $event->auction_ends;
                 $syncData = $event->id;
                 $created_ad->expired_at = Carbon::parse(Carbon::parse($event->auction_ends)->toDateString() . ' ' . $request->bid_deadline);
-                $created_ad->status = $event->status;
+                // $created_ad->status = $event->status;
                 $created_ad->save();
             } 
             $created_ad->events()->sync($syncData);
@@ -482,6 +483,8 @@ class AdsController extends Controller
             'state_id'          => $request->state,
             'city_id'           => $request->city,
             'address'           => $request->address,
+            'status'            => $request->status,
+            'order'             => $request->status == 1 ? 1 : 2,
             'video_url'         => $video_url,
             'latitude'          => $request->latitude,
             'longitude'         => $request->longitude,
@@ -1184,6 +1187,7 @@ class AdsController extends Controller
             $q->where('bids.user_id', Auth::id());
         })
         ->where('status', '1')
+        ->orderBy('updated_ad')
         ->paginate(20);
 
         return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));
@@ -1196,7 +1200,9 @@ class AdsController extends Controller
         $ads = Ad::whereHas('bids', function ($q) {
             $q->where('bids.user_id', Auth::id())
                 ->where('bids.is_accepted', 1);
-        })->paginate(20);
+        })
+        ->orderBy('updated_ad')
+        ->paginate(20);
 
         return view('admin.auctions.won_auctions', compact('title', 'ads'));
     }

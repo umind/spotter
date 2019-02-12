@@ -106,7 +106,7 @@ class AppServiceProvider extends ServiceProvider
 
                         if (Carbon::parse($auction->expired_at)->isPast()) {
                             // auction not sold (has not been bidded)
-                            $auction->update(['status' => '4']);
+                            $auction->update(['status' => '4', 'order' => 4]);
                             
                             // won bid
                             $bid = $auction->bids()
@@ -137,7 +137,7 @@ class AppServiceProvider extends ServiceProvider
                                 $wonUser->save();
 
                                 // auction sold
-                                $auction->update(['status' => '3']);
+                                $auction->update(['status' => '3', 'order' => 3]);
 
                                 // create invoice
                                 $invoice = $auction->invoice()->save(new Invoice);
@@ -153,6 +153,7 @@ class AppServiceProvider extends ServiceProvider
                     // close an event inside if all articles underneath him are finished
                     if ($countArticles < 1) {
                         $event->status = '2';
+                        $event->order = 3;
                         $event->save();
                     }
 

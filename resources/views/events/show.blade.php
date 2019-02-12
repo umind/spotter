@@ -59,7 +59,10 @@
 		
 		<div class="container">
 			<div class="row events">
-                @if($ads->count())
+                @if(
+                    ($event->status == '1' && $ads->count()) || 
+                    ($event->status == '2' && $ads->count())
+                )
                     @foreach($ads as $ad)
                         <div class="col-sm-6 col-md-3">
                             <div class="ad-box">

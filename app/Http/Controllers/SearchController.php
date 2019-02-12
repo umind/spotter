@@ -59,7 +59,7 @@ class SearchController extends Controller
 
 		$ads = isset($orderBy) 
                     ? $ads->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) 
-                    : $ads->orderBy('bid_no')->orderBy('status');
+                    : $ads->orderBy('order')->orderBy('bid_no');
 		$ads = $ads->paginate(20);
 
     	$request->flash();

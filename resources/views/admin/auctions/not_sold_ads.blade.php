@@ -81,7 +81,7 @@
     <script>
         $(document).ready(function() {
             $('.deleteAds').on('click', function () {
-                if (!confirm('{{ trans('app.are_you_sure') }}')) {
+                if (!confirm('{{ trans('app.are_you_sure_data_will_be_removed') }}')) {
                     return '';
                 }
                 var selector = $(this);
