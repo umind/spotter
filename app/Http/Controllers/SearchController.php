@@ -42,13 +42,18 @@ class SearchController extends Controller
 	            if ($status == 'won') {
 	            	$q->where('bids.user_id', Auth::id())
                 		->where('bids.is_accepted', 1);
+	            } elseif($status == 'lost') {
+	            	$q->where('bids.user_id', Auth::id())
+                        ->where('bids.is_accepted', 0)
+                        ->whereNull('bids.won_bid_amount');
 	            } else {
-	            	$q->where('bids.user_id', Auth::id());
-	            }
-	        })->where(function ($q) use ($request) {
-						$q->where('title', 'LIKE', '%' . $request->q . '%')
-	        				->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
-	        			});
+                    $q->where('bids.user_id', Auth::id());
+                }
+	        })
+            ->where(function ($q) use ($request) {
+				$q->where('title', 'LIKE', '%' . $request->q . '%')
+    				->orWhere('bid_no', 'LIKE', '%' . $request->q . '%');
+    			});
 
     		if ($status == 'active') {
     			$ads = $ads->where('expired_at', '>=', Carbon::now());
@@ -64,6 +69,6 @@ class SearchController extends Controller
 
     	$request->flash();
 
-    	return view('admin.search', compact('ads', 'user'));
+    	return view('admin.search', compact('ads', 'user', 'status'));
     }
 }

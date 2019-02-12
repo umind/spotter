@@ -148,7 +148,10 @@ class AppServiceProvider extends ServiceProvider
                     }
 
                     // check if all the articles inside the auction are expired 
-                    $countArticles = $event->auctions()->where('status', '1')->whereDate('expired_at', '<=', Carbon::now())->count();
+                    $countArticles = $event->auctions()
+                                        ->where('status', '1')
+                                        ->whereDate('expired_at', '<=', Carbon::now())
+                                        ->count();
 
                     // close an event inside if all articles underneath him are finished
                     if ($countArticles < 1) {

@@ -39,7 +39,11 @@ class AdsController extends Controller
     {
         $title = trans('app.all_ads');
 
-        $ads = Ad::with('city', 'country', 'state')->whereStatus('1')->orderBy('bid_no')->paginate(20);
+        $ads = Ad::with('city', 'country', 'state')
+                ->whereStatus('1')
+                ->orderBy('order')
+                ->orderBy('bid_no')
+                ->paginate(20);
 
         return view('admin.all_ads', compact('title', 'ads'));
     }
@@ -47,14 +51,20 @@ class AdsController extends Controller
     public function adminPendingAds()
     {
         $title = trans('app.pending_ads');
-        $ads = Ad::with('city', 'country', 'state')->whereStatus('0')->orderBy('bid_no')->paginate(20);
+        $ads = Ad::with('city', 'country', 'state')
+                ->whereStatus('0')
+                ->orderBy('bid_no')
+                ->paginate(20);
 
         return view('admin.pending_ads', compact('title', 'ads'));
     }
     public function adminBlockedAds()
     {
         $title = trans('app.blocked_ads');
-        $ads = Ad::with('city', 'country', 'state')->whereStatus('2')->orderBy('bid_no')->paginate(20);
+        $ads = Ad::with('city', 'country', 'state')
+                    ->whereStatus('2')
+                    ->orderBy('bid_no')
+                    ->paginate(20);
 
         return view('admin.all_ads', compact('title', 'ads'));
     }
@@ -66,7 +76,11 @@ class AdsController extends Controller
 
         // start search
 
-        $ads = $user->ads()->active()->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
+        $ads = $user->ads()
+                    ->active()
+                    ->with('city', 'country', 'state')
+                    ->orderBy('bid_no')
+                    ->paginate(20);
 
 
         return view('admin.my_ads', compact('title', 'ads'));
@@ -76,7 +90,11 @@ class AdsController extends Controller
         $title = trans('app.pending_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->whereStatus('0')->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
+        $ads = $user->ads()
+                    ->whereStatus('0')
+                    ->with('city', 'country', 'state')
+                    ->orderBy('bid_no')
+                    ->paginate(20);
 
         return view('admin.pending_ads', compact('title', 'ads'));
     }
@@ -85,7 +103,10 @@ class AdsController extends Controller
         $title = trans('app.favourite_ads');
 
         $user = Auth::user();
-        $ads = $user->favourite_ads()->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
+        $ads = $user->favourite_ads()
+                    ->with('city', 'country', 'state')
+                    ->orderBy('bid_no')
+                    ->paginate(20);
 
         return view('admin.favourite_ads', compact('title', 'ads'));
     }
@@ -94,7 +115,11 @@ class AdsController extends Controller
         $title = trans('app.sold_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->whereStatus('3')->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
+        $ads = $user->ads()
+                    ->whereStatus('3')
+                    ->with('city', 'country', 'state')
+                    ->orderBy('bid_no')
+                    ->paginate(20);
 
         return view('admin.auctions.sold_ads', compact('title', 'ads'));
     }
@@ -103,7 +128,11 @@ class AdsController extends Controller
         $title = trans('app.not_sold_ads');
 
         $user = Auth::user();
-        $ads = $user->ads()->whereStatus('4')->with('city', 'country', 'state')->orderBy('bid_no')->paginate(20);
+        $ads = $user->ads()
+                    ->whereStatus('4')
+                    ->with('city', 'country', 'state')
+                    ->orderBy('bid_no')
+                    ->paginate(20);
 
         return view('admin.auctions.not_sold_ads', compact('title', 'ads'));
     }
@@ -1171,8 +1200,12 @@ class AdsController extends Controller
         $title = trans('app.finished_auctions');
 
         $ads = Ad::whereHas('bids', function ($q) {
-            $q->where('bids.user_id', Auth::id());
+            $q->where('bids.user_id', Auth::id())
+                ->where('bids.is_accepted', 0)
+                ->whereNull('bids.won_bid_amount')
+                ->orderBy('updated_at');
         })
+        ->with('bids', 'events')
         ->where('expired_at', '<', Carbon::now())
         ->paginate(20);
 
@@ -1184,10 +1217,10 @@ class AdsController extends Controller
         $title = trans('app.active_bidding_auctions');
 
         $ads = Ad::whereHas('bids', function ($q) {
-            $q->where('bids.user_id', Auth::id());
+            $q->where('bids.user_id', Auth::id())
+                ->orderBy('bids.updated_at');
         })
         ->where('status', '1')
-        ->orderBy('updated_ad')
         ->paginate(20);
 
         return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));
@@ -1199,9 +1232,9 @@ class AdsController extends Controller
 
         $ads = Ad::whereHas('bids', function ($q) {
             $q->where('bids.user_id', Auth::id())
-                ->where('bids.is_accepted', 1);
+                ->where('bids.is_accepted', 1)
+                ->orderBy('bids.updated_at');
         })
-        ->orderBy('updated_ad')
         ->paginate(20);
 
         return view('admin.auctions.won_auctions', compact('title', 'ads'));
@@ -1231,10 +1264,10 @@ class AdsController extends Controller
         $bid->is_accepted = 1;
         $bid->save();
 
-        // mark as finished
-        $event->update(['status' => '2']);
+        // mark as closed
+        $event->update(['status' => '2', 'order' => 3]);
         // mark as sold
-        $ad->update(['status' => '3']);
+        $ad->update(['status' => '3', 'order' => 3]);
 
         $invoice = $ad->invoice()->save(new Invoice);
 

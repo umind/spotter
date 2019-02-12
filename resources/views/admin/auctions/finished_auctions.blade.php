@@ -24,6 +24,10 @@
                             <table class="table table-bordered table-striped table-responsive">
 
                                 @foreach($ads as $ad)
+                                    @if($ad->bids()->whereNotNull('won_bid_amount')->value('user_id') == Auth::id())
+                                        @continue
+                                    @endif
+
                                     <tr>
                                         <td width="100">
                                             <img src="{{ media_url($ad->feature_img) }}" class="thumb-listing-table" alt="">

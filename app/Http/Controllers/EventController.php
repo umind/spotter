@@ -33,6 +33,7 @@ class EventController extends Controller
 
         $ads = $event->auctions()
                     ->whereIn('status', ['1', '3', '4'])
+                    ->orderBy('order')
                     ->orderBy('expired_at')
                     ->paginate(20);
 
