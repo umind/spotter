@@ -152,6 +152,7 @@
                                 
                                 <select class="form-control select2" name="country">
                                     <option value="">@lang('app.select_a_country')</option>
+                                    <option value="756" {{ old('country') == 756 || $user->country_id == 756 ? 'selected' : '' }}>Schweiz</option>
                                     @foreach($countries as $country)
                                         <option value="{{ $country->id }}" {{ old('country') == $country->id ? 'selected' :'' }}>{{ $country->name_de }}</option>
                                     @endforeach

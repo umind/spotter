@@ -86,7 +86,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $countries = Country::all();
+        $countries = Country::orderBy('name_de')
+                            ->where('name_en', '!=', 'Switzerland')
+                            ->get();
         return view('theme.user_create', compact('countries'));
     }
 
@@ -106,7 +108,7 @@ class UserController extends Controller
             'country'    => 'required',
             'password'    => 'required|confirmed',
             'password_confirmation'    => 'required',
-            'phone'    => 'required',
+            'phone' => 'required|numeric',
             'agree'    => 'required',
         ];
         $this->validate($request, $rules);
@@ -217,7 +219,9 @@ class UserController extends Controller
     public function profileEdit($id){
         $title = trans('app.profile_edit');
         $user = User::findOrFail($id);
-        $countries = Country::all();
+        $countries = Country::orderBy('name_de')
+                            ->where('name_en', '!=', 'Switzerland')
+                            ->get();
 
         if ($user->id != $id) {
             return view('admin.error.error_404');
@@ -240,7 +244,7 @@ class UserController extends Controller
             'company_vat' => 'required_if:title,2',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|numeric',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'zip_code' => 'required|string|max:255',
@@ -304,7 +308,9 @@ class UserController extends Controller
 
     public function addAdministrator(){
         $title = trans('app.add_administrator');
-        $countries = Country::all();
+        $countries = Country::orderBy('name_de')
+                            ->where('name_en', '!=', 'Switzerland')
+                            ->get();
 
         return view('admin.add_administrator', compact('title', 'countries'));
     }
@@ -314,7 +320,7 @@ class UserController extends Controller
         $rules = [
             'name'                  => 'required',
             'email'                 => 'required|email',
-            'phone'                 => 'required',
+            'phone'                 => 'required|numeric',
             'gender'                => 'required',
             'country'               => 'required',
             'password'              => 'required|confirmed',

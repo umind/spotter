@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Country;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -23,6 +24,15 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    public function showRegistrationForm()
+    {
+        $countries = Country::orderBy('name_de')
+                            ->where('name_en', '!=', 'Switzerland')
+                            ->get();
+
+        return view('auth.register', compact('countries'));
+    }
 
     /**
      * Handle a registration request for the application.
@@ -88,7 +98,7 @@ class RegisterController extends Controller
             'company_vat' => 'required_if:title,2',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|numeric',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'zip_code' => 'required|string|max:255',

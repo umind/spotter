@@ -18,7 +18,7 @@
 								</div>
 							</div>
 						</div>
-							<div class="auction-content">
+						{{-- <div class="auction-content">
 							<ul>
 								@foreach($event->auctions as $auction)
 									<li class="item">
@@ -32,8 +32,8 @@
 									</li>
 								@endforeach
 							</ul>
-						</div>
-							<div class="auction-footer">
+						</div> --}}
+						<div class="auction-footer">
 							<div class="row">
 								<div class="col-md-4 auction-top">
 									<p>{{ $event->auctioner }}</p>
@@ -41,6 +41,12 @@
 									<p>{{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
 								<div class="col-md-4 auction-middle text-center">
+									@if($event->image)
+                                		<a href="{{ route('single_event', $event->id) }}">
+                                			<img src="{{ event_img_url($event->image) }}" height="150px">
+                                		</a>
+                            		@endif
+
 									<p>@lang('app.auction_ends')</p>
 									<p>{{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }} ab {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }} Uhr</p>
 								</div>

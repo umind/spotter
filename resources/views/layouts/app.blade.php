@@ -131,7 +131,7 @@
 								@else
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle user" data-toggle="dropdown" role="button" aria-expanded="false">
-											{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }} <span class="headerAvatar"> <img src="{{auth()->user()->get_gravatar()}}" /> </span> <span class="caret"></span>
+											{{ auth()->user()->user_name }} <span class="headerAvatar"> <img src="{{auth()->user()->get_gravatar()}}" /> </span> <span class="caret"></span>
 										</a>
 
 										<ul class="dropdown-menu user" role="menu">

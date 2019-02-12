@@ -3,7 +3,7 @@
 return [
     //newest
     'bought_now_message' => 'You have successfully bought this product. Please check you email for more details.',
-    'buy_now_price' -> 'Buy Now Price',
+    'buy_now_price' => 'Buy Now Price',
     'buy_now' => 'Buy Now',
     'has_company' => ':field is required if you select that you have a company',
     'company_vat' => 'Company VAT.',

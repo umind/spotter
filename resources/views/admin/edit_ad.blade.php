@@ -47,6 +47,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group  {{ $errors->has('category')? 'has-error':'' }}">
+                            <label for="category_name" class="col-sm-4 control-label">@lang('app.category')</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2" name="category">
+                                    <option value="">@lang('app.select_a_category')</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $ad->sub_category_id == $category->id ? 'selected': '' }} data-category-type="{{$category->category_type}}">{{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
+                                {!! $errors->has('category')? '<p class="help-block">'.$errors->first('category').'</p>':'' !!}
+                            </div>
+                        </div>
+
                         <div class="form-group {{ $errors->has('ad_title')? 'has-error':'' }}">
                             <label for="ad_title" class="col-sm-4 control-label">@lang('app.ad_title')</label>
                             <div class="col-sm-8">

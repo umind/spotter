@@ -68,6 +68,7 @@ class AdsController extends Controller
 
         $ads = $user->ads()->active()->with('city', 'country', 'state')->orderBy('id', 'desc')->paginate(20);
 
+
         return view('admin.my_ads', compact('title', 'ads'));
     }
 
@@ -389,13 +390,16 @@ class AdsController extends Controller
         }
 
         $events = Event::where('status', '0')->orWhere('status', '1')->get();
+        $categories = Category::orderBy('category_name', 'asc')->get();
 
-        $countries = Country::all();
+        $countries = Country::orderBy('name_de')
+                            ->where('name_en', '!=', 'Switzerland')
+                            ->get();
 
         $previous_states = State::where('country_id', $ad->country_id)->get();
         $previous_cities = City::where('state_id', $ad->state_id)->get();
 
-        return view('admin.edit_ad', compact('title', 'countries', 'ad', 'previous_states', 'previous_cities', 'events'));
+        return view('admin.edit_ad', compact('title', 'countries', 'ad', 'previous_states', 'previous_cities', 'events', 'categories'));
     }
 
     /**
@@ -463,6 +467,8 @@ class AdsController extends Controller
             'auction_no'        => $request->auction_no,
             'bid_no'            => $request->bid_no,
             'description'       => $request->ad_description,
+            'category_id'       => $sub_category->category_id,
+            'sub_category_id'   => $request->category,
             'price'             => $request->price,
             'buy_now_price'             => $request->buy_now_price,
             'price_increaser'   => $request->price_increaser,

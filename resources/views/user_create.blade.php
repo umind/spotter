@@ -100,6 +100,7 @@
                             <div class="form-group {{ $errors->has('country')? 'has-error':'' }}">
                                 <select id="country" name="country" class="form-control select2">
                                     <option value="">@lang('app.select_a_country')</option>
+                                    
                                     @foreach($countries as $country)
                                         <option value="{{ $country->id }}" {{ old('country') == $country->id ? 'selected' :'' }}>{{ $country->country_name }}</option>
                                     @endforeach

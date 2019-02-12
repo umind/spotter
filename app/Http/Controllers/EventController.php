@@ -19,8 +19,8 @@ class EventController extends Controller
     public function index(){
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
         $events = Event::active()
-                        ->orderBy('status')
                         ->orderBy('auction_ends')
+                        ->orderBy('status')
                         ->paginate(20);
 
         return view('events.index', compact('events'));
