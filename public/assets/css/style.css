@@ -38,6 +38,17 @@ a:focus {
 	padding-left: 0;
 }
 
+.color {
+	color: #888483;
+	color: #eea439;
+	color: #eb9114;
+	color: #f0ad4e;
+	color: #f4c23d;
+	color: #d58512;
+	color: #252654;
+	color: #ed1c24;
+}
+
 /*----------------------------
     App start
 ----------------------------*/
@@ -418,11 +429,11 @@ a.more-states {
 }
 
 .home-cat-box-title a {
-	color: #252652;
+	color: #777777;
 }
 
 .home-cat-box-title a:hover {
-	color: #6162b8;
+	color: #333333;
 }
 
 a.cat-view-more {
@@ -1075,12 +1086,6 @@ Ad box
 	height: 200px;
 }
 
-/*.auction-content .item:hover img {
-	-moz-transform: scale(1.1);
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
-}*/
-
 .auction-content .information p {
 	font-size: 15px;
 	margin-bottom: 5px;
@@ -1093,8 +1098,7 @@ Ad box
 .auction-footer {
 	font-size: 15px;
 	padding: 10px 15px 8px;
-	background-color: #e1e3e2;
-	color: #252654;
+	background-color: #f2f2f2;
 	margin-bottom: 30px;
 }
 
@@ -1150,7 +1154,7 @@ Ad box
 
 .ad-box .bid-price {
 	color: #ffffff;
-	background-color: #252654;
+	background-color: #888483;
 	padding: 10px 15px 8px;
 	font-weight: bold;
 	font-size: 13px;
@@ -2088,11 +2092,12 @@ Auction
 	font-size: 20px;
 	vertical-align: middle;
 	cursor: pointer;
-	color: #f0ad4e;
+	color: #ffffff;
+	transition: all .3s ease;
 }
 
 #sub-header .right-info .notification i:hover {
-	color: #f4c23d;
+	color: #cccccc;
 }
 
 #sub-header .right-info .notification .notification-number {
@@ -2262,14 +2267,14 @@ Auction
 	line-height: 45px;
 	padding: 0;
 	font-size: 16px;
-	background-color: #252652;
+	background-color: #000000;
 	transition: all 0.3s ease;
 	border: none;
 	letter-spacing: 1px;
 }
 
 .place-bid-btn .btn-primary:hover {
-	background-color: #eea439;
+	background-color: #404040;
 }
 
 /* Profile edit */
@@ -2305,7 +2310,7 @@ Auction
 ----------------------------*/
 
 #auction {
-	background-color: #252654;
+	background-color: #888483;
 	margin-bottom: 50px;
 }
 
