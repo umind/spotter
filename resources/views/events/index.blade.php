@@ -34,23 +34,22 @@
 							</ul>
 						</div> --}}
 						<div class="auction-footer">
-							<div class="row">
-								<div class="col-md-4 auction-top">
+							<div class="row no-gutters">
+								<div class="col-md-2 auction-top">
 									<p>{{ $event->auctioner }}</p>
 									<p>{{ $event->address }}</p>
 									<p>{{ $event->zip_code }} {{ $event->city }}</p>
 								</div>
-								<div class="col-md-4 auction-middle text-center">
+								<div class="col-md-8 auction-middle text-center">
 									@if($event->image)
                                 		<a href="{{ route('single_event', $event->id) }}">
                                 			<img src="{{ event_img_url($event->image) }}" height="150px">
                                 		</a>
-                            		@endif
-
-									<p>@lang('app.auction_ends')</p>
+									@endif
+									
 									<p>{{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }} ab {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }} Uhr</p>
 								</div>
-								<div class="col-md-4 auction-bottom text-right">
+								<div class="col-md-2 auction-bottom text-right">
 									@php 
 										$latestProductToExpire = $event->auctions()->latest('expired_at')->first();
 									@endphp
