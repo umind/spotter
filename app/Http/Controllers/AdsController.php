@@ -148,7 +148,7 @@ class AdsController extends Controller
         $categories = Category::orderBy('category_name', 'asc')->get();
         $countries = Country::all();
 
-        $events = Event::where('status', '0')->orWhere('status', '1')->get();
+        $events = Auth::user()->events()->where('status', '0')->orWhere('status', '1')->get();
 
         $previous_states = State::where('country_id', old('country'))->get();
         $previous_cities = City::where('state_id', old('state'))->get();
@@ -180,8 +180,9 @@ class AdsController extends Controller
             'event'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
-            'price'          => 'required',
-            'price_increaser'          => 'required',
+            'price'          => 'required_without:buy_now_price',
+            'buy_now_price'          => 'required_without:price',
+            'price_increaser'          => 'required_with:price',
             'bid_deadline'          => 'required',
             'ad_description'    => 'required',
         ];
@@ -419,7 +420,7 @@ class AdsController extends Controller
             }
         }
 
-        $events = Event::where('status', '0')->orWhere('status', '1')->get();
+        $events = Auth::user()->events()->where('status', '0')->orWhere('status', '1')->get();
         $categories = Category::orderBy('category_name', 'asc')->get();
 
         $countries = Country::orderBy('name_de')
@@ -460,8 +461,9 @@ class AdsController extends Controller
             'event'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
-            'price'          => 'required',
-            'price_increaser'          => 'required',
+            'price'          => 'required_without:buy_now_price',
+            'buy_now_price'          => 'required_without:price',
+            'price_increaser'          => 'required_with:price',
             'bid_deadline'          => 'required',
             'ad_description'    => 'required',
         ];

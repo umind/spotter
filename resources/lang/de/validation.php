@@ -249,6 +249,7 @@ return [
         'seller_email' => 'Verkäufer Email',
         'seller_name' => 'Verkäufer Name',
         'price' => 'Startpreis',
+        'buy_now_price' => 'Sofortkaufpreis',
 
         // contact us
         'message' => 'Nachricht',

@@ -16,6 +16,8 @@ class AuctionWonMail extends Mailable
 
     public $event;
     public $ad;
+    public $bid;
+    public $user;
 
     /**
      * Create a new message instance.

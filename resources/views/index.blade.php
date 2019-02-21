@@ -72,8 +72,8 @@
                                 </div>
                                 <div class="bid-price">
                                     <div class="bid-number text-center">{{ $ad->bid_no }}</div>
-                                    <div class="starting-price pull-left">@lang('app.starting_price')</div>
-									<div class="pull-right">{{ themeqx_price($ad->price) }}</div>
+                                    <div class="starting-price pull-left">{{ $ad->price ? __('app.starting_price') : __('app.buy_now_price') }} </div>
+                                    <div class="pull-right">{{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}</div>
                                 </div>
 
                                 <div class="countdown product-countdown" data-expire-date="{{ $ad->expired_at }}" ></div>

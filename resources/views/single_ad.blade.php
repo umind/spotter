@@ -331,7 +331,9 @@
 
                         @if($ad->category_type == 'auction')
                             <div class="widget">
-                                <h3>@lang('app.starting_price') {{ themeqx_price($ad->price) }}</h3>
+                                <h3>
+                                    {{ $ad->price ? __('app.starting_price') : __('app.buy_now_price') }} {{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}
+                                </h3>
                                 <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
@@ -339,42 +341,49 @@
                                         <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>{{-- 
                                         <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p> --}}
 
-                                        {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
-                                                        <span class="glyphicon glyphicon-minus"></span>
-                                                    </button>
-                                                </span>
-                                                @if(Auth::check())
-                                                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
-                                                @else
-                                                    <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
-                                                @endif
-                                                <span class="input-group-btn">
-                                                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
-                                                      <span class="glyphicon glyphicon-plus"></span>
-                                                    </button>
-                                                </span>
-                                                {{-- <div class="input-group-addon">.00</div> --}}
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
-                                        {!! Form::close() !!}
+                                        @if($ad->price)
+                                            {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
+                                                                <span class="glyphicon glyphicon-minus"></span>
+                                                            </button>
+                                                        </span>
+                                                        @if(Auth::check())
+                                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
+                                                        @else
+                                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
+                                                        @endif
+                                                        <span class="input-group-btn">
+                                                            <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
+                                                              <span class="glyphicon glyphicon-plus"></span>
+                                                            </button>
+                                                        </span>
+                                                        {{-- <div class="input-group-addon">.00</div> --}}
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
+                                            {!! Form::close() !!}
+                                        @endif
 
                                         @if($ad->buy_now_price)
                                             {!! Form::open(['route'=> ['buy_now', $ad->id], 'class' => 'form-inline']) !!}
                                                 <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
-                                                <p>Zusätzlich 7.7% MwSt</p>
+                                                @if($ad->price)
+                                                    <p>Zusätzlich 7.7% MwSt</p>
+                                                @endif
                                             {!! Form::close() !!}
                                         @endif
 
-                                        <div class="bid-max-div">
-											<p>@lang('app.max_bid_desc')</p>
-											<button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
-										</div>
-                                        <br>
+                                        @if($ad->price)
+                                            <div class="bid-max-div">
+                                                <p>@lang('app.max_bid_desc')</p>
+                                                <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+                                            </div>
+                                            <br>
+                                        @endif
+
                                         @if($userMaxBid && $maxBid->user_id == Auth::id())
                                             <p>@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
                                         @endif
@@ -521,7 +530,7 @@
                                         <div class="ad-box">
                                             <div class="ad-box-caption-title">
 												<h4>
-													<span class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">{{ $ad->title }}</span>
+													<span class="ad-box-title" href="{{ route('single_ad', [$rad->id, $rad->slug]) }}" title="{{ $rad->title }}">{{ $rad->title }}</span>
 												</h4>
                                             </div>
                                             <div class="ads-thumbnail">
@@ -537,9 +546,9 @@
                                                 </a>
                                             </div>
                                             <div class="bid-price">
-												<div class="bid-number text-center">{{ $ad->bid_no }}</div>
-												<div class="starting-price pull-left">@lang('app.starting_price')</div>
-												<div class="pull-right">{{ themeqx_price($ad->price) }}</div>
+												<div class="bid-number text-center">{{ $rad->bid_no }}</div>
+												<div class="starting-price pull-left">{{ $rad->price ? __('app.starting_price') : __('app.buy_now_price') }} </div>
+                                                <div class="pull-right">{{ $rad->price ? themeqx_price($rad->price) : themeqx_price($rad->buy_now_price) }}</div>
                                             </div>
 
                                             <div class="countdown" data-expire-date="{{$rad->expired_at}}" ></div>
@@ -719,12 +728,13 @@
 
             $('button[type="submit"]').not('#post-comment-button').click(function (e) {
                 e.preventDefault();
+                var that = $(this);
 
-                if (!confirm('{{ __('app.are_you_sure') }}')) {
-                    return false;
+                if (confirm('{{ __('app.are_you_sure') }}')) {
+                    that.text('Please wait...');
+                    that.attr('disabled', true);
+                    that.parent('form').submit(); 
                 }
-
-                $(this).parent('form').submit(); 
             });
         });
     </script>
