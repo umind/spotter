@@ -45,7 +45,7 @@
                         $inputMaxBid = $ad->price;
                     }
                 @endphp
-                    <input type="text" name="max_bid_amount" class="form-control input-number" value="{{ $inputMaxBid }}" min="{{ $inputMaxBid }}">
+                    <input type="text" name="max_bid_amount" class="form-control input-number bid-value" id="is-max-bid" value="{{ $inputMaxBid }}" min="{{ $inputMaxBid }}">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="max_bid_amount">
                           <span class="glyphicon glyphicon-plus"></span>
@@ -63,6 +63,57 @@
     </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="confirmBidModal" tabindex="-1" role="dialog" aria-labelledby="confirmBidModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>@lang('app.confirm_bid_modal_text')</p>
+
+                    {{-- @php
+                        $adPrice = $ad->price ? $ad->price : $ad->buy_now_price;
+                    @endphp --}}
+
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                        <span>CHF</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="bidded-value"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span>CHF</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span>7.7 MwSt</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span>CHF</span>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="bidded-value-total"></span> Total
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="confirmBidButton">@lang('app.confirm_bid_button_text')</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('app.close')</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="page-header search-page-header">
         <div class="container">
@@ -351,9 +402,9 @@
                                                             </button>
                                                         </span>
                                                         @if(Auth::check())
-                                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
+                                                            <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
                                                         @else
-                                                            <input type="text" name="bid_amount" class="form-control input-number" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
+                                                            <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
                                                         @endif
                                                         <span class="input-group-btn">
                                                             <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
@@ -369,7 +420,10 @@
 
                                         @if($ad->buy_now_price)
                                             {!! Form::open(['route'=> ['buy_now', $ad->id], 'class' => 'form-inline']) !!}
+                                                <input type="hidden" value="{{ number_format($ad->buy_now_price, 2) }}" class="bid-value" id="is-buy-now-bid">
+
                                                 <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
+
                                                 @if($ad->price)
                                                     <p>Zusätzlich 7.7% MwSt</p>
                                                 @endif
@@ -719,22 +773,49 @@
 				gallery:'gallery_01',
 				scrollZoom:'True'
 			}); 
+
             //pass the images to Fancybox
             $("#zoom_01").bind("click", function(e) {  
-              var ez =   $('#zoom_01').data('elevateZoom'); 
+              var ez =   $('#zoom_01').data('elevateZoom');
                 $.fancybox(ez.getGalleryList());
               return false;
             });
 
             $('button[type="submit"]').not('#post-comment-button').click(function (e) {
                 e.preventDefault();
+                var buttonsToDisabled = $('button[type="submit"]').not('#post-comment-button');
                 var that = $(this);
+                var form = that.parent('form');
+                var bidInput = form.find('input.bid-value');
+                var biddedValue = parseFloat(bidInput.val());
 
-                if (confirm('{{ __('app.are_you_sure') }}')) {
-                    that.text('Please wait...');
-                    that.attr('disabled', true);
-                    that.parent('form').submit(); 
+                bidInput
+
+                if (bidInput.is('#is-standard-bid')) {
+                    // if ($('#is-buy-now-bid').length > 0) {
+                        var buyNowBid = parseFloat($('#is-buy-now-bid').val());
+
+                        if (!isNaN(buyNowBid) && biddedValue > buyNowBid) {
+                            biddedValue = parseFloat(buyNowBid);
+                        }
+                    // }
                 }
+
+                var totalBiddedValue = biddedValue + (biddedValue*7.7/100);
+
+                $('span.bidded-value').text(number_format(biddedValue, 2));
+                $('span.bidded-value-total').text(number_format(totalBiddedValue, 2));
+
+                $('#confirmBidModal').modal({ 
+                    backdrop: 'static', 
+                    keyboard: false 
+                }).on('click', '#confirmBidButton', function() {
+                    that.text('{{ __('app.please_wait') }}');
+                    buttonsToDisabled.attr('disabled', true);
+                    form.submit(); 
+
+                    $('#confirmBidModal').modal('hide');
+                });                    
             });
         });
     </script>

@@ -2,6 +2,9 @@
 
 return [
     //newest
+    'please_wait' => 'Please Wait...',
+    'confirm_bid_button_text' => 'Bid/Buy',
+    'confirm_bid_modal_text' => 'Are you sure you to place the following bid or buy for the following price?',
     'bought_now_message' => 'You have successfully bought this product. Please check you email for more details.',
     'buy_now_price' => 'Buy Now Price',
     'buy_now' => 'Buy Now',
@@ -18,6 +21,7 @@ return [
     'created_at_asc' => 'Newest',
     'bid_no_asc' => 'Bid Number Ascending',
     'bid_no_desc' => 'Bid Number Descending',
+    'auction_desc' => 'Auction',
     'you_won_mail_text' => 'Hello!<br><br>You won on a bidding auction (:event_title) an article (:article_title).<br><br>The Spotter team will contact you within 48 hours.<br><br>Best Regards<br><br>Spotter Team',
     'you_won_mail_subject' => 'You Won',
     'next_bidding' => 'Next Bidding',

@@ -7,6 +7,7 @@ use App\Ad;
 use App\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class SearchController extends Controller
 {
@@ -62,10 +63,31 @@ class SearchController extends Controller
     		}
     	}
 
-		$ads = isset($orderBy) 
-                    ? $ads->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_')) 
-                    : $ads->orderBy('order')->orderBy('bid_no');
-		$ads = $ads->paginate(20);
+        if (isset($orderBy) ) {
+            if ($orderBy == 'auction_desc') {
+                $ads = $ads->with('events');
+            } else {
+                $ads = $ads->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_'));
+            }
+        } else {
+            $ads = $ads->orderBy('order')->orderBy('bid_no');
+        }
+
+		$ads = $ads->get();
+
+        if ($orderBy == 'auction_desc') {
+            $ads = $ads->sortByDesc(function ($ad) {
+                return ($event = $ad->events->first())
+                         ? $event->auction_ends
+                         : null;
+            });
+        }
+
+        $currentPage = $request->page ? $request->page : 1;
+
+        $ads = new Paginator($ads->forPage($currentPage, 20), $ads->count(), 20, Paginator::resolveCurrentPage(), [
+                'path' => Paginator::resolveCurrentPath(),
+            ]);
 
     	$request->flash();
 

@@ -838,6 +838,7 @@ function getOrderBy() {
     return [
         'bid_no_asc' => __('app.bid_no_asc'),
         'bid_no_desc' => __('app.bid_no_desc'),
+        'auction_desc' => __('app.auction_desc'),
         'created_at_desc' => __('app.created_at_desc'),
         'created_at_asc' => __('app.created_at_asc'),
     ];

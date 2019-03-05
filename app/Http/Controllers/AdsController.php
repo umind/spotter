@@ -16,6 +16,7 @@ use App\Job;
 use App\JobApplication;
 use App\Jobs\SendAuctionWonMail;
 use App\Media;
+use App\Notification;
 use App\Payment;
 use App\Report_ad;
 use App\State;
@@ -1266,13 +1267,43 @@ class AdsController extends Controller
         $bid->is_accepted = 1;
         $bid->save();
 
-        // mark as closed
-        $event->update(['status' => '2', 'order' => 3]);
-        // mark as sold
-        $ad->update(['status' => '3', 'order' => 3]);
+        $wonUser = $bid->user;
 
+        $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
+
+        $notification = new Notification;
+        $notification->title = trans('app.you_won');
+        $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
+        $notification->url = url('auction/' . $ad->id);
+        $notification->date = Carbon::now();
+
+        $wonUser->notifications()->save($notification);
+
+        // activate notification bell
+        $wonUser->notification_bell = 1;
+        $wonUser->save();
+
+        // ad sold
+        $ad->update([
+            'status' => '3', 
+            'order' => 3,
+            'expired_at' => Carbon::now(),
+        ]);
+
+        $countArticles = $event->auctions()
+                            ->where('status', '1')
+                            ->count();
+
+        // close an event inside if all articles underneath him are finished
+        if ($countArticles < 1) {
+            $event->status = '2';
+            $event->order = 3;
+            $event->auction_ends = Carbon::now();
+            $event->save();
+        }
+
+        // send invoice 
         $invoice = $ad->invoice()->save(new Invoice);
-
         dispatch(new SendAuctionWonMail($event, $ad, $bid, $user));
 
         return back()->with('success', trans('app.bought_now_message'));

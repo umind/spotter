@@ -118,7 +118,8 @@ function showHide(shID) {
 }
 
 function getTimeRemaining(endtime) {
-	var t = Date.parse(endtime) - Date.parse(new Date());
+	var t = new Date(endtime.replace(/-/g, '/')) - Date.parse(new Date());
+	console.log(t);
 	var seconds = Math.floor((t / 1000) % 60);
 	var minutes = Math.floor((t / 1000 / 60) % 60);
 	var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
@@ -142,6 +143,8 @@ $(document).ready(function () {
 			var countDownItem = countDownWrap[i];
 
 			var endtime = countDownItem.getAttribute('data-expire-date');
+
+			console.log(endtime);
 
 			var timeinterval = setInterval(function (countDownItem, endtime) {
 				var t = getTimeRemaining(endtime);

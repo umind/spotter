@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Mail;
 use App\Ad;
 use App\Bid;
+use App\Invoice;
+use App\Jobs\SendAuctionWonMail;
+use App\Mail\OverbiddingUsersBidMail;
+use App\Notification;
 use App\User;
 use Carbon\Carbon;
-use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Mail\OverbiddingUsersBidMail;
+use Mail;
 
 class BidController extends Controller
 {
@@ -111,6 +113,58 @@ class BidController extends Controller
             if ($userWithCurrentHighestBid->email_notifications == 1 && !$userWithCurrentHighestBid->is_online) {
                 Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
             }
+        }
+
+
+        // sell item if bid is greater than buy now price, but ony if buy price is defined
+        if ($ad->buy_now_price && $bid_amount >= $ad->buy_now_price) {
+
+            $event = $ad->events->first();
+
+            $bid->is_accepted = 1;
+            $bid->won_bid_amount = $ad->buy_now_price;
+            $bid->save();
+
+            $wonUser = $bid->user;
+
+            $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
+
+            $notification = new Notification;
+            $notification->title = trans('app.you_won');
+            $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
+            $notification->url = url('auction/' . $ad->id);
+            $notification->date = Carbon::now();
+
+            $wonUser->notifications()->save($notification);
+
+            // activate notification bell
+            $wonUser->notification_bell = 1;
+            $wonUser->save();
+
+            // ad sold
+            $ad->update([
+                'status' => '3', 
+                'order' => 3,
+                'expired_at' => Carbon::now(),
+            ]);
+
+            $countArticles = $event->auctions()
+                                ->where('status', '1')
+                                ->count();
+
+            // close an event inside if all articles underneath him are finished
+            if ($countArticles < 1) {
+                $event->status = '2';
+                $event->order = 3;
+                $event->auction_ends = Carbon::now();
+                $event->save();
+            }
+
+            // create invoice and send email
+            $invoice = $ad->invoice()->save(new Invoice);
+            dispatch(new SendAuctionWonMail($event, $ad, $bid, $wonUser));
+
+            return back()->with('success', trans('app.bought_now_message'));
         }
 
         return back()->with('success', trans('app.your_bid_posted'));

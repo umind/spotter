@@ -2,6 +2,9 @@
 
 return [
     // new
+    'please_wait' => 'Bitte warten...',
+    'confirm_bid_button_text' => 'bieten/kaufen',
+    'confirm_bid_modal_text' => 'Möchten sie folgendes gebot oder folgenden kaufpreis eingeben?',
     'bought_now_message' => 'Sie haben erfolgreich das Produkt gekauft. Bitte prüfen Sie Ihre Mail für mehr Informationen.',
     'buy_now_price' => 'Sofortkaufpreis',
     'buy_now' => 'Sofort kaufen',
@@ -18,6 +21,7 @@ return [
     'created_at_asc' => 'Älteste',
     'bid_no_asc' => 'Los-Nummer aufsteigend',
     'bid_no_desc' => 'Los-Nummer absteigend',
+    'auction_desc' => 'Auktion nach Neueste',
     'you_won_mail_text' => 'Hallo!<br><br>Sie haben bei der Auktion (:event_title) den Artikel (:article_title) gewonnen.<br><br>Das Spotter-Team meldet sich bei Ihnen innert 48 Stunden.<br><br>Freundliche Grüsse<br><br>Spotter Team',
     'you_won_mail_subject' => 'Sie haben gewonnen',
     'next_bidding' => 'Nächste Versteigerung',
@@ -158,7 +162,7 @@ return [
     'blocked_ads'           => 'Blockierte Artikel',
     'all_ads'               => 'Alle Artikel',
     'pending_ads'           => 'Unpublished Articles',
-    'active_bidding_auctions'           => 'aktive Artikel',
+    'active_bidding_auctions'           => 'meine Gebote',
     'expired_on'           => 'Abgelaufen am',
     'expires_on'           => 'Läuft ab',
     'finished_auctions'           => 'verlorene Artikel',
