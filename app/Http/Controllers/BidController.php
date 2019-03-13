@@ -101,21 +101,6 @@ class BidController extends Controller
             }
         }
 
-        // notification here
-        if ($maxBidObj) {
-            if ($bid_amount > $currentMaxBid) {
-                $user = $maxBidObj->user;
-                if ($user->email_notifications == 1 && !$user->is_online) {
-                    Mail::to($user->email)->send(new OverbiddingUsersBidMail($ad));
-                }
-            }
-        } elseif(isset($userWithCurrentHighestBid)) {
-            if ($userWithCurrentHighestBid->email_notifications == 1 && !$userWithCurrentHighestBid->is_online) {
-                Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
-            }
-        }
-
-
         // sell item if bid is greater than buy now price, but ony if buy price is defined
         if ($ad->buy_now_price && $bid_amount >= $ad->buy_now_price) {
 
@@ -165,6 +150,46 @@ class BidController extends Controller
             dispatch(new SendAuctionWonMail($event, $ad, $bid, $wonUser));
 
             return back()->with('success', trans('app.bought_now_message'));
+        } else if ($maxBidObj) {
+
+            // send notification to the user that is now bidding (auth user)
+            // or to the user that has biggest max bid if the bid amount is bigger that the biggest max big
+            if ($bid_amount > $currentMaxBid) {
+                $user = $maxBidObj->user;
+            }
+
+            $notification = new Notification;
+            $notification->title = trans('app.overbidding_notification_title');
+            $notification->text = trans('app.overbidding_message_notification', ['article_title' => $ad->title]);
+            $notification->url = url('auction/' . $ad->id);
+            $notification->date = Carbon::now();
+
+            $user->notifications()->save($notification);
+
+            // activate notification bell
+            $user->notification_bell = 1;
+            $user->save();
+
+            if ($user->email_notifications == 1 && !$user->is_online) {
+                Mail::to($user->email)->send(new OverbiddingUsersBidMail($ad));
+            }
+
+        } else if (isset($userWithCurrentHighestBid)) {
+            $notification = new Notification;
+            $notification->title = trans('app.overbidding_notification_title');
+            $notification->text = trans('app.overbidding_message_notification', ['article_title' => $ad->title]);
+            $notification->url = url('auction/' . $ad->id);
+            $notification->date = Carbon::now();
+
+            $userWithCurrentHighestBid->notifications()->save($notification);
+
+            // activate notification bell
+            $userWithCurrentHighestBid->notification_bell = 1;
+            $userWithCurrentHighestBid->save();
+
+            if ($userWithCurrentHighestBid->email_notifications == 1 && !$userWithCurrentHighestBid->is_online) {
+                Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
+            }
         }
 
         return back()->with('success', trans('app.your_bid_posted'));
@@ -219,6 +244,18 @@ class BidController extends Controller
                 $bid->bid_amount = $minimumBid;
                 $bid->is_accepted = 0;
                 $bid->save();
+
+                $notification = new Notification;
+                $notification->title = trans('app.overbidding_notification_title');
+                $notification->text = trans('app.overbidding_message_notification', ['article_title' => $ad->title]);
+                $notification->url = url('auction/' . $ad->id);
+                $notification->date = Carbon::now();
+
+                $currentUserThatHasHighestBid->notifications()->save($notification);
+
+                // activate notification bell
+                $currentUserThatHasHighestBid->notification_bell = 1;
+                $currentUserThatHasHighestBid->save();
 
                 if ($currentUserThatHasHighestBid->email_notifications == 1 && !$currentUserThatHasHighestBid->is_online) {
                     Mail::to($currentUserThatHasHighestBid->email)->send(new OverbiddingUsersBidMail($ad));

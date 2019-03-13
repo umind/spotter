@@ -1287,6 +1287,16 @@ Ad box
 	padding: 0 8px 10px;
 }
 
+.paginated-articles {
+	overflow: hidden; 
+	clear: both; 
+	margin-bottom: 25px;
+}
+
+.paginated-articles a {
+	text-decoration: underline !important;
+}
+
 /**
 Countries
  */

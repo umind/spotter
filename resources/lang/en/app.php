@@ -2,6 +2,10 @@
 
 return [
     //newest
+    'overbidding_message_notification' => 'Someone placed a higher bid on an auction (:article_title) that you are currently bidding.',
+    'overbidding_notification_title' => 'Auction Overbidded',
+    'previous_article' => 'Previous Article',
+    'next_article' => 'Next Article',
     'please_wait' => 'Please Wait...',
     'confirm_bid_button_text' => 'Bid/Buy',
     'confirm_bid_modal_text' => 'Are you sure you to place the following bid or buy for the following price?',

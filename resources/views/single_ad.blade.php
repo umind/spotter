@@ -149,6 +149,25 @@
 
         <div class="container">
             <div class="row">
+
+                <div class="col-sm-12 paginated-articles">
+                    <div class="previous-article pull-left">
+                        @if($previous && $previous['id'] != $ad->id)
+                            <a href="{{ url('auction/' . $previous['id'] . '/' . $previous['slug']) }}">
+                                @lang('app.previous_article')
+                            </a>
+                        @endif
+                    </div>
+
+                    <div class="next-article pull-right">
+                        @if($next && $next['id'] != $ad->id)
+                            <a href="{{ url('auction/' .  $next['id'] . '/' .  $next['slug']) }}">
+                                @lang('app.next_article')
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="col-sm-8">
 
                     @include('admin.flash_msg')
@@ -169,6 +188,7 @@
                         </div>
                     @endif
  --}}
+
                     <div class="auction-img-video-wrap">
                         @if ($ad->status == '2')
                             <div class="alert alert-warning"> <i class="fa fa-warning"></i> @lang('app.ad_closed')</div>
@@ -245,12 +265,12 @@
                         </div>
                     @endif
 
-                    @if(get_option('enable_fb_comments') == 1)
+                    {{-- @if(get_option('enable_fb_comments') == 1)
                         <hr />
                         <div class="fb-comments" data-href="{{route('single_ad', [$ad->id, $ad->slug])}}" data-width="100%"></div>
-                    @endif
+                    @endif --}}
 
-                    @if(get_option('enable_comments') == 1)
+                    {{-- @if(get_option('enable_comments') == 1)
                         <hr />
                         @php $comments = \App\Comment::approved()->parent()->whereAdId($ad->id)->with('childs_approved')->orderBy('id', 'desc')->get();
                         $comments_count = \App\Comment::approved()->whereAdId($ad->id)->count();
@@ -279,7 +299,6 @@
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" id="author_email" value="@if(auth()->check() ) {{auth()->user()->email}}@else{{old('author_email')}}@endif" name="author_email" placeholder="@lang('app.author_email')">
                                             {!! $errors->has('author_email')? '<p class="help-block">'.$errors->first('author_email').'</p>':'' !!}
-                                            {{-- <p class="text-info">@lang('app.email_secured')</p> --}}
                                         </div>
                                     </div>
                                 @endif
@@ -306,7 +325,6 @@
                                     @foreach($comments as $comment)
                                         <li id="comment-{{$comment->id}}">
                                             <div class="comment-main-level">
-                                                <!-- Avatar -->
                                                 <div class="comment-avatar">
                                                     @if($comment->user_id)
                                                         <img src="{{$comment->author->get_gravatar()}}" alt="{{$comment->author_name}}">
@@ -314,7 +332,6 @@
                                                         <img src="{{avatar_by_email($comment->author_email)}}" alt="{{$comment->author_name}}">
                                                     @endif
                                                 </div>
-                                                <!-- Contenedor del Comentario -->
                                                 <div class="comment-box" data-comment-id="{{$comment->id}}">
                                                     <div class="comment-head">
                                                         <h6 class="comment-name by-author">{{$comment->author_name}}</h6>
@@ -331,10 +348,8 @@
 
                                         @if($comment->childs_approved)
                                             @foreach($comment->childs_approved as $childComment)
-                                                <!-- Respuestas de los comentarios -->
                                                     <ul class="comments-list reply-list">
                                                         <li id="comment-{{$childComment->id}}">
-                                                            <!-- Avatar -->
                                                             <div class="comment-avatar">
                                                                 @if($childComment->user_id)
                                                                     <img src="{{$childComment->author->get_gravatar()}}" alt="{{$childComment->author_name}}">
@@ -342,7 +357,6 @@
                                                                     <img src="{{avatar_by_email($childComment->author_email)}}" alt="{{$childComment->author_name}}">
                                                                 @endif
                                                             </div>
-                                                            <!-- Contenedor del Comentario -->
                                                             <div class="comment-box" data-comment-id="{{$comment->id}}">
                                                                 <div class="comment-head">
                                                                     <h6 class="comment-name by-author">{{$childComment->author_name}}</h6>
@@ -373,7 +387,7 @@
 
 
                         </div>
-                    @endif
+                    @endif --}}
 
                 </div>
 
@@ -509,7 +523,7 @@
                                 <p><span class="ad-info-name"><i class="fa fa-clock-o"></i> @lang('app.application_deadline')</span> <span class="ad-info-value">{{ date('M d, Y', strtotime($ad->job->application_deadline)) }}</span></p>
 
                             @else
-                                <h3>@lang('app.general_info')</h3>
+                                {{-- <h3>@lang('app.general_info')</h3> --}}
                             @endif
 
                             {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p> --}}

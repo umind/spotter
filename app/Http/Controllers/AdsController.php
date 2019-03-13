@@ -181,6 +181,7 @@ class AdsController extends Controller
             'event'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
+            'status'          => 'required',
             'price'          => 'required_without:buy_now_price',
             'buy_now_price'          => 'required_without:price',
             'price_increaser'          => 'required_with:price',
@@ -270,8 +271,8 @@ class AdsController extends Controller
             'category_type'     => 'classifieds',
             'price_plan'        => $request->price_plan,
             'mark_ad_urgent'    => $mark_ad_urgent,
-            'status'            => '1',
-            'order'             => 1,
+            'status'            => $request->status,
+            'order'             => $request->status == 1 ? 1 : 2,
             'user_id'           => $user_id,
             'latitude'          => $request->latitude,
             'longitude'         => $request->longitude,
@@ -462,6 +463,7 @@ class AdsController extends Controller
             'event'          => 'required',
             'bid_no'          => 'required',
             'auction_no'          => 'required',
+            'status'          => 'required',
             'price'          => 'required_without:buy_now_price',
             'buy_now_price'          => 'required_without:price',
             'price_increaser'          => 'required_with:price',
@@ -1126,6 +1128,32 @@ class AdsController extends Controller
                                         ->with('category', 'city')
                                         ->orderBy('expired_at')
                                         ->get();
+
+            $eventAuctions = $event->auctions()
+                    ->whereIn('status', ['1', '3', '4'])
+                    ->orderBy('order')
+                    ->orderBy('expired_at')
+                    ->get();
+
+            $activeAuctions = $eventAuctions->where('status', '1')
+                                        ->sortBy('order')
+                                        ->sortBy('expired_at');
+
+            $finishedAuctions = $eventAuctions->whereIn('status', ['3', '4'])
+                                        ->sortBy('order')
+                                        ->sortBy('expired_at');
+
+            $eventAuctionsNew = $activeAuctions->merge($finishedAuctions)->toArray();
+
+            foreach ($eventAuctionsNew as $key => $eventAuction) {
+                if ($ad->id == $eventAuction['id']) {
+
+                    $previous = $key-1 < 0 ? NULL : $eventAuctionsNew[$key-1];
+                    $next = $key+1 > count($eventAuctionsNew)-1 ? NULL : $eventAuctionsNew[$key+1];
+
+                    break;
+                }
+            }
         }
 
         // get all bids for this auction and also the max bid by the logged in user if set
@@ -1139,7 +1167,7 @@ class AdsController extends Controller
         $wonBid = $ad->bids()->where('is_accepted', 1)->first();
         $wonUser = $wonBid ? User::find($wonBid->user_id) : null;
 
-        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', 'wonUser', 'wonBid', 'maxBid'));
+        return view('single_ad', compact('ad', 'title', 'related_ads', 'bids', 'userMaxBid', 'wonUser', 'wonBid', 'maxBid', 'next', 'previous'));
     }
 
     public function switchGridListView(Request $request){

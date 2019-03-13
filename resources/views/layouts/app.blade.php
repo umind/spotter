@@ -62,17 +62,17 @@
 						<div class="social-icons">
 							@php
 								$facebook_url = get_option('facebook_url');
-								$twitter_url = get_option('twitter_url');
-								$linked_in_url = get_option('linked_in_url');
-								$dribble_url = get_option('dribble_url');
-								$google_plus_url = get_option('google_plus_url');
-								$youtube_url = get_option('youtube_url');
+								// $twitter_url = get_option('twitter_url');
+								// $linked_in_url = get_option('linked_in_url');
+								// $dribble_url = get_option('dribble_url');
+								// $google_plus_url = get_option('google_plus_url');
+								// $youtube_url = get_option('youtube_url');
 							@endphp
 							<ul>
 								@if($facebook_url)
 									<li><a href="{{$facebook_url}}"><i class="fa fa-facebook"></i> </a> </li>
 								@endif
-								@if($twitter_url)
+								{{-- @if($twitter_url)
 									<li><a href="{{$twitter_url}}"><i class="fa fa-twitter"></i> </a> </li>
 								@endif
 								@if($google_plus_url)
@@ -86,7 +86,7 @@
 								@endif
 								@if($dribble_url)
 									<li><a href="{{$dribble_url}}"><i class="fa fa-dribbble"></i> </a> </li>
-								@endif
+								@endif --}}
 							</ul>
 						</div>
 					</div>
@@ -289,17 +289,17 @@
                     <div class="footer-social-links">
                         @php
                             $facebook_url = get_option('facebook_url');
-                            $twitter_url = get_option('twitter_url');
-                            $linked_in_url = get_option('linked_in_url');
-                            $dribble_url = get_option('dribble_url');
-                            $google_plus_url = get_option('google_plus_url');
-                            $youtube_url = get_option('youtube_url');
+                            // $twitter_url = get_option('twitter_url');
+                            // $linked_in_url = get_option('linked_in_url');
+                            // $dribble_url = get_option('dribble_url');
+                            // $google_plus_url = get_option('google_plus_url');
+                            // $youtube_url = get_option('youtube_url');
                         @endphp
                         <ul>
                             @if($facebook_url)
                                 <li><a href="{{$facebook_url}}"><i class="fa fa-facebook"></i> </a> </li>
                             @endif
-                            @if($twitter_url)
+                            {{-- @if($twitter_url)
                                 <li><a href="{{$twitter_url}}"><i class="fa fa-twitter"></i> </a> </li>
                             @endif
                             @if($google_plus_url)
@@ -313,7 +313,7 @@
                             @endif
                             @if($dribble_url)
                                 <li><a href="{{$dribble_url}}"><i class="fa fa-dribbble"></i> </a> </li>
-                            @endif
+                            @endif --}}
                         </ul>
                     </div>
 
