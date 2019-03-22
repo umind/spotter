@@ -439,11 +439,11 @@
                                             {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
                                                 <div class="form-group">
                                                     <div class="input-group">
-                                                        <span class="input-group-btn">
+                                                        {{-- <span class="input-group-btn">
                                                             <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="bid_amount">
                                                                 <span class="glyphicon glyphicon-minus"></span>
                                                             </button>
-                                                        </span>
+                                                        </span> --}}
 
                                                         @if(Auth::check())
                                                             <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
@@ -451,11 +451,11 @@
                                                             <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
                                                         @endif
                                                         
-                                                        <span class="input-group-btn">
+                                                        {{-- <span class="input-group-btn">
                                                             <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                                                               <span class="glyphicon glyphicon-plus"></span>
                                                             </button>
-                                                        </span>
+                                                        </span> --}}
                                                         {{-- <div class="input-group-addon">.00</div> --}}
                                                     </div>
                                                 </div>
