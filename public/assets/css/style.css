@@ -54,7 +54,7 @@ a:focus {
 }
 
 .clearfix {
-	overflow: hidden; 
+	overflow: hidden;
 	clear: both;
 }
 
@@ -1297,8 +1297,8 @@ Ad box
 }
 
 .paginated-articles {
-	overflow: hidden; 
-	clear: both; 
+	overflow: hidden;
+	clear: both;
 	margin-bottom: 25px;
 }
 
@@ -1513,7 +1513,6 @@ Create ad
 	-webkit-box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
 	box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
-	overflow: hidden;
 }
 
 .widget .bid-max-div p:first-child {
