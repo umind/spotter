@@ -13,13 +13,26 @@
 								<p>@lang('app.auctioner'): {{ $event->auctioner }}</p>
 							</div> --}}
 							<div class="location">
-								<p>@lang('app.city'): {{ $event->auctioner }}, {{ $event->address }}, {{ $event->zip_code }} {{ $event->city }}</p>
+								<div class="clearfix">
+                                    <span class="is-text-black pull-left">@lang('app.city_event_show_title'):</span> 
+                                    <div class="pull-left location-info">
+                                        <p>{{ $event->auctioner }}</p>
+                                        <p>{{ $event->address }}</p>
+                                        @if($event->address2)
+                                            <p>{{ $event->address2 }}</p>
+                                        @endif
+                                        <p>{{ $event->zip_code }}, {{ $event->city }}</p>
+                                    </div>
+                                </div>
 							</div>
 							<div class="time">
-								<p>@lang('app.last_bidding'): {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%d %B %Y') }} {{ __('app.at') }} {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%H:%M') }}</p>
+								<p>
+                                    <span class="is-text-black">@lang('app.auction_begins_event_show_title'):</span> {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%d %B %Y') }} {{ __('app.at') }} {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%H:%M') }}
+                                </p>
 							</div>
                             <div class="event_view_dates">
-								<p><span>@lang('app.view_dates'):</span><span>{!! nl2br($event->view_dates) !!}</span></p>
+								<p>
+                                    <span class="is-text-black">@lang('app.view_dates'):</span><span>{!! nl2br($event->view_dates) !!}</span></p>
                             </div>
                             <div class="event_description">
 								<p><span></span><span>{!! nl2br($event->description) !!}</span></p>

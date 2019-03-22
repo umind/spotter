@@ -80,19 +80,33 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('zip_code')? 'has-error':'' }}">
-                            <label for="products" class="col-sm-4 control-label">@lang('app.zip_code')</label>
+                        <div class="form-group {{ $errors->has('address2')? 'has-error':'' }}">
+                            <label for="products" class="col-sm-4 control-label">@lang('app.address2')</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="zip_code" value="{{ old('zip_code')? old('zip_code') : $event->zip_code }}" name="zip_code" placeholder="@lang('app.zip_code')">
-                                {!! $errors->has('zip_code')? '<p class="help-block">'.$errors->first('zip_code').'</p>':'' !!}
+                                <input type="text" class="form-control" id="address2" value="{{ old('address2')? old('address2') : $event->address2 }}" name="address2" placeholder="@lang('app.address2')">
+                                {!! $errors->has('address2')? '<p class="help-block">'.$errors->first('address2').'</p>':'' !!}
                             </div>
                         </div>
 
-                        <div class="form-group {{ $errors->has('city')? 'has-error':'' }}">
-                            <label for="products" class="col-sm-4 control-label">@lang('app.city')</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="city" value="{{ old('city')? old('city') : $event->city }}" name="city" placeholder="@lang('app.city')">
-                                {!! $errors->has('city')? '<p class="help-block">'.$errors->first('city').'</p>':'' !!}
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="form-group {{ $errors->has('zip_code')? 'has-error':'' }}">
+                                    <label for="products" class="col-sm-7 control-label">@lang('app.zip_code')</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="zip_code" value="{{ old('zip_code')? old('zip_code') : $event->zip_code }}" name="zip_code" placeholder="@lang('app.zip_code')">
+                                        {!! $errors->has('zip_code')? '<p class="help-block">'.$errors->first('zip_code').'</p>':'' !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group {{ $errors->has('city')? 'has-error':'' }}">
+                                    <label for="products" class="col-sm-3 control-label">@lang('app.city')</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="city" value="{{ old('city')? old('city') : $event->city }}" name="city" placeholder="@lang('app.city')">
+                                        {!! $errors->has('city')? '<p class="help-block">'.$errors->first('city').'</p>':'' !!}
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

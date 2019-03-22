@@ -2,6 +2,9 @@
 
 return [
     //newest
+    'address2' => 'Address 2',
+    'city_event_show_title' => 'Venue',
+    'auction_begins_event_show_title' => 'Auction Begins',
     'overbidding_message_notification' => 'Someone placed a higher bid on an auction (:article_title) that you are currently bidding.',
     'overbidding_notification_title' => 'Auction Overbidded',
     'previous_article' => 'Previous Article',
@@ -11,6 +14,8 @@ return [
     'confirm_bid_modal_text' => 'Are you sure you to place the following bid or buy for the following price?',
     'bought_now_message' => 'You have successfully bought this product. Please check you email for more details.',
     'buy_now_price' => 'Buy Now Price',
+    'buy_now_text_below_button1' => 'Buy now immediately.',
+    'buy_now_text_below_button2' => 'Put other buyers in disadvantage.',
     'buy_now' => 'Buy Now',
     'has_company' => ':field is required if you select that you have a company',
     'company_vat' => 'Company VAT.',
@@ -56,7 +61,10 @@ return [
     'cannot_bid_yourself' => 'You cannot bid yourself. Your current bid is the highest one.',
     'finished_events' => 'Finished Events',
     'choose_event' => 'Choose An Event',
-    'max_bid_desc' => 'Max. Bid allows you to enter your maximum bid amount. The system automatically offers you up to this total.',
+    'bid_title' => 'Enter fight bid',
+    'bid_desc' => 'The price is increased immediately to the desired amount. - For professionals and experienced buyers, especially in the closing stages.',
+    'max_bid_title' => 'Bid with bidding assistant',
+    'max_bid_desc' => 'You enter a maximum bid and the assistant takes over bidding up to the entered limit. If you are overbidded, you will receive an email.',
     'no_bids_after_deadline' => 'There were no bids regarding this article.',
 
 

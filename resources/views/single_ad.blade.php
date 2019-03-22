@@ -400,13 +400,49 @@
                                     {{ $ad->price ? __('app.starting_price') : __('app.buy_now_price') }} {{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}
                                 </h3>
                                 <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
+
+                                @if($ad->buy_now_price && $ad->price)
+                                    <h5>
+                                        {{ __('app.buy_now_price') }} {{ themeqx_price($ad->buy_now_price) }}
+                                    </h5>
+                                    <h6 class="pdv">@lang('app.plus_pdv') 7.7% MwSt</h6>
+                                @endif
+
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
 
-                                        <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p>{{-- 
-                                        <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p> --}}
+                                        {{-- <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p> --}}
+                                        <p>
+                                            <span class="ad-info-name">
+                                                <i class="fa fa-calendar-check-o"></i>
+                                                Angebots-Ende
+                                            </span> 
+                                            <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
+                                        </p>
+                                        {{-- <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p> --}}
 
                                         @if($ad->price)
+                                            <div class="bid-max-div">
+                                                <p>@lang('app.max_bid_title')</p>
+                                                <p>@lang('app.max_bid_desc')</p>
+                                                <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+
+                                                <br>
+
+                                                @if($userMaxBid && $maxBid->user_id == Auth::id())
+                                                    <p>@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
+                                                @endif
+                                            </div>
+                                            <br>
+                                        @endif
+
+                                        @if($ad->price)
+                                            
+                                            <div class="bid-title-desc">
+                                                <p>@lang('app.bid_title')</p>
+                                                <p>@lang('app.bid_desc')</p>
+                                            </div>
+
                                             {!! Form::open(['route'=> ['post_bid', $ad->id], 'class' => 'form-inline']) !!}
                                                 <div class="form-group">
                                                     <div class="input-group">
@@ -439,23 +475,11 @@
                                                 <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
 
                                                 @if($ad->price)
-                                                    <p>Zusätzlich 7.7% MwSt</p>
+                                                    <p style="margin-top: 2px; margin-bottom: 0px;">@lang('app.buy_now_text_below_button1')</p>
+                                                    <p style="margin-top: 0px;">@lang('app.buy_now_text_below_button2')</p>
                                                 @endif
                                             {!! Form::close() !!}
                                         @endif
-
-                                        @if($ad->price)
-                                            <div class="bid-max-div">
-                                                <p>@lang('app.max_bid_desc')</p>
-                                                <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
-                                            </div>
-                                            <br>
-                                        @endif
-
-                                        @if($userMaxBid && $maxBid->user_id == Auth::id())
-                                            <p>@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
-                                        @endif
-
                                     @else
                                         @if($ad->is_bid_accepted())
                                             <p>@lang('app.bid_accepted')</p>
@@ -527,7 +551,7 @@
                             @endif
 
                             {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p> --}}
-                            <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expires_on')</span> <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span></p>
+                            {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expires_on')</span> <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span></p> --}}
 
                             <div class="modern-social-share-btn-group">
                                 <h4>@lang('app.share_this_ad')</h4>
@@ -590,7 +614,7 @@
 
                         @if($related_ads->count() > 0 && get_option('enable_related_ads') == 1)
                             <div class="widget similar-ads">
-                                <h3>@lang('app.next_bidding')</h3>
+                                <h3>@lang('app.next_article')</h3>
 
                                 @foreach($related_ads as $rad)
                                     <div class="item-loop">

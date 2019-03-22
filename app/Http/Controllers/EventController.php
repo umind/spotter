@@ -64,6 +64,7 @@ class EventController extends Controller
         $event->title = $request->title;
         $event->auctioner = $request->auctioner;
         $event->address = $request->address;
+        $event->address2 = $request->address2;
         $event->city = $request->city;
         $event->zip_code = $request->zip_code;
         // $event->auction_begins = Carbon::parse($request->auction_begins);
@@ -97,6 +98,7 @@ class EventController extends Controller
         $event->title = $request->title;
         $event->auctioner = $request->auctioner;
         $event->address = $request->address;
+        $event->address2 = $request->address2;
         $event->city = $request->city;
         $event->zip_code = $request->zip_code;
         // $event->auction_begins = Carbon::parse($request->auction_begins);

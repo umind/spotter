@@ -2,6 +2,9 @@
 
 return [
     // new
+    'address2' => 'Adresszusatz',
+    'city_event_show_title' => 'Ort der Versteigerung',
+    'auction_begins_event_show_title' => 'Auktionsbeginn',
     'overbidding_message_notification' => 'Someone placed a higher bid on an auction (:article_title) that you are currently bidding.',
     'overbidding_notification_title' => 'Auction Overbidded',
     'previous_article' => 'vorheriger Artikel',
@@ -10,6 +13,8 @@ return [
     'confirm_bid_button_text' => 'bieten/kaufen',
     'confirm_bid_modal_text' => 'Möchten sie folgendes gebot oder folgenden kaufpreis eingeben?',
     'bought_now_message' => 'Sie haben erfolgreich das Produkt gekauft. Bitte prüfen Sie Ihre Mail für mehr Informationen.',
+    'buy_now_text_below_button1' => 'Sie kaufen sofort.',
+    'buy_now_text_below_button2' => 'Alle anderen Käufer haben das Nachsehen.',
     'buy_now_price' => 'Sofortkaufpreis',
     'buy_now' => 'Sofort kaufen',
     'has_company' => 'Das Feld :field ist für Unternehmen obligatorisch',
@@ -58,7 +63,10 @@ return [
     'cannot_bid_yourself' => 'Sie können sich nicht selbst überbieten. Ihr aktuelles Gebot ist das höchste.',
     'finished_events' => 'Archived Auctions',
     'choose_event' => 'Auktion auswählen',
-    'max_bid_desc' => 'Max. Gebot ermöglicht Ihnen Ihre maximale Gebotssumme einzutragen. Das System bietet für Sie automatisch weiter bis zu dieser Summe.',
+    'bid_title' => 'Kampf-Gebot eingeben',
+    'bid_desc' => 'Der Preis wird sofort erhöht auf den gewünschten Betrag. - Für Profis und geübte Käufer vor allem in der Schlussphase.',
+    'max_bid_title' => 'Gebot abgeben mit Biet-Assistent',
+    'max_bid_desc' => 'Sie geben ein Maximal-Gebot ein und der Assistent übernimmt das Bieten bis zur eingegebenen Limite. Sollten Sie überboten werden, so erhalten Sie eine Email.',
     'no_bids_after_deadline' => 'Für diesen Artikel sind keine Gebote vorhanden',
 
     'ends' => 'Endet am',
@@ -356,7 +364,7 @@ return [
     'random'                    => 'Zufällig',
     'personal'                  => 'Persönlich',
     'view_all_ad_of_this'       => 'Sie alle Artikel von diesem Anbieter',
-    'save_ad_as_favorite'       => 'Diese Artikel unter Favoriten speichern',
+    'save_ad_as_favorite'       => 'als Favorit speichern',
     'remove_from_favorite'      => 'Aus den Favoriten entfernen',
     'report_this_ad'            => 'Diese Anzeige melden',
     'reason'                    => 'Grund',
