@@ -27,12 +27,13 @@
 							</div>
 							<div class="time">
 								<p>
-                                    <span class="is-text-black">@lang('app.auction_begins_event_show_title'):</span> {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%d %B %Y') }} {{ __('app.at') }} {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%H:%M') }}
+                                    <span class="time-label is-text-black">@lang('app.auction_begins_event_show_title'):</span> {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%d %B %Y') }} {{ __('app.at') }} {{ \Carbon\Carbon::parse($event->auction_ends)->formatLocalized('%H:%M') }}
                                 </p>
 							</div>
                             <div class="event_view_dates">
 								<p>
-                                    <span class="is-text-black">@lang('app.view_dates'):</span><span>{!! nl2br($event->view_dates) !!}</span></p>
+                                    <span class="is-text-black">@lang('app.view_dates'):</span><span>{!! nl2br($event->view_dates) !!}</span>
+                                </p>
                             </div>
                             <div class="event_description">
 								<p><span></span><span>{!! nl2br($event->description) !!}</span></p>
