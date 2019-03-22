@@ -27,7 +27,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">@lang('app.place_bid')</h4>
+            <h4 class="modal-title">@lang('app.place_max_bid')</h4>
         </div>
         <div class="modal-body">
             {!! Form::open(['route'=> ['post_max_bid', $ad->id], 'class' => 'form-inline']) !!}
@@ -69,7 +69,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <p>@lang('app.confirm_bid_modal_text')</p>
+                    <p>
+                        <h4 class="text-center">
+                            <strong>@lang('app.warning')</strong>
+                        </h4>
+                        <span>@lang('app.confirm_bid_modal_text')</span>
+                    </p>
 
                     {{-- @php
                         $adPrice = $ad->price ? $ad->price : $ad->buy_now_price;
@@ -81,17 +86,17 @@
                         <div class="col-md-4">
                         <span>CHF</span>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 text-right">
                             <span class="bidded-value"></span>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <span>CHF</span>
+                            <span>MwSt 7.7%</span>
                         </div>
-                        <div class="col-md-4">
-                            <span>7.7 MwSt</span>
+                        <div class="col-md-4 text-right">
+                            <span class="bidded-discount-amount"></span>
                         </div>
                     </div>
 
@@ -101,8 +106,11 @@
                         <div class="col-md-4">
                             <span>CHF</span>
                         </div>
-                        <div class="col-md-4">
-                            <span class="bidded-value-total"></span> Total
+                        <div class="col-md-4 text-right">
+                            <span class="bidded-value-total"></span>
+                        </div>
+                        <div class="col-md-2">
+                            <span>Total</span>
                         </div>
                     </div>
 
@@ -139,7 +147,10 @@
                         <h2>{{safe_output($ad->title)}}</h2>
 					</div>
 					{{-- <p class="bid-number-header">{{ trans('app.bid_no') }}: {{ $ad->bid_no }}</p> --}}
-					<p class="auction-number-header">{{ trans('app.auction_no') }}: {{ $ad->auction_no }}</p>
+                </div>
+
+                <div class="col-md-8">
+                    <p class="auction-number-header pull-right">Nr. {{ $ad->auction_no }}</p>
                 </div>
             </div>
         </div>
@@ -150,7 +161,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-sm-12 paginated-articles">
+                <div class="col-sm-8 paginated-articles">
                     <div class="previous-article pull-left">
                         @if($previous && $previous['id'] != $ad->id)
                             <a href="{{ url('auction/' . $previous['id'] . '/' . $previous['slug']) }}">
@@ -450,7 +461,7 @@
                                                         @else
                                                             <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
                                                         @endif
-                                                        
+
                                                         {{-- <span class="input-group-btn">
                                                             <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                                                               <span class="glyphicon glyphicon-plus"></span>
@@ -459,7 +470,7 @@
                                                         {{-- <div class="input-group-addon">.00</div> --}}
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
+                                                <button type="submit" class="btn btn-primary bid">@lang('app.place_bid_single_ad')</button>
                                             {!! Form::close() !!}
 
                                             <hr>
@@ -560,13 +571,13 @@
                             {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.posted_at')</span> <span class="ad-info-value">{{$ad->posted_date()}}</span></p> --}}
                             {{-- <p><span class="ad-info-name"><i class="fa fa-calendar-check-o"></i> @lang('app.expires_on')</span> <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span></p> --}}
 
-                            <div class="modern-social-share-btn-group">
+                            {{-- <div class="modern-social-share-btn-group">
                                 <h4>@lang('app.share_this_ad')</h4>
                                 <a href="#" class="btn btn-default share s_facebook"><i class="fa fa-facebook"></i> </a>
                                 <a href="#" class="btn btn-default share s_plus"><i class="fa fa-google-plus"></i> </a>
                                 <a href="#" class="btn btn-default share s_twitter"><i class="fa fa-twitter"></i> </a>
                                 <a href="#" class="btn btn-default share s_linkedin"><i class="fa fa-linkedin"></i> </a>
-                            </div>
+                            </div> --}}
 
                             <ul class="ad-action-list">
                                     <li>
@@ -846,10 +857,12 @@
                     // }
                 }
 
-                var totalBiddedValue = biddedValue + (biddedValue*7.7/100);
+                var discountAmount = biddedValue*7.7/100;
+                var totalBiddedValue = biddedValue + (discountAmount);
 
                 $('span.bidded-value').text(number_format(biddedValue, 2));
                 $('span.bidded-value-total').text(number_format(totalBiddedValue, 2));
+                $('span.bidded-discount-amount').text(number_format(discountAmount, 2));
 
                 $('#confirmBidModal').modal({ 
                     backdrop: 'static', 

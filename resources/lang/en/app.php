@@ -2,6 +2,7 @@
 
 return [
     //newest
+    'place_bid_single_ad' => 'Place fixed price bid',
     'address2' => 'Address 2',
     'city_event_show_title' => 'Venue',
     'auction_begins_event_show_title' => 'Auction Begins',
@@ -62,6 +63,7 @@ return [
     'finished_events' => 'Finished Events',
     'choose_event' => 'Choose An Event',
     'bid_title' => 'Enter fight bid',
+    'warning' => 'Warning!',
     'bid_desc' => 'The price is increased immediately to the desired amount.',
     'max_bid_title' => 'Bid with bidding assistant',
     'max_bid_desc' => 'You enter a maximum bid and the assistant takes over bidding up to the entered limit. If you are overbidded, you will receive an email.',

@@ -797,14 +797,13 @@ Search page
 }
 
 .search-page-header .bid-number-header {
-	color: #666666;
+	color: #000;
 	font-size: 30px !important;
 	padding: 8px;
-	background-color: #ffffff;
 	display: inline-block;
 	font-weight: bold;
 	margin-top: 20px;
-	margin-right: 10px;
+	margin-right: 20px;
 	margin-bottom: 0;
 }
 
@@ -2401,6 +2400,7 @@ Auction
 #auction-info .event_view_dates,
 #auction-info .event_description {
 	margin-top: 20px;
+	overflow: hidden;
 }
 
 .event-show-countdown {

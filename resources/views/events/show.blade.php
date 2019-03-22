@@ -36,7 +36,9 @@
                                 </p>
                             </div>
                             <div class="event_description">
-								<p><span></span><span>{!! nl2br($event->description) !!}</span></p>
+								<p>
+                                    <span>{!! nl2br($event->description) !!}</span>
+                                </p>
                             </div>
 						</div>
 						<div class="col-md-2 text-right">

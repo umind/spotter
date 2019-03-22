@@ -2,6 +2,7 @@
 
 return [
     // new
+    'place_bid_single_ad' => 'Fixpreis-Gebot abgeben',
     'address2' => 'Adresszusatz',
     'city_event_show_title' => 'Ort der Versteigerung',
     'auction_begins_event_show_title' => 'Auktionsbeginn',
@@ -11,7 +12,8 @@ return [
     'next_article' => 'nächster Artikel',
     'please_wait' => 'Bitte warten...',
     'confirm_bid_button_text' => 'bieten/kaufen',
-    'confirm_bid_modal_text' => 'Möchten sie folgendes gebot oder folgenden kaufpreis eingeben?',
+    'warning' => 'Achtung!',
+    'confirm_bid_modal_text' => 'Dieses Gebot ist bindend. Möchten Sie wirklich bieten?',
     'bought_now_message' => 'Sie haben erfolgreich das Produkt gekauft. Bitte prüfen Sie Ihre Mail für mehr Informationen.',
     'buy_now_text_below_button1' => 'Sie kaufen sofort.',
     'buy_now_text_below_button2' => 'Alle anderen Käufer haben das Nachsehen.',
@@ -775,7 +777,7 @@ return [
     'bid_deadline_info'                 => 'Gebotsende %s läuft ab %s',
     'bid_deadline_closed_info'          => 'Gebot %s wurde abgeschlossen am %s',
     'place_bid'                         => 'Gebot abgeben',
-    'place_max_bid'                         => 'Max. Gebot abgeben',
+    'place_max_bid'                         => 'Bieten mit Assistent',
     'your_max_bid'                         => 'Ihr maximales Gebot',
     'bid_amount'                        => 'Gebot',
     'login_first_to_post_bid'           => 'Loggen Sie sich zuerst ein, um ein Gebot abzugeben',
