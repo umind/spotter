@@ -2409,7 +2409,6 @@ Auction
 
 #auction-info img {
 	width: 25px;
-	margin-right: 5px;
 	vertical-align: top;
 }
 
@@ -2827,7 +2826,7 @@ Auction
 	}
 
 	#auction-info .col-md-4.text-right {
-		text-align: left;
+		text-align: center;
 	}
 
 	#auction-info .event-show-countdown {
@@ -2847,11 +2846,19 @@ Auction
 		width: auto;
 	}
 
-	#auction-info .location p,
-	#auction-info .time p,
-	#auction-info .event_view_dates p,
-	#auction-info .event_description p {
-		width: 250px;
+	#auction-info .location span,
+	#auction-info .location .location-info,
+	#auction-info .time span,
+	#auction-info .event_view_dates span,
+	#auction-info .event_description span {
+		display: block;
+		float: none !important;
+		margin: 0;
+	}
+
+	#auction-info img {
+		margin-top: 20px;
+		width: 50% !important;
 	}
 
 	#auction-info .auction {
@@ -2892,6 +2899,11 @@ Auction
 	.auction-footer p {
 		text-align: left;
 		font-size: 13px;
+	}
+
+	.auction-footer .auction-middle p {
+		position: static;
+		margin-top: 8px;
 	}
 
 	.auction-footer .text-red {
@@ -3236,16 +3248,18 @@ Auction
 		padding: 30px 10px;
 	}
 
-	#auction-info .location p,
-	#auction-info .time p,
-	#auction-info .event_view_dates p,
-	#auction-info .event_description p {
-		width: 280px;
+	#auction-info .event_view_dates span:last-child {
+		width: auto;
 	}
 
 	#admin-panel .btn-info.pull-right {
 		margin-top: 5px;
 		float: none !important;
+	}
+
+	.auction-footer .auction-middle a img {
+		width: auto;
+		height: 100px;
 	}
 }
 
@@ -3268,6 +3282,10 @@ Auction
 
 	.table-scrollable .prices.number {
 		min-width: 60px;
+	}
+
+	#auction-info .event_view_dates span:last-child {
+		width: auto;
 	}
 }
 

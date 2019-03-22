@@ -35,35 +35,42 @@
 						</div> --}}
 						<div class="auction-footer">
 							<div class="row no-gutters">
-								<div class="col-md-2 auction-top">
-									<p>{{ $event->auctioner }}</p>
-									<p>{{ $event->address }}</p>
-									<p>{{ $event->zip_code }} {{ $event->city }}</p>
+								<div class="col-md-2">
+									<div class="auction-top">
+										<p>{{ $event->auctioner }}</p>
+										<p>{{ $event->address }}</p>
+										<p>{{ $event->zip_code }} {{ $event->city }}</p>
+									</div>
 								</div>
-								<div class="col-md-8 auction-middle text-center">
-									@if($event->image)
+								<div class="col-md-8 text-center">
+									<div class="auction-middle">
+
+										@if($event->image)
                                 		<a href="{{ route('single_event', $event->id) }}">
-                                			<img src="{{ event_img_url($event->image) }}" height="150px">
+											<img src="{{ event_img_url($event->image) }}" height="150px">
                                 		</a>
-									@endif
-									
-									<p>{{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }} ab {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }} Uhr</p>
+										@endif
+										
+										<p>{{ Carbon\Carbon::parse($event->auction_ends)->format('d-m-Y') }} ab {{ Carbon\Carbon::parse($event->auction_ends)->format('H:i') }} Uhr</p>
+									</div>
 								</div>
-								<div class="col-md-2 auction-bottom text-right">
-									@php 
-										$latestProductToExpire = $event->auctions()->latest('expired_at')->first();
-									@endphp
-									<p class="text-red {{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown' }}" data-expire-date="{{ $event->auction_ends }}">
-										@if(Carbon\Carbon::parse($event->auction_ends)->isPast())
-											@if($latestProductToExpire)
-												@if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
-													@lang('app.auction_has_ended')
-												@else
-													@lang('app.auction_soon_ends')
+								<div class="col-md-2 text-right">
+									<div class="auction-bottom">
+										@php 
+											$latestProductToExpire = $event->auctions()->latest('expired_at')->first();
+										@endphp
+										<p class="text-red {{ Carbon\Carbon::parse($event->auction_ends)->isPast() ? '' : 'countdown' }}" data-expire-date="{{ $event->auction_ends }}">
+											@if(Carbon\Carbon::parse($event->auction_ends)->isPast())
+												@if($latestProductToExpire)
+													@if(Carbon\Carbon::parse($latestProductToExpire->expired_at)->isPast())
+														@lang('app.auction_has_ended')
+													@else
+														@lang('app.auction_soon_ends')
+													@endif
 												@endif
 											@endif
-										@endif
-									</p>
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
