@@ -396,7 +396,7 @@
 
                         @if($ad->category_type == 'auction')
                             <div class="widget">
-                                <h3>
+                                {{-- <h3>
                                     {{ $ad->price ? __('app.starting_price') : __('app.buy_now_price') }} {{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}
                                 </h3>
                                 <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
@@ -406,35 +406,28 @@
                                         {{ __('app.buy_now_price') }} {{ themeqx_price($ad->buy_now_price) }}
                                     </h5>
                                     <h6 class="pdv">@lang('app.plus_pdv') 7.7% MwSt</h6>
-                                @endif
+                                @endif --}}
 
                                 @if($ad->expired_at)
                                     @if($ad->is_bid_active())
 
                                         {{-- <p>{{ sprintf(trans('app.bid_deadline_info'), $ad->bid_deadline(), $ad->bid_deadline_left()) }}</p> --}}
-                                        <p>
-                                            <span class="ad-info-name">
-                                                <i class="fa fa-calendar-check-o"></i>
-                                                Angebots-Ende
-                                            </span> 
-                                            <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
-                                        </p>
+                                        
                                         {{-- <p>@lang('app.total_bids'): {{ $bids->count() }}, <a id="bid-history" href="javascript:void(0)">@lang('app.bid_history')</a> </p> --}}
 
                                         @if($ad->price)
                                             <div class="bid-max-div">
                                                 <p>@lang('app.max_bid_title')</p>
                                                 <p>@lang('app.max_bid_desc')</p>
-                                                <button type="button" class="btn btn-danger bid" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
-
-                                                <br>
+                                                <button type="button" class="btn btn-danger bid pull-left" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
 
                                                 @if($userMaxBid && $maxBid->user_id == Auth::id())
-                                                    <p>@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
+                                                    <p style="margin-top: 20px;">@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
                                                 @endif
                                             </div>
-                                            <br>
                                         @endif
+
+                                        <hr>
 
                                         @if($ad->price)
                                             
@@ -451,11 +444,13 @@
                                                                 <span class="glyphicon glyphicon-minus"></span>
                                                             </button>
                                                         </span>
+
                                                         @if(Auth::check())
                                                             <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}" min="{{ $bids->count() ? number_format($ad->current_bid_plus_increaser(), 2) : number_format($ad->price, 2) }}">
                                                         @else
                                                             <input type="text" name="bid_amount" class="form-control input-number bid-value" id="is-standard-bid" value="{{ number_format($ad->price, 2) }}" min="{{ number_format($ad->price, 2) }}">
                                                         @endif
+                                                        
                                                         <span class="input-group-btn">
                                                             <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="bid_amount">
                                                               <span class="glyphicon glyphicon-plus"></span>
@@ -466,20 +461,32 @@
                                                 </div>
                                                 <button type="submit" class="btn btn-primary bid">@lang('app.place_bid')</button>
                                             {!! Form::close() !!}
+
+                                            <hr>
                                         @endif
 
                                         @if($ad->buy_now_price)
                                             {!! Form::open(['route'=> ['buy_now', $ad->id], 'class' => 'form-inline']) !!}
                                                 <input type="hidden" value="{{ number_format($ad->buy_now_price, 2) }}" class="bid-value" id="is-buy-now-bid">
 
-                                                <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
-
                                                 @if($ad->price)
                                                     <p style="margin-top: 2px; margin-bottom: 0px;">@lang('app.buy_now_text_below_button1')</p>
                                                     <p style="margin-top: 0px;">@lang('app.buy_now_text_below_button2')</p>
                                                 @endif
+
+                                                <button type="submit" class="btn btn-success buy_now">@lang('app.buy_now') für {{ themeqx_price($ad->buy_now_price) }}</button>
                                             {!! Form::close() !!}
+
+                                            <hr>
                                         @endif
+
+                                        <p>
+                                            <span class="ad-info-name">
+                                                <i class="fa fa-calendar-check-o"></i>
+                                                Angebots-Ende
+                                            </span> 
+                                            <span class="ad-info-value">{{ \Carbon\Carbon::parse($ad->expired_at)->formatLocalized(get_option('date_format')) }}</span>
+                                        </p>
                                     @else
                                         @if($ad->is_bid_accepted())
                                             <p>@lang('app.bid_accepted')</p>

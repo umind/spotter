@@ -62,7 +62,7 @@ return [
     'finished_events' => 'Finished Events',
     'choose_event' => 'Choose An Event',
     'bid_title' => 'Enter fight bid',
-    'bid_desc' => 'The price is increased immediately to the desired amount. - For professionals and experienced buyers, especially in the closing stages.',
+    'bid_desc' => 'The price is increased immediately to the desired amount.',
     'max_bid_title' => 'Bid with bidding assistant',
     'max_bid_desc' => 'You enter a maximum bid and the assistant takes over bidding up to the entered limit. If you are overbidded, you will receive an email.',
     'no_bids_after_deadline' => 'There were no bids regarding this article.',

@@ -64,7 +64,7 @@ return [
     'finished_events' => 'Archived Auctions',
     'choose_event' => 'Auktion auswählen',
     'bid_title' => 'Kampf-Gebot eingeben',
-    'bid_desc' => 'Der Preis wird sofort erhöht auf den gewünschten Betrag. - Für Profis und geübte Käufer vor allem in der Schlussphase.',
+    'bid_desc' => 'Der Preis wird sofort erhöht auf den gewünschten Betrag.',
     'max_bid_title' => 'Gebot abgeben mit Biet-Assistent',
     'max_bid_desc' => 'Sie geben ein Maximal-Gebot ein und der Assistent übernimmt das Bieten bis zur eingegebenen Limite. Sollten Sie überboten werden, so erhalten Sie eine Email.',
     'no_bids_after_deadline' => 'Für diesen Artikel sind keine Gebote vorhanden',
