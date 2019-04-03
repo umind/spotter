@@ -196,9 +196,9 @@
             </div>
             <div class="customer-data" style="text-align: right;">
                 <p>LUIS B GmbH</p>
-                <p>Seestrasse 160</p>
-                <p>8002 Zürich</p>
-                <p>+41 44 280 06 65</p>
+                <p>Zürcherstr. 102</p>
+                <p>8852 Altendorf</p>
+                <p>+41 55 442 33 11</p>
                 <p>info@spotter.ch</p>
             </div>
         </div>
@@ -208,14 +208,14 @@
                 <tr>
                     <th style="border: none;">
                         <div class="left_info address">
-							<p class="client-nr">Kunden-Nr. {{ $user->id }}</p>
+							<p class="client-nr">K-Nr. {{ $user->id }}</p>
 			                <br>
 			                <p>{{ $user->getTitle() }}</p>
 			                <p>{{ $user->first_name }} {{ $user->last_name }}</p>
                             <p>{{ $user->address }}</p>
                             <p class="bold city-zip">{{ $user->zip_code }} {{ $user->city }}</p>
 			                <br><br><br>
-			                <p>Zürich, {{ strftime("%d. %m. %Y") }}</p>
+			                <p>Altendorf, {{ strftime("%d. %m. %Y") }}</p>
 			                <br>
 			                <p class="bold">Rechnung Nr. {{ $ad->invoice->id }}</p>
                         </div>
@@ -228,15 +228,15 @@
             <table class="receipt-table">
 				
 				@php 
-					$price = $bid->won_bid_amount; 
+					$price = $bid->won_bid_amount;
 					$vat = $price * 7.7 / 100;
 				@endphp
 
                 <tr>
-                    <th>Artikel Nr.</th>
-                    <th>Bid Nr.</th>
+                    <th>Art-Nr.</th>
+                    <th>Los-Nr.</th>
                     <th>Artikel</th>
-                    <th>Stückpreis</th>
+                    <th>Zuschlag/VP</th>
                     <th>Menge</th>
                     <th>Preis</th>
                 </tr>
@@ -278,7 +278,23 @@
         </div>
 			
 		<br><br><br><br><br>
-        <p>Zahlungsbedingungen: Zahlung innert 30 Tagen</p>
+        <p>Zahlbar innert 7 Tagen.</p>
+        <br>
+        <p>Abholfristen:</p>
+        <p>- No-Limit-Versteigerungen 7 Tagen</p>
+        <p>- Auktionen 14 Tage</p>
+
+        <br><br><br><br><br><br>
+
+        <p>Bankverbindung:</p>
+        <p>Raiffeisenbank, 8001, Zürich</p>
+        <p>IBAN: CH64 8080 8005 4664 1513 4</p>
+        <p>SWIFT-BIC: RAIFCH22</p>
+
+        <br>
+
+        <p>zugunsten von</p>
+        <p>LUIS B GmbH, 8002 Zürich</p>
     </div>
 </body>
 

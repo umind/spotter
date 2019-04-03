@@ -1283,9 +1283,9 @@ Ad box
 	margin-left: 5px;
 }
 
-.events .col-md-3:nth-child(5n) {
+/*.events .col-md-3:nth-child(5n) {
 	clear: both;
-}
+}*/
 
 .ad-box-caption-title {
 	padding: 10px;
@@ -2374,7 +2374,8 @@ Auction
 
 #auction-info .location span,
 #auction-info .time span,
-#auction-info .event_view_dates span {
+#auction-info .event_view_dates span,
+#auction-info .event_description span {
 	min-width: 180px;
 	display: inline-block;
 }
@@ -2425,8 +2426,7 @@ Auction
 	width: 200px;
 }
 
-#auction-info .event_view_dates span,
-#auction-info .event_description span {
+#auction-info .event_view_dates span {
 	float: left;
 }
 

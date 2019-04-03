@@ -49,15 +49,12 @@
             <div class="container">
                 <div class="row">
                     @foreach($ads as $ad)
-                        <div class="col-md-3">
-
+                        <div class="col-sm-6 col-md-3">
                             <div class="ad-box">
                                 <div class="ad-box-caption-title">
-                                    <h3>
-                                        <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">
-                                            {{ str_limit($ad->title, 40) }}
-                                        </a>
-                                    </h3>
+                                    <h4>
+                                        <a class="ad-box-title" href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" title="{{ $ad->title }}">{{ $ad->title }}</a>
+                                    </h4>
                                 </div>
                                 <div class="ads-thumbnail">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}">
@@ -72,15 +69,15 @@
                                     </a>
                                 </div>
                                 <div class="bid-price">
-                                    <div class="bid-number">@lang('app.bid_no'): {{ $ad->auction_no }}</div>
-                                    <div class="starting-price">@lang('app.starting_price') {{ themeqx_price($ad->price) }}</div>
+                                    <div class="bid-number text-center">{{ $ad->bid_no }}</div>
+                                    <div class="starting-price pull-left">{{ $ad->price ? __('app.starting_price') : __('app.buy_now_price') }} </div>
+                                    <div class="pull-right">{{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}</div>
                                 </div>
 
                                 <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
                                 </div>
-
                             </div>
                         </div>
                     @endforeach

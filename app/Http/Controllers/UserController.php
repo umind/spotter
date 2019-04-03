@@ -108,7 +108,7 @@ class UserController extends Controller
             'country'    => 'required',
             'password'    => 'required|confirmed',
             'password_confirmation'    => 'required',
-            'phone' => 'required|numeric',
+            'phone' => 'required|regex:/[0-9 ]+/',
             'agree'    => 'required',
         ];
         $this->validate($request, $rules);
@@ -244,7 +244,7 @@ class UserController extends Controller
             'company_vat' => 'required_if:title,2',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|numeric',
+            'phone' => 'required|regex:/[0-9 ]+/',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'zip_code' => 'required|string|max:255',
@@ -320,7 +320,7 @@ class UserController extends Controller
         $rules = [
             'name'                  => 'required',
             'email'                 => 'required|email',
-            'phone'                 => 'required|numeric',
+            'phone'                 => 'required|regex:/[0-9 ]+/',
             'gender'                => 'required',
             'country'               => 'required',
             'password'              => 'required|confirmed',

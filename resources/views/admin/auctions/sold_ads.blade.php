@@ -39,7 +39,7 @@
                                                         $wonBid = $ad->bids()->where('is_accepted', 1)->first();
 													@endphp
 
-													<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ themeqx_price($wonBid->won_bid_amount) }}
+													<i class="fa fa-clock-o"></i> @lang('app.bought_for'): {{ $wonBid ? themeqx_price($wonBid->won_bid_amount) : '' }}
 													@if($ad->paid)
 														<span class="label label-success">@lang('app.paid')</span>
 													@else

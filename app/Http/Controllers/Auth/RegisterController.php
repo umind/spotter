@@ -98,7 +98,7 @@ class RegisterController extends Controller
             'company_vat' => 'required_if:title,2',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'phone' => 'required|numeric',
+            'phone' => 'required|regex:/[0-9 ]+/',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'zip_code' => 'required|string|max:255',

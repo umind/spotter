@@ -21,8 +21,12 @@ class InvoicePolicy
         //
     }
 
-    public function viewInvoice(User $user, Ad $ad, Bid $wonBid)
+    public function viewInvoice(User $user, Ad $ad, $wonBid)
     {
-        return $wonBid->user_id == $user->id || $user->is_admin();
+        if ($wonBid) {
+            return $wonBid->user_id == $user->id || $user->is_admin();
+        }
+
+        return false;
     }
 }

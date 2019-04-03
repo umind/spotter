@@ -22,7 +22,7 @@ class EventController extends Controller
         $events = Event::active()
                         ->orderBy('order')
                         ->orderBy('auction_ends')
-                        ->paginate(20);
+                        ->paginate(100);
 
         return view('events.index', compact('events'));
     }
@@ -35,7 +35,7 @@ class EventController extends Controller
                     ->whereIn('status', ['1', '3', '4'])
                     ->orderBy('order')
                     ->orderBy('expired_at')
-                    ->paginate(20);
+                    ->paginate(100);
 
         return view('events.show', compact('ads', 'total_ads_count', 'user_count', 'event'));
     }
@@ -44,7 +44,7 @@ class EventController extends Controller
     public function myEvents() {
         $limit_regular_ads = get_option('number_of_free_ads_in_home');
         $title = trans('app.my_events');
-        $events = Auth::user()->events()->paginate(20);
+        $events = Auth::user()->events()->paginate(100);
         return view('admin.events.my_events', compact('events', 'title'));
     }
 
@@ -150,7 +150,7 @@ class EventController extends Controller
     public function pending()
     {
         $title = trans('app.pending_events');
-        $events = Auth::user()->events()->whereStatus('0')->orderBy('auction_ends')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('0')->orderBy('auction_ends')->paginate(100);
 
         return view('admin.events.pending_events', compact('title', 'events'));
     }
@@ -158,7 +158,7 @@ class EventController extends Controller
     public function active()
     {
         $title = trans('app.published_events');
-        $events = Auth::user()->events()->whereStatus('1')->orderBy('auction_ends')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('1')->orderBy('auction_ends')->paginate(100);
 
         return view('admin.events.active_events', compact('title', 'events'));
     }
@@ -166,7 +166,7 @@ class EventController extends Controller
     public function closed()
     {
         $title = trans('app.closed_events');
-        $events = Auth::user()->events()->whereStatus('2')->orderBy('auction_ends')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('2')->orderBy('auction_ends')->paginate(100);
 
         return view('admin.events.closed_events', compact('title', 'events'));
     }
@@ -174,7 +174,7 @@ class EventController extends Controller
     public function archived()
     {
         $title = trans('app.archived_events');
-        $events = Auth::user()->events()->whereStatus('3')->orderBy('auction_ends')->paginate(20);
+        $events = Auth::user()->events()->whereStatus('3')->orderBy('auction_ends')->paginate(100);
 
         return view('admin.events.archived_events', compact('title', 'events'));
     }

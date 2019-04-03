@@ -241,8 +241,8 @@
                     </div>
 
                     <div class="ads-detail">
-                        @lang('app.description')</h4>
-                        {!! nl2br(safe_output($ad->description)) !!}
+                        {{-- @lang('app.description')</h4> --}}
+                        {!! safe_output($ad->description) !!}
                     </div>
 
                     @if($ad->category_type == 'auction')

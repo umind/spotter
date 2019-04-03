@@ -44,7 +44,7 @@ class AdsController extends Controller
                 ->whereStatus('1')
                 ->orderBy('order')
                 ->orderBy('bid_no')
-                ->paginate(20);
+                ->paginate(100);
 
         return view('admin.all_ads', compact('title', 'ads'));
     }
@@ -55,7 +55,7 @@ class AdsController extends Controller
         $ads = Ad::with('city', 'country', 'state')
                 ->whereStatus('0')
                 ->orderBy('bid_no')
-                ->paginate(20);
+                ->paginate(100);
 
         return view('admin.pending_ads', compact('title', 'ads'));
     }
@@ -65,7 +65,7 @@ class AdsController extends Controller
         $ads = Ad::with('city', 'country', 'state')
                     ->whereStatus('2')
                     ->orderBy('bid_no')
-                    ->paginate(20);
+                    ->paginate(100);
 
         return view('admin.all_ads', compact('title', 'ads'));
     }
@@ -81,7 +81,7 @@ class AdsController extends Controller
                     ->active()
                     ->with('city', 'country', 'state')
                     ->orderBy('bid_no')
-                    ->paginate(20);
+                    ->paginate(100);
 
 
         return view('admin.my_ads', compact('title', 'ads'));
@@ -95,7 +95,7 @@ class AdsController extends Controller
                     ->whereStatus('0')
                     ->with('city', 'country', 'state')
                     ->orderBy('bid_no')
-                    ->paginate(20);
+                    ->paginate(100);
 
         return view('admin.pending_ads', compact('title', 'ads'));
     }
@@ -107,7 +107,7 @@ class AdsController extends Controller
         $ads = $user->favourite_ads()
                     ->with('city', 'country', 'state')
                     ->orderBy('bid_no')
-                    ->paginate(20);
+                    ->paginate(100);
 
         return view('admin.favourite_ads', compact('title', 'ads'));
     }
@@ -120,7 +120,7 @@ class AdsController extends Controller
                     ->whereStatus('3')
                     ->with('city', 'country', 'state')
                     ->orderBy('bid_no')
-                    ->paginate(20);
+                    ->paginate(100);
 
         return view('admin.auctions.sold_ads', compact('title', 'ads'));
     }
@@ -133,7 +133,7 @@ class AdsController extends Controller
                     ->whereStatus('4')
                     ->with('city', 'country', 'state')
                     ->orderBy('bid_no')
-                    ->paginate(20);
+                    ->paginate(100);
 
         return view('admin.auctions.not_sold_ads', compact('title', 'ads'));
     }
@@ -1049,7 +1049,7 @@ class AdsController extends Controller
             $ads = $ads->orderBy('id', 'desc');
         }
 
-        $ads = $ads->paginate(20);
+        $ads = $ads->paginate(100);
 
         return view('search', compact('ads', 'title', 'premium_ads', 'pagination_output',  'category_id', 'city_id', 'city_name', 'query_category'));
     }
@@ -1195,7 +1195,7 @@ class AdsController extends Controller
 
 
     public function reports(){
-        $reports = Report_ad::orderBy('id', 'desc')->with('ad')->paginate(20);
+        $reports = Report_ad::orderBy('id', 'desc')->with('ad')->paginate(100);
         $title = trans('app.ad_reports');
 
         return view('admin.ad_reports', compact('title', 'reports'));
@@ -1219,7 +1219,7 @@ class AdsController extends Controller
             return view('admin.error.error_404');
         }
 
-        $reports = $ad->reports()->paginate(20);
+        $reports = $ad->reports()->paginate(100);
 
         $title = trans('app.ad_reports');
         return view('admin.reports_by_ads', compact('title', 'ad', 'reports'));
@@ -1238,7 +1238,7 @@ class AdsController extends Controller
         })
         ->with('bids', 'events')
         ->where('expired_at', '<', Carbon::now())
-        ->paginate(20);
+        ->paginate(100);
 
         return view('admin.auctions.finished_auctions', compact('title', 'ads'));
     }
@@ -1252,7 +1252,7 @@ class AdsController extends Controller
                 ->orderBy('bids.updated_at');
         })
         ->where('status', '1')
-        ->paginate(20);
+        ->paginate(100);
 
         return view('admin.auctions.active_bidding_auctions', compact('title', 'ads'));
     }
@@ -1266,7 +1266,7 @@ class AdsController extends Controller
                 ->where('bids.is_accepted', 1)
                 ->orderBy('bids.updated_at');
         })
-        ->paginate(20);
+        ->paginate(100);
 
         return view('admin.auctions.won_auctions', compact('title', 'ads'));
     }

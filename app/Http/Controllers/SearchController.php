@@ -85,7 +85,7 @@ class SearchController extends Controller
 
         $currentPage = $request->page ? $request->page : 1;
 
-        $ads = new Paginator($ads->forPage($currentPage, 20), $ads->count(), 20, Paginator::resolveCurrentPage(), [
+        $ads = new Paginator($ads->forPage($currentPage, 100), $ads->count(), 100, Paginator::resolveCurrentPage(), [
                 'path' => Paginator::resolveCurrentPath(),
             ]);
 

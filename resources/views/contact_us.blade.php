@@ -24,11 +24,12 @@
                         <strong>{{ get_text_tpl(get_option('footer_company_name')) }}</strong>
                         @if(get_option('footer_address'))
                             <br />
-                            <i class="fa fa-map-marker"></i>
+                            {{-- <i class="fa fa-map-marker"></i> --}}
                             {!! get_option('footer_address') !!}
                         @endif
                         @if(get_option('site_phone_number'))
-                            <br><i class="fa fa-phone"></i>
+                            <br>
+                            {{-- <i class="fa fa-phone"></i> --}}
                             <abbr title="Phone">{!! get_option('site_phone_number') !!}</abbr>
                         @endif
 
@@ -37,7 +38,8 @@
                     @if(get_option('email_address'))
                         <address>
                             <strong>@lang('app.email')</strong>
-                            <br> <i class="fa fa-envelope-o"></i>
+                            <br> 
+                            {{-- <i class="fa fa-envelope-o"></i> --}}
                             <a href="mailto:{{ get_option('email_address') }}"> {{ get_option('email_address') }} </a>
                         </address>
                     @endif
@@ -78,6 +80,13 @@
                 {!! get_option('google_map_embedded_code') !!}
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <p>Newsletter: <a href="https://www.kunst-haus.ch/de/newsletterseite" target="_blank">https://www.kunst-haus.ch/de/newsletterseite</a></p>
+            </div>
+        </div>
     </div>
 
 
@@ -85,8 +94,6 @@
 @endsection
 
 @section('page-js')
-
-
     <script>
         @if(session('success'))
             toastr.success('{{ session('success') }}', '<?php echo trans('app.success') ?>', toastr_options);

@@ -40,7 +40,7 @@ class AuctionWonMail extends Mailable
     public function build()
     {
 
-        $email = $this->from('info@spotter.ch')
+        $email = $this->from('info@spotter.ch', 'Spotter')
                         ->subject(__('app.you_won_mail_subject'))
                         ->view('emails.auction_won', with([
                                                         'event' => $this->event, 

@@ -30,7 +30,7 @@ class OverbiddingUsersBidMail extends Mailable
      */
     public function build()
     {
-        return $this->from('info@spotter.ch')
+        return $this->from('info@spotter.ch', 'Spotter')
             ->subject(__('app.overbidding_mail_subject'))
             ->view('emails.overbidding');
     }
