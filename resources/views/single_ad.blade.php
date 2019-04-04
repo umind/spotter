@@ -430,10 +430,12 @@
                                             <div class="bid-max-div">
                                                 <p>@lang('app.max_bid_title')</p>
                                                 <p>@lang('app.max_bid_desc')</p>
-                                                <button type="button" class="btn btn-danger bid pull-left" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+                                                <div class="clearfix">
+                                                    <button type="button" class="btn btn-danger bid pull-left" data-toggle="modal" data-target="#myModal">@lang('app.place_max_bid')</button>
+                                                </div>
 
                                                 @if($userMaxBid && $maxBid->user_id == Auth::id())
-                                                    <p style="margin-top: 20px;">@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
+                                                    <p style="margin-top: 20px; margin-bottom: 0px;">@lang('app.your_max_bid'): {{ themeqx_price($userMaxBid) }}</p>
                                                 @endif
                                             </div>
                                         @endif

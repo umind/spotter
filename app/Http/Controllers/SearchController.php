@@ -67,10 +67,20 @@ class SearchController extends Controller
             if ($orderBy == 'auction_desc') {
                 $ads = $ads->with('events');
             } else {
-                $ads = $ads->orderBy(getBeforeLastChar($orderBy, '_'), getAfterLastChar($orderBy, '_'));
+                $orderByColumn = getBeforeLastChar($orderBy, '_');
+                $direction = getAfterLastChar($orderBy, '_');
+
+                if ($orderByColumn == 'bid_no') {
+                    $ads = $ads->orderByRaw(
+                                    'LENGTH('.$orderByColumn.')', 
+                                    $direction
+                            );
+                }
+
+                $ads = $ads->orderBy($orderByColumn, $direction);
             }
         } else {
-            $ads = $ads->orderBy('order')->orderBy('bid_no');
+            $ads = $ads->orderBy('order')->orderByRaw('LENGTH(bid_no)')->orderBy('bid_no');
         }
 
 		$ads = $ads->get();

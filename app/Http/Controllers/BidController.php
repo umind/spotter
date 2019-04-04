@@ -174,6 +174,8 @@ class BidController extends Controller
                 Mail::to($user->email)->send(new OverbiddingUsersBidMail($ad));
             }
 
+            return back()->with('warning', trans('app.bid_overbidded_warning_message'));
+
         } else if (isset($userWithCurrentHighestBid)) {
             $notification = new Notification;
             $notification->title = trans('app.overbidding_notification_title');
@@ -190,6 +192,8 @@ class BidController extends Controller
             if ($userWithCurrentHighestBid->email_notifications == 1 && !$userWithCurrentHighestBid->is_online) {
                 Mail::to($userWithCurrentHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
             }
+
+            return back()->with('warning', trans('app.bid_overbidded_warning_message'));
         }
 
         return back()->with('success', trans('app.your_bid_posted'));
@@ -260,6 +264,8 @@ class BidController extends Controller
                 if ($currentUserThatHasHighestBid->email_notifications == 1 && !$currentUserThatHasHighestBid->is_online) {
                     Mail::to($currentUserThatHasHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
                 }
+
+                return back()->with('warning', trans('app.bid_overbidded_warning_message'));
             }
 
             $currentUserThatHasMaxBid = $currentMaxBidObj->user;
@@ -268,6 +274,8 @@ class BidController extends Controller
                 if ($currentUserThatHasMaxBid->email_notifications == 1 && !$currentUserThatHasMaxBid->is_online) {
                     Mail::to($currentUserThatHasMaxBid->email)->send(new OverbiddingUsersBidMail($ad));
                 }
+
+                return back()->with('warning', trans('app.bid_overbidded_warning_message'));
             }
         } else {
             $bid = new Bid;

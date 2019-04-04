@@ -2,6 +2,7 @@
 
 return [
     // new
+    'bid_overbidded_warning_message' => 'Ihr Gebot wurde platziert. Es wirde jedoch nur einen Bieter überboten.',
     'place_bid_single_ad' => 'Fixpreis-Gebot abgeben',
     'address2' => 'Adresszusatz',
     'city_event_show_title' => 'Ort der Versteigerung',

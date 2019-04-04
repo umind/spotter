@@ -98,7 +98,7 @@
                             </table>
                         @endif
 
-                        {!! $ads->links() !!}
+                        {!! $ads->appends(request()->input())->links() !!}
 
                     </div>
                 </div>

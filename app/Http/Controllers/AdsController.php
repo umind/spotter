@@ -43,6 +43,7 @@ class AdsController extends Controller
         $ads = Ad::with('city', 'country', 'state')
                 ->whereStatus('1')
                 ->orderBy('order')
+                ->orderByRaw('LENGTH(bid_no)')
                 ->orderBy('bid_no')
                 ->paginate(100);
 
@@ -54,6 +55,7 @@ class AdsController extends Controller
         $title = trans('app.pending_ads');
         $ads = Ad::with('city', 'country', 'state')
                 ->whereStatus('0')
+                ->orderByRaw('LENGTH(bid_no)')
                 ->orderBy('bid_no')
                 ->paginate(100);
 
@@ -64,6 +66,7 @@ class AdsController extends Controller
         $title = trans('app.blocked_ads');
         $ads = Ad::with('city', 'country', 'state')
                     ->whereStatus('2')
+                    ->orderByRaw('LENGTH(bid_no)')
                     ->orderBy('bid_no')
                     ->paginate(100);
 
@@ -80,6 +83,7 @@ class AdsController extends Controller
         $ads = $user->ads()
                     ->active()
                     ->with('city', 'country', 'state')
+                    ->orderByRaw('LENGTH(bid_no)')
                     ->orderBy('bid_no')
                     ->paginate(100);
 
@@ -94,6 +98,7 @@ class AdsController extends Controller
         $ads = $user->ads()
                     ->whereStatus('0')
                     ->with('city', 'country', 'state')
+                    ->orderByRaw('LENGTH(bid_no)')
                     ->orderBy('bid_no')
                     ->paginate(100);
 
@@ -106,6 +111,7 @@ class AdsController extends Controller
         $user = Auth::user();
         $ads = $user->favourite_ads()
                     ->with('city', 'country', 'state')
+                    ->orderByRaw('LENGTH(bid_no)')
                     ->orderBy('bid_no')
                     ->paginate(100);
 
@@ -119,6 +125,7 @@ class AdsController extends Controller
         $ads = $user->ads()
                     ->whereStatus('3')
                     ->with('city', 'country', 'state')
+                    ->orderByRaw('LENGTH(bid_no)')
                     ->orderBy('bid_no')
                     ->paginate(100);
 
@@ -132,6 +139,7 @@ class AdsController extends Controller
         $ads = $user->ads()
                     ->whereStatus('4')
                     ->with('city', 'country', 'state')
+                    ->orderByRaw('LENGTH(bid_no)')
                     ->orderBy('bid_no')
                     ->paginate(100);
 
