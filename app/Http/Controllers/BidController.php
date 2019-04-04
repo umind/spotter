@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Ad;
 use App\Bid;
 use App\Invoice;
+use App\Jobs\SendArticleSoldMail;
 use App\Jobs\SendAuctionWonMail;
 use App\Mail\OverbiddingUsersBidMail;
 use App\Notification;
