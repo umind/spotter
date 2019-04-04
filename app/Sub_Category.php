@@ -12,6 +12,10 @@ class Sub_Category extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function ads(){
+        return $this->hasMany(Ad::class, 'sub_category_id');
+    }
+
     public function product_count(){
         return $this->hasMany(Ad::class,'sub_category_id')->whereStatus('1')->count();
     }

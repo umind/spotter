@@ -2,15 +2,12 @@
 
 namespace App\Mail;
 
-use PDF;
-use Session;
-use Storage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AuctionWonMail extends Mailable
+class ArticleSoldMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -40,23 +37,14 @@ class AuctionWonMail extends Mailable
     public function build()
     {
 
-        $email = $this->from('info@spotter.ch', 'Spotter')
-                        ->subject(__('app.you_won_mail_subject'))
-                        ->view('emails.auction_won', with([
+        return $this->from('info@spotter.ch', 'Spotter')
+                        ->subject(__('app.article_sold'))
+                        ->view('emails.article_sold', with([
                                                         'event' => $this->event, 
                                                         'ad' => $this->ad,
-                                                        'user' => $this->user
+                                                        'bid' => $this->user,
+                                                        'user' => $this->user,
                                                     ]));
 
-        $pdf = PDF::loadView('pdf.invoice', [
-                                            'event' => $this->event, 
-                                            'ad' => $this->ad,
-                                            'bid' => $this->bid,
-                                            'user' => $this->user,
-                                        ]);
-
-        $email->attachData($pdf->output(), 'spotter-invoice.pdf');
-
-        return $email;
     }
 }

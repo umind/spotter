@@ -7,7 +7,7 @@
 			<div class="container">
 				<div id="auction-info">
 					<div class="row">
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<h2 class="text-uppercase">{{ $event->title }}</h2>
 							{{-- <div class="auctioneer">
 								<p>@lang('app.auctioner'): {{ $event->auctioner }}</p>
@@ -21,7 +21,7 @@
                                         @if($event->address2)
                                             <p>{{ $event->address2 }}</p>
                                         @endif
-                                        <p>{{ $event->zip_code }}, {{ $event->city }}</p>
+                                        <p>{{ $event->zip_code }} {{ $event->city }}</p>
                                     </div>
                                 </div>
 							</div>
@@ -42,7 +42,7 @@
                                 </p>
                             </div>
 						</div>
-						<div class="col-md-2 text-right">
+						<div class="col-md-4 text-right">
                             @php 
                                 $latestProductToExpire = $event->auctions()->latest('expired_at')->first();
                             @endphp

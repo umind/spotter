@@ -34,7 +34,7 @@ class Ad extends Model
     }
 
     public function sub_category(){
-        return $this->belongsTo(Sub_Category::class);
+        return $this->belongsTo(Sub_Category::class, 'sub_cagetory_id');
     }
 
     public function brand(){

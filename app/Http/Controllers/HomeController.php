@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Ad;
 use App\Category;
-use Carbon\Carbon;
 use App\Contact_query;
 use App\Country;
+use App\Http\Requests;
 use App\Post;
 use App\Slider;
+use App\Sub_Category;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -20,12 +21,16 @@ use Yajra\Datatables\Datatables;
 class HomeController extends Controller
 {
     public function index(){
-        $top_categories = Category::whereCategoryType('auction')->orderBy('category_name', 'asc')->get();
+        $top_categories = Sub_Category::whereCategoryType('auction')
+                                    ->whereHas('ads', function ($q) {
+                                        $q->active();
+                                    })
+                                    ->orderBy('category_name', 'asc')
+                                    ->get();
 
         $ads = Ad::active()
                 ->whereHas('events', function ($query) {
-                    $query->where('events.status', '1')
-                        ->orWhere('events.status', '1');
+                    $query->active();
                 })
                 ->orderBy('expired_at')
                 ->get();

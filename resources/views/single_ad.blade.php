@@ -253,7 +253,7 @@
                                 <table class="table table-striped">
                                     <tr>
                                         <th>@lang('app.bidder')</th>
-                                        {{-- <th>@lang('app.bid_amount')</th> --}}
+                                        <th>@lang('app.bid_amount')</th>
                                         <th>@lang('app.date_time')</th>
                                     </tr>
                                     @foreach($bids as $bid)
@@ -264,7 +264,7 @@
                                                     <i class="fa fa-check-circle text-primary"></i>
                                                 @endif
                                             </td>
-                                            {{-- <td>{{ themeqx_price($bid->bid_amount) }}</td> --}}
+                                            <td>{{ themeqx_price($bid->bid_amount) }}</td>
                                             <td>{{ \Carbon\Carbon::parse($bid->updated_at)->formatLocalized(get_option('date_format')) }}</td>
                                         </tr>
                                     @endforeach
@@ -407,12 +407,12 @@
 
                         @if($ad->category_type == 'auction')
                             <div class="widget">
-                                {{-- <h3>
+                                <h3>
                                     {{ $ad->price ? __('app.starting_price') : __('app.buy_now_price') }} {{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}
                                 </h3>
                                 <p class="pdv">@lang('app.plus_pdv') 7.7% MwSt</p>
 
-                                @if($ad->buy_now_price && $ad->price)
+                                {{-- @if($ad->buy_now_price && $ad->price)
                                     <h5>
                                         {{ __('app.buy_now_price') }} {{ themeqx_price($ad->buy_now_price) }}
                                     </h5>

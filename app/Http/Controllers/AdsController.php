@@ -14,6 +14,7 @@ use App\Event;
 use App\Invoice;
 use App\Job;
 use App\JobApplication;
+use App\Jobs\SendArticleSoldMail;
 use App\Jobs\SendAuctionWonMail;
 use App\Media;
 use App\Notification;
@@ -1341,6 +1342,9 @@ class AdsController extends Controller
         // send invoice 
         $invoice = $ad->invoice()->save(new Invoice);
         dispatch(new SendAuctionWonMail($event, $ad, $bid, $user));
+
+        // inform admin that something has been bought
+        dispatch(new SendArticleSoldMail($event, $ad, $bid, $user));
 
         return back()->with('success', trans('app.bought_now_message'));
     }

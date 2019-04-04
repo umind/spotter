@@ -149,6 +149,9 @@ class BidController extends Controller
             $invoice = $ad->invoice()->save(new Invoice);
             dispatch(new SendAuctionWonMail($event, $ad, $bid, $wonUser));
 
+            // inform admin that something has been bought
+            dispatch(new SendArticleSoldMail($event, $ad, $bid, $wonUser));
+
             return back()->with('success', trans('app.bought_now_message'));
         } else if ($maxBidObj) {
 

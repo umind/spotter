@@ -52,12 +52,12 @@
                             <div class="col-md-12">
                                 <div class="form-group {{ $errors->has('name')? 'has-error':'' }}">
                                     <label for="name">@lang('app.name')</label>
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="@lang('app.enter_name')" value="{{ old('name') }}"/>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="@lang('app.name')" value="{{ old('name') }}"/>
                                     {!! $errors->has('name')? '<p class="help-block">'.$errors->first('name').'</p>':'' !!}
                                 </div>
                                 <div class="form-group {{ $errors->has('email')? 'has-error':'' }}">
-                                    <label for="email">@lang('app.email_address')</label>
-                                    <input type="text" class="form-control" id="email" placeholder="@lang('app.enter_email_address')" name="email" value="{{ old('email') }}"/>
+                                    <label for="email">@lang('app.email')</label>
+                                    <input type="text" class="form-control" id="email" placeholder="@lang('app.email')" name="email" value="{{ old('email') }}"/>
                                     {!! $errors->has('email')? '<p class="help-block">'.$errors->first('email').'</p>':'' !!}
                                 </div>
 

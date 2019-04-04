@@ -2,6 +2,7 @@
 
 return [
     //newest
+    'article_sold' => 'Article Sold',
     'bid_overbidded_warning_message' => 'You bid has been successfully placed, but it was automatically overbidded by someone else.',
     'place_bid_single_ad' => 'Place fixed price bid',
     'address2' => 'Address 2',

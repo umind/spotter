@@ -2,11 +2,12 @@
 
 return [
     // new
+    'article_sold' => 'Artikel verkauft',
     'bid_overbidded_warning_message' => 'Ihr Gebot wurde platziert. Es wirde jedoch nur einen Bieter überboten.',
-    'place_bid_single_ad' => 'Fixpreis-Gebot abgeben',
+    'place_bid_single_ad' => 'Kampf-Gebot abgeben',
     'address2' => 'Adresszusatz',
     'city_event_show_title' => 'Ort der Versteigerung',
-    'auction_begins_event_show_title' => 'Auktionsbeginn',
+    'auction_begins_event_show_title' => 'Bieten endet',
     'overbidding_message_notification' => 'Someone placed a higher bid on an auction (:article_title) that you are currently bidding.',
     'overbidding_notification_title' => 'Auction Overbidded',
     'previous_article' => 'vorheriger Artikel',
