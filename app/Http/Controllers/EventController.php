@@ -35,6 +35,8 @@ class EventController extends Controller
                     ->whereIn('status', ['1', '3', '4'])
                     ->orderBy('order')
                     ->orderBy('expired_at')
+                    ->orderByRaw('LENGTH(bid_no)')
+                    ->orderBy('bid_no')
                     ->paginate(100);
 
         return view('events.show', compact('ads', 'total_ads_count', 'user_count', 'event'));

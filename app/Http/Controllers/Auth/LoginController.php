@@ -94,4 +94,17 @@ class LoginController extends Controller
         return redirect()->route('dashboard');
     }
 
+    public function logout(Request $request)
+    {
+        $request->user()->update([
+            'is_online' => '0'
+        ]);
+
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/');
+    }
+
 }

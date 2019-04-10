@@ -781,7 +781,9 @@ if ( ! function_exists('frontendLocalisedJson')){
     function frontendLocalisedJson(){
         $json_array = [
             'time_remaining'    => trans('app.time_remaining'),
-            'bidding_time_expired'    => trans('app.bidding_time_expired')
+            'bidding_time_expired'    => trans('app.bidding_time_expired'),
+            'sold'    => trans('app.sold_word_de'),
+            'not_sold'    => trans('app.not_sold_word_de')
         ];
 
         $json = \Psy\Util\Json::encode($json_array);

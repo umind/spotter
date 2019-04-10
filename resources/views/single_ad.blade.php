@@ -17,7 +17,7 @@
 
 @section('page-css')
     <link rel="stylesheet" href="{{ asset('assets/fancybox/jquery.fancybox.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.css"> --}}
 @endsection
 
 @section('content')
@@ -71,9 +71,9 @@
                 <div class="modal-body">
                     <p>
                         <h4 class="text-center">
-                            <strong>@lang('app.warning')</strong>
+                            <strong style="color: red">@lang('app.warning')</strong>
                         </h4>
-                        <span>@lang('app.confirm_bid_modal_text')</span>
+                        <span style="color: red;">@lang('app.confirm_bid_modal_text')</span>
                     </p>
 
                     {{-- @php
@@ -104,13 +104,10 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <span>CHF</span>
+                            <span>Total CHF</span>
                         </div>
                         <div class="col-md-4 text-right">
                             <span class="bidded-value-total"></span>
-                        </div>
-                        <div class="col-md-2">
-                            <span>Total</span>
                         </div>
                     </div>
 
@@ -663,7 +660,7 @@
                                                 <div class="pull-right">{{ $rad->price ? themeqx_price($rad->price) : themeqx_price($rad->buy_now_price) }}</div>
                                             </div>
 
-                                            <div class="countdown" data-expire-date="{{$rad->expired_at}}" ></div>
+                                            <div class="countdown" data-expire-date="{{$rad->expired_at}}" data-sold="{{ $rad->bids->where('is_accepted', '1')->first() ? 'sold' : '' }}"></div>
                                             <div class="place-bid-btn">
                                                 <a href="{{ route('single_ad', [$rad->id, $rad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
                                             </div>
@@ -693,7 +690,7 @@
     <script src="{{ asset('assets/plugins/SocialShare/SocialShare.js') }}"></script>
     <script src="{{ asset('assets/plugins/form-validator/form-validator.min.js') }}"></script>
 
-    @if(!Auth::check())
+    {{-- @if(!Auth::check())
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.11/sweetalert2.min.js"></script> 
         <script>
             swal(
@@ -702,7 +699,7 @@
                 'warning'
             );
         </script>
-    @endif
+    @endif --}}
 
     <script>
         $('.share').ShareLink({

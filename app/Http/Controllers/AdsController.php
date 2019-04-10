@@ -1092,7 +1092,7 @@ class AdsController extends Controller
         }
 
         $title = trans('app.ads_by').' '.$user->name;
-        $ads = Ad::active()->whereUserId($user_id)->paginate(40);
+        $ads = Ad::active()->whereUserId($user_id)->paginate(100);
 
         return view('ads_by_user', compact('ads', 'title', 'user'));
     }
@@ -1136,6 +1136,7 @@ class AdsController extends Controller
                                     })->where('id', '!=', $ad->id)
                                         ->with('category', 'city')
                                         ->orderBy('expired_at')
+                                        ->take(3)
                                         ->get();
 
             $eventAuctions = $event->auctions()
@@ -1315,10 +1316,6 @@ class AdsController extends Controller
         $notification->date = Carbon::now();
 
         $wonUser->notifications()->save($notification);
-
-        // activate notification bell
-        $wonUser->notification_bell = 1;
-        $wonUser->save();
 
         // ad sold
         $ad->update([

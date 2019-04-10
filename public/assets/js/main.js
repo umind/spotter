@@ -142,6 +142,7 @@ $(document).ready(function () {
 			var countDownItem = countDownWrap[i];
 
 			var endtime = countDownItem.getAttribute('data-expire-date');
+			var sold = countDownItem.getAttribute('data-sold');
 
 			var timeinterval = setInterval(function (countDownItem, endtime) {
 				var t = getTimeRemaining(endtime);
@@ -150,8 +151,14 @@ $(document).ready(function () {
 
 				$(countDownItem).html(clockHtml);
 				if (t.total <= 0) {
+					$(countDownItem).css('color', 'red');
+
 					// clearInterval(timeinterval);
-					$(countDownItem).html(jsonData.bidding_time_expired);
+					if (sold == 'sold') {
+						$(countDownItem).html(jsonData.sold);
+					} else {
+						$(countDownItem).html(jsonData.not_sold);
+					}
 				}
 			}, 1000, countDownItem, endtime);
 		}

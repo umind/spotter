@@ -28,12 +28,15 @@ class HomeController extends Controller
                                     ->orderBy('category_name', 'asc')
                                     ->get();
 
-        $ads = Ad::active()
+        $ads = Ad::whereIn('status', ['1', '3', '4'])
                 ->whereHas('events', function ($query) {
                     $query->active();
                 })
+                ->orderBy('order')
                 ->orderBy('expired_at')
-                ->get();
+                ->orderByRaw('LENGTH(bid_no)')
+                    ->orderBy('bid_no')
+                ->paginate(100);
 
         $total_ads_count = Ad::active()->count();
         $user_count = User::count();

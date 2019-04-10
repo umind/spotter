@@ -132,10 +132,6 @@ class AppServiceProvider extends ServiceProvider
 
                                 $wonUser->notifications()->save($notification);
 
-                                // activate notification bell
-                                $wonUser->notification_bell = 1;
-                                $wonUser->save();
-
                                 // auction sold
                                 $auction->update(['status' => '3', 'order' => 3]);
 

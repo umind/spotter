@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class NotificationController extends Controller
 {
     public function removeNumber() {
-    	$user = Auth::user();
-    	$user->notification_bell = 0;
-    	$user->save();
+    	$user = Auth::user()->notifications()->update([
+            'seen' => 1
+        ]);
 
         return ['success' => 1];
     }

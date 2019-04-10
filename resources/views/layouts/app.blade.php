@@ -96,13 +96,13 @@
 								@if(Auth::check())
 									@php 
 										$notifications = Auth::user()->notifications->sortByDesc('date');
-										$notifNum = $notifications->where('is_read', 0)->count();
+										$notSeenNotifNum = $notifications->where('seen', 0)->count();
 									@endphp
 									<li class="notification-li" id="notifications">
 										<div class="notification">
 											<i class="fa fa-bell"></i>
-											@if($notifNum > 0 && Auth::user()->notification_bell == 1)
-												<span class="notification-number">{{ $notifNum }}</span>
+											@if($notSeenNotifNum > 0)
+												<span class="notification-number">{{ $notSeenNotifNum }}</span>
 											@endif
 										</div>
 										<div class="notification-div">

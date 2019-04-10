@@ -101,7 +101,7 @@
 									<div class="pull-right">{{ $ad->price ? themeqx_price($ad->price) : themeqx_price($ad->buy_now_price) }}</div>
 								</div>
 
-                                <div class="countdown" data-expire-date="{{$ad->expired_at}}" ></div>
+                                <div class="countdown" data-expire-date="{{$ad->expired_at}}" data-sold="{{ $ad->bids->where('is_accepted', '1')->first() ? 'sold' : '' }}"></div>
                                 <div class="place-bid-btn">
                                     <a href="{{ route('single_ad', [$ad->id, $ad->slug]) }}" class="btn btn-primary">@lang('app.place_bid')</a>
                                 </div>
@@ -109,6 +109,11 @@
                             </div>
                         </div>
                     @endforeach
+
+                    <div class="col-md-12 text-center">
+                        {!! $ads->links() !!}
+                    </div>
+
                 @else
                     <div class="col-md-12">
                         <div class="no-ads-wrap">

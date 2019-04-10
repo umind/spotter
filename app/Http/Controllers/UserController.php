@@ -37,10 +37,14 @@ class UserController extends Controller
     }
 
     public function usersData(){
-        $users = User::select('id', 'user_name', 'email', 'created_at', 'active_status')->whereUserType('user')->get();
+        $users = User::select('id', 'last_name', 'first_name', 'email', 'created_at', 'active_status')->whereUserType('user')->orderBy('created_at', 'desc')->get();
         return  Datatables::of($users)
-            ->editColumn('user_name', function($user){
-                $html = '<a href="'.route('user_info', $user->id).'">'.$user->user_name.'</a>';
+            ->editColumn('last_name', function($user){
+                $html = '<a href="'.route('user_info', $user->id).'">'. $user->last_name.'</a>';
+                return $html;
+            })
+            ->editColumn('first_name', function($user){
+                $html = '<a href="'.route('user_info', $user->id).'">'. $user->first_name.'</a>';
                 return $html;
             })
             ->editColumn('created_at',function($user){
