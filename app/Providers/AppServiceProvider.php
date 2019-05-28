@@ -137,7 +137,6 @@ class AppServiceProvider extends ServiceProvider
 
                                 // create invoice
                                 $invoice = $auction->invoice()->save(new Invoice);
-
                                 dispatch(new SendAuctionWonMail($event, $auction, $bid, $wonUser));
                             }
                         }

@@ -1305,18 +1305,6 @@ class AdsController extends Controller
         $bid->is_accepted = 1;
         $bid->save();
 
-        $wonUser = $bid->user;
-
-        $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
-
-        $notification = new Notification;
-        $notification->title = trans('app.you_won');
-        $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
-        $notification->url = url('auction/' . $ad->id);
-        $notification->date = Carbon::now();
-
-        $wonUser->notifications()->save($notification);
-
         // ad sold
         $ad->update([
             'status' => '3', 
@@ -1335,6 +1323,18 @@ class AdsController extends Controller
             $event->auction_ends = Carbon::now();
             $event->save();
         }
+
+        // send notification
+        $wonUser = $bid->user;
+        $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
+
+        $notification = new Notification;
+        $notification->title = trans('app.you_won');
+        $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
+        $notification->url = url('auction/' . $ad->id);
+        $notification->date = Carbon::now();
+
+        $wonUser->notifications()->save($notification);
 
         // send invoice 
         $invoice = $ad->invoice()->save(new Invoice);

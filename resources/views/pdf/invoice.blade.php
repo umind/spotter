@@ -242,9 +242,9 @@
                 </tr>
                 
                 <tr class="products">
-                    <td>{{ $ad->auction_no }}</td>
-                    <td>{{ $ad->bid_no }}</td>
-                    <td>{{ $ad->title }}</td>
+                    <td style="width: 70px;">{{ $ad->auction_no }}</td>
+                    <td style="width: 70px;">{{ $ad->bid_no }}</td>
+                    <td style="word-wrap: break-word:">{{ $ad->title }}</td>
                     <td>{{ $price }} CHF</td>
                     <td>1</td>
                     <td>{{ number_format($price, 2) }} CHF</td>

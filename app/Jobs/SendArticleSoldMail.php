@@ -39,7 +39,7 @@ class SendArticleSoldMail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to('info@spotter.ch')->send(new ArticleSoldMail(
+        Mail::to('sale@spotter.ch')->send(new ArticleSoldMail(
                                                     $this->event, 
                                                     $this->auction, 
                                                     $this->bid, 

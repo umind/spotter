@@ -111,18 +111,6 @@ class BidController extends Controller
             $bid->won_bid_amount = $ad->buy_now_price;
             $bid->save();
 
-            $wonUser = $bid->user;
-
-            $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
-
-            $notification = new Notification;
-            $notification->title = trans('app.you_won');
-            $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
-            $notification->url = url('auction/' . $ad->id);
-            $notification->date = Carbon::now();
-
-            $wonUser->notifications()->save($notification);
-
             // ad sold
             $ad->update([
                 'status' => '3', 
@@ -141,6 +129,18 @@ class BidController extends Controller
                 $event->auction_ends = Carbon::now();
                 $event->save();
             }
+
+            // send notification
+            $wonUser = $bid->user;
+            $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
+
+            $notification = new Notification;
+            $notification->title = trans('app.you_won');
+            $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
+            $notification->url = url('auction/' . $ad->id);
+            $notification->date = Carbon::now();
+
+            $wonUser->notifications()->save($notification);
 
             // create invoice and send email
             $invoice = $ad->invoice()->save(new Invoice);
@@ -252,18 +252,6 @@ class BidController extends Controller
                     $bid->is_accepted = 1;
                     $bid->save();
 
-                    $wonUser = $bid->user;
-
-                    $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
-
-                    $notification = new Notification;
-                    $notification->title = trans('app.you_won');
-                    $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
-                    $notification->url = url('auction/' . $ad->id);
-                    $notification->date = Carbon::now();
-
-                    $wonUser->notifications()->save($notification);
-
                     // ad sold
                     $ad->update([
                         'status' => '3', 
@@ -283,13 +271,19 @@ class BidController extends Controller
                         $event->save();
                     }
 
-                    // create invoice and send email
-                    $invoice = $ad->invoice()->save(new Invoice);
-                    dispatch(new SendAuctionWonMail($event, $ad, $bid, $wonUser));
+                    // send won article notification
+                    $wonUser = $bid->user;
+                    $wonBidAmountWithTax = $bid->won_bid_amount + ($bid->won_bid_amount*7.7/100);
 
-                    // inform admin that something has been bought
-                    dispatch(new SendArticleSoldMail($event, $ad, $bid, $wonUser));
+                    $notification = new Notification;
+                    $notification->title = trans('app.you_won');
+                    $notification->text = trans('app.won_and_bought_for', ['won_bid_amount' => themeqx_price($wonBidAmountWithTax)]);
+                    $notification->url = url('auction/' . $ad->id);
+                    $notification->date = Carbon::now();
 
+                    $wonUser->notifications()->save($notification);
+
+                    // send overbidding message notification to the user that currently has highest bid 
                     $notification = new Notification;
                     $notification->title = trans('app.overbidding_notification_title');
                     $notification->text = trans('app.overbidding_message_notification', ['article_title' => $ad->title]);
@@ -297,6 +291,13 @@ class BidController extends Controller
                     $notification->date = Carbon::now();
 
                     $currentUserThatHasHighestBid->notifications()->save($notification);
+
+                    // create invoice and send email
+                    $invoice = $ad->invoice()->save(new Invoice);
+                    dispatch(new SendAuctionWonMail($event, $ad, $bid, $wonUser));
+
+                    // inform admin that something has been bought
+                    dispatch(new SendArticleSoldMail($event, $ad, $bid, $wonUser));
 
                     if ($currentUserThatHasHighestBid->email_notifications == 1) {
                         Mail::to($currentUserThatHasHighestBid->email)->send(new OverbiddingUsersBidMail($ad));
