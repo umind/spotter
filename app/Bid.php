@@ -14,7 +14,7 @@ class Bid extends Model
     }
 
     public function user()
-    {
+    { //test
     	return $this->belongsTo(User::class);
     }
 
